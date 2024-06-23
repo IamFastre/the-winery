@@ -1,0 +1,90 @@
+@import '/styles/colors.sass';
+@import '/styles/consts.sass';
+
+@mixin styling($border-width, $margin, $padding) {
+
+  #background {
+    position: relative;
+    background-color: $primary;
+    border-radius: 0;
+  }
+  
+  #container {
+    position: relative;
+    flex: 1;
+    margin: $margin;
+    padding: $padding;
+    overflow: hidden;
+    border: $border-width solid $secondary;
+    border-radius: $section-radius;
+    &:hover {
+      border-color: $accent;
+    }
+  }
+  
+  #header {
+    position: absolute;
+    top: 0;
+    align-self: flex-start;
+    margin-left: calc($margin + 15px);
+    justify-content: center;
+    align-content: center;
+    z-index: 2;
+    font-weight: lighter;
+    font-size: 20px;
+  }
+  
+  #header.centered {
+    align-self: center;
+    margin-left: 0;
+  }
+  
+  #header-bg {
+    z-index: 1;
+    position: absolute;
+    background-color: $primary;
+    top: $margin;
+    left: -5px;
+    height: $border-width;
+    width: calc(100% + 10px);
+  }
+  
+  #header-text {
+    z-index: 2;
+    font-weight: lighter;
+    line-height: calc($margin * 2);
+    font-size: 22px;
+    &:hover {
+      font-weight: 400;
+    }
+  }
+  
+  /* ======================================================================== */
+  /*                                   Card                                   */
+  /* ======================================================================== */
+  
+  .card {
+    #background {
+      border-radius: $section-radius;
+    }
+    
+    #container {
+      margin: 0;
+    }
+    
+    #header {
+      margin-top: calc($margin * -1);
+      margin-left: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling($border-width: 1px, $margin: 10px, $padding: 15px);
+}
+
+@media screen and (min-width: 787px) {
+  @include styling($border-width: 2px, $margin: 20px, $padding: 15px);
+}
+

@@ -1,0 +1,37 @@
+@import 'colors';
+
+@font-face {
+  font-family: 'Cascadia';
+  font-style: normal;
+  src: url('/static/fonts/CascadiaCode.woff2') format(woff2);
+}
+
+@font-face {
+  font-family: 'Cascadia';
+  font-style: italic;
+  src: url('/static/fonts/CascadiaCodeItalic.woff2') format(woff2);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  background-color: $primary;
+  color: $tertiary;
+
+  font-family: 'Cascadia', 'Menlo', 'Courier Prime', 'Courier New', Courier, monospace;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+}
