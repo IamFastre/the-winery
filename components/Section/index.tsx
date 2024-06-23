@@ -5,15 +5,10 @@ import './style.scss';
 export interface SectionProps {
   title?: string;
   style?: CSS.Properties;
-  containerStyle?: CSS.Properties;
-  titleStyle?: CSS.Properties;
   children?: React.ReactNode;
+  containerStyle?: CSS.Properties;
   isCard?: boolean;
   centered?: boolean;
-  scrollable?: boolean;
-  stickyIndices?: number[];
-  bg?: CSS.Property.Color;
-  onLoad?: ReactEventHandler<HTMLDivElement>;
 }
 
 export function Section(props:SectionProps) : React.JSX.Element {
@@ -21,7 +16,6 @@ export function Section(props:SectionProps) : React.JSX.Element {
     <div
       id="background"
       style={props.style}
-      onLoad={props.onLoad}
       className={props.isCard ? "card" : ""}
     >
       { props.title
@@ -35,7 +29,10 @@ export function Section(props:SectionProps) : React.JSX.Element {
           </div>
         </div>
       : null }
-      <div id="container">
+      <div
+        id="container"
+        style={props.containerStyle}
+      >
         {props.children}
       </div>
     </div>
