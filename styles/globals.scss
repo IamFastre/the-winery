@@ -1,5 +1,10 @@
 @import 'colors';
 
+::selection {
+  color: $primary;
+  background-color: $accent;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -19,7 +24,20 @@ body {
   font-family: 'Cascadia', 'Menlo', 'Courier Prime', 'Courier New', Courier, monospace;
 }
 
+// BTW, can you tell I'm a React Native dev?
 div {
   display: flex;
   flex-direction: column;
+}
+
+.color-primary {
+  color: $primary;
+}
+
+.color-secondary {
+  color: $secondary;
+}
+
+.color-tertiary {
+  color: $tertiary;
 }
