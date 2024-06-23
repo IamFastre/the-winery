@@ -2,13 +2,13 @@
 
 @mixin styling($border-width, $margin, $padding) {
 
-  #background {
+  #section-background {
     position: relative;
     background-color: $primary;
     border-radius: 0;
   }
   
-  #container {
+  #section-container {
     position: relative;
     flex: 1;
     margin: $margin;
@@ -20,7 +20,7 @@
     }
   }
   
-  #header {
+  #section-title {
     position: absolute;
     top: 0;
     align-self: flex-start;
@@ -32,12 +32,12 @@
     font-size: 20px;
   }
   
-  #header.centered {
+  #section-title.centered {
     align-self: center;
     margin-left: 0;
   }
   
-  #header-bg {
+  #section-title-bg {
     z-index: 1;
     position: absolute;
     background-color: $primary;
@@ -47,7 +47,7 @@
     width: calc(100% + 10px);
   }
   
-  #header-text {
+  #section-title-text {
     z-index: 2;
     font-weight: lighter;
     line-height: calc($margin * 2);
@@ -62,11 +62,11 @@
   /* ======================================================================== */
   
   .card {
-    #container {
+    #section-container {
       margin: 0;
     }
     
-    #header {
+    #section-title {
       margin-top: calc($margin * -1);
       margin-left: 0;
     }
@@ -75,10 +75,9 @@
 
 @media screen and (min-width: 0px)
               and (max-width: 786px) {
-  @include styling($border-width: 1px, $margin: 10px, $padding: 15px);
+  @include styling($border-width: 1px, $margin: 5px, $padding: 15px);
 }
 
 @media screen and (min-width: 787px) {
-  @include styling($border-width: 2px, $margin: 20px, $padding: 15px);
+  @include styling($border-width: 2px, $margin: 5px, $padding: 15px);
 }
-

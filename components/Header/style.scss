@@ -1,0 +1,28 @@
+@import '@/styles/colors.scss';
+
+@mixin styling($font-size, $small-font-size) {
+  #header-title {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    font-size: $small-font-size;
+  }
+
+  #header-title-text {
+    font-size: $font-size;
+    color: $accent;
+  }
+
+  .header-children {
+    position: absolute;
+  }
+}
+
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling($font-size: 25px, $small-font-size: 16px);
+}
+
+@media screen and (min-width: 787px) {
+  @include styling($font-size: 32px, $small-font-size: 28px);
+}
