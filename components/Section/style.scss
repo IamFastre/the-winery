@@ -1,5 +1,4 @@
 @import '/styles/colors.scss';
-@import '/styles/consts.scss';
 
 @mixin styling($border-width, $margin, $padding) {
 
@@ -16,7 +15,6 @@
     padding: $padding;
     overflow: hidden;
     border: $border-width solid $secondary;
-    border-radius: $section-radius;
     &:hover {
       border-color: $accent;
     }
@@ -64,10 +62,6 @@
   /* ======================================================================== */
   
   .card {
-    #background {
-      border-radius: $section-radius;
-    }
-    
     #container {
       margin: 0;
     }
