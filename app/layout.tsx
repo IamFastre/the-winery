@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import "@/styles/globals.scss";
 import consts from "@/utils/consts";
+import { FontFaces } from "@/components";
+
 
 export const metadata: Metadata = {
   title: consts.name,
@@ -11,6 +13,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children:React.ReactNode }>) {
   return (
     <html lang="en">
+      <head>
+        <FontFaces />
+      </head>
       <body>
         {children}
       </body>

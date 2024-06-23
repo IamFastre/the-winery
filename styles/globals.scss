@@ -1,17 +1,5 @@
 @import 'colors';
 
-@font-face {
-  font-family: 'Cascadia';
-  font-style: normal;
-  src: url('/static/fonts/CascadiaCode.woff2') format(woff2);
-}
-
-@font-face {
-  font-family: 'Cascadia';
-  font-style: italic;
-  src: url('/static/fonts/CascadiaCodeItalic.woff2') format(woff2);
-}
-
 body {
   margin: 0;
   padding: 0;
