@@ -2,7 +2,7 @@
 #
 # To get started with Next.js see: https://nextjs.org/docs/getting-started
 #
-name: Deploy Next.js site to Pages
+name: Deploy Winery Next.js site to Github Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -78,7 +78,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: ./dist
 
   # Deployment job
   deploy:
