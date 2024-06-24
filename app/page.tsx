@@ -59,7 +59,7 @@ export default function Home() {
               priority
             />
           </div>
-          <span>
+          <span className={styles.text}>
             Hello, there!
             <br/>
             <a className="color-primary" href="https://youtu.be/rEq1Z0bjdwc" target="_blank">

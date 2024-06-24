@@ -17,6 +17,10 @@ $shadow: drop-shadow(0 0 5em #8400ffbb);
   animation: beat 1s ease-out 500ms infinite;
 }
 
+.text {
+  text-align: center;
+}
+
 .msg {
   text-align: center;
   position: absolute;
