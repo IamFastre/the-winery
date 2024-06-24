@@ -1,9 +1,9 @@
 "use client";
-import { Header, Section } from "@/components";
-import consts from "@/utils/consts";
-import Image from "next/image";
-import styles from "/styles/page.module.scss";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+
+import { Header, Section } from "@/components";
+import styles from "/styles/page.module.scss";
 
 const Nail = () => (
   <div style={{ fontSize: 26 }}>
@@ -61,10 +61,11 @@ export default function Home() {
           </div>
           <span>
             Hello, there!
+            <br/>
+            <a className="color-primary" href="https://youtu.be/rEq1Z0bjdwc" target="_blank">
+              General Kenobi!
+            </a>
           </span>
-          <a className="color-primary" href="https://youtu.be/rEq1Z0bjdwc" target="_blank">
-            General Kenobi!
-          </a>
           <span style={{ opacity: showMsg ? 1 : 0 }} className={styles.msg}>
             Wish {isBeating() ? "CPR" : "giving someone a cardiac arrest"} was that easy...
           </span>

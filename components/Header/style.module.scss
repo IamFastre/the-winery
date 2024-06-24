@@ -1,19 +1,19 @@
 @import '@/styles/colors.scss';
 
 @mixin styling($font-size, $small-font-size) {
-  #header-title {
+  .title {
     position: relative;
     justify-content: center;
     align-items: center;
     font-size: $small-font-size;
   }
 
-  #header-title-text {
+  .text {
     font-size: $font-size;
     color: $accent;
   }
 
-  .header-children {
+  .children {
     position: absolute;
   }
 }

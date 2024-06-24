@@ -1,6 +1,6 @@
 import CSS from "csstype";
 import { Section } from "@/components";
-import "./style.scss";
+import styles from "./style.module.scss";
 
 export interface HeaderProps {
   title?: string;
@@ -15,16 +15,16 @@ export function Header(props:Readonly<HeaderProps>) {
     <Section style={{ height: props.height ?? "100px" }}>
       <div style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
 
-        <div className="header-children" style={{ left: props.margin ?? 0 }}>
+        <div className={styles.children} style={{ left: props.margin ?? 0 }}>
           {props.left}
         </div>
 
-        <span id="header-title">
+        <span className={styles.title}>
           <span>
             {"•-{ "}
           </span>
 
-          <span id="header-title-text">
+          <span className={styles.text}>
             {props.title}
           </span>
 
@@ -33,7 +33,7 @@ export function Header(props:Readonly<HeaderProps>) {
           </span>
         </span>
 
-        <div className="header-children" style={{ right: props.margin ?? 0 }}>
+        <div className={styles.children} style={{ right: props.margin ?? 0 }}>
           {props.right}
         </div>
 
