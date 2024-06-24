@@ -1,5 +1,5 @@
 import CSS from "csstype";
-import './style.scss';
+import styles from "./style.module.scss";
 
 export interface SectionProps {
   title?: string;
@@ -14,23 +14,21 @@ export interface SectionProps {
 export function Section(props:SectionProps) : React.JSX.Element {
   return (
     <div
-      id="section-background"
+      className={`${styles.background} ${props.isCard ? "card" : ""}`}
       style={props.style}
-      className={props.isCard ? "card" : ""}
     >
       { props.title
       ? <div
-          id="section-title"
-          className={props.centered ? "centered" : ""}
+          className={`${styles.title} ${props.centered ? "centered" : ""}`}
         >
-          <div id="section-title-bg"/>
-          <div id="section-title-text">
+          <div className={styles.titleBG} />
+          <div className={styles.titleText}>
             {props.title}
           </div>
         </div>
       : null }
       <div
-        id="section-container"
+        className={styles.container}
         style={props.containerStyle}
       >
         {props.children}

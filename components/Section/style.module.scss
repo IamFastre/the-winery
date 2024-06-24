@@ -2,13 +2,13 @@
 
 @mixin styling($border-width, $margin, $padding) {
 
-  #section-background {
+  .background {
     position: relative;
     background-color: $primary;
     border-radius: 0;
   }
   
-  #section-container {
+  .container {
     position: relative;
     flex: 1;
     margin: $margin;
@@ -20,7 +20,7 @@
     }
   }
   
-  #section-title {
+  .title {
     position: absolute;
     top: 0;
     align-self: flex-start;
@@ -32,12 +32,12 @@
     font-size: 20px;
   }
   
-  #section-title.centered {
+  .title.centered {
     align-self: center;
     margin-left: 0;
   }
   
-  #section-title-bg {
+  .titleBG {
     z-index: 1;
     position: absolute;
     background-color: $primary;
@@ -47,7 +47,7 @@
     width: calc(100% + 10px);
   }
   
-  #section-title-text {
+  .titleText {
     z-index: 2;
     font-weight: lighter;
     line-height: calc($margin * 2);
@@ -62,11 +62,11 @@
   /* ======================================================================== */
   
   .card {
-    #section-container {
+    .container {
       margin: 0;
     }
     
-    #section-title {
+    .title {
       margin-top: calc($margin * -1);
       margin-left: 0;
     }
