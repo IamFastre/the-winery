@@ -1,5 +1,4 @@
 import { Header, Section } from "@/components";
-import consts from "@/utils/consts";
 import Image from "next/image";
 
 export default function Home() {
@@ -21,7 +20,7 @@ export default function Home() {
       <Section style={{ flex: 1 }} centered>
         <div style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: "15px" }}>
           <Image
-            src={`${consts.basePath}/static/images/NaipeDeCopas.png`}
+            src={'/static/images/NaipeDeCopas.png'}
             alt="the Winery logo; a purple heart suit with a sharp spiky hexagram on top"
             width={imgSize}
             height={imgSize}
