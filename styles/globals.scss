@@ -41,6 +41,10 @@ div {
   flex-direction: column;
 }
 
+img {
+  pointer-events: none;
+}
+
 .color-primary {
   color: $primary;
 }

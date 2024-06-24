@@ -1,0 +1,51 @@
+$time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
+$shadow: drop-shadow(0 0 5em #8400ffbb);
+
+.icon {
+  user-select: none;
+  transition: all 500ms $time-func;
+
+  &:hover {
+    filter: $shadow;
+  }
+  &:active {
+    transform: scale(0.75);
+  }
+}
+
+.beating {
+  animation: beat 1s ease-out 500ms infinite;
+}
+
+.msg {
+  text-align: center;
+  position: absolute;
+  bottom: 50px;
+  transition: all 500ms $time-func 250ms;
+}
+
+$shrink-filter: $shadow blur(3px);
+$shrink-transform: scale(0.8);
+
+@keyframes beat {
+  0% {
+    filter: $shadow;
+    transform: none;
+  }
+  10% {
+    filter: $shrink-filter;
+    transform: $shrink-transform;
+  }
+  30% {
+    filter: $shadow;
+    transform: none;
+  }
+  50% {
+    filter: $shrink-filter;
+    transform: $shrink-transform;
+  }
+  80% {
+    filter: $shadow;
+    transform: none;
+  }
+}
