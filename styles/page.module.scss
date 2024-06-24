@@ -8,7 +8,7 @@ $shadow: drop-shadow(0 0 5em #8400ffbb);
   &:hover {
     filter: $shadow;
   }
-  &:active {
+  &:active:not(.beating){
     transform: scale(0.75);
   }
 }
