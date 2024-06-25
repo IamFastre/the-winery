@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import { B, C, Header, Section } from "@/components";
 import styles from "@/styles/page.module.scss";
+import NDC from "@/public/static/images/NaipeDeCopas.png";
 
 const Nail = () => (
   <div style={{ fontSize: 26 }}>
@@ -12,7 +13,6 @@ const Nail = () => (
 );
 
 export default function Home() {
-  const imgSize:number = 200;
   const [showMsg, setShowMsg] = useState<boolean>(false);
   const [clicks, setClicks] = useState<number>(0);
   const [hrtCls, setHrtCls] = useState<string>(styles.icon);
@@ -52,22 +52,30 @@ export default function Home() {
             className={hrtCls}
           >
             <Image
-              src={'/static/images/NaipeDeCopas.png'}
+              src={NDC}
               alt="the Winery logo; a purple heart suit with a sharp spiky hexagram on top"
-              width={imgSize}
-              height={imgSize}
+              className={styles.image}
               priority
             />
           </div>
           <span className={styles.text}>
             Hello, there!
             <br/>
-            <a className="color-primary" href="https://youtu.be/rEq1Z0bjdwc" target="_blank">
-              General Kenobi!
+            <a href="https://youtu.be/rEq1Z0bjdwc" target="_blank" style={{ textDecoration: 'none' }}>
+              <C.NONE>
+                  General Kenobi!
+              </C.NONE>
             </a>
           </span>
+
+          <div className={styles.sep} />
+
           <span className={styles.desc}>
             Welcome to <C.ACCENT><B>The Winery</B></C.ACCENT> where, no sadly, we don't make wine, but where we whine!
+            <br/>
+            To get start and ferment your own pieces, please <a href="">log in</a> to your account.
+            <br/>
+            Oh you're new? expected; <a href="">create new account</a>!
           </span>
           <span style={{ opacity: showMsg ? 1 : 0 }} className={styles.msg}>
             Wish {isBeating() ? "CPR" : "giving someone a cardiac arrest"} was that easy...

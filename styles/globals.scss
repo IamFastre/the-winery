@@ -16,7 +16,7 @@
 
 ::selection {
   color: $primary;
-  background-color: $accent;
+  background-color: rgba($accent, 0.8);
 }
 
 body {
@@ -48,14 +48,8 @@ img {
   pointer-events: none;
 }
 
-.color-primary {
-  color: $primary;
-}
-
-.color-secondary {
-  color: $secondary;
-}
-
-.color-tertiary {
-  color: $tertiary;
+a {
+  color: $accent;
+  font-style: italic;
+  text-decoration-style: dotted;
 }
