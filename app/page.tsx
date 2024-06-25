@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { B, C, Header, Section } from "@/components";
-import styles from "/styles/page.module.scss";
+import styles from "@/styles/page.module.scss";
 
 const Nail = () => (
   <div style={{ fontSize: 26 }}>

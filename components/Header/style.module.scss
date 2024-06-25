@@ -1,4 +1,4 @@
-@import '@/styles/colors.scss';
+@import '@/styles/colors.module.scss';
 
 @mixin styling($font-size, $small-font-size) {
   .title {
