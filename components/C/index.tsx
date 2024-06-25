@@ -25,11 +25,11 @@ export const L = (props: SpanProps) : React.JSX.Element => (
 );
 
 export const R = (props: SpanProps) : React.JSX.Element => (
-  <span {...props} style={{ fontWeight: '100', ...props.style }} />
+  <span {...props} style={{ fontWeight: '400', ...props.style }} />
 );
 
 export const B = (props: SpanProps) : React.JSX.Element => (
-  <span {...props} style={{ fontWeight: '900', ...props.style }} />
+  <span {...props} style={{ fontWeight: '700', ...props.style }} />
 );
 
 /* ================================= Italics ================================ */
@@ -39,7 +39,7 @@ export const LI = (props: SpanProps) : React.JSX.Element => (
 );
 
 export const RI = (props: SpanProps) : React.JSX.Element => (
-  <span {...props} style={{ fontStyle: 'italic', fontWeight: '100', ...props.style }} />
+  <span {...props} style={{ fontStyle: 'italic', fontWeight: '400', ...props.style }} />
 );
 
 export const BI = (props: SpanProps) : React.JSX.Element => (
@@ -47,6 +47,7 @@ export const BI = (props: SpanProps) : React.JSX.Element => (
 );
 
 /* ================================= Colors ================================= */
+
 export const C = {
   NONE: (props: SpanProps) : React.JSX.Element => (
     <span {...props} style={{color: colors.none}} />
