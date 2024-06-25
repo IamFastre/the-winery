@@ -13,15 +13,15 @@ export interface HeaderProps {
 export function Header(props:Readonly<HeaderProps>) {
   return (
     <Section style={{ height: props.height ?? "100px" }}>
-      <div style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+      <div className={styles.container}>
 
         <div className={styles.children} style={{ left: props.margin ?? 0 }}>
           {props.left}
         </div>
 
-        <span className={styles.title}>
+        <div className={styles.title}>
           <span>
-            {"•-{ "}
+            {"•-{"}
           </span>
 
           <span className={styles.text}>
@@ -29,9 +29,9 @@ export function Header(props:Readonly<HeaderProps>) {
           </span>
 
           <span>
-            {" }-•"}
+            {"}-•"}
           </span>
-        </span>
+        </div>
 
         <div className={styles.children} style={{ right: props.margin ?? 0 }}>
           {props.right}

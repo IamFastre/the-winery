@@ -1,10 +1,19 @@
 @import '@/styles/colors.module.scss';
 
 @mixin styling($font-size, $small-font-size) {
+  .container {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+
   .title {
     position: relative;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
+    gap: 10px;
     font-size: $small-font-size;
   }
 
