@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { IoWine } from "react-icons/io5";
 
-import { B, C, Header, Section } from "@/components";
+import { B, Button, C, Header, Section } from "@/components";
 import styles from "@/styles/page.module.scss";
 import NDC from "@/public/static/images/NaipeDeCopas.png";
 
@@ -77,6 +78,15 @@ export default function Home() {
             <br/>
             Oh you're new? expected; <a href="">create new account</a>!
           </span>
+
+          <Button
+            title="Get started"
+            icon={{
+              element: IoWine,
+            }}
+            onClick={() => alert("Still working on that :)")}
+          />
+
           <span style={{ opacity: showMsg ? 1 : 0 }} className={styles.msg}>
             Wish {isBeating() ? "CPR" : "giving someone a cardiac arrest"} was that easy...
           </span>
