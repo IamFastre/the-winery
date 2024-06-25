@@ -6,7 +6,7 @@ import consts from "@/utils/consts";
 
 export const metadata: Metadata = {
   title: consts.name,
-  description: "It's Winery DeFastre! Where I whine about shit, not where I make wine.",
+  description: "Welcome to The Winery where, no sadly, we don't make wine, but where we whine!",
 };
 
 export default function RootLayout({ children }: Readonly<{ children:React.ReactNode }>) {

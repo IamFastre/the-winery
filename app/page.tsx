@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import { B, C, Header, L, Section, U, WU } from "@/components";
+import { B, C, Header, Section } from "@/components";
 import styles from "/styles/page.module.scss";
 
 const Nail = () => (
@@ -46,7 +46,7 @@ export default function Home() {
       />
 
       <Section style={{ flex: 1 }} centered>
-        <div style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: "15px" }}>
+        <div className={styles.holder}>
           <div
             onClick={() => setClicks(c => c + 1)}
             className={hrtCls}
@@ -66,7 +66,7 @@ export default function Home() {
               General Kenobi!
             </a>
           </span>
-          <span style={{ textAlign: 'left' }}>
+          <span className={styles.desc}>
             Welcome to <C.ACCENT><B>The Winery</B></C.ACCENT> where, no sadly, we don't make wine, but where we whine!
           </span>
           <span style={{ opacity: showMsg ? 1 : 0 }} className={styles.msg}>

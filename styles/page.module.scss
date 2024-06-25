@@ -1,6 +1,13 @@
 $time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
 $shadow: drop-shadow(0 0 5em #8400ffbb);
 
+.holder {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
 .icon {
   user-select: none;
   transition: all 500ms $time-func;
@@ -20,6 +27,11 @@ $shadow: drop-shadow(0 0 5em #8400ffbb);
 .text {
   text-align: center;
   margin-bottom: -10px;
+}
+
+.desc {
+  text-align: left;
+  margin: 20px;
 }
 
 .msg {
