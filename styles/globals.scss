@@ -53,3 +53,17 @@ a {
   font-style: italic;
   text-decoration-style: dotted;
 }
+
+
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  * {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 787px) {
+  * {
+    font-size: 1rem;
+  }
+}
