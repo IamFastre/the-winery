@@ -1,3 +1,3 @@
-export { Section } from "@/components/Section";
-export { Header } from "@/components/Header";
-export { C } from "@/components/C";
+export * from "@/components/Section";
+export * from "@/components/Header";
+export * from "@/components/C";

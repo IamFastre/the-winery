@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import { C, Header, Section } from "@/components";
+import { B, C, Header, L, Section, U, WU } from "@/components";
 import styles from "/styles/page.module.scss";
 
 const Nail = () => (
@@ -67,7 +67,7 @@ export default function Home() {
             </a>
           </span>
           <span style={{ textAlign: 'left' }}>
-            Welcome to <C.ACCENT>The Winery</C.ACCENT> where, no sadly, we don't make wine, but where we whine!
+            Welcome to <C.ACCENT><B>The Winery</B></C.ACCENT> where, no sadly, we don't make wine, but where we whine!
           </span>
           <span style={{ opacity: showMsg ? 1 : 0 }} className={styles.msg}>
             Wish {isBeating() ? "CPR" : "giving someone a cardiac arrest"} was that easy...

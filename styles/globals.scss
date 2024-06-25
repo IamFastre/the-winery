@@ -1,15 +1,17 @@
 @import 'colors';
 
 @font-face {
-  font-family: 'Cascadia';
+  font-family: Cascadia;
+  src: url('/static/fonts/CascadiaCode.ttf');
+  font-weight: 100 200 300 400 500 600 800 900;
   font-style: normal;
-  src: url('/static/fonts/CascadiaCode.woff2') format(woff2);
 }
 
 @font-face {
-  font-family: 'Cascadia';
+  font-family: Cascadia;
+  src: url('/static/fonts/CascadiaCode-Italic.ttf');
+  font-weight: 100 200 300 400 500 600 800 900;
   font-style: italic;
-  src: url('/static/fonts/CascadiaCodeItalic.woff2') format(woff2);
 }
 
 ::selection {
