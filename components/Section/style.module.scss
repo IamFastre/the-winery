@@ -24,7 +24,7 @@
     position: absolute;
     top: 0;
     align-self: flex-start;
-    margin-left: calc($margin + 15px);
+    margin-left: $margin + 15px;
     justify-content: center;
     align-content: center;
     z-index: 2;
@@ -50,7 +50,7 @@
   .titleText {
     z-index: 2;
     font-weight: lighter;
-    line-height: calc($margin * 2);
+    line-height: $margin * 2;
     font-size: 22px;
     &:hover {
       font-weight: 400;
@@ -67,7 +67,7 @@
     }
     
     .title {
-      margin-top: calc($margin * -1);
+      margin-top: -1 * $margin;
       margin-left: 0;
     }
   }
