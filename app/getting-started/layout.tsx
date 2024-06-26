@@ -13,7 +13,7 @@ export default function Layout({ children }: Readonly<{ children:React.ReactNode
         title="The Winery"
         left={<Nail />}
         right={<Nail />}
-        margin="17px"
+        margin="20px"
       />
       {children}
     </div>

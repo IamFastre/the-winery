@@ -4,8 +4,10 @@ import Image from "next/image";
 import { IoWine } from "react-icons/io5";
 
 import { B, Button, C, Section } from "@/components";
-import styles from "./getting-started.module.scss";
+
 import NDC from "@/public/static/images/NaipeDeCopas.png";
+import styles from "./getting-started.module.scss";
+
 
 export default function GettingStarted() {
   const [showMsg, setShowMsg] = useState<boolean>(false);

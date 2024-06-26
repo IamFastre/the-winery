@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-import "@/styles/globals.scss";
 import consts from "@/utils/consts";
+import "@/styles/globals.scss";
 
 
 export const metadata: Metadata = {

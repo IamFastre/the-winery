@@ -1,4 +1,5 @@
 import CSS from "csstype";
+
 import { Section } from "@/components";
 import styles from "./style.module.scss";
 

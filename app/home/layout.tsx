@@ -1,14 +1,17 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
+import { IconBaseProps } from "react-icons";
+import { IoCogOutline, IoInformationCircleOutline, IoPersonCircleOutline, IoWineOutline } from "react-icons/io5";
 
 import { Section } from "@/components";
+
 import NDC from "@/public/static/images/NaipeDeCopas.png";
-import styles from "./home.module.scss";
-import { useState } from "react";
-import { useRouter } from 'next/navigation';
-import { IoCogOutline, IoInformationCircleOutline, IoPersonCircleOutline, IoWineOutline } from "react-icons/io5";
-import { IconBaseProps } from "react-icons";
 import colors from '@/styles/colors.module.scss';
+import styles from "./home.module.scss";
+
+
 
 export default function HomeLayout({ children }: Readonly<{ children:React.ReactNode }>) {
   const router = useRouter();
