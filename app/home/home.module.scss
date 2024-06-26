@@ -1,0 +1,147 @@
+@import '@/styles/colors.module.scss';
+
+@mixin styling($direction, $icon-size) {
+  $time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
+  $size: 0px;
+  $image-size: 0px;
+  $shrink-transform: scale(0.8);
+  $shadow: drop-shadow(-5px -5px 10px $highlight)
+           drop-shadow(5px 5px 10px $accent);
+  $shrink-filter: $shadow blur(3px);
+  $icon-shadow: drop-shadow(0 0 5px $tertiary);
+
+  @if $direction == row {
+    $size: 85px;
+    $image-size: 55px;
+  }
+  @else {
+    $size: 70px;
+    $image-size: 40px;
+  }
+
+  .body {
+    flex: 1;
+    margin: 10px;
+    flex-direction: $direction;
+  }
+
+  .bar {
+    @if $direction == row {
+      width: $size;
+      height: 100%;
+    }
+    @else {
+      width: 100%;
+      height: $size;
+    }
+  }
+
+  .nav {
+    flex: 1;
+    gap: $size / 5;
+    justify-content: flex-start;
+    align-items: center;
+
+    @if $direction == row {
+      flex-direction: column;
+      padding-top: $size / 10;
+    }
+    @else {
+      flex-direction: row;
+      padding-left: $size / 10;
+    }
+  }
+
+  .image {
+    img {
+      cursor: pointer;
+      transition: all 500ms $time-func;
+      width: $image-size;
+      height: $image-size;
+      
+      &:hover {
+        transform: scale(0.85);
+        filter: $shadow;
+      }
+    }
+  }
+  
+  .redirecting {
+    animation: beat 1s ease-out 0ms infinite;
+  }
+
+  @keyframes beat {
+    0% {
+      filter: $shadow;
+      transform: none;
+    }
+    10% {
+      filter: $shrink-filter;
+      transform: $shrink-transform;
+    }
+    30% {
+      filter: $shadow;
+      transform: none;
+    }
+    50% {
+      filter: $shrink-filter;
+      transform: $shrink-transform;
+    }
+    80% {
+      filter: $shadow;
+      transform: none;
+    }
+  }
+
+  .sep {
+    background-color: $accent;
+
+    @if $direction == row {
+      width: 90%;
+      height: 2px;
+    }
+    @else {
+      width: 2px;
+      height: 80%;
+    }
+  }
+
+  .icons {
+    flex: 1;
+    
+    @if $direction == row {
+      flex-direction: column;
+      gap: $icon-size / 3 * 2;
+    }
+    @else {
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  }
+
+  .icon {
+    color: $quinary;
+    font-size: $icon-size;
+    transition: all 500ms $time-func;
+
+    &:hover {
+      color: $tertiary;
+      transform: scale(1.1);
+      filter: $icon-shadow;
+    }
+
+    &:active {
+      transition: transform 100ms $time-func;
+      transform: scale(0.8);
+    }
+  }
+}
+
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling($direction: column-reverse, $icon-size: 35px);
+}
+
+@media screen and (min-width: 787px) {
+  @include styling($direction: row, $icon-size: 45px);
+}

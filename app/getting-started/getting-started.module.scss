@@ -15,6 +15,7 @@
   }
 
   .image {
+    pointer-events: none;
     height: $img-size;
     width: $img-size;
   }
