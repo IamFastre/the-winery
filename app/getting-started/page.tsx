@@ -40,7 +40,7 @@ export default function GettingStarted() {
     }, [clicks])
 
   return (
-    <div style={{ flex: 1, margin: 10 }}>
+    <div style={{ flex: 1 }}>
       <Header
         title="The Winery"
         left={<Nail />}
