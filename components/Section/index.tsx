@@ -7,6 +7,9 @@ export interface SectionProps {
   style?: CSS.Properties;
   containerStyle?: CSS.Properties;
 
+  className?: string;
+  containerClassName?: string;
+
   isCard?: boolean;
   centered?: boolean;
 }
@@ -14,12 +17,12 @@ export interface SectionProps {
 export function Section(props:SectionProps) : React.JSX.Element {
   return (
     <div
-      className={`${styles.background} ${props.isCard ? "card" : ""}`}
+      className={`${styles.background} ${props.className} ${props.isCard ? styles.card : ""}`}
       style={props.style}
     >
       { props.title
       ? <div
-          className={`${styles.title} ${props.centered ? "centered" : ""}`}
+          className={`${styles.title} ${props.centered ? styles.centered : ""}`}
         >
           <div className={styles.titleBG} />
           <div className={styles.titleText}>
@@ -28,7 +31,8 @@ export function Section(props:SectionProps) : React.JSX.Element {
         </div>
       : null }
       <div
-        className={styles.container}
+        id="container"
+        className={`${styles.container} ${props.containerClassName}`}
         style={props.containerStyle}
       >
         {props.children}
