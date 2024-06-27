@@ -56,7 +56,7 @@ jobs:
         run: npm ci
 
       - name: Build with Next.js
-        run: npx next build --no-install
+        run: npx --no-install next build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
