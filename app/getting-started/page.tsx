@@ -15,7 +15,7 @@ const Nail = () => (
   </div>
 );
 
-export default function GettingStarted() {
+export default function GettingStartedPage() {
   const [showMsg, setShowMsg] = useState<boolean>(false);
   const [clicks, setClicks] = useState<number>(0);
   const [hrtCls, setHrtCls] = useState<string>(styles.icon);

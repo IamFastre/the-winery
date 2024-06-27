@@ -1,0 +1,60 @@
+@import '@/styles/colors.module.scss';
+
+$time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
+$min-width: 350px;
+$max-width: 70%;
+
+.page {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  flex: 1;
+  align-items: stretch;
+  justify-content: center;
+  min-width: $min-width;
+  max-width: $max-width;
+  gap: 10px;
+}
+
+.section {
+  min-height: 300px;
+  max-height: 90%;
+  transition: all 500ms $time-func;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 20px;
+    
+    label {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 5px;
+
+      span {
+        user-select: none;
+      }
+
+      input {
+        width: 100%;
+
+        &::placeholder {
+          color: $secondary;
+        }
+      }
+    }
+  }
+
+  :global #container {
+    padding-top: 50px;
+  }
+}
+
+.haveAcc {
+  margin: 5px;
+}

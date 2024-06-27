@@ -2,7 +2,7 @@ import { Section } from "@/components";
 
 export default function HomePage() {
   return (
-    <Section style={{ flex: 1 }} title="Home">
+    <Section title="Home" style={{ flex: 1 }}>
       
     </Section>
   );

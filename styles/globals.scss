@@ -33,9 +33,6 @@ body {
   left: 0;
 
   background-color: $primary;
-  color: $tertiary;
-
-  font-family: 'Cascadia', 'Menlo', 'Courier Prime', 'Courier New', Courier, monospace;
 }
 
 // BTW, can you tell I'm a React Native dev?
@@ -50,16 +47,28 @@ a {
   text-decoration-style: dotted;
 }
 
+input {
+  background-color: $quaternary;
+  border: none;
+  border-bottom: 2px $accent solid;
+  min-height: 25px;
+}
 
 @media screen and (min-width: 0px)
               and (max-width: 786px) {
-  * {
-    font-size: 14px;
-  }
+  * { font-size: 14px; }
 }
 
 @media screen and (min-width: 787px) {
-  * {
-    font-size: 1rem;
+  * { font-size: 1rem; }
+}
+
+* {
+  font-family: 'Cascadia', 'Menlo', 'Courier Prime', 'Courier New', Courier, monospace;
+  color: $tertiary;
+
+  &:focus-visible {
+    outline-color: $accent;
+    outline-style: dashed;
   }
 }
