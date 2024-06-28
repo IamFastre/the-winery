@@ -25,7 +25,7 @@
     cursor: pointer;
     transition: all 500ms $time-func;
 
-    &:hover {
+    &:hover, &:focus {
       filter: $shadow;
     }
     &:active:not(.beating){

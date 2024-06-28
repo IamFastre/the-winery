@@ -20,11 +20,11 @@ $all-transition: all 350ms ease-out;
   transition: $all-transition,
               filter 500ms $time-func;
 
-  &:hover:not(.disabled) {
+  &:hover:not(.disabled), &:focus:not(.disabled) {
     background-color: rgba($accent, 0.2);
   }
 
-  &:active:not(.disabled) {
+  &:active:not(.disabled), &.active:not(.disabled) {
     background-color: $accent;
     filter: $shadow;
 
