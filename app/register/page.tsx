@@ -2,11 +2,10 @@
 import { useRef, useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 
-import { Button, C, Section } from "@/components";
+import { Button, C, GoHomeLogo, Section } from "@/components";
 import { multiplyString } from "@/utils";
 
 import styles from "./register.module.scss";
-import colors from '@/styles/colors.module.scss';
 
 const checkEmail = (str:string) : boolean => {
     if (!str)
@@ -40,7 +39,20 @@ export default function RegisterPage() {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        <Section title="Register" className={styles.section} isCard centered>
+        {/* TODO: Make redirecting make this dashy */}
+        <Section title="Register" className={`${styles.section}`} isCard centered>
+          <GoHomeLogo
+            className={styles.image}
+          />
+          <div className={styles.name}>
+            <C.SECONDARY>
+              {'•-{ '}
+              <C.ACCENT>
+                The Winery
+              </C.ACCENT>
+              {' }-•'}
+            </C.SECONDARY>
+          </div>
           <form>
             <label>
               <span>

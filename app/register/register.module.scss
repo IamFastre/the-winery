@@ -54,7 +54,24 @@ $max-width: 70%;
   }
 
   :global #container {
-    padding-top: 50px;
+    gap: 10px;
+    padding-top: 40px;
+  }
+}
+
+.name {
+  align-self: center;
+  user-select: none;
+  
+  span { font-size: 20px; }
+  &:hover { font-weight: bold; }
+}
+
+.image {
+  align-self: center;
+  img {
+    height: 100px;
+    width: 100px;
   }
 }
 
