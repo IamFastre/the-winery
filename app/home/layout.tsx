@@ -1,40 +1,25 @@
 "use client";
-import { useState } from "react";
-import Image from "next/image";
-import { useRouter } from 'next/navigation';
 import { IoCogOutline, IoInformationCircleOutline, IoPersonCircleOutline, IoWineOutline } from "react-icons/io5";
 
-import { Section } from "@/components";
+import { Section, GoHomeLogo } from "@/components";
+import { useGoTo } from "@/hooks";
 
-import NDC from "@/public/static/images/NaipeDeCopas.png";
 import styles from "./home.module.scss";
 
 
 export default function HomeLayout({ children }: Readonly<{ children:React.ReactNode }>) {
-  const router = useRouter();
-  const [isRe, setIsRe] = useState<boolean>(false);
-
-  const goto = (path:string) => {
-    setIsRe(true);
-
-    setTimeout(() => {
-      router.push(path);
-      setIsRe(false);
-    }, 960)
-  };
+  const [redirecting, goto] = useGoTo();
 
   return (
     <div className={styles.body}>
       <div className={styles.bar}>
-        <Section style={{ flex: 1 }} containerStyle={{ borderStyle: isRe ? 'dashed' : 'solid' }}>
+        <Section style={{ flex: 1 }} containerStyle={{ borderStyle: redirecting ? 'dashed' : 'solid' }}>
           <div className={styles.nav}>
-            <div className={`${styles.image} ${isRe ? styles.redirecting : ""}`} onClick={() => goto('/home')}>
-              <Image
-                src={NDC}
-                alt="the Winery logo; a purple heart suit with a sharp spiky hexagram on top"
-                priority
-              />
-              </div>
+            <GoHomeLogo
+              redirecting={redirecting}
+              goto={goto}
+              className={styles.image}
+            />
             <div className={styles.sep} />
             <div className={styles.icons}>
               <IoPersonCircleOutline

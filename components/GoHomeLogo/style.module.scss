@@ -1,0 +1,46 @@
+@import '@/styles/colors.module.scss';
+
+$time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
+$shrink-transform: scale(0.8);
+$shadow: drop-shadow(-5px -5px 10px $highlight)
+         drop-shadow(5px 5px 10px $accent);
+$shrink-filter: $shadow blur(3px);
+
+.image {
+  img {
+    cursor: pointer;
+    transition: all 500ms $time-func;
+    
+    &:hover, &:focus {
+      transform: scale(0.85);
+      filter: $shadow;
+    }
+  }
+}
+
+.redirecting {
+  animation: beat 1s ease-out 0ms infinite;
+}
+
+@keyframes beat {
+  0% {
+    filter: $shadow;
+    transform: none;
+  }
+  10% {
+    filter: $shrink-filter;
+    transform: $shrink-transform;
+  }
+  30% {
+    filter: $shadow;
+    transform: none;
+  }
+  50% {
+    filter: $shrink-filter;
+    transform: $shrink-transform;
+  }
+  80% {
+    filter: $shadow;
+    transform: none;
+  }
+}
