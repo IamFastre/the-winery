@@ -1,3 +1,4 @@
+"use client";
 import { Section } from "@/components";
 
 export default function HomePage() {

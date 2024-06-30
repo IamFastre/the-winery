@@ -85,7 +85,7 @@
     font-size: $icon-size;
     transition: all 500ms $time-func;
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       color: $tertiary;
       transform: scale(1.1);
       filter: $icon-shadow;

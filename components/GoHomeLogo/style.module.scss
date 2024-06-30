@@ -11,7 +11,7 @@ $shrink-filter: $shadow blur(3px);
     cursor: pointer;
     transition: all 500ms $time-func;
     
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       transform: scale(0.85);
       filter: $shadow;
     }

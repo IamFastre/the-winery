@@ -15,7 +15,7 @@
     padding: $padding;
     overflow: hidden;
     border: $border-width solid $secondary;
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       border-color: $accent;
     }
   }
