@@ -1,7 +1,6 @@
 @import '@/styles/colors.module.scss';
 
 $time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
-$shadow: drop-shadow(0 0 10px rgba($accent, 0.5));
 $all-transition: all 350ms ease-out;
 
 .container {
@@ -14,20 +13,11 @@ $all-transition: all 350ms ease-out;
 
   border-width: 1px;
   border-style: solid;
-  border-color: $accent;
-  background-color: rgba($accent, 0.1);
   cursor: pointer;
   transition: $all-transition,
               filter 500ms $time-func;
 
-  &:hover:not(.disabled), &:focus:not(.disabled) {
-    background-color: rgba($accent, 0.2);
-  }
-
   &:active:not(.disabled), &.active:not(.disabled) {
-    background-color: $accent;
-    filter: $shadow;
-
     span {
       color: $primary;
     }
@@ -62,8 +52,4 @@ $all-transition: all 350ms ease-out;
     transition: $all-transition;
     user-select: none;
   }
-}
-
-.brackets {
-  color: $accent;
 }

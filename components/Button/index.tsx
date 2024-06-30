@@ -1,8 +1,10 @@
 import { KeyboardEventHandler, MouseEventHandler } from "react";
 import { IconType } from "react-icons";
+import CSS from "csstype";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";
+import { hexOpacity } from "@/utils";
 
 interface Icon {
   element: IconType;
@@ -16,9 +18,11 @@ export interface ButtonProps {
   icon?: Icon;
   onClick?: MouseEventHandler<HTMLDivElement>;
   disabled?: boolean;
+  color?: CSS.Property.Color;
 }
 
 export function Button(props:Readonly<ButtonProps>) {
+  const color   = props.disabled ? colors.secondary : props.color ?? colors.accent;
   const iconPos = props.icon?.position ?? "left";
   const icon    = props.icon && props.icon.position !== "none" ? (
     <div className={styles.icon}>
@@ -48,16 +52,33 @@ export function Button(props:Readonly<ButtonProps>) {
       onKeyUp={keyup}
       tabIndex={0}
     >
-      { props.icon && iconPos === "left" ? icon : null }
+      {/* This is just cursed */}
+      <style jsx> {`
+        .${styles.container} {
+          border-color: ${color};
+          background-color: ${hexOpacity(color, 0.1)};
 
+          &:hover:not(.${styles.disabled}),
+          &:focus-visible:not(.${styles.disabled}) {
+            background-color: ${hexOpacity(color, 0.2)};
+          }
+
+          &:active:not(.${styles.disabled}),
+          &.${styles.active}:not(.${styles.disabled}) {
+            background-color: ${color};
+            filter: drop-shadow(0 0 10px ${hexOpacity(color, 0.5)});
+          }
+        }
+      `}</style>
+
+      { props.icon && iconPos === "left" ? icon : null }
       <div className={styles.textHolder}>
         <span>
-          <span className={styles.brackets}>{'[ '}</span>
+          <span style={{ color }}>{'[ '}</span>
           {props.title}
-          <span className={styles.brackets}>{' ]'}</span>
+          <span style={{ color }}>{' ]'}</span>
         </span>
       </div>
-
       { props.icon && iconPos === "right" ? icon : null }
     </div>
   );
