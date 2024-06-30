@@ -38,15 +38,16 @@ $max-width: 70%;
       gap: 5px;
 
       span {
-        font-style: italic;
         user-select: none;
       }
 
       input {
         border-top-left-radius: 2px;
         border-top-right-radius: 2px;
+        font-variant-ligatures: none;
 
         &::placeholder {
+          font-style: italic;
           color: $secondary;
         }
       }
@@ -69,6 +70,8 @@ $max-width: 70%;
 
 .image {
   align-self: center;
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+
   img {
     height: 100px;
     width: 100px;

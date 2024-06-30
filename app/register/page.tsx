@@ -5,6 +5,7 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import { Button, C, GoHomeLogo, Section } from "@/components";
 import { multiplyString } from "@/utils";
 
+import colors from '@/styles/colors.module.scss';
 import styles from "./register.module.scss";
 
 const checkEmail = (str:string) : boolean => {
@@ -19,6 +20,17 @@ const checkPassword = (str:string) : boolean => {
     return true;
 
   return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[?!@#$%^&()\.\,\-\+\*\/=\\]).{1,}$/.test(str);
+}
+
+const LabelTitle = ({ title }:{ title:string }) => {
+  return (
+    <span>
+      <C.ACCENT>
+        {'> '}
+      </C.ACCENT>
+      {title}
+    </span>
+  );
 }
 
 export default function RegisterPage() {
@@ -43,25 +55,27 @@ export default function RegisterPage() {
         <Section title="Register" className={`${styles.section}`} isCard centered>
           <GoHomeLogo
             className={styles.image}
+            style={{ filter: showPass ? "saturate(0) blur(3px)" : "" }}
           />
           <div className={styles.name}>
             <C.SECONDARY>
               {'•-{ '}
-              <C.ACCENT>
+              <span style={{ color: showPass ? colors.quinary : colors.accent }}>
                 The Winery
-              </C.ACCENT>
+              </span>
               {' }-•'}
             </C.SECONDARY>
           </div>
           <form>
             <label>
-              <span>
-                Email
-              </span>
+              <LabelTitle title="Email" />
               <input
+                name="email"
+                autoComplete="email"
                 type="email"
+                title=""
                 value={email}
-                placeholder="user@email.com"
+                placeholder="user@example.com"
                 onChange={e => setEmail(e.target.value)}
                 ref={emailRef}
                 required
@@ -74,12 +88,13 @@ export default function RegisterPage() {
             </label>
 
             <label>
-              <span>
-                Password
-              </span>
+              <LabelTitle title="Password" />
               <div className={styles.passwordContainer}>
                 <input
+                  name="password"
+                  autoComplete="new-password"
                   type={showPass ? "text" : "password"}
+                  title=""
                   value={password}
                   placeholder="********"
                   onChange={e => setPassword(e.target.value)}
@@ -90,7 +105,10 @@ export default function RegisterPage() {
                       cPassRef.current?.focus();
                   }}
                 />
-                <div onClick={() => setShowPass(p => !p)}>
+                <div
+                  title={showPass ? "Hide Password" : "Show Password"}
+                  onClick={() => setShowPass(p => !p)}
+                >
                   {showPass ? <IoEyeOff id="closed" /> : <IoEye id="open" />}
                 </div>
               </div>
@@ -98,11 +116,12 @@ export default function RegisterPage() {
             </label>
 
             <label>
-              <span>
-                Confirm Password
-              </span>
+              <LabelTitle title="Confirm Password" />
               <input
+                name="password"
+                autoComplete="new-password"
                 type={showPass ? "text" : "password"}
+                title=""
                 value={confPass}
                 placeholder={password ? multiplyString("*", password.length) : "********"}
                 onChange={e => setConfPass(e.target.value)}
