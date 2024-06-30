@@ -1,4 +1,5 @@
 import Image from "next/image";
+import CSS from 'csstype';
 
 import { useGoTo } from "@/hooks";
 
@@ -7,6 +8,7 @@ import styles from "./style.module.scss";
 
 export interface HomeIconProps {
   className:string;
+  style?:CSS.Properties;
   redirecting?:boolean;
   goto?: (str:string) => void;
 }
@@ -24,6 +26,7 @@ export function GoHomeLogo(props:HomeIconProps) {
   return (
     <div
       className={`${styles.image} ${redirecting ? styles.redirecting : ""} ${props.className}`}
+      style={props.style}
       onClick={() => goto('/home')}
     >
       <Image
