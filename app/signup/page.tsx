@@ -6,20 +6,22 @@ import { Button, C, GoHomeLogo, Section } from "@/components";
 import { multiplyString } from "@/utils";
 
 import colors from '@/styles/colors.module.scss';
-import styles from "./register.module.scss";
+import styles from "./signup.module.scss";
 
 const checkEmail = (str:string) : boolean => {
     if (!str)
       return true;
 
-    return /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/i.test(str);
+    return /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/i
+           .test(str);
 }
 
 const checkPassword = (str:string) : boolean => {
   if (!str)
     return true;
 
-  return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[?!@#$%^&()\.\,\-\+\*\/=\\]).{1,}$/.test(str);
+  return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[?!@#$%^&()\.\,\-\+\*\/=\\]).{1,}$/
+         .test(str);
 }
 
 const LabelTitle = ({ title }:{ title:string }) => {
@@ -52,7 +54,7 @@ export default function RegisterPage() {
     <div className={styles.page}>
       <div className={styles.container}>
         {/* TODO: Make redirecting make this dashy */}
-        <Section title="Register" className={`${styles.section}`} isCard centered>
+        <Section title="Create Account" className={`${styles.section}`} isCard centered>
           <GoHomeLogo
             className={styles.image}
             style={{ filter: showPass ? "saturate(0) blur(3px)" : "" }}
@@ -66,6 +68,7 @@ export default function RegisterPage() {
               {' }-•'}
             </C.SECONDARY>
           </div>
+
           <form>
             <label>
               <LabelTitle title="Email" />
@@ -84,7 +87,7 @@ export default function RegisterPage() {
                     passRef.current?.focus();
                 }}
               />
-              { checkEmail(email) ? "" : <C.RED>{'> WRONG'}</C.RED>}
+              { checkEmail(email) ? null : <C.RED>{'> WRONG'}</C.RED>}
             </label>
 
             <label>
@@ -112,7 +115,7 @@ export default function RegisterPage() {
                   {showPass ? <IoEyeOff id="closed" /> : <IoEye id="open" />}
                 </div>
               </div>
-              { checkPassword(password) ? "" : <C.RED>{'> WRONG'}</C.RED>}
+              { checkPassword(password) ? null : <C.RED>{'> WRONG'}</C.RED>}
             </label>
 
             <label>
@@ -128,11 +131,11 @@ export default function RegisterPage() {
                 ref={cPassRef}
                 required
               />
-              { password.length > 0 && confPass.length > 0 && password != confPass ? <C.RED>{'> WRONG'}</C.RED> : ""}
+              { password.length > 0 && confPass.length > 0 && password != confPass ? <C.RED>{'> WRONG'}</C.RED> : null}
             </label>
 
             <Button
-              title="Sign Up"
+              title="Sign up"
               onClick={onSubmit}
             />
           </form>
@@ -140,7 +143,7 @@ export default function RegisterPage() {
 
         <Section isCard>
           <span className={styles.haveAcc}>
-            Already have an account? <a href="">log in</a> now!
+            Already have an account? <a href="/login">log in</a> now!
           </span>
         </Section>
       </div>
