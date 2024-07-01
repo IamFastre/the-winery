@@ -8,11 +8,11 @@
 
   @if $direction == row {
     $size: 85px;
-    $image-size: 55px;
+    $image-size: 65px;
   }
   @else {
     $size: 70px;
-    $image-size: 40px;
+    $image-size: 50px;
   }
 
   .body {

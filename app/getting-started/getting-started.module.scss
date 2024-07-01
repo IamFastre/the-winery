@@ -102,9 +102,9 @@
 
 @media screen and (min-width: 0px)
               and (max-width: 786px) {
-  @include styling($img-size: 125px);
+  @include styling($img-size: 200px);
 }
 
 @media screen and (min-width: 787px) {
-  @include styling($img-size: 240px);
+  @include styling($img-size: 300px);
 }
