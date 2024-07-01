@@ -45,6 +45,11 @@ a {
   color: $accent;
   font-style: italic;
   text-decoration-style: dotted;
+
+  &:hover, &:focus-visible {
+    font-weight: bolder;
+    text-decoration-style: solid;
+  }
 }
 
 input {
