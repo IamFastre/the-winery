@@ -1,6 +1,7 @@
 import CSS from "csstype";
 import styles from "./style.module.scss";
 
+
 export interface SectionProps {
   title?: string;
   children?: React.ReactNode;

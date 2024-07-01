@@ -6,6 +6,7 @@ import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";
 import { hexOpacity } from "@/utils";
 
+
 interface Icon {
   element: IconType;
   color?: string;

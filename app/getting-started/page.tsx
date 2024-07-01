@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { IoWine } from "react-icons/io5";
 
+import { getLogo } from "@/utils";
 import { B, Button, C, Header, Section } from "@/components";
 
-import NDC from "@/public/static/images/NaipeDeCopas.png";
 import styles from "./getting-started.module.scss";
 
 
@@ -54,7 +54,7 @@ export default function GettingStartedPage() {
             className={hrtCls}
           >
             <Image
-              src={NDC}
+              src={getLogo("main")}
               alt="the Winery logo; a purple heart suit with a sharp spiky hexagram on top"
               className={styles.image}
               priority

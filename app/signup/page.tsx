@@ -8,6 +8,7 @@ import { multiplyString } from "@/utils";
 import colors from '@/styles/colors.module.scss';
 import styles from "./signup.module.scss";
 
+
 const checkEmail = (str:string) : boolean => {
     if (!str)
       return true;

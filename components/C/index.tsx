@@ -1,6 +1,7 @@
 import React, { HTMLAttributes } from "react";
 import colors from '@/styles/colors.module.scss';
 
+
 export type SpanProps      = HTMLAttributes<HTMLSpanElement>;
 export type UnderlineProps = SpanProps & { underlineColor?: string };
 

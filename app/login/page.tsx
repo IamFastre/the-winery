@@ -7,6 +7,7 @@ import { Button, C, GoHomeLogo, Section } from "@/components";
 import colors from '@/styles/colors.module.scss';
 import styles from "./login.module.scss";
 
+
 const checkEmail = (str:string) : boolean => {
     if (!str)
       return true;

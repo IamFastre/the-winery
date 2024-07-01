@@ -3,6 +3,7 @@ import CSS from "csstype";
 import { Section } from "@/components";
 import styles from "./style.module.scss";
 
+
 export interface HeaderProps {
   title?: string;
   height?: CSS.Property.Height;

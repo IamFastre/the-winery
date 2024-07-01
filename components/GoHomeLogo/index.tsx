@@ -3,14 +3,16 @@ import CSS from 'csstype';
 
 import { useGoTo } from "@/hooks";
 
-import NDC from "@/public/static/images/NaipeDeCopas.png";
 import styles from "./style.module.scss";
+import { getLogo, LogoKind } from "@/utils";
+
 
 export interface HomeIconProps {
   className:string;
   style?:CSS.Properties;
   redirecting?:boolean;
   goto?: (str:string) => void;
+  logo?: LogoKind;
 }
 
 export function GoHomeLogo(props:HomeIconProps) {
@@ -30,8 +32,8 @@ export function GoHomeLogo(props:HomeIconProps) {
       onClick={() => goto('/home')}
     >
       <Image
-        src={NDC}
-        alt="the Winery logo; a purple heart suit with a sharp spiky hexagram on top"
+        alt="the Winery logo; a purple heart suit with a golden spiky hexagram on top"
+        src={getLogo(props.logo ?? "brand")}
         priority
       />
     </div>
