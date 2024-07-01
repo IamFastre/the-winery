@@ -4,7 +4,7 @@ import { IoCogOutline, IoInformationCircleOutline, IoPersonCircleOutline, IoWine
 import { Section, GoHomeLogo } from "@/components";
 import { useGoTo } from "@/hooks";
 
-import styles from "./home.module.scss";
+import styles from "./styles.module.scss";
 
 
 export default function HomeLayout({ children }: Readonly<{ children:React.ReactNode }>) {

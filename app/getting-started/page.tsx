@@ -6,7 +6,7 @@ import { IoWine } from "react-icons/io5";
 import { getLogo } from "@/utils";
 import { B, Button, C, Header, Section } from "@/components";
 
-import styles from "./getting-started.module.scss";
+import styles from "./styles.module.scss";
 
 
 const Nail = () => (

@@ -5,7 +5,7 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import { Button, C, GoHomeLogo, Section } from "@/components";
 
 import colors from '@/styles/colors.module.scss';
-import styles from "./login.module.scss";
+import styles from "./styles.module.scss";
 
 
 const checkEmail = (str:string) : boolean => {

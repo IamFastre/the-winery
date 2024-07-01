@@ -6,7 +6,7 @@ import { Button, C, GoHomeLogo, Section } from "@/components";
 import { multiplyString } from "@/utils";
 
 import colors from '@/styles/colors.module.scss';
-import styles from "./signup.module.scss";
+import styles from "./styles.module.scss";
 
 
 const checkEmail = (str:string) : boolean => {
