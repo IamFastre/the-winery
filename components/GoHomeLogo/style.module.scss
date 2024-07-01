@@ -7,6 +7,10 @@ $shadow: drop-shadow(-5px -5px 10px $highlight)
 $shrink-filter: $shadow blur(3px);
 
 .image {
+  > a {
+    display: flex;
+  }
+
   img {
     cursor: pointer;
     transition: all 500ms $time-func;

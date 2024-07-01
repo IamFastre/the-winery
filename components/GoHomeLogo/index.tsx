@@ -11,12 +11,14 @@ export interface HomeIconProps {
   className:string;
   style?:CSS.Properties;
   redirecting?:boolean;
-  goto?: (str:string) => void;
-  logo?: LogoKind;
+  goto?:(str:string) => void;
+  logo?:LogoKind;
+  dest?:string;
 }
 
 export function GoHomeLogo(props:HomeIconProps) {
   let useHook = true;
+  let dest    = props.dest ?? '/home';
 
   if (props.redirecting === undefined && props.goto !== undefined || props.redirecting !== undefined && props.goto === undefined)
     throw new Error("Can't have one but now the other");
@@ -29,13 +31,15 @@ export function GoHomeLogo(props:HomeIconProps) {
     <div
       className={`${styles.image} ${redirecting ? styles.redirecting : ""} ${props.className}`}
       style={props.style}
-      onClick={() => goto('/home')}
+      onClick={() => goto(dest)}
     >
-      <Image
-        alt="the Winery logo; a purple heart suit with a golden spiky hexagram on top"
-        src={getLogo(props.logo ?? "brand")}
-        priority
-      />
+      <a href={dest} onClick={e => e.preventDefault()}>
+        <Image
+          alt="the Winery logo; a purple heart suit with a golden spiky hexagram on top"
+          src={getLogo(props.logo ?? "brand")}
+          priority
+        />
+      </a>
     </div>
   );
 }
