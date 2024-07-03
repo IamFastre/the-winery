@@ -66,6 +66,8 @@ input {
 
 hr {
   width: 100%;
+  height: 0;
+  border-color: $secondary;
 }
 
 @media screen and (min-width: 0px)
