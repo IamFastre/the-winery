@@ -45,7 +45,7 @@ export default function LoginPage() {
     <div className={styles.page}>
       <div className={styles.container}>
         {/* TODO: Make redirecting make this dashy */}
-        <Section title="Bienvenue" className={`${styles.section}`} isCard centered>
+        <Section title="Bienvenue" className={`${styles.section}`} containerClassName={styles.sectionContent} isCard centered>
           <GoHomeLogo
             className={styles.image}
             style={{ filter: showPass ? "saturate(0) blur(3px)" : "" }}

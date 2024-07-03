@@ -32,7 +32,6 @@ export function Section(props:SectionProps) : React.JSX.Element {
         </div>
       : null }
       <div
-        id="container"
         className={`${styles.container} ${props.containerClassName}`}
         style={props.containerStyle}
       >
