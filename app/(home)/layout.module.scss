@@ -33,17 +33,15 @@
 
   .nav {
     flex: 1;
-    gap: $size / 5;
     justify-content: flex-start;
     align-items: center;
 
     @if $direction == row {
       flex-direction: column;
-      padding-top: $size / 10;
     }
     @else {
       flex-direction: row;
-      padding-left: $size / 10;
+      padding-left: $size / 15;
     }
   }
 
@@ -60,10 +58,13 @@
     @if $direction == row {
       width: 90%;
       height: 2px;
+      margin-top: $image-size / 12.5 + 2.5px;
+      margin-bottom: $image-size / 7.5 + 2.5px;
     }
     @else {
       width: 2px;
       height: 80%;
+      margin-left: $image-size / 5;
     }
   }
 
@@ -91,7 +92,7 @@
       filter: $icon-shadow;
     }
 
-    &:active {
+    &:active, &.active {
       transition: transform 100ms $time-func;
       transform: scale(0.8);
     }

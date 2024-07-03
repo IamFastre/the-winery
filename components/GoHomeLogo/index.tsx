@@ -18,7 +18,7 @@ export interface HomeIconProps {
 
 export function GoHomeLogo(props:HomeIconProps) {
   let useHook = true;
-  let dest    = props.dest ?? '/home';
+  let dest    = props.dest ?? '/';
 
   if (props.redirecting === undefined && props.goto !== undefined || props.redirecting !== undefined && props.goto === undefined)
     throw new Error("Can't have one but now the other");

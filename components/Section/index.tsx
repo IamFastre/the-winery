@@ -5,12 +5,14 @@ import styles from "./style.module.scss";
 export interface SectionProps {
   title?: string;
   children?: React.ReactNode;
+
   style?: CSS.Properties;
   containerStyle?: CSS.Properties;
 
   className?: string;
   containerClassName?: string;
 
+  noFlex?: boolean;
   isCard?: boolean;
   centered?: boolean;
 }
@@ -32,7 +34,7 @@ export function Section(props:SectionProps) : React.JSX.Element {
         </div>
       : null }
       <div
-        className={`${styles.container} ${props.containerClassName}`}
+        className={`${styles.container} ${props.noFlex ? "" : styles.flex} ${props.containerClassName}`}
         style={props.containerStyle}
       >
         {props.children}

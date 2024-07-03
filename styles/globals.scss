@@ -23,7 +23,7 @@ body {
   margin: 0;
   padding: 10px;
 
-  position: fixed;
+  position: absolute;
   display: flex;
   flex-direction: column;
 
@@ -32,6 +32,7 @@ body {
   right: 0;
   left: 0;
 
+  overflow: hidden;
   background-color: $primary;
 }
 
@@ -39,6 +40,49 @@ body {
 div {
   display: flex;
   flex-direction: column;
+}
+
+h1 {
+  font-size: 26px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 22px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+
+h1,h2,h3 {
+  margin-block-start: 0.6em;
+  margin-block-end: 0;
+  &::before {
+    content: "§ ";
+    color: $secondary;
+  }
+}
+
+h4,h5,h6 {
+  margin-block-start: 0.6em;
+  margin-block-end: 0;
+  &::before {
+    content: "> ";
+    color: $secondary;
+  }
 }
 
 p {
@@ -76,7 +120,7 @@ hr {
 }
 
 @media screen and (min-width: 787px) {
-  * { font-size: 1rem; }
+  * { font-size: 16px; }
 }
 
 * {

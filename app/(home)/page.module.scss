@@ -1,0 +1,71 @@
+@import '@/styles/colors.module.scss';
+
+$time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
+$arrow-size: 28px;
+
+.sectionContent {
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.card {
+  max-width: 600px;
+  flex: 1;
+}
+
+.quiver {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 15px;
+  gap: 20px;
+
+  span {
+    height: $arrow-size;
+    line-height: $arrow-size;
+    overflow: hidden;
+    text-align: center;
+    font-size: 22px;
+    user-select: none;
+  }
+
+  svg {
+    font-size: $arrow-size;
+    transition: all 500ms $time-func;
+    stroke: $quinary;
+    fill: $quinary;
+
+    path {
+      transition: all 500ms $time-func;
+    }
+
+    &.disabled {
+      transform: scale(0.8);
+    }
+
+    &:not(.disabled) {
+      stroke: $accent;
+      fill: $accent;
+
+      &:hover, &:focus-visible {
+        transform: scale(1.2);
+
+        path {
+          stroke-width: 80px;
+        }
+      }
+
+      &:active, &.active {
+        transform: scale(0.8);
+        &:nth-child(1) {
+          transform: translateX(-15px);
+        }
+        &:nth-last-child(1) {
+          transform: translateX(15px);
+        }
+      }
+    }
+  }
+}

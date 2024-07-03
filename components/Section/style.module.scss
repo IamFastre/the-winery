@@ -9,8 +9,10 @@
   }
   
   .container {
+    &.flex {
+      flex: 1;
+    }
     position: relative;
-    flex: 1;
     margin: $margin;
     padding: $padding;
     overflow: hidden;
