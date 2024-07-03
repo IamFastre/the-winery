@@ -4,7 +4,7 @@ import CSS from "csstype";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";
-import { hexOpacity } from "@/utils";
+import { focusable, hexOpacity } from "@/utils";
 
 
 interface Icon {
@@ -33,25 +33,11 @@ export function Button(props:Readonly<ButtonProps>) {
       />
     </div>) : null;
 
-  const keydown:KeyboardEventHandler<HTMLDivElement> = e => {
-    if (e.key === 'Enter')
-      e.currentTarget.classList.add(styles.active);
-  };
-
-  const keyup:KeyboardEventHandler<HTMLDivElement> = e => {
-    if (e.key === 'Enter') {
-      e.currentTarget.classList.remove(styles.active);
-      e.currentTarget.click();
-    }
-  };
-
   return (
     <div
       className={`${styles.container} ${props.disabled ? styles.disabled : ""}`}
       onClick={!props.disabled ? props.onClick : undefined}
-      onKeyDown={keydown}
-      onKeyUp={keyup}
-      tabIndex={0}
+      {...focusable(styles.active)}
     >
       {/* This is just cursed */}
       <style jsx> {`
