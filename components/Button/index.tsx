@@ -36,8 +36,8 @@ export function Button(props:Readonly<ButtonProps>) {
   return (
     <div
       className={`${styles.container} ${props.disabled ? styles.disabled : ""}`}
-      onClick={!props.disabled ? props.onClick as any : undefined}
       {...focusable(styles.active)}
+      onClick={!props.disabled ? props.onClick as any : undefined}
     >
       {/* This is just cursed */}
       <style jsx> {`
