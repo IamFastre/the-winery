@@ -1,0 +1,63 @@
+@import '@/styles/colors.module.scss';
+
+.card {
+  justify-content: center;
+  gap: 10px;
+}
+
+.section {
+  max-height: 50%;
+
+  .sectionContent {
+    height: 100%;
+    overflow-y: scroll;
+    align-items: start;
+    justify-content: start;
+    padding: 15px;
+  }
+  
+  p {
+    font-weight: 200;
+  }
+
+  hr {
+    border-color: $accent;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::after {
+      content: "<#>";
+      display: block;
+      color: $secondary;
+      font-size: 16px;
+      background-color: $primary;
+      padding-left: 2.5px;
+      padding-right: 2.5px;
+    }
+  }
+}
+
+.caption {
+  flex-direction: row;
+  align-items: center;
+  gap: 7.5px;
+
+  > img {
+   border-radius: 10%;
+  }
+
+  .author {
+    font-size: 16px;
+  }
+}
+
+.date {
+  margin-top: -10px;
+
+  span {
+    font-style: italic;
+    color: $secondary;
+  }
+}
