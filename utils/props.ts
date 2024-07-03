@@ -1,6 +1,6 @@
-import { KeyboardEventHandler } from "react";
+import { KeyboardEventHandler, MouseEventHandler } from "react";
 
-export function focusable(activeClass:string, onClick?:Function) {
+export function focusable(activeClass:string, onClick?:MouseEventHandler<HTMLElement>) {
   const onKeyDown:KeyboardEventHandler<HTMLElement> = e => {
     if (e.key === 'Enter')
       e.currentTarget.classList.add(activeClass);
