@@ -3,17 +3,21 @@
 .card {
   justify-content: center;
   gap: 10px;
+  min-width: 300px;
 }
 
 .section {
-  max-height: 50%;
+  max-height: 70%;
 
   .sectionContent {
     height: 100%;
     overflow-y: scroll;
-    align-items: start;
+    align-items: stretch;
     justify-content: start;
     padding: 15px;
+    scrollbar-width: 0;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar { display: none; }
   }
   
   p {
