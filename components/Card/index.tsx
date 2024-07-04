@@ -1,5 +1,6 @@
 import Image from "next/image";
 import MarkDown from "react-markdown";
+import gfm from "remark-gfm";
 
 import { C, Section } from "@/components";
 
@@ -17,7 +18,8 @@ export function Card(props:CardProps) {
   return (
     <div className={`${styles.card} ${props.className}`}>
       <Section title={props.title} className={styles.section} containerClassName={styles.sectionContent} noFlex isCard>
-        <MarkDown>
+        {/* TODO: tables */}
+        <MarkDown remarkPlugins={[gfm]}>
           {props.content}
         </MarkDown>
       </Section>

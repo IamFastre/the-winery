@@ -143,6 +143,23 @@ code {
   font-family: monospace;
 }
 
+ul, ol {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  padding-inline-start: 30px;
+}
+
+
+li {
+  &::marker {
+    color: $accent;
+  }
+}
+
+ol li::marker {
+  font-size: 12px;
+}
+
 hr {
   width: 100%;
   height: 0;
