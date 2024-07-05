@@ -7,6 +7,7 @@ import superSub from "remark-supersub";
 import { C, Section } from "@/components";
 
 import styles from "./style.module.scss";
+import { humanizeTime } from "@/utils";
 
 
 export interface CardProps {
@@ -14,6 +15,7 @@ export interface CardProps {
   userAvatar: string;
   title: string;
   content: string;
+  timestamp: number;
   className?:string;
 }
 
@@ -52,7 +54,8 @@ export function Card(props:CardProps) {
       </div>
       <div className={styles.date}>
         <span>
-          today at 10:19pm
+          {humanizeTime(props.timestamp)}
+          {/* today at 10:19pm */}
         </span>
       </div>
     </div>

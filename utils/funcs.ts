@@ -7,6 +7,7 @@ import NDCB  from "@/public/static/images/logo/NaipeDeCopasBrand.png";
 import NDCM  from "@/public/static/images/logo/NaipeDeCopasMono.png";
 import NDCBO from "@/public/static/images/logo/NaipeDeCopasBrandO.png";
 import NDCMO from "@/public/static/images/logo/NaipeDeCopasMonoO.png";
+import moment from 'moment';
 
 
 export function multiplyString(str:string, num:number) : string {
@@ -47,4 +48,22 @@ export function getLogo(kind:LogoKind) : StaticImageData {
        : kind === "mono outline"
        ? NDCMO
        : NDC;
+}
+
+export function humanizeTime(stamp: number) : string {
+  const now  = new Date();
+  const date = new Date(stamp);
+  const mmnt = moment(date);
+
+  let dif = now.getDate() - date.getDate();
+  let mif = now.getMonth() - date.getMonth();
+
+  let day = now.getFullYear() === date.getFullYear() && now.getMonth() === date.getMonth()
+          ? (dif === 0 ? "today" : dif === 1 ? "yesterday" : `${dif} days ago`)
+          : now.getFullYear() === date.getFullYear()
+          ? (mif === 1 ? `${date.getDate()}th of last month` : `${mmnt.format("DD/MM")} this year`)
+          : mmnt.format("DD/MM/YYYY");
+
+  day = (date.valueOf() > now.valueOf() ? "the future " : "") + day;
+  return `${day}, at ${mmnt.format("h:mma")}`;
 }
