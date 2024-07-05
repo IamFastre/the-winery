@@ -81,6 +81,17 @@ a {
     font-weight: bolder;
     text-decoration-style: solid;
   }
+
+  &[aria-describedby="footnote-label"] {
+    font-style: normal;
+
+    &::before {
+      content: "[";
+    }
+    &::after {
+      content: "]";
+    }
+  }
 }
 
 blockquote {
@@ -166,6 +177,40 @@ hr {
   border-color: $secondary;
 }
 
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  align-self: stretch;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  width: max-content;
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid $secondary;
+}
+
+tr {
+  background-color: $quaternary;
+
+  &:nth-child(2n) {
+    background-color: $primary;
+  }
+}
+
+th, td {
+  padding: 6px 13px;
+}
+
+th {
+  background-color: $primary;
+  font-weight: bold;
+  border-bottom: 1px solid $secondary;
+}
+
+td {
+  border: 1px dashed $secondary;
+}
+
 input {
   background-color: $quaternary;
   border: none;
@@ -175,11 +220,11 @@ input {
 
 @media screen and (min-width: 0px)
               and (max-width: 786px) {
-  * { font-size: 14px; }
+  body { font-size: 14px; }
 }
 
 @media screen and (min-width: 787px) {
-  * { font-size: 16px; }
+  body { font-size: 16px; }
 }
 
 * {

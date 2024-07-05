@@ -1,10 +1,13 @@
 import Image from "next/image";
-import MarkDown from "react-markdown";
+import MarkDown, { Options } from "react-markdown";
 import gfm from "remark-gfm";
+import headingId from "remark-heading-id";
+import superSub from "remark-supersub";
 
 import { C, Section } from "@/components";
 
 import styles from "./style.module.scss";
+
 
 export interface CardProps {
   username: string;
@@ -14,12 +17,18 @@ export interface CardProps {
   className?:string;
 }
 
+const plugins:Options["remarkPlugins"] = [
+  [headingId, { defaults: true }],
+  [gfm, { singleTilde: false }],
+  superSub,
+];
+
 export function Card(props:CardProps) {
   return (
     <div className={`${styles.card} ${props.className}`}>
       <Section title={props.title} className={styles.section} containerClassName={styles.sectionContent} noFlex isCard>
         {/* TODO: tables */}
-        <MarkDown remarkPlugins={[gfm]}>
+        <MarkDown remarkPlugins={plugins}>
           {props.content}
         </MarkDown>
       </Section>
