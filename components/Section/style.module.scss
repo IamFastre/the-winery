@@ -54,6 +54,7 @@
     z-index: 2;
     font-weight: lighter;
     line-height: $margin * 2;
+    display: inline;
     font-size: 22px;
     &:hover {
       font-weight: 400;
