@@ -9,7 +9,11 @@ export function focusable(activeClass:string, onClick?:MouseEventHandler<HTMLEle
   const onKeyUp:KeyboardEventHandler<HTMLElement> = e => {
     if (e.key === 'Enter') {
       e.currentTarget.classList.remove(activeClass);
-      (e.currentTarget.click ?? onClick)?.();
+
+      if (e.currentTarget.click)
+        e.currentTarget.click();
+      else
+        onClick?.({} as any);
     }
   };
 

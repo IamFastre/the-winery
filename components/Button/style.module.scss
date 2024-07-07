@@ -2,11 +2,14 @@
 
 $time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
 $all-transition: all 350ms ease-out;
+$placeholder: $quinary;
 
 .container {
   align-items: stretch;
   justify-content: center;
   flex-direction: row;
+  border-color: $placeholder;
+  background-color: rgba($placeholder, 0.1);
 
   min-width: 100px;
   min-height: 50px;
@@ -17,7 +20,15 @@ $all-transition: all 350ms ease-out;
   transition: $all-transition,
               filter 500ms $time-func;
 
+  &:hover:not(.disabled),
+  &:focus-visible:not(.disabled) {
+    background-color: rgba($placeholder, 0.2);
+  }
+    
   &:active:not(.disabled), &.active:not(.disabled) {
+    background-color: $placeholder;
+    filter: drop-shadow(0 0 10px rgba($placeholder, 0.5));
+
     span {
       color: $primary;
     }

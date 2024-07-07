@@ -4,6 +4,7 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 
 import { Button, C, GoHomeLogo, Section } from "@/components";
 import { multiplyString } from "@/utils";
+import { useGoTo } from "@/hooks";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
@@ -37,6 +38,8 @@ const LabelTitle = ({ title }:{ title:string }) => {
 }
 
 export default function RegisterPage() {
+  const [redirecting, goto] = useGoTo();
+
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confPass, setConfPass] = useState<string>('');
@@ -54,9 +57,10 @@ export default function RegisterPage() {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        {/* TODO: Make redirecting make this dashy */}
-        <Section title="Create Account" className={`${styles.section}`} containerClassName={styles.sectionContent} isCard centered>
+        <Section title="Create Account" className={`${styles.section}`} containerClassName={styles.sectionContent} containerStyle={{ borderStyle: redirecting ? 'dashed' : 'solid' }} isCard centered>
           <GoHomeLogo
+            goto={goto}
+            redirecting={redirecting}
             className={styles.image}
             style={{ filter: showPass ? "saturate(0) blur(3px)" : "" }}
           />

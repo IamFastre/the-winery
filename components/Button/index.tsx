@@ -42,18 +42,18 @@ export function Button(props:Readonly<ButtonProps>) {
       {/* This is just cursed */}
       <style jsx> {`
         .${styles.container} {
-          border-color: ${color};
-          background-color: ${hexOpacity(color, 0.1)};
+          border-color: ${color} !important;
+          background-color: ${hexOpacity(color, 0.1)} !important;
 
           &:hover:not(.${styles.disabled}),
           &:focus-visible:not(.${styles.disabled}) {
-            background-color: ${hexOpacity(color, 0.2)};
+            background-color: ${hexOpacity(color, 0.2)} !important;
           }
 
           &:active:not(.${styles.disabled}),
           &.${styles.active}:not(.${styles.disabled}) {
-            background-color: ${color};
-            filter: drop-shadow(0 0 10px ${hexOpacity(color, 0.5)});
+            background-color: ${color} !important;
+            filter: drop-shadow(0 0 10px ${hexOpacity(color, 0.5)}) !important;
           }
         }
       `}</style>

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { IoWine } from "react-icons/io5";
+import { IoWine, IoWineOutline } from "react-icons/io5";
 
 import { getLogo } from "@/utils";
 import { B, Button, C, Header, Section } from "@/components";
@@ -75,15 +75,15 @@ export default function GettingStartedPage() {
           <span className={styles.desc}>
             Welcome to <C.ACCENT><B>The Winery</B></C.ACCENT> where, no sadly, we don't make wine, but where we whine!
             <br/>
-            To get start and ferment your own pieces, please <a href="">log in</a> to your account.
+            To get start and ferment your own pieces, please <a href="/login">log in</a> to your account.
             <br/>
-            Oh you're new? expected; <a href="">create new account</a>!
+            Oh you're new? expected; <a href="/signup">create new account</a>!
           </span>
 
           <Button
             title="Get started"
             icon={{
-              element: IoWine,
+              element: isBeating() ?IoWine : IoWineOutline,
             }}
             onClick={() => alert("Still working on that :)")}
           />
