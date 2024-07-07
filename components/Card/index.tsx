@@ -29,7 +29,6 @@ export function Card(props:CardProps) {
   return (
     <div className={`${styles.card} ${props.className}`}>
       <Section title={props.title} className={styles.section} containerClassName={styles.sectionContent} noFlex isCard>
-        {/* TODO: tables */}
         <MarkDown remarkPlugins={plugins}>
           {props.content}
         </MarkDown>
