@@ -1,4 +1,4 @@
-import { KeyboardEventHandler, MouseEventHandler } from "react";
+import { MouseEventHandler } from "react";
 import { IconType } from "react-icons";
 import CSS from "csstype";
 
@@ -18,8 +18,10 @@ export interface ButtonProps {
   title?:string;
   icon?: Icon;
   onClick?: MouseEventHandler<HTMLDivElement>;
-  disabled?: boolean;
   color?: CSS.Property.Color;
+  className?: string;
+  disabled?: boolean;
+  noMinimum?: boolean;
 }
 
 export function Button(props:Readonly<ButtonProps>) {
@@ -35,7 +37,7 @@ export function Button(props:Readonly<ButtonProps>) {
 
   return (
     <div
-      className={`${styles.container} ${props.disabled ? styles.disabled : ""}`}
+      className={`${styles.container} ${props.disabled ? styles.disabled : ""} ${props.noMinimum ? styles.noMin : ""} ${props.className}`}
       {...focusable(styles.active)}
       onClick={!props.disabled ? props.onClick : undefined}
     >
@@ -59,13 +61,18 @@ export function Button(props:Readonly<ButtonProps>) {
       `}</style>
 
       { props.icon && iconPos === "left" ? icon : null }
-      <div className={styles.textHolder}>
-        <span>
-          <span style={{ color }}>{'[ '}</span>
-          {props.title}
-          <span style={{ color }}>{' ]'}</span>
-        </span>
-      </div>
+      {
+        props.title ?
+        <div className={styles.textHolder}>
+          <span>
+            <span style={{ color }}>{'[ '}</span>
+            {props.title}
+            <span style={{ color }}>{' ]'}</span>
+          </span>
+        </div>
+        :
+        null
+      }
       { props.icon && iconPos === "right" ? icon : null }
     </div>
   );

@@ -11,8 +11,10 @@ $placeholder: $quinary;
   border-color: $placeholder;
   background-color: rgba($placeholder, 0.1);
 
-  min-width: 100px;
-  min-height: 50px;
+  &:not(.noMin) {
+    min-width: 100px;
+    min-height: 50px;
+  }
 
   border-width: 1px;
   border-style: solid;
