@@ -22,16 +22,20 @@ export interface ButtonProps {
   className?: string;
   disabled?: boolean;
   noMinimum?: boolean;
+  iconBackground?: boolean;
 }
 
 export function Button(props:Readonly<ButtonProps>) {
   const color   = props.disabled ? colors.secondary : props.color ?? colors.accent;
   const iconPos = props.icon?.position ?? "left";
   const icon    = props.icon && props.icon.position !== "none" ? (
-    <div className={styles.icon}>
+    <div className={`${styles.icon} ${props.iconBackground ? styles.background : ""}`}>
       <props.icon.element
-        color={props.disabled ? colors.secondary : props.icon.color ?? colors.accent}
         size={props.icon.size ?? 30}
+        style={{
+          fill: props.disabled ? colors.secondary : props.icon.color ?? colors.tertiary,
+          stroke: props.disabled ? colors.secondary : props.icon.color ?? colors.tertiary
+        }}
       />
     </div>) : null;
 

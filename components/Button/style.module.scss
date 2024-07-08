@@ -47,10 +47,15 @@ $placeholder: $quinary;
 .icon {
   align-items: center;
   justify-content: center;
-  background-color: $primary;
   padding: 7.5px;
 
+  &:not(.background) {
+    background-color: $primary;
+  }
+
   svg {
+    fill: $tertiary;
+    stroke: $tertiary;
     transition: $all-transition;
   }
 }
