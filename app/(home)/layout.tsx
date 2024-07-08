@@ -10,14 +10,14 @@ import styles from "./layout.module.scss";
 
 
 export default function HomeLayout({ children }: Readonly<{ children:React.ReactNode }>) {
-  const [redirecting, goto] = useGoTo();
+  const [redirecting, goto, current] = useGoTo();
 
   const Icon = (props:{ icon:IconType; dest?:string; }) => {
     const onclick = props.dest ? () => goto(props.dest!) : undefined;
 
     return (
       <props.icon
-        className={styles.icon}
+        className={`${styles.icon} ${props.dest === current ? styles.current : ""}`}
         {...focusable(styles.active, onclick) as any}
       />
     );
@@ -25,6 +25,7 @@ export default function HomeLayout({ children }: Readonly<{ children:React.React
 
   return (
     <div className={styles.body}>
+      {/* TODO: Resizable bar + icon title */}
       <div className={styles.bar}>
         <Section style={{ flex: 1 }} containerStyle={{ borderStyle: redirecting ? 'dashed' : 'solid' }}>
           <div className={styles.nav}>
@@ -35,10 +36,10 @@ export default function HomeLayout({ children }: Readonly<{ children:React.React
             />
             <div className={styles.sep} />
             <div className={styles.icons}>
-              <Icon icon={IoPersonCircleOutline} dest={'/profile'} />
-              <Icon icon={IoWineOutline} />
+              <Icon icon={IoPersonCircleOutline} dest='/profile' />
+              <Icon icon={IoWineOutline} dest='/compose'/>
               <Icon icon={IoCogOutline} />
-              <Icon icon={IoInformationCircleOutline} dest={'/getting-started'} />
+              <Icon icon={IoInformationCircleOutline} dest='/getting-started' />
             </div>
           </div>
         </Section>
