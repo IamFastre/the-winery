@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-export function useGoTo() : [boolean, (path:string) => void] {
-  const router = useRouter();
+export function useGoTo() : [boolean, (path:string) => void, string] {
+  const router  = useRouter();
+  const current = usePathname();
   const [redirecting, setRedirecting] = useState(false);
 
   const goto = (path:string) => {
@@ -14,5 +15,5 @@ export function useGoTo() : [boolean, (path:string) => void] {
     }, 960)
   };
 
-  return [redirecting, goto];
+  return [redirecting, goto, current];
 }
