@@ -1,6 +1,6 @@
 "use client";
 import { IconType } from "react-icons";
-import { IoCogOutline, IoInformationCircleOutline, IoPersonCircleOutline, IoWineOutline } from "react-icons/io5";
+import { IoCogOutline, IoInformationCircleOutline, IoPersonCircleOutline, IoSearchOutline, IoWineOutline } from "react-icons/io5";
 
 import { Section, GoHomeLogo } from "@/components";
 import { focusable } from "@/utils";
@@ -36,6 +36,7 @@ export default function HomeLayout({ children }: Readonly<{ children:React.React
             />
             <div className={styles.sep} />
             <div className={styles.icons}>
+              <Icon icon={IoSearchOutline} />
               <Icon icon={IoPersonCircleOutline} dest='/profile' />
               <Icon icon={IoWineOutline} dest='/compose'/>
               <Icon icon={IoCogOutline} />
