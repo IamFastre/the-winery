@@ -34,9 +34,9 @@ export function Section(props:SectionProps) : React.JSX.Element {
           className={`${styles.title} ${props.centered ? styles.centered : ""}`}
         >
           <div className={styles.titleBG} />
-          <div className={styles.titleText} style={props.titleColor ? { color: props.titleColor } : { }}>
+          <span className={styles.titleText} style={props.titleColor ? { color: props.titleColor } : { }}>
             {props.title}
-          </div>
+          </span>
         </div>
       : null }
       <div
