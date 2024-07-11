@@ -31,7 +31,6 @@ export default function HomePage() {
         setError(error)
       if (posts)
         setCache({ ...cache, posts, users });
-      console.log({ posts, users })
     };
     start();
   }, []);
