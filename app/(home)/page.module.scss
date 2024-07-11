@@ -71,3 +71,18 @@ $arrow-size: 28px;
     }
   }
 }
+
+.error {
+  text-align: center;
+
+  > :nth-child(1) {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+
+    &::before {
+      color: $red;
+      content: "× ";
+    }
+  }
+}
