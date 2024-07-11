@@ -25,7 +25,7 @@ export default function HomePage() {
   useEffect(() => {
     const start = async () => {
       const { data: posts, error: postsError } = await getPosts(20);
-      const users = (await Promise.all(posts?.map(post => getUser(post.author))!)).map(u => u.data);
+      const users = (await Promise.all(posts?.map(post => getUser(post.author!))!)).map(u => u.data);
 
       if (postsError)
         setError(error)
