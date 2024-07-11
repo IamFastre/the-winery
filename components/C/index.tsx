@@ -51,56 +51,56 @@ export const BI = (props: SpanProps) : React.JSX.Element => (
 
 export const C = {
   NONE: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.none}} />
+    <span {...props} style={{ color: colors.none, ...props.style }} />
   ),
 
   PRIMARY: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.primary}} />
+    <span {...props} style={{ color: colors.primary, ...props.style }} />
   ),
   SECONDARY: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.secondary}} />
+    <span {...props} style={{ color: colors.secondary, ...props.style }} />
   ),
   TERTIARY: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.tertiary}} />
+    <span {...props} style={{ color: colors.tertiary, ...props.style }} />
   ),
   QUATERNARY: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.quaternary}} />
+    <span {...props} style={{ color: colors.quaternary, ...props.style }} />
   ),
   QUINARY: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.quinary}} />
+    <span {...props} style={{ color: colors.quinary, ...props.style }} />
   ),
 
   ACCENT: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.accent}} />
+    <span {...props} style={{ color: colors.accent, ...props.style }} />
   ),
   HIGHLIGHT: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.highlight}} />
+    <span {...props} style={{ color: colors.highlight, ...props.style }} />
   ),
 
   HOT: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.hot}} />
+    <span {...props} style={{ color: colors.hot, ...props.style }} />
   ),
   COLD: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.cold}} />
+    <span {...props} style={{ color: colors.cold, ...props.style }} />
   ),
 
   RED: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.red}} />
+    <span {...props} style={{ color: colors.red, ...props.style }} />
   ),
   GREEN: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.green}} />
+    <span {...props} style={{ color: colors.green, ...props.style }} />
   ),
   BLUE: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.blue}} />
+    <span {...props} style={{ color: colors.blue, ...props.style }} />
   ),
 
   CYAN: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.cyan}} />
+    <span {...props} style={{ color: colors.cyan, ...props.style }} />
   ),
   YELLOW: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.yellow}} />
+    <span {...props} style={{ color: colors.yellow, ...props.style }} />
   ),
   MAGENTA: (props: SpanProps) : React.JSX.Element => (
-    <span {...props} style={{color: colors.magenta}} />
+    <span {...props} style={{ color: colors.magenta, ...props.style }} />
   ),
 };
