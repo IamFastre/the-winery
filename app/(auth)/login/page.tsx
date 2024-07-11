@@ -6,7 +6,7 @@ import { Button, C, GoHomeLogo, Section } from "@/components";
 import { useGoTo } from "@/hooks";
 
 import colors from '@/styles/colors.module.scss';
-import styles from "./styles.module.scss";
+import styles from "../styles.module.scss";
 
 
 const checkEmail = (str:string) : boolean => {
@@ -28,6 +28,16 @@ const LabelTitle = ({ title }:{ title:string }) => {
   );
 }
 
+const PasswordChecker = ({ password }:{ password:string; }) => {
+  return (
+    <div className={styles.badInput}>
+      <span className={password.length > 8 ? styles.good : styles.bad}>
+        Too short.
+      </span>
+    </div>
+  );
+};
+
 export default function LoginPage() {
   const [redirecting, goto] = useGoTo();
 
@@ -35,7 +45,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState<string>('');
 
   const [showPass, setShowPass] = useState<boolean>(false);
-  const [invalidMail, setInvalidMail] = useState<boolean>(false);
+  const [passChecker, setPassChecker] = useState<boolean>(false);
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passRef  = useRef<HTMLInputElement>(null);
@@ -64,12 +74,13 @@ export default function LoginPage() {
             </C.SECONDARY>
           </div>
 
-          <div className={styles.form}>
+          <form>
             <label>
               <LabelTitle title="Email" />
               <input
                 name="email"
                 autoComplete="email"
+                spellCheck={false}
                 type="email"
                 title=""
                 value={email}
@@ -77,13 +88,18 @@ export default function LoginPage() {
                 onChange={e => setEmail(e.target.value)}
                 ref={emailRef}
                 required
-                onBlur={e => setInvalidMail(!checkEmail(email))}
                 onKeyDown={e => {
                   if (e.key === 'Enter')
                     passRef.current?.focus();
                 }}
               />
-              { invalidMail ? <C.RED>{'> WRONG'}</C.RED> : null}
+              { !checkEmail(email) ?
+                  <div className={styles.badInput}>
+                    <span className={styles.bad}>
+                      Invalid email address.
+                    </span>
+                  </div>
+              : null }
             </label>
 
             <label>
@@ -92,6 +108,7 @@ export default function LoginPage() {
                 <input
                   name="password"
                   autoComplete="new-password"
+                  spellCheck={false}
                   type={showPass ? "text" : "password"}
                   title=""
                   value={password}
@@ -99,6 +116,8 @@ export default function LoginPage() {
                   onChange={e => setPassword(e.target.value)}
                   ref={passRef}
                   required
+                  onFocus={() => setPassChecker(true)}
+                  onBlur={() => setPassChecker(password.length <= 8)}
                 />
                 <div
                   title={showPass ? "Hide Password" : "Show Password"}
@@ -107,6 +126,7 @@ export default function LoginPage() {
                   {showPass ? <IoEyeOff id="closed" /> : <IoEye id="open" />}
                 </div>
               </div>
+              { passChecker ? <PasswordChecker password={password} /> : null }
             </label>
 
             <Button
@@ -117,7 +137,7 @@ export default function LoginPage() {
             <a href="">
               Forgot password?
             </a>
-          </div>
+          </form>
         </Section>
 
         <Section isCard>
