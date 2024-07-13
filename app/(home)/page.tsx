@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { IoArrowBack, IoArrowForward } from "react-icons/io5";
 import { PostgrestError } from "@supabase/supabase-js";
 
-import { Section, Card, C } from "@/components";
 import { focusable } from "@/utils";
 import { getPosts, getUserByIdentifier } from "@/utils/server";
+import { Section, Card, C } from "@/components";
 
 import styles from "./page.module.scss";
 

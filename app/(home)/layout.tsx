@@ -2,8 +2,8 @@
 import { IconType } from "react-icons";
 import { IoCogOutline, IoInformationCircleOutline, IoPersonCircleOutline, IoSearchOutline, IoWineOutline } from "react-icons/io5";
 
-import { Section, GoHomeLogo } from "@/components";
 import { focusable } from "@/utils";
+import { Section, GoHomeLogo } from "@/components";
 import { useGoTo } from "@/hooks";
 
 import styles from "./layout.module.scss";

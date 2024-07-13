@@ -6,8 +6,8 @@ import { C, RI } from "@/components/C";
 
 import { createClient } from "@/supabase/admin";
 
-import styles from "./styles.module.scss";
 import colors from '@/styles/colors.module.scss';
+import styles from "./styles.module.scss";
 
 export default async function GettingStartedPage({ searchParams }:{searchParams: { [key: string]: string | string[] | undefined }}) {
   const supabase = createClient();

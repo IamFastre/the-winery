@@ -1,10 +1,10 @@
 import Image from "next/image";
 import CSS from 'csstype';
 
+import { getLogo, LogoKind } from "@/utils";
 import { useGoTo } from "@/hooks";
 
 import styles from "./style.module.scss";
-import { getLogo, LogoKind } from "@/utils";
 
 
 export interface HomeIconProps {

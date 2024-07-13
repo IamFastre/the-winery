@@ -1,7 +1,10 @@
-"use client";
-import { RI, C, Section } from "@/components";
-import styles from './not-found.module.scss';
 import { IoHome } from "react-icons/io5";
+
+import { Section } from "@/components/Section";
+import { RI, C } from "@/components/C";
+
+import styles from './not-found.module.scss';
+
 
 export default function NotFoundPage() {
   return (

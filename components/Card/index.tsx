@@ -1,9 +1,9 @@
 import Image from "next/image";
 
+import { humanizeTime } from "@/utils";
 import { C, MarkDown, Section } from "@/components";
 
 import styles from "./style.module.scss";
-import { humanizeTime } from "@/utils";
 
 
 export interface CardProps {

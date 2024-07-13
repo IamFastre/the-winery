@@ -2,9 +2,10 @@ import { MouseEventHandler } from "react";
 import { IconType } from "react-icons";
 import CSS from "csstype";
 
+import { focusable, hexOpacity } from "@/utils";
+
 import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";
-import { focusable, hexOpacity } from "@/utils";
 
 
 interface Icon {
