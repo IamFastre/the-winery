@@ -36,7 +36,7 @@ export default function GettingStartedPage() {
     };
 
     start();
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (clicks) {
@@ -53,7 +53,7 @@ export default function GettingStartedPage() {
         setShowMsg(false);
       }, 3000);
     }
-    }, [clicks])
+    }, [clicks]);
 
   return (
     <div style={{ flex: 1 }}>

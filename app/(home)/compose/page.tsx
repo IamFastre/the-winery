@@ -1,7 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { IoAdd, IoEye, IoEyeOutline, IoFolderOutline } from "react-icons/io5";
 
+import { createPost, getUser } from "@/utils/server";
 import { Button, C, MarkDown, Section } from "@/components";
 
 import colors from '@/styles/colors.module.scss';
@@ -9,9 +11,13 @@ import styles from "./styles.module.scss";
 
 
 export default function ComposePage() {
+  const router = useRouter();
+
+  const [username, setUsername] = useState<string | null>(null);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [showPrev, setShowPrev] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   const placeholder = "Change title";
   const input = (
@@ -26,6 +32,27 @@ export default function ComposePage() {
       autoComplete="off"
     />
   );
+
+  useEffect(() => {
+    const start = async () => {
+      const { data, error } = await getUser();
+      if (data && !error) {
+        setUsername(data.username);
+        setError(false)
+      }
+      else
+        setError(true)
+    };
+    start();
+  }, []);
+
+  const onPost = async () => {
+    const { error } = await createPost(title, content);
+    setError(!!error);
+    console.log(error);
+    if (!error)
+      router.push('/');
+  };
 
   return (
     <Section title="Compose" style={{ flex: 1 }} containerClassName={styles.sectionContent}>
@@ -76,7 +103,7 @@ export default function ComposePage() {
               {' u:'}
             </C.QUINARY>
             <C.ACCENT>
-              IamFastre
+              {username ?? "<self>"}
             </C.ACCENT>
           </span>
           <div className={styles.actions}>
@@ -84,15 +111,28 @@ export default function ComposePage() {
               noMinimum
               icon={{ element: IoFolderOutline }}
               // onclick => draft
+              disabled={!username}
             />
             <Button
               title="Post"
               icon={{ element: IoAdd }}
-              onClick={() => { console.log({ title, content }); alert(title + "\n" + content); }}
-              // onclick => post
+              onClick={onPost}
+              disabled={!username}
             />
           </div>
         </div>
+        {
+          error
+          ?
+          <span className={styles.error}>
+            Oops...
+            <br/>
+            <span>
+              Seems an error has occurred, try again in a bit.
+            </span>
+          </span>
+          : null
+        }
       </div>
     </Section>
   );

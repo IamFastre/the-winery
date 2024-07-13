@@ -76,3 +76,38 @@ $padding: 20px;
   transform-origin: top right;
   transform: scale(0.8);
 }
+
+.error {
+  color: $secondary;
+  animation: showUp 1s ease-in-out;
+
+  > span {
+    color: inherit;
+
+    &::before {
+      content: "..";
+      color: $none;
+    }
+  }
+
+  &::before {
+    content: "× ";
+    color: $red;
+  }
+}
+
+@keyframes showUp {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  80% {
+    transform: translateX(100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

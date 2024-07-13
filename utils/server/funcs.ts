@@ -88,3 +88,19 @@ export async function signIn(email:string, password:string) {
     error
   };
 }
+
+export async function createPost(title:string, content:string) {
+  const supabase = createClient();
+  const { data:user, error: userError } = await getUser();
+  let error = userError;
+
+  if (user) {
+    const { error: postingError } = await supabase
+      .from('posts')
+      .insert([{ title, content }]);
+
+    error = postingError;
+  }
+
+  return { error };
+}
