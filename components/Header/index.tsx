@@ -1,15 +1,17 @@
 import CSS from "csstype";
 
-import { Section } from "@/components";
+import { Section } from "@/components/Section";
 import styles from "./style.module.scss";
 
 
 export interface HeaderProps {
   title?: string;
+  titleColor?: string;
   height?: CSS.Property.Height;
   margin?: CSS.Property.Margin;
   left?: React.ReactNode;
   right?: React.ReactNode;
+  noBrackets?: boolean;
 }
 
 export function Header(props:Readonly<HeaderProps>) {
@@ -22,17 +24,22 @@ export function Header(props:Readonly<HeaderProps>) {
         </div>
 
         <div className={styles.title}>
-          <span>
-            {"•-{"}
-          </span>
+          {
+            props.noBrackets ? null :
+            <span>
+              {"•-{"}
+            </span>
+          }
 
-          <span className={styles.text}>
+          <span className={styles.text} style={{ color: props.titleColor }}>
             {props.title}
           </span>
-
-          <span>
-            {"}-•"}
-          </span>
+          {
+            props.noBrackets ? null :
+            <span>
+              {"}-•"}
+            </span>
+          }
         </div>
 
         <div className={styles.children} style={{ right: props.margin ?? 0 }}>
