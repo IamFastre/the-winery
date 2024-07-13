@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-
 import { C, MarkDown, Section } from "@/components";
 
 import styles from "./style.module.scss";
