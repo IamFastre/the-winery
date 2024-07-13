@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoAdd, IoEye, IoEyeOutline, IoFolderOutline } from "react-icons/io5";
 
-import { createPost, getUser } from "@/utils/server";
+import { createDraft, createPost, getUser } from "@/utils/server";
 import { Button, C, MarkDown, Section } from "@/components";
 
 import colors from '@/styles/colors.module.scss';
@@ -52,6 +52,14 @@ export default function ComposePage() {
     console.log(error);
     if (!error)
       router.push('/');
+  };
+
+  const onDraft = async () => {
+    const { error } = await createDraft(title, content);
+    setError(!!error);
+    console.log(error);
+    if (!error)
+      router.push('/profile');
   };
 
   return (
@@ -110,7 +118,7 @@ export default function ComposePage() {
             <Button
               noMinimum
               icon={{ element: IoFolderOutline }}
-              // onclick => draft
+              onClick={onDraft}
               disabled={!username}
             />
             <Button
