@@ -69,7 +69,7 @@ export type Database = {
             columns: ["author"]
             isOneToOne: false
             referencedRelation: "users"
-            referencedColumns: ["id"]
+            referencedColumns: ["identifier"]
           },
         ]
       }
@@ -78,6 +78,7 @@ export type Database = {
           avatar: string | null
           bio: string
           created_at: string
+          email: string | null
           id: string
           identifier: string
           username: string
@@ -86,6 +87,7 @@ export type Database = {
           avatar?: string | null
           bio?: string
           created_at?: string
+          email?: string | null
           id: string
           identifier: string
           username: string
@@ -94,6 +96,7 @@ export type Database = {
           avatar?: string | null
           bio?: string
           created_at?: string
+          email?: string | null
           id?: string
           identifier?: string
           username?: string
@@ -102,14 +105,7 @@ export type Database = {
           {
             foreignKeyName: "users_id_fkey"
             columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "users_uuid_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
