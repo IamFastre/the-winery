@@ -12,14 +12,14 @@ export async function getPosts(amount:number = 5) {
     .order('id', { ascending: false });
 }
 
-export async function getUser(uuid:string) {
+export async function getUserByIdentifier(id:string) {
   const supabase = createClient();
   // const user = supabase.auth.getUser();
 
   return await supabase
     .from('users')
     .select()
-    .eq('id', uuid)
-    .select("username, avatar")
+    .eq('identifier', id)
+    .select("username, avatar, bio")
     .single();
 }

@@ -5,7 +5,7 @@ import { PostgrestError } from "@supabase/supabase-js";
 
 import { Section, Card, C } from "@/components";
 import { focusable } from "@/utils";
-import { getPosts, getUser } from "@/utils/server";
+import { getPosts, getUserByIdentifier } from "@/utils/server";
 
 import styles from "./page.module.scss";
 
@@ -25,7 +25,7 @@ export default function HomePage() {
   useEffect(() => {
     const start = async () => {
       const { data: posts, error: postsError } = await getPosts(20);
-      const users = (await Promise.all(posts?.map(post => getUser(post.author!))!)).map(u => u.data);
+      const users = (await Promise.all(posts?.map(post => getUserByIdentifier(post.author!))!)).map(u => u.data);
 
       if (postsError)
         setError(error)
