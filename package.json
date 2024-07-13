@@ -19,6 +19,7 @@
     "remark-gfm": "^4.0.0",
     "remark-heading-id": "^1.0.1",
     "remark-supersub": "^1.0.0",
+    "server-only": "^0.0.1",
     "sharp": "^0.33.4"
   },
   "devDependencies": {
