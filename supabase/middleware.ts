@@ -3,6 +3,8 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 import { Database } from './types';
 
+const noAuthPaths = ['/login', '/signup', '/getting-started'];
+
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
@@ -23,14 +25,13 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  // ! This is only temporary
-  // const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
 
-  // if (!user && !request.nextUrl.pathname.startsWith('/login')) {
-  //   const url = request.nextUrl.clone();
-  //   url.pathname = '/login';
-  //   return NextResponse.redirect(url);
-  // }
+  if (!user && !noAuthPaths.some(path => request.nextUrl.pathname.startsWith(path))) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/getting-started';
+    return NextResponse.redirect(url);
+  }
 
   return supabaseResponse;
 }
