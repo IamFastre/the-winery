@@ -26,6 +26,17 @@ export async function getUserByIdentifier(id:string) {
     .single();
 }
 
+export async function getUser() {
+  const supabase = createClient();
+  const { data } = await supabase.auth.getUser();
+
+  return await supabase
+    .from('users')
+    .select()
+    .eq('id', data.user?.id ?? "")
+    .single();
+}
+
 export async function signUp(username:string, email:string, password:string) {
   const supabase = createClient();
   const emRegex  = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/i;
