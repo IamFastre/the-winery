@@ -124,7 +124,7 @@ export default function LoginPage() {
               <div className={styles.passwordContainer}>
                 <input
                   name="password"
-                  autoComplete="new-password"
+                  autoComplete="password"
                   spellCheck={false}
                   type={showPass ? "text" : "password"}
                   title=""
