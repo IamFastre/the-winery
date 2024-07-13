@@ -151,6 +151,18 @@ $max-width: 70%;
   }
 }
 
+.error {
+  align-self: center;
+  margin-bottom: 10px;
+
+  svg {
+    fill: $red;
+    stroke: $red;
+    margin-inline-end: 5px;
+    margin-block-end: -3px;
+  }
+}
+
 .haveAcc {
   user-select: none;
   margin: 5px;

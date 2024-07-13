@@ -1,9 +1,10 @@
 "use client";
 import { useRef, useState } from "react";
-import { IoEye, IoEyeOff } from "react-icons/io5";
+import { IoEye, IoEyeOff, IoSadOutline } from "react-icons/io5";
 
-import { Button, C, GoHomeLogo, Section } from "@/components";
 import { multiplyString } from "@/utils";
+import { AuthError, signUp } from "@/utils/server";
+import { Button, C, GoHomeLogo, Section } from "@/components";
 import { useGoTo } from "@/hooks";
 
 import colors from '@/styles/colors.module.scss';
@@ -58,7 +59,7 @@ const UsernameChecker = ({ username }:{ username:string; }) => {
     <div className={styles.badInput}>
       <span className={/^[0-9a-zA-Z_\-]*$/.test(username) ? styles.good : styles.bad}>
         Allowed characters:
-        <br />
+        <br/>
         {'- '}
         <C.SECONDARY>0-9, a-z, - and _</C.SECONDARY>
       </span>
@@ -123,8 +124,26 @@ export default function RegisterPage() {
   const passRef  = useRef<HTMLInputElement>(null);
   const cPassRef = useRef<HTMLInputElement>(null);
 
-  const onSubmit = () => {
-    console.log({ username, email, password });
+  const [error, setError] = useState<AuthError | null>(null);
+
+  const isOK = username.length > 2
+            && email
+            && password.length > 7
+            && checkUsername(username)
+            && checkEmail(email)
+            && checkPassword(password)
+            && password === confPass;
+
+  const onSubmit = async () => {
+    if (isOK) {
+      const { data, error } = await signUp(username, email, password);
+
+      if (error)
+        setError(error);
+
+      else if (data)
+        goto(`/checkmail?uuid=${data.user?.id}`, 'replace');
+    }
   };
 
   return (
@@ -258,8 +277,21 @@ export default function RegisterPage() {
             <Button
               title="Sign up"
               onClick={onSubmit}
+              disabled={!isOK}
             />
           </form>
+          {
+            error ?
+            <span className={styles.error}>
+              <IoSadOutline />
+              <C.RED>
+                An error has occurred with
+                <br/>
+                status code of <C.SECONDARY>{error.status}</C.SECONDARY>.
+              </C.RED>
+            </span>
+            : null
+          }
         </Section>
 
         <Section isCard>
