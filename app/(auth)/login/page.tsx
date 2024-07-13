@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 
+import { AuthError, signIn } from "@/utils/server";
 import { Button, C, GoHomeLogo, Section } from "@/components";
 import { useGoTo } from "@/hooks";
 
@@ -50,8 +51,24 @@ export default function LoginPage() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passRef  = useRef<HTMLInputElement>(null);
 
-  const onSubmit = () => {
-    console.log({ email, password })
+  const [error, setError] = useState<AuthError | null>(null);
+
+  const isOK = email
+            && password.length > 7
+            && checkEmail(email);
+
+  const onSubmit = async () => {
+    if (isOK) {
+      const { data, error } = await signIn(email, password);
+
+      if (error)
+        setError(error);
+
+      else if (data) {
+        setError(null);
+        goto('/', 'replace');
+      }
+    }
   };
 
   return (
@@ -138,6 +155,16 @@ export default function LoginPage() {
               Forgot password?
             </a>
           </form>
+          {
+            error ?
+            <span className={styles.error}>
+              <C.RED>
+                {error.message ?? "An error has occurred"}
+                <C.SECONDARY> [{error.status}]</C.SECONDARY>
+              </C.RED>
+            </span>
+            : null
+          }
         </Section>
 
         <Section isCard>

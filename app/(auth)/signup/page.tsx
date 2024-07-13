@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import { IoEye, IoEyeOff, IoSadOutline } from "react-icons/io5";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 import { multiplyString } from "@/utils";
 import { AuthError, signUp } from "@/utils/server";
@@ -141,8 +141,10 @@ export default function RegisterPage() {
       if (error)
         setError(error);
 
-      else if (data)
+      else if (data) {
+        setError(null);
         goto(`/checkmail?uuid=${data.user?.id}`, 'replace');
+      }
     }
   };
 
@@ -283,11 +285,9 @@ export default function RegisterPage() {
           {
             error ?
             <span className={styles.error}>
-              <IoSadOutline />
               <C.RED>
-                An error has occurred with
-                <br/>
-                status code of <C.SECONDARY>{error.status}</C.SECONDARY>.
+                {error.message ?? "An error has occurred"}
+                <C.SECONDARY>[{error.status}]</C.SECONDARY>
               </C.RED>
             </span>
             : null
