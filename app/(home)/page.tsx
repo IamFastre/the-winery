@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { IoArrowBack, IoArrowForward } from "react-icons/io5";
-import { PostgrestError } from "@supabase/supabase-js";
 
 import { focusable } from "@/utils";
 import { getPosts, getUserByIdentifier } from "@/utils/server";
@@ -14,7 +13,7 @@ export default function HomePage() {
   const [cache, setCache] = useState<{ posts:any[], users:any[] } | null>(null);
   const [index, setIndex] = useState<number>(0);
 
-  const [error, setError] = useState<PostgrestError | null>(null);
+  const [error, setError] = useState<boolean>(false);
 
   const inc = (num:number = 1) => {
     if (cache)
@@ -27,10 +26,13 @@ export default function HomePage() {
       const { data: posts, error: postsError } = await getPosts(20);
       const users = (await Promise.all(posts?.map(post => getUserByIdentifier(post.author!))!)).map(u => u.data);
 
-      if (postsError)
-        setError(error)
-      if (posts)
+      if (postsError || posts.length <= 0)
+        setError(true)
+
+      if (posts && posts.length > 0 && users.length > 0) {
         setCache({ ...cache, posts, users });
+        setError(false)
+      }
     };
     start();
   }, []);
@@ -47,7 +49,7 @@ export default function HomePage() {
   return (
     <Section title="Home" style={{ flex: 1 }} containerClassName={styles.sectionContent}>
       {
-        cache ?
+        cache && cache?.posts[index] && cache.users[index] ?
         <>
           <Card
             username={cache.users[index].username}
