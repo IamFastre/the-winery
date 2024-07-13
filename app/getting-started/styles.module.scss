@@ -7,11 +7,22 @@
   $shrink-filter: $shadow blur(3px);
   $shrink-transform: scale(0.8);
 
-  .holder {
+  .sectionContainer {
     flex: 1;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    overflow-y: scroll;
+    padding: 15px;
+    gap: 10px;
+
+    > hr {
+      width: 80%;
+      max-width: 800px;
+      height: 3px;
+      border: none;
+      border-radius: 3px;
+      background-color: $quaternary;
+    }  
   }
 
   .image {
@@ -27,6 +38,7 @@
 
     &:hover, &:focus-visible {
       filter: $shadow;
+      transform: scale(0.9);
     }
     &:active:not(.beating){
       transform: scale(0.75);
@@ -37,22 +49,18 @@
     animation: beat 1s ease-out 500ms infinite;
   }
 
-  .text {
+  .hello {
     text-align: center;
     margin-bottom: -10px;
-  }
 
-  .sep {
-    width: 80%;
-    max-width: 800px;
-    height: 3px;
-    border-radius: 3px;
-    background-color: $quaternary;
+    &::before {
+      content: none;
+    }
   }
 
   .desc {
     text-align: left;
-    margin: 15px;
+    max-width: 850px;
   }
 
   .msg {
@@ -60,8 +68,8 @@
     border-style: solid;
     border-color: $highlight;
     border-width: 0;
-    border-bottom-width: 1px;
-    background-color: rgba($highlight, 0.12);
+    border-bottom-width: 2px;
+    background-color: $lowlight;
     padding: 7.5px;
     max-width: 80%;
     color: $quinary;
