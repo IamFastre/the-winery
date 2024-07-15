@@ -39,10 +39,6 @@
     }
   }
 
-  li {
-    position: relative;
-  }
-
   input[type="checkbox"]:disabled {
     &::before {
       content: "";

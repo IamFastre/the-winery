@@ -34,7 +34,6 @@ $padding: 20px;
 
 .cardContent {
   padding: $padding;
-  position: relative;
 
   > textarea {
     flex: 1;
@@ -60,7 +59,6 @@ $padding: 20px;
 
 .footer {
   align-self: stretch;
-  position: relative;
 
   > span {
     user-select: none;
