@@ -53,6 +53,7 @@ export default function HomePage() {
         <>
           <Card
             username={cache.users[index].username}
+            displayName={cache.users[index].display_name}
             userAvatar={cache.users[index].avatar}
             title={cache.posts[index].title}
             content={cache.posts[index].content}
