@@ -5,7 +5,6 @@ import { AuthData, AuthError } from "./types";
 
 export async function getPosts(amount:number = 5) {
   const supabase = createClient();
-  // const user = supabase.auth.getUser();
 
   return await supabase
     .from('posts')
