@@ -16,13 +16,11 @@ export async function getPosts(amount:number = 5) {
 
 export async function getUserByIdentifier(id:string) {
   const supabase = createClient();
-  // const user = supabase.auth.getUser();
 
   return await supabase
     .from('users')
-    .select()
-    .eq('identifier', id)
-    .select("username, avatar, bio")
+    .select("username, display_name, avatar, bio")
+    .eq('identifier', id.toLowerCase())
     .single();
 }
 
