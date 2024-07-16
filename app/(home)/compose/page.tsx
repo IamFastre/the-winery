@@ -38,10 +38,10 @@ export default function ComposePage() {
       const { data, error } = await getUser();
       if (data && !error) {
         setUsername(data.username);
-        setError(false)
+        setError(false);
       }
       else
-        setError(true)
+        setError(true);
     };
     start();
   }, []);
