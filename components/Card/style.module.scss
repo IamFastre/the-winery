@@ -7,10 +7,7 @@
 }
 
 .section {
-  max-height: 70%;
-
   .sectionContent {
-    height: 100%;
     overflow-y: scroll;
     align-items: stretch;
     justify-content: start;
@@ -29,14 +26,26 @@
   > img {
    border-radius: 10%;
   }
+}
 
-  .author {
-    font-size: 16px;
+.author {
+  font-size: 16px;
+
+  a {
+    font-style: normal;
+    text-decoration: none;
+
+    &:hover, &:focus-visible {
+      text-decoration: $quinary underline dotted;
+    }  
   }
 }
 
 .date {
-  margin-top: -10px;
+  &.hasUser {
+    margin-top: -12.5px;
+    margin-left: 32.5px;
+  }
 
   span {
     font-style: italic;
