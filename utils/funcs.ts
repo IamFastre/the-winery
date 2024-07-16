@@ -50,7 +50,7 @@ export function getLogo(kind:LogoKind) : StaticImageData {
        : NDC;
 }
 
-export function humanizeTime(stamp: number) : string {
+export function humanizeTime(stamp: number | string) : string {
   const now  = new Date();
   const date = new Date(stamp);
   const mmnt = moment(date);
