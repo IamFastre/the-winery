@@ -24,6 +24,16 @@ export async function getUserByIdentifier(id:string) {
     .single();
 }
 
+export async function getUserPosts(id:string) {
+  const supabase = createClient();
+
+  return await supabase
+    .from('posts')
+    .select()
+    .eq('author', id.toLowerCase())
+    .order('timestamp', { ascending: false });
+}
+
 export async function getUser() {
   const supabase = createClient();
   const { data } = await supabase.auth.getUser();
