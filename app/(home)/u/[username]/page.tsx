@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 
-import { getAvatarUrl, getUserByIdentifier, getUserPosts } from "@/utils/server";
+import { getUserByIdentifier, getUserPosts } from "@/utils/server";
 import { Section } from "@/components/Section";
 import { B, C } from "@/components/C";
 import { Card } from "@/components/Card";
@@ -42,7 +42,7 @@ export default async function UserPage({ params }:Props) {
       <div className={styles.userBox}>
         <Image
           alt={`${user.username}'s profile picture.`}
-          src={await getAvatarUrl(params.username)}
+          src={user.avatar}
           width={128}
           height={128}
           className={styles.avatar}
