@@ -37,6 +37,7 @@ export async function getUser() {
 
 export async function signUp(username:string, email:string, password:string) {
   const supabase = createClient();
+  const avatar   = getAvatarUrl(username);
   const emRegex  = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/i;
   const pwRegex  = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[?!@#$%~^&()\[\]\{\}\.\,\-\+\*\/=\\]).{1,}$/;
 
@@ -49,7 +50,7 @@ export async function signUp(username:string, email:string, password:string) {
       password,
       options: {
         emailRedirectTo: '/',
-        data: { username }
+        data: { username, avatar }
       }
     });
 
@@ -117,4 +118,38 @@ export async function createDraft(title:string, content:string) {
   }
 
   return { error };
+}
+
+export async function getAvatarUrl(username:string) {
+  const color = [
+    "d71e1e", // 01
+    "2054ff", // 02
+    "3a7aff", // 03
+    "27d4ff", // 04
+    "dbb024", // 05
+    "1ed760", // 06
+    "8400ff", // 07
+    "ff511c", // 08
+    "00c43b", // 09
+    "eb16c7", // 10
+    "a4d904", // 11
+    "f09763", // 12
+  ];
+
+  const bgColor = [
+    "1f0303", // 01
+    "020a26", // 02
+    "010e29", // 03
+    "021f26", // 04
+    "241b00", // 05
+    "011c0a", // 06
+    "110121", // 07
+    "ff511c", // 08
+    "011c09", // 09
+    "2b0024", // 10
+    "202b00", // 11
+    "2b1000", // 12
+  ];
+
+  return `https://api.dicebear.com/9.x/identicon/png?seed=${username}&rowColor=${color}&backgroundColor=${bgColor}`;
 }
