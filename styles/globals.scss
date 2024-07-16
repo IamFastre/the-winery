@@ -34,6 +34,9 @@ body {
 
   overflow: hidden;
   background-color: $primary;
+
+  font-family: 'Cascadia', 'Menlo', 'Courier Prime', 'Courier New', Courier, monospace;
+  color: $tertiary;
 }
 
 // BTW, can you tell I'm a React Native dev?
@@ -237,6 +240,25 @@ input, textarea {
   }
 }
 
+.mention {
+  font-weight: bold;
+  color: $quinary;
+  background-color: rgba($accent, 0.1);
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 2px 4px;
+
+  &:hover, &:focus-visible {
+    background-color: rgba($accent, 0.2);
+  } 
+
+  a {
+    color: $accent;
+    font-style: inherit;
+    text-decoration: inherit; 
+  }
+}
+
 @media screen and (min-width: 0px)
               and (max-width: 786px) {
   body { font-size: 14px; }
@@ -247,8 +269,8 @@ input, textarea {
 }
 
 * {
-  font-family: 'Cascadia', 'Menlo', 'Courier Prime', 'Courier New', Courier, monospace;
-  color: $tertiary;
+  font-family: inherit;
+  color: inherit;
 
   &:focus {
     outline: none;
