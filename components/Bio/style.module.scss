@@ -1,0 +1,24 @@
+@import '@/styles/colors.module.scss';
+
+.bio {
+  color: $secondary;
+  padding: 0 25px;
+  width: 100%;
+  max-width: 500px;
+  cursor: pointer;
+  align-items: center;
+
+  > span {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+.expanded {
+  > span {
+    text-overflow: none;
+    white-space: normal;
+    overflow: visible;
+  }
+}
