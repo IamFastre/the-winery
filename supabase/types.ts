@@ -11,35 +11,27 @@ export type Database = {
     Tables: {
       drafts: {
         Row: {
-          author: string
+          author: string | null
           content: string | null
           created_at: string
           id: number
           title: string | null
         }
         Insert: {
-          author?: string
+          author?: string | null
           content?: string | null
           created_at?: string
           id?: number
           title?: string | null
         }
         Update: {
-          author?: string
+          author?: string | null
           content?: string | null
           created_at?: string
           id?: number
           title?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "drafts_author_fkey"
-            columns: ["author"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       posts: {
         Row: {
@@ -75,28 +67,31 @@ export type Database = {
       }
       users: {
         Row: {
-          avatar: string | null
+          avatar: string
           bio: string
           created_at: string
-          email: string | null
+          display_name: string | null
+          email: string
           id: string
           identifier: string
           username: string
         }
         Insert: {
-          avatar?: string | null
+          avatar: string
           bio?: string
           created_at?: string
-          email?: string | null
+          display_name?: string | null
+          email: string
           id: string
           identifier: string
           username: string
         }
         Update: {
-          avatar?: string | null
+          avatar?: string
           bio?: string
           created_at?: string
-          email?: string | null
+          display_name?: string | null
+          email?: string
           id?: string
           identifier?: string
           username?: string
