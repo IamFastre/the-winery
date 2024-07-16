@@ -11,7 +11,7 @@ import styles from "./style.module.scss";
 export type CardProps = {
   title: string;
   content: string;
-  timestamp: number | string;
+  timestamp?: number | string;
   className?:string;
   centered?:boolean;
 } & ({
@@ -35,36 +35,39 @@ export function Card(props:CardProps) {
 
       {
         props.username ?
-        <div className={styles.caption}>
-          <Image
-            src={props.userAvatar}
-            alt={`${props.username}'s avatar`}
-            width={25}
-            height={25}
-            priority
-          />
-          <div className={styles.author}>
-            <span>
-              <C.QUINARY>
-                u:
-              </C.QUINARY>
-              <C.ACCENT>
-                <a href={`/u/${props.username}`}>
-                  {props.username}
-                </a>
-              </C.ACCENT>
-            </span>
+          <div className={styles.caption}>
+            <Image
+              src={props.userAvatar}
+              alt={`${props.username}'s avatar`}
+              width={25}
+              height={25}
+              priority
+            />
+            <div className={styles.author}>
+              <span>
+                <C.QUINARY>
+                  u:
+                </C.QUINARY>
+                <C.ACCENT>
+                  <a href={`/u/${props.username}`}>
+                    {props.username}
+                  </a>
+                </C.ACCENT>
+              </span>
+            </div>
           </div>
-        </div>
         : null
       }
-
-      <div className={`${styles.date} ${props.username ? styles.hasUser : ""}`}>
-        <span>
-          {humanizeTime(props.timestamp)}
-          {/* today at 10:19pm */}
-        </span>
-      </div>
+      {
+        props.timestamp ?
+        <div className={`${styles.date} ${props.username ? styles.hasUser : ""}`}>
+          <span>
+            {humanizeTime(props.timestamp)}
+            {/* today at 10:19pm */}
+          </span>
+        </div>
+      : null
+      }
     </div>
   );
 }
