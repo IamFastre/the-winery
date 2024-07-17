@@ -1,0 +1,276 @@
+@import '@/styles/colors.module.scss';
+
+@mixin styling($padding-top, $data-font-size, $cards-grid) {
+  .section {
+    flex: 1;
+  }
+
+  .sectionContainer {
+    padding: $padding-top 10px;
+    padding-bottom: 0;
+    gap: 5px;
+
+    hr {
+      width: 90%;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-color: rgba($secondary, 0.5);
+      border-radius: 2px;
+
+      &::after {
+        content: "<#>";
+        display: block;
+        color: $accent;
+        background-color: $primary;
+        padding-left: 2.5px;
+        padding-right: 2.5px;
+      }
+    }
+  }
+
+  .userBox {
+    align-items: center;
+    gap: 10px;
+  }
+
+  .form {
+    width: 80%;
+    max-width: 400px;
+    align-items: stretch;
+    margin: 15px 0 5px 0;
+    gap: 5px;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 5px;
+
+      input, textarea {
+        display: flex;
+        height: 30px;
+        padding: 1px 2px;
+        resize: none;
+      }
+
+      textarea {
+        height: 60px;
+      }
+    }
+
+    .maxLength {
+      user-select: none;
+      align-self: flex-end;
+      font-size: 10px;
+    }
+  }
+
+  .bigIcon {
+    svg {
+      transform: scale(1.3);
+    }
+  }
+
+  .avatar {
+    border-radius: 7.5%;
+
+    img {
+      border-radius: 7.5%;
+    }
+
+    &.editing {
+      outline: 2px $accent dashed;
+      cursor: pointer;
+    }
+
+    .avatarEdit {
+      position: absolute;
+      align-items: center;
+      justify-content: center;  
+      background-color: rgba($tertiary, 0.25);
+      transition: all 250ms ease-in-out;
+      animation: fadeIn 500ms ease-in-out;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      &:hover, &:focus-visible {
+        background-color: rgba($tertiary, 0.35);
+        .avatarEditIcon {
+          outline: 1px $primary dashed;
+        }
+      }
+
+      &:active, &.active {
+        background-color: rgba($tertiary, 0.5);
+        .avatarEditIcon {
+          background-color: $primary;
+          outline: 1px $accent dashed;
+          svg {
+            fill: $accent;
+            stroke: $accent;
+          }
+        }
+      }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .avatarEditIcon {
+      position: absolute;
+      transition: all 400ms ease-in-out;
+      background-color: $accent;
+      outline: 1px transparent dashed;
+      padding: 7.5px;
+      border-radius: 25px;
+
+      svg {
+        transition: all 400ms ease-in-out;
+        font-size: 32px;
+        fill: $primary;
+        stroke: $primary;
+        stroke-width: 0.5px;
+      }
+    }
+
+    .avatarRemoveIcon {
+      position: absolute;
+      bottom: -10px;
+      right: -10px;
+      animation: fadeIn 500ms ease-in-out;
+      transition: all 400ms ease-in-out;
+      background-color: $red;
+      outline: 1px transparent dashed;
+      padding: 5px;
+      border-radius: 25px;
+
+      svg {
+        transition: all 400ms ease-in-out;
+        font-size: 20px;
+        fill: $tertiary;
+        stroke: $tertiary;
+        stroke-width: 0.5px;
+      }
+    }
+
+    input {
+      display: none;
+    }
+  }
+
+  .textStuff {
+    user-select: none;
+    align-items: center;
+    gap: 2.5px;
+  }
+
+  .names {
+    align-items: center;
+
+    > :nth-child(1) {
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    > :nth-child(2) {
+      font-weight: 200;
+      user-select: text;
+    }
+  }
+
+  .buttonRack {
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .button {
+    $h: 35px;
+    height: $h;
+    font-size: 14px;
+
+    > :nth-of-type(1) {
+      width: $h;
+    }
+  }
+
+  .dataBox {
+    flex: 1;
+    align-self: stretch;
+    display: grid;
+    grid-template-columns: 1fr 18fr 1fr;
+    align-items: center;
+    justify-items: stretch;
+    padding: 0 15px;
+
+    &::before {
+      content: "{";
+      color: $accent;
+      justify-self: end;
+      font-size: 32px;
+    }
+
+    &::after {
+      content: "}";
+      color: $accent;
+      justify-self: start;
+      font-size: 32px;
+    }
+  }
+
+  .data {
+    user-select: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .dataItem {
+    font-size: $data-font-size;
+
+    &::after {
+      content: ", ";
+      color: $quinary;
+    }
+
+    &:nth-last-of-type(1)::after {
+      content: none;
+    }
+  }
+
+  .cardsHolder {
+    flex: 1;
+    align-items: center;
+  }
+
+  .cards {
+    position: absolute;
+    display: grid;
+    grid-template-columns: $cards-grid;
+    align-items: start;
+    justify-items: stretch;
+    align-content: start;
+    top: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    padding: 15px 10%;
+    gap: 30px;
+  }
+}
+
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling($padding-top: 30px, $data-font-size: 14px, $cards-grid: 1fr);
+}
+
+@media screen and (min-width: 787px) {
+  @include styling($padding-top: 50px, $data-font-size: 18px, $cards-grid: 1fr 1fr);
+}
