@@ -179,3 +179,28 @@ export async function cropAvatar(base64Image:string) {
   }
   catch { return null; }
 }
+
+export async function uploadAvatar(base64Image:string) {
+  // const supabase = createClient();
+  const { data:user, error: userError } = await getUser();
+
+  if (!user)
+    // return { data: null, error: userError };
+    return null;
+
+  const cropped = (await cropAvatar(base64Image));
+
+  if (!cropped)
+    // return { data: null, error: null };
+    return null;
+
+  const blob = await (await fetch(cropped)).blob();
+  const file = new File([blob], `${user.identifier}-avatar@256px`, { type: 'image/png' });
+
+  // ! TEMPORARY
+  return cropped;
+
+  // return await supabase.storage
+  //   .from('avatars')
+  //   .upload(file.name, file);
+}
