@@ -280,6 +280,7 @@ export default function RegisterPage() {
               title="Sign up"
               onClick={onSubmit}
               disabled={!isOK}
+              className={styles.button}
             />
           </form>
           {

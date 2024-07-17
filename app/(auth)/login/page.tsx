@@ -149,6 +149,8 @@ export default function LoginPage() {
             <Button
               title="Log in"
               onClick={onSubmit}
+              disabled={!isOK}
+              className={styles.button}
             />
 
             <a href="">
