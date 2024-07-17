@@ -264,6 +264,10 @@ export default function RegisterPage() {
                 required
                 onFocus={() => setCPassChecker(true)}
                 onBlur={() => setCPassChecker(password.length > 0 && confPass.length > 0 && password !== confPass)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' && isOK)
+                    onSubmit();
+                }}
               />
               { cPassChecker ?
                 <div className={styles.badInput}>

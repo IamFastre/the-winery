@@ -135,6 +135,10 @@ export default function LoginPage() {
                   required
                   onFocus={() => setPassChecker(true)}
                   onBlur={() => setPassChecker(password.length <= 8)}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter' && isOK)
+                      onSubmit();
+                  }}
                 />
                 <div
                   title={showPass ? "Hide Password" : "Show Password"}
