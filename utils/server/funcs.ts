@@ -161,19 +161,21 @@ export async function getAvatarUrl(username:string) {
     "2b1000", // 12
   ];
 
-  return `https://api.dicebear.com/9.x/identicon/png?seed=${username}&rowColor=${color}&backgroundColor=${bgColor}`;
+  return `https://api.dicebear.com/9.x/identicon/png?seed=${username}&rowColor=${color}&backgroundColor=${bgColor}&size=512`;
 }
 
-export async function prepareImage(base64Image:string) {
+export async function prepareAvatar(base64Image:string) {
   const WIDTH = 512, HEIGHT = 512;
-  const buffer = Buffer.from(base64Image, 'base64');
+  const uri = base64Image.split(';base64,').pop()!;
+  const buffer = Buffer.from(uri, 'base64');
 
   try {
     const resizedImage = await sharp(buffer)
+      .png()
       .resize({ width: WIDTH, height: HEIGHT, fit: 'cover' })
       .toBuffer();
 
-    return resizedImage.toString('base64');
+    return "data:image/png;base64," + resizedImage.toString('base64');
   }
   catch { return null; }
 }
