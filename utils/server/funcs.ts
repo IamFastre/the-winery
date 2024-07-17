@@ -164,7 +164,7 @@ export async function getAvatarUrl(username:string) {
   return `https://api.dicebear.com/9.x/identicon/png?seed=${username}&rowColor=${color}&backgroundColor=${bgColor}&size=512`;
 }
 
-export async function prepareAvatar(base64Image:string) {
+export async function cropAvatar(base64Image:string) {
   const WIDTH = 512, HEIGHT = 512;
   const uri = base64Image.split(';base64,').pop()!;
   const buffer = Buffer.from(uri, 'base64');

@@ -1,12 +1,13 @@
-import { LogoKind } from './types';
+import moment from 'moment';
 import { StaticImageData } from 'next/image';
+
+import { LogoKind } from './types';
 
 import NDC   from "@/public/static/images/logo/NaipeDeCopas.png";
 import NDCB  from "@/public/static/images/logo/NaipeDeCopasBrand.png";
 import NDCM  from "@/public/static/images/logo/NaipeDeCopasMono.png";
 import NDCBO from "@/public/static/images/logo/NaipeDeCopasBrandO.png";
 import NDCMO from "@/public/static/images/logo/NaipeDeCopasMonoO.png";
-import moment from 'moment';
 
 
 export function multiplyString(str:string, num:number) : string {
@@ -65,4 +66,29 @@ export function humanizeTime(stamp: number | string) : string {
 
   day = (date.valueOf() > now.valueOf() ? "the future " : "") + day;
   return `${day}, at ${mmnt.format("h:mma")}`;
+}
+
+export function cropAvatar(base64Image:string, onDone:(dataUrl:string) => void) {
+  const WIDTH = 512, HEIGHT = 512;
+  const image = document.createElement("img");
+  image.src = base64Image;
+
+  image.onload = e => {
+    let w = 0, h = 0;
+    const canvas = document.createElement("canvas");
+    canvas.width = WIDTH;
+    canvas.height = HEIGHT;
+    const ctx = canvas.getContext("2d")!;
+
+    if (image.width > image.height)
+      w = image.width * (canvas.height/image.height), h = canvas.height;
+    else if (image.width < image.height)
+      w = canvas.width, h = image.height * (canvas.width/image.width);
+    else
+      w = canvas.width, h = canvas.height;
+
+    ctx.drawImage(image, -(w - canvas.width)/2, -(h - canvas.height)/2, w, h);
+
+    onDone(ctx.canvas.toDataURL(image.src, 'image/png'));
+  };
 }
