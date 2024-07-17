@@ -2,7 +2,8 @@ import { MouseEventHandler } from "react";
 import { IconType } from "react-icons";
 import CSS from "csstype";
 
-import { focusable, hexOpacity } from "@/utils";
+import { hexOpacity } from "@/utils/funcs";
+import { focusable } from "@/utils/props";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";
@@ -23,6 +24,7 @@ export interface ButtonProps {
   className?: string;
   disabled?: boolean;
   noMinimum?: boolean;
+  noBrackets?: boolean;
   iconBackground?: boolean;
 }
 
@@ -43,8 +45,7 @@ export function Button(props:Readonly<ButtonProps>) {
   return (
     <div
       className={`${styles.container} ${props.disabled ? styles.disabled : ""} ${props.noMinimum ? styles.noMin : ""} ${props.className}`}
-      {...focusable(styles.active)}
-      onClick={!props.disabled ? props.onClick : undefined}
+      {...focusable(styles.active, !props.disabled ? props.onClick : undefined)}
     >
       {/* This is just cursed */}
       <style jsx> {`
@@ -70,9 +71,9 @@ export function Button(props:Readonly<ButtonProps>) {
         props.title ?
         <div className={styles.textHolder}>
           <span>
-            <span style={{ color }}>{'[ '}</span>
+            { props.noBrackets ? null : <span style={{ color }}>{'[ '}</span> }
             {props.title}
-            <span style={{ color }}>{' ]'}</span>
+            { props.noBrackets ? null : <span style={{ color }}>{' ]'}</span> }
           </span>
         </div>
         :

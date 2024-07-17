@@ -12,8 +12,8 @@ $placeholder: $quinary;
   background-color: rgba($placeholder, 0.1);
 
   &:not(.noMin) {
-    min-width: 100px;
-    min-height: 50px;
+    min-width: 75px;
+    min-height: 25px;
   }
 
   border-width: 1px;

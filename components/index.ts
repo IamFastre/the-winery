@@ -5,3 +5,4 @@ export * from "./Button";
 export * from "./GoHomeLogo";
 export * from "./Card";
 export * from "./MarkDown";
+export * from "./Bio";
