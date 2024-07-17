@@ -161,17 +161,17 @@ export async function getAvatarUrl(username:string) {
     "2b1000", // 12
   ];
 
-  return `https://api.dicebear.com/9.x/identicon/png?seed=${username}&rowColor=${color}&backgroundColor=${bgColor}&size=512`;
+  return `https://api.dicebear.com/9.x/identicon/png?seed=${username}&rowColor=${color}&backgroundColor=${bgColor}&size=256`;
 }
 
 export async function cropAvatar(base64Image:string) {
-  const WIDTH = 512, HEIGHT = 512;
+  const WIDTH = 256, HEIGHT = 256;
   const uri = base64Image.split(';base64,').pop()!;
   const buffer = Buffer.from(uri, 'base64');
 
   try {
     const resizedImage = await sharp(buffer)
-      .png()
+      .png({ compressionLevel: 9, effort: 10 })
       .resize({ width: WIDTH, height: HEIGHT, fit: 'cover' })
       .toBuffer();
 

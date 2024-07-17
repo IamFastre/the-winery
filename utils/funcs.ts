@@ -69,7 +69,7 @@ export function humanizeTime(stamp: number | string) : string {
 }
 
 export function cropAvatar(base64Image:string, onDone:(dataUrl:string) => void) {
-  const WIDTH = 512, HEIGHT = 512;
+  const WIDTH = 256, HEIGHT = 256;
   const image = document.createElement("img");
   image.src = base64Image;
 
@@ -89,6 +89,6 @@ export function cropAvatar(base64Image:string, onDone:(dataUrl:string) => void) 
 
     ctx.drawImage(image, -(w - canvas.width)/2, -(h - canvas.height)/2, w, h);
 
-    onDone(ctx.canvas.toDataURL(image.src, 'image/png'));
+    onDone(ctx.canvas.toDataURL('image/png'));
   };
 }
