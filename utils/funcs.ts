@@ -1,4 +1,3 @@
-
 import { LogoKind } from './types';
 import { StaticImageData } from 'next/image';
 

@@ -1,4 +1,5 @@
 "use server";
+import sharp from "sharp";
 import { createClient } from "@/supabase/server";
 
 import { AuthData, AuthError } from "./types";
@@ -161,4 +162,18 @@ export async function getAvatarUrl(username:string) {
   ];
 
   return `https://api.dicebear.com/9.x/identicon/png?seed=${username}&rowColor=${color}&backgroundColor=${bgColor}`;
+}
+
+export async function prepareImage(base64Image:string) {
+  const WIDTH = 512, HEIGHT = 512;
+  const buffer = Buffer.from(base64Image, 'base64');
+
+  try {
+    const resizedImage = await sharp(buffer)
+      .resize({ width: WIDTH, height: HEIGHT, fit: 'cover' })
+      .toBuffer();
+
+    return resizedImage.toString('base64');
+  }
+  catch { return null; }
 }
