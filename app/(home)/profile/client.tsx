@@ -1,10 +1,12 @@
 'use client';
 import { ChangeEventHandler, useRef, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { GoPencil, GoTrash } from "react-icons/go";
 import { IoBuildOutline, IoEllipsisHorizontalOutline, IoSaveOutline } from "react-icons/io5";
 
 import { cropAvatar, focusable } from "@/utils";
+import { editProfile } from "@/utils/server";
 import { Bio, Button, C } from "@/components";
 import { Database } from "@/supabase/types";
 
@@ -30,6 +32,8 @@ const LabelTitle = ({ title, subtitle }:{ title:string; subtitle?:string; }) => 
 };
 
 export function UserInfo({ user }:{ user:Database['public']['Tables']['users']['Row'] }) {
+  const router = useRouter();
+
   const [editing, setEditing] = useState<boolean>(false);
   const [avatarData, setAvatarData] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState<string>(user.display_name ?? user.username);
@@ -50,14 +54,22 @@ export function UserInfo({ user }:{ user:Database['public']['Tables']['users']['
         setAvatarData(s);
       });
     };
-  }
+  };
 
   const handleEditButton = async () => {
-    if (editing)
-      alert("still working on it...");
+    if (editing) {
+      if (avatarData)
+        alert("Still working on the avatar thing...");
+
+      if ((user.display_name ?? "") !== displayName || user.bio !== bio) {
+        await editProfile({ display_name: displayName, bio });
+        router.refresh();
+      }
+    }
 
     setEditing(e => !e);
   };
+
   return (
     <>
       <div className={`${styles.avatar} ${editing ? styles.editing : ""}`}>
@@ -108,7 +120,7 @@ export function UserInfo({ user }:{ user:Database['public']['Tables']['users']['
             />
             <div className={styles.maxLength}>
               <C.SECONDARY>
-                { displayName.length === 0 || displayName.length === 32 ?
+                { displayName.length === 32 ?
                   <C.RED>{displayName.length}</C.RED> :
                   <C.ACCENT>{displayName.length}</C.ACCENT> }
                 /32
@@ -128,7 +140,7 @@ export function UserInfo({ user }:{ user:Database['public']['Tables']['users']['
             />
             <div className={styles.maxLength}>
               <C.SECONDARY>
-                { bio.length === 0 || bio.length === 256 ?
+                { bio.length === 256 ?
                   <C.RED>{bio.length}</C.RED> :
                   <C.ACCENT>{bio.length}</C.ACCENT> }
                 /256

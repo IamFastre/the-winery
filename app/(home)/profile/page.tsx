@@ -9,7 +9,7 @@ import { UserInfo } from "./client";
 import styles from "./styles.module.scss";
 
 export const metadata:Metadata = {
-  title: "My Profile | The Winery",
+  title: "My Profile • The Winery",
   description: "Edit your profile.",
 };
 

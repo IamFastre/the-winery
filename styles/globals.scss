@@ -134,7 +134,7 @@ blockquote {
       font-weight: bold;
     }
   }
-  
+
   >:not(:nth-child(1)) {
     &::before {
       content: "\00a0\00a0";

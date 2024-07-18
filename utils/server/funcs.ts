@@ -3,6 +3,7 @@ import sharp from "sharp";
 import { createClient } from "@/supabase/server";
 
 import { AuthData, AuthError } from "./types";
+import { Database } from "@/supabase/types";
 
 export async function getPosts(amount:number = 5) {
   const supabase = createClient();
@@ -43,6 +44,32 @@ export async function getUser() {
     .select()
     .eq('id', data.user?.id ?? "")
     .single();
+}
+
+export async function editProfile(partialUser:{ display_name?: string | null; bio?: string; }) {
+  const supabase = createClient();
+  const { data:user, error } = await getUser();
+
+  if (!user || error)
+    return { data: null, error };
+
+  const trimmed = {
+    display_name: partialUser.display_name?.trim() as string | null | undefined,
+    bio: partialUser.bio?.trim(),
+  };
+
+  if (trimmed.display_name === "")
+    trimmed.display_name = null;
+
+  if (user.display_name !== trimmed.display_name || user.bio !== trimmed.bio)
+    return await supabase
+      .from('users')
+      .update(trimmed)
+      .eq('id', user.id)
+      .select()
+      .single();
+  else
+    return { data: user, error: null };
 }
 
 export async function signUp(username:string, email:string, password:string) {
