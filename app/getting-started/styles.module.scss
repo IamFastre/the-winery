@@ -8,11 +8,15 @@
   $shrink-transform: scale(0.8);
 
   .sectionContainer {
-    flex: 1;
-    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     align-items: center;
+    overflow: hidden;
     overflow-y: scroll;
-    padding: 15px;
+    padding: 50px 15px;
     gap: 10px;
 
     > hr {
@@ -63,6 +67,10 @@
     max-width: 850px;
   }
 
+  .button {
+    height: 50px;
+  }
+
   .msg {
     display: block;
     border-style: solid;
@@ -74,8 +82,8 @@
     max-width: 80%;
     color: $quinary;
     text-align: center;
-    position: absolute;
-    bottom: 50px;
+    position: fixed;
+    bottom: 40px;
     transition: all 500ms $time-func 250ms;
 
     &::before {

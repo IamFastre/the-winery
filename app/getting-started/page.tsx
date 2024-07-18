@@ -124,14 +124,14 @@ export default function GettingStartedPage() {
 
         <Button
           title="Compose"
-          icon={{
-            element: isBeating() ? IoWine : IoWineOutline,
-          }}
+          icon={{ element: isBeating() ? IoWine : IoWineOutline }}
           onClick={() => router.push('/compose')}
+          className={styles.button}
           disabled={!username}
+          noMinimum
         />
 
-        <span style={{ opacity: showMsg ? 1 : 0 }} className={styles.msg}>
+        <span style={{ opacity: showMsg ? 1 : 0, transform: showMsg ? "" : "translateY(200%) scale(0)" }} className={styles.msg}>
           Wish {isBeating() ? "CPR" : "giving someone a cardiac arrest"} was that easy...
         </span>
       </Section>

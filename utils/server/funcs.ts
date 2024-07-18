@@ -47,7 +47,7 @@ export async function getUser() {
 
 export async function signUp(username:string, email:string, password:string) {
   const supabase = createClient();
-  const avatar   = getAvatarUrl(username);
+  const avatar   = await getAvatarUrl(username);
   const emRegex  = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/i;
   const pwRegex  = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[?!@#$%~^&()\[\]\{\}\.\,\-\+\*\/=\\]).{1,}$/;
 
