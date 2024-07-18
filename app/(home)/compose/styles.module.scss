@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   padding: 0;
-  gap: 50px;
+  gap: 30px;
 }
 
 .title {
@@ -26,7 +26,7 @@
 }
 
 .card {
-  height: 500px;
+  min-height: 400px;
   max-height: 80%;
 }
 
@@ -59,24 +59,35 @@ $padding: 20px;
 
 .footer {
   align-self: stretch;
+  flex-direction: row;
+}
+
+.asUser {
+  flex: 1;
 
   > span {
     user-select: none;
-    position: absolute;
-    left: 0;
+    font-size: 12px;
   }
 }
 
 .actions {
+  flex: 1;
   flex-direction: row;
   align-self: flex-end;
-  gap: 10px;
-  transform-origin: top right;
-  transform: scale(0.8);
+  justify-content: flex-end;
+  gap: 5px;
+  height: 35px;
+
+  > div {
+    > div:nth-child(1) { width: 33px; }
+    > div:nth-child(2) { font-size: 12px; }
+  }
 }
 
 .error {
   color: $secondary;
+  font-size: 14px;
   animation: showUp 1s ease-in-out;
 
   > span {

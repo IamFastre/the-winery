@@ -21,7 +21,8 @@
     "remark-supersub": "^1.0.0",
     "server-only": "^0.0.1",
     "sharp": "^0.33.4",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "xregexp": "^5.1.1"
   },
   "devDependencies": {
     "@types/node": "^20",

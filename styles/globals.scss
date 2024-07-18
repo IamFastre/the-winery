@@ -127,7 +127,7 @@ blockquote {
     color: $quinary;
   }
 
-  p:nth-child(1) {
+  >:nth-child(1) {
     &::before {
       content: "“\00a0";
       color: $secondary;
@@ -135,14 +135,14 @@ blockquote {
     }
   }
   
-  p:not(:nth-child(1)) {
+  >:not(:nth-child(1)) {
     &::before {
       content: "\00a0\00a0";
       color: $secondary;
     }
   }
 
-  p:nth-last-child(1) {
+  >:nth-last-child(1) {
     &::after {
       content: "\00a0”";
       color: $secondary;
