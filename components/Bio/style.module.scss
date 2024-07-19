@@ -5,12 +5,12 @@
   padding: 0 25px;
   width: 90%;
   max-width: 600px;
-  cursor: pointer;
   align-items: center;
   overflow: hidden;
 
   > span {
-    width: 90%;
+    cursor: pointer;
+    max-width: 90%;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

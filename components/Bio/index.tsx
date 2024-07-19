@@ -8,11 +8,8 @@ export function Bio(props:{ content:string; }) {
   const [expanded, setExpanded] = useState<boolean>(false);
 
   return (
-    <div
-      className={`${styles.bio} ${expanded ? styles.expanded : ""}`}
-      {...focusable("", () => setExpanded(e => !e))}
-    >
-      <span>
+    <div className={`${styles.bio} ${expanded ? styles.expanded : ""}`}>
+      <span {...focusable("", () => setExpanded(e => !e))}>
         {props.content}
       </span>
     </div>

@@ -62,9 +62,7 @@ export default async function UserPage({ params }:Props) {
               </C.ACCENT>
             </span>
           </div>
-          <Bio
-            content={user.bio}
-          />
+          <Bio content={user.bio} />
         </div>
         <div className={styles.dataBox}>
           <div className={styles.data}>

@@ -163,7 +163,7 @@ export function ProfileInfo({ profile }:{ profile:Database['public']['Tables']['
               </C.ACCENT>
             </span>
           </div>
-          <Bio content={"profile.bioprofile.bio profile.bio profile.bio profile.bio profile.bio profile.bioprofile.bioprofile.biobioprofile.biobioprofile.biobioprofile.biobioprofile.bio"} />
+          <Bio content={profile.bio} />
         </div>
       }
       <div className={styles.buttonRack}>
