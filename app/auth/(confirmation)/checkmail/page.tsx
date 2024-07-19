@@ -11,9 +11,9 @@ import styles from "./styles.module.scss";
 
 export default async function CheckMailPage({ searchParams }:{searchParams: { [key: string]: string | string[] | undefined }}) {
   const supabase = createClient();
-  let  user = searchParams.uuid
-             ? (await supabase.from('users').select('username, email, id').eq('id', searchParams.uuid).single()).data ?? "bad" as const
-             : null;
+  let user = searchParams.uuid
+           ? (await supabase.from('profiles').select('username, email, id').eq('id', searchParams.uuid).single()).data ?? "bad" as const
+           : null;
 
   if (user === "bad" || user?.id !== searchParams.uuid)
     redirect('/', RedirectType.replace);
