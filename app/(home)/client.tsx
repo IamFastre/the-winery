@@ -28,7 +28,6 @@ export function FeedNavigator({ feed, users }:Props) {
         setIndex(index + num);
   };
 
-  console.log(users);
   return (
     <>
       <Card
