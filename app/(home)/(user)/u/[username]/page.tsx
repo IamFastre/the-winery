@@ -7,7 +7,7 @@ import { Section } from "@/components/Section";
 import { B, C } from "@/components/C";
 import { Card } from "@/components/Card";
 
-import styles from "./styles.module.scss";
+import styles from "../../styles.module.scss";
 import { Bio } from "@/components/Bio";
 
 

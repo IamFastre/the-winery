@@ -10,7 +10,7 @@ import { Bio, Button, C } from "@/components";
 import { editProfile } from "@/supabase/actions/user";
 import { Database } from "@/supabase/types";
 
-import styles from "./styles.module.scss";
+import styles from "../styles.module.scss";
 
 
 const LabelTitle = ({ title, subtitle }:{ title:string; subtitle?:string; }) => {
@@ -163,7 +163,7 @@ export function ProfileInfo({ profile }:{ profile:Database['public']['Tables']['
               </C.ACCENT>
             </span>
           </div>
-          <Bio content={profile.bio} />
+          <Bio content={"profile.bioprofile.bio profile.bio profile.bio profile.bio profile.bio profile.bioprofile.bioprofile.biobioprofile.biobioprofile.biobioprofile.biobioprofile.bio"} />
         </div>
       }
       <div className={styles.buttonRack}>

@@ -7,7 +7,7 @@ import { getUserPosts } from "@/supabase/actions/post";
 import { getProfile } from "@/supabase/actions/user";
 
 import { ProfileInfo } from "./client";
-import styles from "./styles.module.scss";
+import styles from "../styles.module.scss";
 
 export const metadata:Metadata = {
   title: "My Profile • The Winery",

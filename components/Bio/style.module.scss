@@ -3,12 +3,14 @@
 .bio {
   color: $secondary;
   padding: 0 25px;
-  width: 100%;
-  max-width: 500px;
+  width: 90%;
+  max-width: 600px;
   cursor: pointer;
   align-items: center;
+  overflow: hidden;
 
   > span {
+    width: 90%;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -17,6 +19,7 @@
 
 .expanded {
   > span {
+    word-break: break-word;
     text-overflow: none;
     white-space: normal;
     overflow: visible;

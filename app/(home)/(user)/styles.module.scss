@@ -169,6 +169,7 @@
   .textStuff {
     user-select: none;
     align-items: center;
+    width: 100%;
     gap: 2.5px;
   }
 
@@ -257,7 +258,7 @@
     position: absolute;
     display: grid;
     grid-template-columns: $cards-grid;
-    align-items: start;
+    align-items: stretch;
     justify-items: stretch;
     align-content: start;
     top: 0;
@@ -265,6 +266,12 @@
     overflow-y: scroll;
     padding: 15px 10%;
     gap: 30px;
+
+    > div {
+      > div:nth-child(1) {
+        flex: 1;
+      }
+    }
   }
 }
 

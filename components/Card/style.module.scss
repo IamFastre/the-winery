@@ -8,6 +8,7 @@
 
 .section {
   .sectionContent {
+    flex: 1;
     overflow-y: scroll;
     align-items: stretch;
     justify-content: start;
