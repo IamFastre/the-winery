@@ -16,11 +16,9 @@ export type CardProps = {
   centered?:boolean;
 } & ({
   username: string;
-  displayName: string;
   userAvatar: string;
 } | {
   username?: undefined;
-  displayName?: undefined;
   userAvatar?: undefined;
 })
 
