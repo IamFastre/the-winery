@@ -13,25 +13,33 @@ export type Database = {
         Row: {
           author: string | null
           content: string | null
-          created_at: string
           id: number
+          timestamp: string
           title: string | null
         }
         Insert: {
           author?: string | null
           content?: string | null
-          created_at?: string
           id?: number
+          timestamp?: string
           title?: string | null
         }
         Update: {
           author?: string | null
           content?: string | null
-          created_at?: string
           id?: number
+          timestamp?: string
           title?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "drafts_author_fkey"
+            columns: ["author"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["identifier"]
+          },
+        ]
       }
       posts: {
         Row: {
@@ -60,12 +68,12 @@ export type Database = {
             foreignKeyName: "posts_author_fkey"
             columns: ["author"]
             isOneToOne: false
-            referencedRelation: "users"
+            referencedRelation: "profiles"
             referencedColumns: ["identifier"]
           },
         ]
       }
-      users: {
+      profiles: {
         Row: {
           avatar: string
           bio: string

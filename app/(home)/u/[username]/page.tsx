@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import Image from "next/image";
 
-import { getUserByIdentifier, getUserPosts } from "@/utils/server";
+import { getPublicProfile } from "@/supabase/actions/user";
+import { getUserPosts } from "@/supabase/actions/post";
 import { Section } from "@/components/Section";
 import { B, C } from "@/components/C";
 import { Card } from "@/components/Card";
@@ -16,7 +17,7 @@ interface Props {
 
 export async function generateMetadata({ params }:Props) : Promise<Metadata> {
   const username = params.username;
-  const { data:user  } = await getUserByIdentifier(params.username);
+  const { data:user  } = await getPublicProfile(params.username);
 
   if (user)
     return {
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }:Props) : Promise<Metadata> {
 }
 
 export default async function UserPage({ params }:Props) {
-  const { data:user  } = await getUserByIdentifier(params.username);
+  const { data:user  } = await getPublicProfile(params.username);
   const { data:posts } = await getUserPosts(user?.username ?? "");
 
   if (!user || !posts)

@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { IoArrowBack, IoArrowForward } from "react-icons/io5";
 
 import { focusable } from "@/utils";
-import { getPosts, getUserByIdentifier } from "@/utils/server";
+import { getFeedPosts } from "@/supabase/actions/post";
+import { getPublicProfile } from "@/supabase/actions/user";
 import { Section, Card, C } from "@/components";
 
 import styles from "./page.module.scss";
@@ -23,8 +24,8 @@ export default function HomePage() {
 
   useEffect(() => {
     const start = async () => {
-      const { data: posts, error: postsError } = await getPosts(20);
-      const users = (await Promise.all(posts?.map(post => getUserByIdentifier(post.author!))!)).map(u => u.data);
+      const { data: posts, error: postsError } = await getFeedPosts(20);
+      const users = (await Promise.all(posts?.map(post => getPublicProfile(post.author!))!)).map(u => u.data);
 
       if (postsError || posts.length <= 0)
         setError(true)

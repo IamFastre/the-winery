@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoEyeOutline, IoEye, IoFolderOutline, IoAdd } from "react-icons/io5";
 
-import { createPost, createDraft } from "@/utils/server";
+import { createPost, createDraft } from "@/supabase/actions/post";
 import { Section, MarkDown, Button, C } from "@/components";
 import { Database } from "@/supabase/types";
 
@@ -11,7 +11,7 @@ import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
 import XRegExp from "xregexp";
 
-export function PostEditor({ user, error: userError }:{ user:Database['public']['Tables']['users']['Row']; error:boolean; }) {
+export function PostEditor({ user, error: userError }:{ user:Database['public']['Tables']['profiles']['Row']; error:boolean; }) {
   const router = useRouter();
 
   const [title, setTitle] = useState<string>("");

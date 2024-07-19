@@ -6,8 +6,8 @@ import { GoPencil, GoTrash } from "react-icons/go";
 import { IoBuildOutline, IoEllipsisHorizontalOutline, IoSaveOutline } from "react-icons/io5";
 
 import { cropAvatar, focusable } from "@/utils";
-import { editProfile } from "@/utils/server";
 import { Bio, Button, C } from "@/components";
+import { editProfile } from "@/supabase/actions/user";
 import { Database } from "@/supabase/types";
 
 import styles from "./styles.module.scss";
@@ -31,13 +31,13 @@ const LabelTitle = ({ title, subtitle }:{ title:string; subtitle?:string; }) => 
   );
 };
 
-export function UserInfo({ user }:{ user:Database['public']['Tables']['users']['Row'] }) {
+export function ProfileInfo({ profile }:{ profile:Database['public']['Tables']['profiles']['Row'] }) {
   const router = useRouter();
 
   const [editing, setEditing] = useState<boolean>(false);
   const [avatarData, setAvatarData] = useState<string | null>(null);
-  const [displayName, setDisplayName] = useState<string>(user.display_name ?? user.username);
-  const [bio, setBio] = useState<string>(user.bio);
+  const [displayName, setDisplayName] = useState<string>(profile.display_name ?? profile.username);
+  const [bio, setBio] = useState<string>(profile.bio);
 
   const imgInputRef = useRef<HTMLInputElement>(null);
 
@@ -61,7 +61,7 @@ export function UserInfo({ user }:{ user:Database['public']['Tables']['users']['
       if (avatarData)
         alert("Still working on the avatar thing...");
 
-      if ((user.display_name ?? "") !== displayName || user.bio !== bio) {
+      if ((profile.display_name ?? "") !== displayName || profile.bio !== bio) {
         await editProfile({ display_name: displayName, bio });
         router.refresh();
       }
@@ -74,8 +74,8 @@ export function UserInfo({ user }:{ user:Database['public']['Tables']['users']['
     <>
       <div className={`${styles.avatar} ${editing ? styles.editing : ""}`}>
         <Image
-          alt={`${user.username}'s profile picture.`}
-          src={editing ? avatarData ?? user.avatar : user.avatar}
+          alt={`${profile.username}'s profile picture.`}
+          src={editing ? avatarData ?? profile.avatar : profile.avatar}
           width={128}
           height={128}
         />
@@ -115,7 +115,7 @@ export function UserInfo({ user }:{ user:Database['public']['Tables']['users']['
               autoComplete="off"
               spellCheck={false}
               type="text"
-              placeholder={(user.display_name ?? user.username) + ` (max. 32)`}
+              placeholder={(profile.display_name ?? profile.username) + ` (max. 32)`}
               maxLength={32}
             />
             <div className={styles.maxLength}>
@@ -135,7 +135,7 @@ export function UserInfo({ user }:{ user:Database['public']['Tables']['users']['
               onBlur={() => setBio(b => b.trim())}
               name="description"
               autoComplete="off"
-              placeholder={user.bio + ` (max. 256)`}
+              placeholder={profile.bio + ` (max. 256)`}
               maxLength={256}
             />
             <div className={styles.maxLength}>
@@ -152,18 +152,18 @@ export function UserInfo({ user }:{ user:Database['public']['Tables']['users']['
         <div className={styles.textStuff}>
           <div className={styles.names}>
             <span>
-              {user.display_name ?? user.username}
+              {profile.display_name ?? profile.username}
             </span>
             <span>
               <C.QUINARY>
                 u:
               </C.QUINARY>
               <C.ACCENT>
-                {user.username}
+                {profile.username}
               </C.ACCENT>
             </span>
           </div>
-          <Bio content={user.bio} />
+          <Bio content={profile.bio} />
         </div>
       }
       <div className={styles.buttonRack}>

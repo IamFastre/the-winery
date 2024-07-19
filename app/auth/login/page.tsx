@@ -2,7 +2,8 @@
 import { useRef, useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 
-import { AuthError, signIn } from "@/utils/server";
+import { signIn } from "@/supabase/actions/user";
+import { AuthError } from "@/supabase/actions/types";
 import { Button, C, GoHomeLogo, Section } from "@/components";
 import { useGoTo } from "@/hooks";
 

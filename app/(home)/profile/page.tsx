@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 
-import { getUser, getUserPosts } from "@/utils/server";
 import { B, C } from "@/components/C";
 import { Card } from "@/components/Card";
 import { Section } from "@/components/Section";
+import { getUserPosts } from "@/supabase/actions/post";
+import { getProfile } from "@/supabase/actions/user";
 
-import { UserInfo } from "./client";
+import { ProfileInfo } from "./client";
 import styles from "./styles.module.scss";
 
 export const metadata:Metadata = {
@@ -14,16 +15,16 @@ export const metadata:Metadata = {
 };
 
 export default async function UserPage() {
-  const { data:user  } = await getUser();
-  const { data:posts } = await getUserPosts(user?.username ?? "");
+  const { data:profile } = await getProfile();
+  const { data:posts } = await getUserPosts(profile?.username ?? "");
 
-  if (!user || !posts)
+  if (!profile || !posts)
     return;
 
   return (
     <Section className={styles.section} containerClassName={styles.sectionContainer}>
       <div className={styles.userBox}>
-        <UserInfo user={user} />
+        <ProfileInfo profile={profile} />
         <div className={styles.dataBox}>
           <div className={styles.data}>
             <span className={styles.dataItem}>

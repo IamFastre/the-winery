@@ -1,12 +1,12 @@
 import { Section } from "@/components/Section";
+import { getProfile } from "@/supabase/actions/user";
 
 import { PostEditor } from "./client";
 import styles from "./styles.module.scss";
-import { getUser } from "@/utils/server";
 
 
 export default async function ComposePage() {
-  const { data:user, error } = await getUser();
+  const { data:user, error } = await getProfile();
 
   if (!user)
     return;
