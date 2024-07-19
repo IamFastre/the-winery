@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 import { Database } from './types';
 
-const noAuthPaths = ['/login', '/signup', '/checkmail', '/getting-started'];
+const noAuthPaths = ['/auth', '/getting-started'];
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });

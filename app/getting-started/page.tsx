@@ -111,8 +111,8 @@ export default function GettingStartedPage() {
               </p>
             :
               <p>
-                To get started and ferment your own pieces, you can <a href="/login">log in</a> to your account.
-                Oh you don't have one? <span title="I mean, of course...">expected</span>; you can also <a href="/signup">create a new account</a>!
+                To get started and ferment your own pieces, you can <a href="/auth/login">log in</a> to your account.
+                Oh you don't have one? <span title="I mean, of course...">expected</span>; you can also <a href="/auth/signup">create a new account</a>!
                 How fabulous!
               </p>
           }

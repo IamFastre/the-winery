@@ -143,7 +143,7 @@ export default function RegisterPage() {
 
       else if (data) {
         setError(null);
-        goto(`/checkmail?uuid=${data.user?.id}`, 'replace');
+        goto(`/auth/checkmail?uuid=${data.user?.id}`, 'replace');
       }
     }
   };
@@ -301,7 +301,7 @@ export default function RegisterPage() {
 
         <Section isCard>
           <span className={styles.haveAcc}>
-            Already have an account? <a href="/login">log in</a> now!
+            Already have an account? <a href="/auth/login">log in</a> now!
           </span>
         </Section>
       </div>

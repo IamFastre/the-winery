@@ -36,28 +36,29 @@ export default async function CheckMailPage({ searchParams }:{searchParams: { [k
               Great, {user.username}!
             </h3>
             <C.SECONDARY>
-              A confirmation email was sent to you at
-              <RI> '{user.email}'</RI>.
-              <br/>
-              now all you have to do is check your inbox!
-              <br/>
               <p>
-                If you're not signed in automatically just go to the <a href="/login">login page</a>.
+                A confirmation email was sent to you at
+                <RI> '{user.email}'</RI>.
+                <br/>
+                now all you have to do is check your inbox!
+              </p>
+              <p>
+                If you're not signed in automatically just go to the <a href="/auth/login">login page</a>.
               </p>
             </C.SECONDARY>
           </>
           :
           <>
-            <p>
-              <C.SECONDARY>
+            <C.SECONDARY>
+              <p>
                 Uhm, it's okay we all get lost sometimes,
                 <br/>
                 don't beat yourself up over it!
-              </C.SECONDARY>
-            </p>
-            <p>
-              You can go to the <a href="/">home page</a>.
-            </p>
+              </p>
+              <p>
+                You can go to the <a href="/">home page</a>.
+              </p>
+            </C.SECONDARY>
           </>}
         </span>
       </Section>

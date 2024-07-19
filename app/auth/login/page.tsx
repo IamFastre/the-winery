@@ -175,7 +175,7 @@ export default function LoginPage() {
 
         <Section isCard>
           <span className={styles.noAcc}>
-            Don't have an account? <a href="/signup">sign up</a> now!
+            Don't have an account? <a href="/auth/signup">sign up</a> now!
           </span>
         </Section>
       </div>
