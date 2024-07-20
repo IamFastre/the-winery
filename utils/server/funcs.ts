@@ -35,7 +35,7 @@ export async function getAvatarUrl(username:string) {
   return `https://api.dicebear.com/9.x/identicon/png?seed=${username}&rowColor=${color}&backgroundColor=${bgColor}&size=256`;
 }
 
-export async function cropAvatar(base64Image:string) {
+export async function cropAvatar(base64Image:string, sharpen:boolean = false) {
   const WIDTH = 256, HEIGHT = 256;
   const uri = base64Image.split(';base64,').pop()!;
   const buffer = Buffer.from(uri, 'base64');
@@ -43,7 +43,7 @@ export async function cropAvatar(base64Image:string) {
   try {
     const resizedImage = await sharp(buffer)
       .png({ compressionLevel: 9, effort: 10 })
-      .resize({ width: WIDTH, height: HEIGHT, fit: 'cover' })
+      .resize({ width: WIDTH, height: HEIGHT, fit: 'cover', kernel: sharpen ? 'nearest' : 'lanczos3' })
       .toBuffer();
 
     return "data:image/png;base64," + resizedImage.toString('base64');

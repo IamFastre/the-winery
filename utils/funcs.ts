@@ -71,7 +71,7 @@ export function humanizeTime(stamp: number | string, noTime?:boolean) : string {
   return day + (noTime ? "" : `, at ${mmnt.format("h:mma")}`);
 }
 
-export function cropAvatar(base64Image:string, onDone:(dataUrl:string) => void) {
+export function cropAvatar(base64Image:string, onDone:(dataUrl:string) => void, sharpen:boolean = false) {
   const WIDTH = 256, HEIGHT = 256;
   const image = document.createElement("img");
   image.src = base64Image;
@@ -79,9 +79,12 @@ export function cropAvatar(base64Image:string, onDone:(dataUrl:string) => void) 
   image.onload = e => {
     let w = 0, h = 0;
     const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d")!;
     canvas.width = WIDTH;
     canvas.height = HEIGHT;
-    const ctx = canvas.getContext("2d")!;
+
+    if (sharpen)
+      ctx.imageSmoothingEnabled = false;
 
     if (image.width > image.height)
       w = image.width * (canvas.height/image.height), h = canvas.height;
