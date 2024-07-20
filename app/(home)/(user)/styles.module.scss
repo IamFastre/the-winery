@@ -6,8 +6,7 @@
   }
 
   .sectionContainer {
-    padding: $padding-top 10px;
-    padding-bottom: 0;
+    padding: $padding-top 10px 0 10px !important;
     gap: 5px;
 
     hr {

@@ -53,7 +53,7 @@ export function getLogo(kind:LogoKind) : StaticImageData {
        : NDC;
 }
 
-export function humanizeTime(stamp: number | string) : string {
+export function humanizeTime(stamp: number | string, noTime?:boolean) : string {
   const now  = new Date();
   const date = new Date(stamp);
   const mmnt = moment(date);
@@ -68,7 +68,7 @@ export function humanizeTime(stamp: number | string) : string {
           : mmnt.format("DD/MM/YYYY");
 
   day = (date.valueOf() > now.valueOf() ? "the future " : "") + day;
-  return `${day}, at ${mmnt.format("h:mma")}`;
+  return day + (noTime ? "" : `, at ${mmnt.format("h:mma")}`);
 }
 
 export function cropAvatar(base64Image:string, onDone:(dataUrl:string) => void) {

@@ -33,7 +33,7 @@
 $padding: 20px;
 
 .cardContent {
-  padding: $padding;
+  padding: $padding !important;
 
   > textarea {
     flex: 1;
@@ -54,6 +54,7 @@ $padding: 20px;
   position: absolute;
   right: $padding;
   bottom: $padding;
+  padding: 2.5px;
   border-radius: 50%;
 }
 
