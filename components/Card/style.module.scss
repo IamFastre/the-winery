@@ -13,7 +13,7 @@
     align-items: stretch;
     justify-content: start;
     padding: 20px;
-    scrollbar-width: 0;
+    scrollbar-width: none;
     -ms-overflow-style: none;
     &::-webkit-scrollbar { display: none; }
   }

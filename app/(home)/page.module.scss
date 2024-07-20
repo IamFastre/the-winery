@@ -96,8 +96,8 @@ $arrow-size: 28px;
   > span:nth-child(1) {
     color: transparent;
     background: linear-gradient(to right, $accent 70%, rgba($accent, 0.33), $accent);
-    background-clip: text;
     -webkit-background-clip: text;
+    background-clip: text;
     animation: swipe 900ms linear infinite;
     background-size: 300% 100%;
   }
