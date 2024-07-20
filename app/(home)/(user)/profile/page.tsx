@@ -1,10 +1,11 @@
 import { Metadata } from "next";
 
-import { B, C } from "@/components/C";
 import { Card } from "@/components/Card";
 import { Section } from "@/components/Section";
 import { getUserPosts } from "@/supabase/actions/post";
 import { getProfile } from "@/supabase/actions/user";
+import { DataBox } from "@/components/DataBox";
+import { humanizeTime } from "@/utils";
 
 import { ProfileInfo } from "./client";
 import styles from "../styles.module.scss";
@@ -25,19 +26,7 @@ export default async function UserPage() {
     <Section className={styles.section} containerClassName={styles.sectionContainer}>
       <div className={styles.userBox}>
         <ProfileInfo profile={profile} />
-        <div className={styles.dataBox}>
-          <div className={styles.data}>
-            <span className={styles.dataItem}>
-              <C.QUINARY>
-                {posts.length >= 2 ? "cards" : "card"}
-              </C.QUINARY>
-              {': '}
-              <B>
-                {posts.length}
-              </B>
-            </span>
-          </div>
-        </div>
+        <DataBox data={{ cards: posts.length, joined: humanizeTime(profile.created_at, true) }} />
       </div>
       <hr/>
       <div className={styles.cardsHolder}>

@@ -9,6 +9,8 @@ import { Card } from "@/components/Card";
 
 import styles from "../../styles.module.scss";
 import { Bio } from "@/components/Bio";
+import { humanizeTime } from "@/utils";
+import { DataBox } from "@/components/DataBox";
 
 
 interface Props {
@@ -17,9 +19,9 @@ interface Props {
 
 export async function generateMetadata({ params }:Props) : Promise<Metadata> {
   const username = params.username;
-  const { data:user  } = await getPublicProfile(params.username);
+  const { data:profile  } = await getPublicProfile(params.username);
 
-  if (user)
+  if (profile)
     return {
       title: `u:${username} • The Winery`,
       description: `${username}'s profile page.`,
@@ -32,18 +34,18 @@ export async function generateMetadata({ params }:Props) : Promise<Metadata> {
 }
 
 export default async function UserPage({ params }:Props) {
-  const { data:user  } = await getPublicProfile(params.username);
-  const { data:posts } = await getUserPosts(user?.username ?? "");
+  const { data:profile } = await getPublicProfile(params.username);
+  const { data:posts } = await getUserPosts(profile?.username ?? "");
 
-  if (!user || !posts)
+  if (!profile || !posts)
     return; // not found
 
   return (
     <Section className={styles.section} containerClassName={styles.sectionContainer}>
       <div className={styles.userBox}>
         <Image
-          alt={`${user.username}'s profile picture.`}
-          src={user.avatar}
+          alt={`${profile.username}'s profile picture.`}
+          src={profile.avatar}
           width={128}
           height={128}
           className={styles.avatar}
@@ -51,32 +53,20 @@ export default async function UserPage({ params }:Props) {
         <div className={styles.textStuff}>
           <div className={styles.names}>
             <span>
-              {user.display_name ?? user.username}
+              {profile.display_name ?? profile.username}
             </span>
             <span>
               <C.QUINARY>
                 u:
               </C.QUINARY>
               <C.ACCENT>
-                {user.username}
+                {profile.username}
               </C.ACCENT>
             </span>
           </div>
-          <Bio content={user.bio} />
+          <Bio content={profile.bio} />
         </div>
-        <div className={styles.dataBox}>
-          <div className={styles.data}>
-            <span className={styles.dataItem}>
-              <C.QUINARY>
-                {posts.length >= 2 ? "cards" : "card"}
-              </C.QUINARY>
-              {': '}
-              <B>
-                {posts.length}
-              </B>
-            </span>
-          </div>
-        </div>
+        <DataBox data={{ cards: posts.length, joined: humanizeTime(profile.created_at, true) }} />
       </div>
       <hr/>
       <div className={styles.cardsHolder}>
