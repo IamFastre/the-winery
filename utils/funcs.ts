@@ -8,6 +8,7 @@ import NDCB  from "@/public/static/images/logo/NaipeDeCopasBrand.png";
 import NDCM  from "@/public/static/images/logo/NaipeDeCopasMono.png";
 import NDCBO from "@/public/static/images/logo/NaipeDeCopasBrandO.png";
 import NDCMO from "@/public/static/images/logo/NaipeDeCopasMonoO.png";
+import NDCTI from "@/public/static/images/logo/NaipeDeCopasTouch.png";
 
 
 export function multiplyString(str:string, num:number) : string {
@@ -47,6 +48,8 @@ export function getLogo(kind:LogoKind) : StaticImageData {
        ? NDCBO
        : kind === "mono outline"
        ? NDCMO
+       : kind === "touch"
+       ? NDCTI
        : NDC;
 }
 
