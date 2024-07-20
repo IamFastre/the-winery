@@ -1,10 +1,10 @@
 import Image from "next/image";
 
-import { humanizeTime } from "@/utils";
 import { Section } from "@/components/Section";
 import { MarkDown } from "@/components/MarkDown";
 import { C } from "@/components/C";
 
+import { Time } from "./client";
 import styles from "./style.module.scss";
 
 
@@ -59,10 +59,7 @@ export function Card(props:CardProps) {
       {
         props.timestamp ?
         <div className={`${styles.date} ${props.username ? styles.hasUser : ""}`}>
-          <span>
-            {humanizeTime(props.timestamp)}
-            {/* today at 10:19pm */}
-          </span>
+          <Time timestamp={props.timestamp} />
         </div>
       : null
       }

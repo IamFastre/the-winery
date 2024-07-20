@@ -6,11 +6,10 @@ import { getUserPosts } from "@/supabase/actions/post";
 import { Section } from "@/components/Section";
 import { B, C } from "@/components/C";
 import { Card } from "@/components/Card";
-
-import styles from "../../styles.module.scss";
 import { Bio } from "@/components/Bio";
-import { humanizeTime } from "@/utils";
-import { DataBox } from "@/components/DataBox";
+
+import { DataBox } from "../../client";
+import styles from "../../styles.module.scss";
 
 
 interface Props {
@@ -66,7 +65,7 @@ export default async function UserPage({ params }:Props) {
           </div>
           <Bio content={profile.bio} />
         </div>
-        <DataBox data={{ cards: posts.length, joined: humanizeTime(profile.created_at, true) }} />
+        <DataBox cards={posts.length} joined={profile.created_at} />
       </div>
       <hr/>
       <div className={styles.cardsHolder}>

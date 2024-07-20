@@ -1,6 +1,6 @@
 @import '@/styles/colors.module.scss';
 
-@mixin styling($padding-top, $cards-grid) {
+@mixin styling($padding-top, $data-font-size, $cards-grid) {
   .section {
     flex: 1;
   }
@@ -203,6 +203,49 @@
       width: $h;
     }
   }
+  .dataBox {
+    flex: 1;
+    align-self: stretch;
+    display: grid;
+    grid-template-columns: 1fr 18fr 1fr;
+    align-items: center;
+    justify-items: stretch;
+    padding: 0 15px;
+
+    &::before {
+      content: "{";
+      color: $accent;
+      justify-self: end;
+      font-size: 32px;
+    }
+
+    &::after {
+      content: "}";
+      color: $accent;
+      justify-self: start;
+      font-size: 32px;
+    }
+  }
+
+  .data {
+    user-select: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .dataItem {
+    font-size: $data-font-size;
+
+    &::after {
+      content: ", ";
+      color: $quinary;
+    }
+
+    &:nth-last-of-type(1)::after {
+      content: none;
+    }
+  }
 
   .cardsHolder {
     flex: 1;
@@ -232,9 +275,9 @@
 
 @media screen and (min-width: 0px)
               and (max-width: 786px) {
-  @include styling($padding-top: 30px, $cards-grid: 1fr);
+  @include styling($padding-top: 30px, $data-font-size: 14px, $cards-grid: 1fr);
 }
 
 @media screen and (min-width: 787px) {
-  @include styling($padding-top: 50px, $cards-grid: 1fr 1fr);
+  @include styling($padding-top: 50px, $data-font-size: 18px, $cards-grid: 1fr 1fr);
 }

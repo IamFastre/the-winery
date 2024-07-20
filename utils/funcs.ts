@@ -53,22 +53,21 @@ export function getLogo(kind:LogoKind) : StaticImageData {
        : NDC;
 }
 
-export function humanizeTime(stamp: number | string, noTime?:boolean) : string {
-  const now  = new Date();
-  const date = new Date(stamp);
-  const mmnt = moment(date);
+export function humanizeTime(stamp: number | string, utc:boolean = true, noTime:boolean = false) : string {
+  const now  = utc ? moment.utc() : moment();
+  const date = utc ? moment.utc(stamp) : moment(stamp);
 
-  let dif = now.getDate() - date.getDate();
-  let mif = now.getMonth() - date.getMonth();
+  let dif = now.date() - date.date();
+  let mif = now.month() - date.month();
 
-  let day = now.getFullYear() === date.getFullYear() && now.getMonth() === date.getMonth()
+  let day = now.year() === date.year() && now.month() === date.month()
           ? (dif === 0 ? "today" : dif === 1 ? "yesterday" : `${dif} days ago`)
-          : now.getFullYear() === date.getFullYear()
-          ? (mif === 1 ? `${date.getDate()}th of last month` : `${mmnt.format("DD/MM")} this year`)
-          : mmnt.format("DD/MM/YYYY");
+          : now.year() === date.year()
+          ? (mif === 1 ? `${date.date()}th of last month` : `${date.format("DD/MM")} this year`)
+          : date.format("DD/MM/YYYY");
 
   day = (date.valueOf() > now.valueOf() ? "the future " : "") + day;
-  return day + (noTime ? "" : `, at ${mmnt.format("h:mma")}`);
+  return day + (noTime ? "" : `, at ${date.format("h:mma")}`);
 }
 
 export function cropAvatar(base64Image:string, onDone:(dataUrl:string) => void, sharpen:boolean = false) {

@@ -4,9 +4,8 @@ import { Card } from "@/components/Card";
 import { Section } from "@/components/Section";
 import { getUserPosts } from "@/supabase/actions/post";
 import { getProfile } from "@/supabase/actions/user";
-import { DataBox } from "@/components/DataBox";
-import { humanizeTime } from "@/utils";
 
+import { DataBox } from "../client";
 import { ProfileInfo } from "./client";
 import styles from "../styles.module.scss";
 
@@ -26,7 +25,7 @@ export default async function UserPage() {
     <Section className={styles.section} containerClassName={styles.sectionContainer}>
       <div className={styles.userBox}>
         <ProfileInfo profile={profile} />
-        <DataBox data={{ cards: posts.length, joined: humanizeTime(profile.created_at, true) }} />
+        <DataBox cards={posts.length} joined={profile.created_at} />
       </div>
       <hr/>
       <div className={styles.cardsHolder}>
