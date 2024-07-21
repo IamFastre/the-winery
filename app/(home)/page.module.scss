@@ -90,6 +90,7 @@ $arrow-size: 28px;
 
 .loading {
   color: $secondary;
+  user-select: none;
   font-size: 1rem;
   font-variant-ligatures: none;
 

@@ -31,8 +31,10 @@ $placeholder: $quinary;
     background-color: $placeholder;
     filter: drop-shadow(0 0 10px rgba($placeholder, 0.5));
 
-    span {
+    span, .background svg {
       color: $primary;
+      fill: $primary;
+      stroke: $primary;
     }
   }
 }
@@ -54,8 +56,6 @@ $placeholder: $quinary;
   }
 
   svg {
-    fill: $tertiary;
-    stroke: $tertiary;
     transition: $all-transition;
   }
 }

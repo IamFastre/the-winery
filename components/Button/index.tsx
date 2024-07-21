@@ -13,7 +13,6 @@ interface Icon {
   element: IconType;
   color?: string;
   size?: number;
-  position?: "left" | "right" | "none";
 }
 
 export interface ButtonProps {
@@ -30,17 +29,6 @@ export interface ButtonProps {
 
 export function Button(props:Readonly<ButtonProps>) {
   const color   = props.disabled ? colors.secondary : props.color ?? colors.accent;
-  const iconPos = props.icon?.position ?? "left";
-  const icon    = props.icon && props.icon.position !== "none" ? (
-    <div className={`${styles.icon} ${props.iconBackground ? styles.background : ""}`}>
-      <props.icon.element
-        size={props.icon.size ?? 30}
-        style={{
-          fill: props.disabled ? colors.secondary : props.icon.color ?? colors.tertiary,
-          stroke: props.disabled ? colors.secondary : props.icon.color ?? colors.tertiary
-        }}
-      />
-    </div>) : null;
 
   return (
     <div
@@ -64,9 +52,22 @@ export function Button(props:Readonly<ButtonProps>) {
             filter: drop-shadow(0 0 10px ${hexOpacity(color, 0.5)}) !important;
           }
         }
+
+        .${styles.icon} {
+          svg {
+            fill: ${props.disabled ? colors.secondary : props.icon?.color ?? colors.tertiary};
+            stroke: ${props.disabled ? colors.secondary : props.icon?.color ?? colors.tertiary};
+          }
+        }
       `}</style>
 
-      { props.icon && iconPos === "left" ? icon : null }
+      {
+        props.icon ?
+        <div className={`${styles.icon} ${props.iconBackground ? styles.background : ""}`}>
+          <props.icon.element size={props.icon.size ?? 30} />
+        </div>
+        : null
+      }
       {
         props.title ?
         <div className={styles.textHolder}>
@@ -76,10 +77,8 @@ export function Button(props:Readonly<ButtonProps>) {
             { props.noBrackets ? null : <span style={{ color }}>{' ]'}</span> }
           </span>
         </div>
-        :
-        null
+        : null
       }
-      { props.icon && iconPos === "right" ? icon : null }
     </div>
   );
 }

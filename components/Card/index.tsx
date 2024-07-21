@@ -60,7 +60,7 @@ export function Card(props:CardProps) {
           }
           {
             props.timestamp ?
-            <div className={`${styles.date} ${props.username ? styles.hasUser : ""}`}>
+            <div className={`${styles.date} ${props.username ? "" : styles.noUser}`}>
               <Time timestamp={props.timestamp} />
             </div>
             : null

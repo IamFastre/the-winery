@@ -36,7 +36,7 @@ export function GoHomeLogo(props:HomeIconProps) {
       <a href={dest} onClick={e => e.preventDefault()}>
         <Image
           alt="the Winery logo; a purple heart suit with a golden spiky hexagram on top"
-          src={getLogo(props.logo ?? "brand")}
+          src={getLogo(props.logo ?? "brand outline")}
           priority
         />
       </a>
