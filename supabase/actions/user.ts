@@ -59,29 +59,46 @@ export async function editProfile(partialUser:{ display_name?: string | null; bi
     .single();
 }
 
-export async function editAvatar(base64Image:string) {
-  // const supabase = createClient();
+export async function editAvatar(base64Image:string | null) {
+  const supabase = createClient();
   const { data:user, error } = await getProfile();
 
   if (!user)
-    // return { data: null, error };
-    return null;
+    return { data: null, error };
 
-  const cropped = (await cropAvatar(base64Image));
+  let url:string | null = null;
 
-  if (!cropped)
-    // return { data: null, error: null };
-    return null;
+  if (base64Image) {
+    const cropped = (await cropAvatar(base64Image));
+    
+    if (!cropped)
+      return { data: null, error: null };
+    
+    const blob = await (await fetch(cropped)).blob();
+    const file = new File([blob], `avatar`, { type: 'image/png' });
 
-  const blob = await (await fetch(cropped)).blob();
-  const file = new File([blob], `${user.identifier}-avatar@256px`, { type: 'image/png' });
+    const res = await supabase.storage
+      .from('profiles')
+      .upload(`${user.identifier}/${file.name}`, file, { contentType: 'image/png', upsert: true });
 
-  // ! TEMPORARY
-  return cropped;
+    if (res.data)
+      url = `${supabase.storage.from('profiles').getPublicUrl(res.data.path).data.publicUrl}?created=${Date.now()}`;
+    else
+      return res;
+  } else {
+    const res = await supabase.storage
+      .from('profiles')
+      .remove([`${user.identifier}/avatar`]);
 
-  // return await supabase.storage
-  //   .from('avatars')
-  //   .upload(file.name, file);
+    if (res.data)
+      url = await getAvatarUrl(user.username);
+    else
+      return res;
+  }
+
+  return await supabase
+    .from('profiles')
+    .update({ avatar: url });
 }
 
 /* ========================================================================== */
