@@ -31,38 +31,42 @@ export function Card(props:CardProps) {
         </MarkDown>
       </Section>
 
-      {
-        props.username ?
-          <div className={styles.caption}>
-            <Image
-              src={props.userAvatar}
-              alt={`${props.username}'s avatar`}
-              width={25}
-              height={25}
-              priority
-            />
-            <div className={styles.author}>
-              <span>
-                <C.QUINARY>
-                  u:
-                </C.QUINARY>
-                <C.ACCENT>
-                  <a href={`/u/${props.username}`}>
+      <div className={styles.caption}>
+        {
+          props.userAvatar ?
+          <Image
+            src={props.userAvatar}
+            alt={`${props.username}'s avatar`}
+            width={32}
+            height={32}
+            priority
+          />
+          : null
+        }
+        <div className={styles.text}>
+          {
+            props.username ?
+              <div className={styles.author}>
+                <a href={`/u/${props.username}`}>
+                  <C.QUINARY>
+                    u:
+                  </C.QUINARY>
+                  <C.ACCENT>
                     {props.username}
-                  </a>
-                </C.ACCENT>
-              </span>
+                  </C.ACCENT>
+                </a>
+              </div>
+            : null
+          }
+          {
+            props.timestamp ?
+            <div className={`${styles.date} ${props.username ? styles.hasUser : ""}`}>
+              <Time timestamp={props.timestamp} />
             </div>
-          </div>
-        : null
-      }
-      {
-        props.timestamp ?
-        <div className={`${styles.date} ${props.username ? styles.hasUser : ""}`}>
-          <Time timestamp={props.timestamp} />
+            : null
+          }
         </div>
-      : null
-      }
+      </div>
     </div>
   );
 }

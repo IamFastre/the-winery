@@ -21,20 +21,23 @@
 
 .caption {
   flex-direction: row;
-  align-items: center;
-  gap: 7.5px;
+  align-items: start;
+  margin-left: 2px;
+  gap: 10px;
 
   > img {
    border-radius: 10%;
   }
 }
 
-.author {
-  font-size: 16px;
+.text {
+  gap: 2px;
 
   a {
+    font-size: 16px;
     font-style: normal;
     text-decoration: none;
+    line-height: 18px;
 
     &:hover, &:focus-visible {
       text-decoration: $quinary underline dotted;
@@ -43,12 +46,9 @@
 }
 
 .date {
-  &.hasUser {
-    margin-top: -12.5px;
-    margin-left: 32.5px;
-  }
-
   span {
+    font-size: 12px;
+    line-height: 12px;
     font-style: italic;
     color: $secondary;
   }
