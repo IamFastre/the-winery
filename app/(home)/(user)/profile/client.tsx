@@ -3,13 +3,14 @@ import { ChangeEventHandler, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { GoPencil, GoTrash } from "react-icons/go";
-import { IoBuildOutline, IoEllipsisHorizontalOutline, IoSaveOutline } from "react-icons/io5";
+import { IoBuildOutline, IoCloseOutline, IoEllipsisHorizontalOutline, IoSaveOutline } from "react-icons/io5";
 
 import { cropAvatar, focusable } from "@/utils";
 import { Bio, Button, C } from "@/components";
-import { editProfile } from "@/supabase/actions/user";
+import { editAvatar, editProfile } from "@/supabase/actions/user";
 import { Database } from "@/supabase/types";
 
+import colors from '@/styles/colors.module.scss';
 import styles from "../styles.module.scss";
 
 
@@ -39,7 +40,15 @@ export function ProfileInfo({ profile }:{ profile:Database['public']['Tables']['
   const [displayName, setDisplayName] = useState<string>(profile.display_name ?? profile.username);
   const [bio, setBio] = useState<string>(profile.bio);
 
+  const changed = !!avatarData || (profile.display_name ?? "") !== displayName || profile.bio !== bio;
   const imgInputRef = useRef<HTMLInputElement>(null);
+
+  const cancel = () => {
+    setEditing(false);
+    setAvatarData(null);
+    setDisplayName(profile.display_name ?? profile.username);
+    setBio(profile.bio);
+  }
 
   const onSubmitImage:ChangeEventHandler<HTMLInputElement> = e => {
     e.preventDefault();
@@ -59,15 +68,18 @@ export function ProfileInfo({ profile }:{ profile:Database['public']['Tables']['
   const handleEditButton = async () => {
     if (editing) {
       if (avatarData)
-        alert("Still working on the avatar thing...");
+        await editAvatar(avatarData);
 
-      if ((profile.display_name ?? "") !== displayName || profile.bio !== bio) {
+      if ((profile.display_name ?? "") !== displayName || profile.bio !== bio)
         await editProfile({ display_name: displayName, bio });
+
+      if (changed) {
+        cancel();
         router.refresh();
       }
+    } else {
+      setEditing(true);
     }
-
-    setEditing(e => !e);
   };
 
   return (
@@ -172,12 +184,15 @@ export function ProfileInfo({ profile }:{ profile:Database['public']['Tables']['
           icon={{ element: editing ? IoSaveOutline : IoBuildOutline }}
           className={styles.button}
           onClick={handleEditButton}
+          disabled={editing && !changed}
           noBrackets
           noMinimum
         />
         <Button
-          icon={{ element: IoEllipsisHorizontalOutline }}
+          icon={{ element: editing ? IoCloseOutline : IoEllipsisHorizontalOutline }}
           className={`${styles.button} ${styles.bigIcon}`}
+          color={editing ? colors.red : colors.accent}
+          onClick={editing ? cancel : undefined}
           iconBackground
           noMinimum
         />
