@@ -12,21 +12,21 @@ export type Database = {
       drafts: {
         Row: {
           author: string | null
-          content: string | null
+          content: string
           id: number
           timestamp: string
           title: string | null
         }
         Insert: {
           author?: string | null
-          content?: string | null
+          content: string
           id?: number
           timestamp?: string
           title?: string | null
         }
         Update: {
           author?: string | null
-          content?: string | null
+          content?: string
           id?: number
           timestamp?: string
           title?: string | null
@@ -47,21 +47,21 @@ export type Database = {
           content: string
           id: number
           timestamp: string
-          title: string
+          title: string | null
         }
         Insert: {
           author?: string | null
           content: string
           id?: number
           timestamp?: string
-          title: string
+          title?: string | null
         }
         Update: {
           author?: string | null
           content?: string
           id?: number
           timestamp?: string
-          title?: string
+          title?: string | null
         }
         Relationships: [
           {

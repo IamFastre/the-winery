@@ -17,14 +17,22 @@ export async function getFeedPosts(amount:number = 5) {
     .order('timestamp', { ascending: false });
 }
 
-export async function getUserPosts(identifier:string) {
+export async function getUserCards(table:'posts' | 'drafts', identifier:string) {
   const supabase = createClient();
 
   return await supabase
-    .from('posts')
+    .from(table)
     .select()
     .eq('author', identifier.toLowerCase())
     .order('timestamp', { ascending: false });
+}
+
+export async function getUserPosts(identifier:string) {
+  return getUserCards('posts', identifier);
+}
+
+export async function getUserDrafts(identifier:string) {
+  return getUserCards('drafts', identifier);
 }
 
 /* ========================================================================== */
