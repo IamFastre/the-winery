@@ -12,11 +12,12 @@ export interface HeaderProps {
   left?: React.ReactNode;
   right?: React.ReactNode;
   noBrackets?: boolean;
+  isCard?: boolean;
 }
 
 export function Header(props:Readonly<HeaderProps>) {
   return (
-    <Section style={{ height: props.height ?? "100px" }}>
+    <Section style={{ height: props.height ?? "100px" }} isCard={props.isCard}>
       <div className={styles.container}>
 
         <div className={styles.children} style={{ left: props.margin ?? 0 }}>

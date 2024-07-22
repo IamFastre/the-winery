@@ -30,7 +30,7 @@
     fill: $quinary;
     stroke: $quinary;
     font-size: 22px;
-    &:hover {
+    &:hover, &:focus-visible {
       fill: $accent;
       stroke: $accent;
     }

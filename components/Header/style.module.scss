@@ -32,5 +32,5 @@
 }
 
 @media screen and (min-width: 787px) {
-  @include styling($font-size: 32px, $small-font-size: 24px);
+  @include styling($font-size: 28px, $small-font-size: 20px);
 }

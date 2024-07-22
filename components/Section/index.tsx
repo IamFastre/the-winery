@@ -5,7 +5,7 @@ import styles from "./style.module.scss";
 
 
 export interface SectionProps {
-  title?: string | React.ReactElement;
+  title?: string | React.ReactElement | null;
   children?: React.ReactNode;
 
   style?: CSS.Properties;

@@ -3,7 +3,6 @@
 .card {
   justify-content: center;
   gap: 10px;
-  min-width: fit-content;
 }
 
 .section {
@@ -16,6 +15,7 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
     &::-webkit-scrollbar { display: none; }
+    word-break: break-word;
   }
 }
 

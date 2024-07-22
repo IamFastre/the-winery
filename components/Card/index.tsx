@@ -9,7 +9,7 @@ import styles from "./style.module.scss";
 
 
 export type CardProps = {
-  title: string;
+  title: string | null;
   content: string;
   timestamp?: number | string;
   className?:string;

@@ -92,7 +92,7 @@ export function Sidebar() {
 
   const Icon = (props:{ icon:IconType; dest?:string; }) => (
     <props.icon
-      className={`${layoutStyles.icon} ${props.dest === current ? layoutStyles.current : ""}`}
+      className={`${layoutStyles.icon} ${current.startsWith(props.dest!) ? layoutStyles.current : ""}`}
       {...focusable(layoutStyles.active, props.dest ? () => goto(props.dest!) : undefined) as {}}
     />
   );
