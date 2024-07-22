@@ -1,14 +1,8 @@
 import { IconType } from "react-icons";
 
-export enum ToastType {
-  info = "info",
-  warning = "warning",
-  error = "error",
-}
-
 export type Toast = {
   message: string;
-  type?: ToastType;
+  type?: "info" | "warning" | "error";
   title?: string;
   icon?: IconType;
   duration?: number;

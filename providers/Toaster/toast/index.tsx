@@ -1,7 +1,7 @@
 import { RiShiningFill } from 'react-icons/ri';
 import { IoSkullSharp, IoWarning } from 'react-icons/io5';
 
-import { Toast as Props, ToastType, ToastWithID } from '../types';
+import { Toast as Props, ToastWithID } from '../types';
 
 import styles from "./style.module.scss";
 
@@ -24,11 +24,11 @@ export function Toast(props:Props) {
       {
         props.icon ?
           <props.icon />
-        : props.type === ToastType.info ?
+        : props.type === "info" ?
           <RiShiningFill />
-        : props.type === ToastType.warning ?
+        : props.type === "warning" ?
           <IoWarning />
-        : props.type === ToastType.error ?
+        : props.type === "error" ?
           <IoSkullSharp />
         : null
       }

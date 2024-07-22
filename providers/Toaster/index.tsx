@@ -1,7 +1,7 @@
 "use client";
 import { useContext, useState } from 'react';
 
-import { ToastType, ToastWithID } from './types';
+import { ToastWithID } from './types';
 import { ToasterContext, ToasterValue } from './context';
 import { ToastHolder } from './toast';
 
@@ -19,7 +19,7 @@ export function Toaster({ children }:{ children:React.ReactNode }) {
 
   const value:ToasterValue = {
     add: (toast) => {
-      const toastWithId = { ...toast, type: toast.type ?? ToastType.info,  id: Date.now() };
+      const toastWithId = { ...toast, type: toast.type ?? "info",  id: Date.now() };
       setToasts(t => [...t, toastWithId]);
 
       setTimeout(() => {
