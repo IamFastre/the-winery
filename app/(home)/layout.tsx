@@ -1,3 +1,4 @@
+import { Toaster } from "@/providers/Toaster";
 import { Sidebar } from "./client";
 import styles from "./layout.module.scss";
 
@@ -8,7 +9,9 @@ export default function HomeLayout({ children }: Readonly<{ children:React.React
       <div className={styles.bar}>
         <Sidebar />
       </div>
-      {children}
+      <Toaster>
+        {children}
+      </Toaster>
     </div>
   );
 }

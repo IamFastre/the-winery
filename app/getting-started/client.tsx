@@ -7,13 +7,14 @@ import { IoWine, IoWineOutline } from "react-icons/io5";
 import { getLogo } from "@/utils";
 import { B, Button, C, RI } from "@/components";
 import { Database } from "@/supabase/types";
+import { useToaster } from "@/providers/Toaster";
 
 import styles from "./styles.module.scss";
 
 export function Content({ profile }: { profile:Database['public']['Tables']['profiles']['Row'] | null }) {
   const router = useRouter();
+  const toaster = useToaster();
 
-  const [showMsg, setShowMsg] = useState<boolean>(false);
   const [clicks, setClicks] = useState<number>(0);
   const [hrtCls, setHrtCls] = useState<string>(styles.icon);
 
@@ -27,12 +28,9 @@ export function Content({ profile }: { profile:Database['public']['Tables']['pro
     }
 
     if (clicks >= 3) {
-      setShowMsg(true);
       setClicks(0);
       setHrtCls(isBeating() ? styles.icon : `${hrtCls} ${styles.beating}`);
-      setTimeout(() => {
-        setShowMsg(false);
-      }, 3000);
+      toaster.add({ message: `Wish ${isBeating() ? "giving someone a cardiac arrest" : "CPR"} was that easy...`});
     }
     }, [clicks]);
 
@@ -104,10 +102,6 @@ export function Content({ profile }: { profile:Database['public']['Tables']['pro
         disabled={!profile?.username}
         noMinimum
       />
-
-      <span style={{ opacity: showMsg ? 1 : 0, transform: showMsg ? "" : "translateY(200%) scale(0)" }} className={styles.msg}>
-        Wish {isBeating() ? "CPR" : "giving someone a cardiac arrest"} was that easy...
-      </span>
     </>
   );
 }

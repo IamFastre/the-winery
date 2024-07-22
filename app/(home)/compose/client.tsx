@@ -2,17 +2,19 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoEyeOutline, IoEye, IoFolderOutline, IoAdd } from "react-icons/io5";
+import XRegExp from "xregexp";
 
 import { createPost, createDraft } from "@/supabase/actions/post";
 import { Section, MarkDown, Button, C } from "@/components";
 import { Database } from "@/supabase/types";
+import { useToaster } from "@/providers/Toaster";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
-import XRegExp from "xregexp";
 
 export function PostEditor({ user, error: userError }:{ user:Database['public']['Tables']['profiles']['Row']; error:boolean; }) {
   const router = useRouter();
+  const toaster = useToaster();
 
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -37,16 +39,20 @@ export function PostEditor({ user, error: userError }:{ user:Database['public'][
     const { error: postError } = await createPost(title, content);
     setError(!!postError);
 
-    if (!postError)
+    if (!postError) {
+      toaster.add({ message: "new post was added successfully." });
       router.push('/');
+    }
   };
 
   const onDraft = async () => {
     const { error: draftError } = await createDraft(title, content);
     setError(!!draftError);
 
-    if (!draftError)
+    if (!draftError) {
+      toaster.add({ message: "new draft was added successfully." });
       router.push('/profile');
+    }
   };
 
   return (

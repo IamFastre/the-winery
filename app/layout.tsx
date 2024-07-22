@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 
 import consts from "@/utils/consts";
 import "@/styles/globals.scss";
+import { Toaster } from "@/providers/Toaster";
 
 
 export const metadata:Metadata = {
@@ -20,7 +21,9 @@ export default function RootLayout({ children }: Readonly<{ children:React.React
   return (
     <html lang="en">
       <body>
-        {children}
+        <Toaster>
+          {children}
+        </Toaster>
       </body>
     </html>
   );
