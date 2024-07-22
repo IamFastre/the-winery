@@ -43,8 +43,8 @@ export function PostEditor({ user, error: userError }:{ user:Database['public'][
     setError(postError as any);
 
     if (!postError) {
-      toaster.add({ message: "New post was added successfully.", icon: IoWine });
-      router.push('/');
+      toaster.add({ message: "Post added", icon: IoWine });
+      router.push('/profile');
     }
   };
 
@@ -53,8 +53,8 @@ export function PostEditor({ user, error: userError }:{ user:Database['public'][
     setError(draftError as any);
 
     if (!draftError) {
-      toaster.add({ message: "New draft was added successfully.", icon: IoFolder });
-      router.push('/profile');
+      toaster.add({ message: "Draft added", icon: IoFolder });
+      router.push('/profile/drafts');
     }
   };
 
