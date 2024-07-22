@@ -1,0 +1,107 @@
+@import '@/styles/colors.module.scss';
+
+@mixin icon($color) {
+  border-color: $color;
+  background-color: color-mix(in srgb, $primary 88%, $color);
+
+  svg {
+    fill: $color;
+    stroke: $color;
+  }
+
+  .title {
+    color: $color;
+  }
+}
+
+@mixin styling($padding, $icon-size, $title-size, $message-size, $bottom: 5px) {
+  .toastHolder {
+    position: absolute;
+    flex-direction: column-reverse;
+    bottom: $bottom;
+    padding-bottom: 15px;
+    align-self: center;
+    align-items: center;
+    max-width: 80%;
+    transition: all 500ms ease-in-out 250ms;
+    gap: 10px;
+    user-select: none;
+    overflow: hidden;
+    transform-origin: bottom;
+  }
+
+  .toast {
+    $padding: 7.5px;
+
+    border-style: solid;
+    border-color: $tertiary;
+    background-color: $quaternary;
+    border-width: 0;
+    border-radius: 5px;
+    border-bottom-width: 2px;
+    min-width: 40px;
+    flex-direction: row;
+    padding: $padding;
+    align-items: center;
+    transition: all 500ms ease-in-out 250ms;
+    transform-origin: bottom;
+    
+    .body {
+      flex: 1;
+      flex-direction: row;
+      color: $quinary;
+      margin-left: $padding;
+      gap: $padding / 2;
+      align-items: baseline;
+      justify-content: start;
+    }
+
+    svg {
+      font-size: $icon-size;
+    }
+
+    .title {
+      font-size: $title-size;
+      font-weight: 900;
+    }
+
+    .message {
+      font-size: $message-size;
+    }
+  }
+
+  @keyframes popIn {
+    from {
+      transform: translateY(100%) scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes popOut {
+    from {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(100%) scale(0);
+      opacity: 0;
+    }
+  }
+
+  .info    { @include icon($highlight); }
+  .warning { @include icon($yellow); }
+  .error   { @include icon($red); }
+}
+
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling($padding: 7.5px, $icon-size: 15px, $title-size: 12px, $message-size: 10px, $bottom: 6px);
+}
+
+@media screen and (min-width: 787px) {
+  @include styling($padding: 10px, $icon-size: 18px, $title-size: 16px, $message-size: 14px, $bottom: 7px);
+}

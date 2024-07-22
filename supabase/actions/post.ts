@@ -1,6 +1,7 @@
 "use server";
 import { createClient } from "@/supabase/server";
 import { getProfile } from "./user";
+import XRegExp from "xregexp";
 
 /* ========================================================================== */
 /*                                   Reading                                  */
@@ -37,6 +38,9 @@ export async function createPost(title:string, content:string) {
   if (!user || error)
     return { data: null, error };
 
+  if (content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 16) 
+    return { data: null, error: {} };
+
   return await supabase
     .from('posts')
     .insert([{ title, content, author: user.identifier }])
@@ -49,6 +53,9 @@ export async function createDraft(title:string, content:string) {
 
   if (!user || error)
     return { data: null, error };
+
+  if (content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 16) 
+    return { data: null, error: {} };
 
   return await supabase
     .from('drafts')
