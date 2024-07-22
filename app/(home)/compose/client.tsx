@@ -1,25 +1,26 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { IoEyeOutline, IoEye, IoFolderOutline, IoAdd } from "react-icons/io5";
+import { IoEyeOutline, IoEye, IoFolderOutline, IoAdd, IoWine, IoFolder } from "react-icons/io5";
 import XRegExp from "xregexp";
 
 import { createPost, createDraft } from "@/supabase/actions/post";
-import { Section, MarkDown, Button, C } from "@/components";
+import { type AuthError, PostgrestError } from "@supabase/supabase-js";
 import { Database } from "@/supabase/types";
+import { Section, MarkDown, Button, C } from "@/components";
 import { useToaster } from "@/providers/Toaster";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
 
-export function PostEditor({ user, error: userError }:{ user:Database['public']['Tables']['profiles']['Row']; error:boolean; }) {
+export function PostEditor({ user, error: userError }:{ user:Database['public']['Tables']['profiles']['Row']; error:AuthError | PostgrestError | null; }) {
   const router = useRouter();
   const toaster = useToaster();
 
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [showPrev, setShowPrev] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(userError);
+  const [error, setError] = useState<AuthError | PostgrestError | null>();
 
   const placeholder = "Change title";
   const input = (
@@ -30,27 +31,29 @@ export function PostEditor({ user, error: userError }:{ user:Database['public'][
       value={title}
       onChange={e => setTitle(e.target.value)}
       onBlur={() => setTitle(t => t.trim())}
-      style={{ width: title ? title.length * 11.72 : placeholder.length * 11.72 }}
+      style={{ width: (title ? title.length : placeholder.length) * 11.72 }}
       autoComplete="off"
     />
   );
 
+  const isOK = content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length >= 16;
+
   const onPost = async () => {
     const { error: postError } = await createPost(title, content);
-    setError(!!postError);
+    setError(postError as any);
 
     if (!postError) {
-      toaster.add({ message: "new post was added successfully." });
+      toaster.add({ message: "New post was added successfully.", icon: IoWine });
       router.push('/');
     }
   };
 
   const onDraft = async () => {
     const { error: draftError } = await createDraft(title, content);
-    setError(!!draftError);
+    setError(draftError as any);
 
     if (!draftError) {
-      toaster.add({ message: "new draft was added successfully." });
+      toaster.add({ message: "New draft was added successfully.", icon: IoFolder });
       router.push('/profile');
     }
   };
@@ -74,7 +77,7 @@ export function PostEditor({ user, error: userError }:{ user:Database['public'][
             name="span"
             placeholder="What's on your mind? (min. 16)"
             value={content}
-            onChange={e => { setContent(e.target.value); setError(false); }}
+            onChange={e => { setContent(e.target.value); setError(null); }}
             onBlur={() => setContent(c => c.trim())}
             autoComplete="off"
           />
@@ -98,7 +101,7 @@ export function PostEditor({ user, error: userError }:{ user:Database['public'][
               {' u:'}
             </C.QUINARY>
             <C.ACCENT>
-              {user.username ?? "<self>"}
+              {user.username}
             </C.ACCENT>
           </span>
         </div>
@@ -107,14 +110,14 @@ export function PostEditor({ user, error: userError }:{ user:Database['public'][
             noMinimum
             icon={{ element: IoFolderOutline }}
             onClick={onDraft}
-            disabled={!user.username}
+            disabled={!(isOK && user.username)}
           />
           <Button
             noMinimum
             title="Post"
             icon={{ element: IoAdd }}
             onClick={onPost}
-            disabled={!user.username}
+            disabled={!(isOK && user.username)}
           />
         </div>
       </div>
@@ -125,11 +128,10 @@ export function PostEditor({ user, error: userError }:{ user:Database['public'][
           Oops...
           <br/>
           {
-            // TODO: Make that ignore MD somehow
-            content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 16 ?
+            !isOK ?
             <>
               <span>
-                That's a really short thought don't you think?
+                That's a really short thought, don't you think?
               </span>
             </>
             :
@@ -140,6 +142,14 @@ export function PostEditor({ user, error: userError }:{ user:Database['public'][
               <br/>
               <span>
                 if that didn't work <a href="https://github.com/IamFastre/the-winery/issues">fill a Github issue</a>.
+                {
+                  Object.keys(error).length ?
+                  <>
+                    <br/>
+                    {JSON.stringify(error)}
+                  </>
+                  : null
+                }
               </span>
             </>
           }

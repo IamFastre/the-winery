@@ -22,12 +22,14 @@ export function Toast(props:Props) {
       style={{ animation: `${styles.popIn} 1s ease-out, ${styles.popOut} 1s ease-in ${(props?.duration ?? 6000) - 750}ms`}}
     >
       {
-        props.type === ToastType.info ?
-        <RiShiningFill />
+        props.icon ?
+          <props.icon />
+        : props.type === ToastType.info ?
+          <RiShiningFill />
         : props.type === ToastType.warning ?
-        <IoWarning />
+          <IoWarning />
         : props.type === ToastType.error ?
-        <IoSkullSharp />
+          <IoSkullSharp />
         : null
       }
       <div className={styles.body}>

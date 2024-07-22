@@ -31,34 +31,28 @@ export async function getUserPosts(identifier:string) {
 /*                                   Writing                                  */
 /* ========================================================================== */
 
-export async function createPost(title:string, content:string) {
+export async function createCard(table:'posts' | 'drafts', title:string | null, content:string) {
   const supabase = createClient();
   const { data:user, error } = await getProfile();
 
   if (!user || error)
     return { data: null, error };
 
-  if (content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 16) 
+  if (content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 16)
     return { data: null, error: {} };
 
+  title = title?.length ? title : null;
+
   return await supabase
-    .from('posts')
+    .from(table)
     .insert([{ title, content, author: user.identifier }])
     .select();
 }
 
+export async function createPost(title:string, content:string) {
+  return await createCard('posts', title, content)
+}
+
 export async function createDraft(title:string, content:string) {
-  const supabase = createClient();
-  const { data:user, error } = await getProfile();
-
-  if (!user || error)
-    return { data: null, error };
-
-  if (content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 16) 
-    return { data: null, error: {} };
-
-  return await supabase
-    .from('drafts')
-    .insert([{ title, content, author: user.identifier }])
-    .select();
+  return await createCard('drafts', title, content)
 }

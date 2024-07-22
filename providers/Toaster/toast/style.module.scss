@@ -16,6 +16,7 @@
 
 @mixin styling($padding, $icon-size, $title-size, $message-size, $bottom: 5px) {
   .toastHolder {
+    pointer-events: none;
     position: absolute;
     flex-direction: column-reverse;
     bottom: $bottom;

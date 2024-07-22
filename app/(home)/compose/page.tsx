@@ -21,7 +21,7 @@ export default async function ComposePage() {
       </div>
       <PostEditor
         user={user}
-        error={!!error}
+        error={error}
       />
     </Section>
   );
