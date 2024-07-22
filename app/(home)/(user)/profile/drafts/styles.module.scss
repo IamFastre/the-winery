@@ -31,9 +31,23 @@
     padding: 15px 7.5%;
     gap: 30px;
 
-    > div {
-      > div:nth-child(1) {
+    > a {
+      display: flex;
+      color: inherit;
+      font-style: inherit;
+      text-decoration: inherit;
+      text-decoration-style: inherit;
+
+      &:hover, &:focus-visible {
+        font-weight: inherit;
+        text-decoration-style: inherit;
+      }
+
+      > div {
         flex: 1;
+        > div:nth-child(1) {
+          flex: 1;
+        }
       }
     }
   }

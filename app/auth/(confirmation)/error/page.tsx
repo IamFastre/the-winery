@@ -9,7 +9,7 @@ import { createClient } from "@/supabase/admin";
 import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
 
-export default async function CheckMailPage({ searchParams }:{searchParams: { [key: string]: string | string[] | undefined }}) {
+export default async function MailErrorPage({ searchParams }:{searchParams: { [key: string]: string | string[] | undefined }}) {
   const supabase = createClient();
   let  user = searchParams.uuid
              ? (await supabase.from('profiles').select('username, email, id').eq('id', searchParams.uuid).single()).data ?? "bad" as const

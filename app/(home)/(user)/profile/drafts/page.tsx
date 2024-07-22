@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 
 import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
@@ -30,13 +31,14 @@ export default async function DraftsPage() {
       <div className={styles.cardsHolder}>
         <div className={styles.cards}>
           {drafts.map(draft => (
-            <Card
-              title={draft.title}
-              content={draft.content}
-              timestamp={draft.timestamp}
-              key={draft.id}
-              centered
-            />
+            <Link href={`/compose?draft=${draft.id}`} key={draft.id}>
+              <Card
+                title={draft.title}
+                content={draft.content}
+                timestamp={draft.timestamp}
+                centered
+              />
+            </Link>
           ))}
         </div>
       </div>
