@@ -17,7 +17,9 @@ export async function getFeedPosts(amount:number = 5) {
     .order('timestamp', { ascending: false });
 }
 
-export async function getUserCards(table:'posts' | 'drafts', identifier:string) {
+/* ========================================================================== */
+
+async function getUserCards(table:'posts' | 'drafts', identifier:string) {
   const supabase = createClient();
 
   return await supabase
@@ -36,20 +38,66 @@ export async function getUserDrafts(identifier:string) {
 }
 
 /* ========================================================================== */
+
+async function getCard(table:'posts' | 'drafts', id:number) {
+  const supabase = createClient();
+
+  return await supabase
+    .from(table)
+    .select()
+    .eq('id', id)
+    .single();
+}
+
+export async function getPost(id:number) {
+  return getCard('posts', id);
+}
+
+export async function getDraft(id:number) {
+  return getCard('drafts', id);
+}
+
+/* ========================================================================== */
+/*                                  Updating                                  */
+/* ========================================================================== */
+
+async function editCard(table:'posts' | 'drafts', id:number, title:string | null, content:string) {
+  const supabase = createClient();
+
+  title = title?.length ? title : null;
+  if (content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 16)
+    return { data: null, error: {} };
+
+  return await supabase
+    .from(table)
+    .update({ title, content })
+    .eq('id', id)
+    .select()
+    .single();
+}
+
+// export async function editPost(id:number, title:string | null, content:string) {
+//   return editCard('posts', id, title, content);
+// }
+
+export async function editDraft(id:number, title:string | null, content:string) {
+  return editCard('drafts', id, title, content);
+}
+
+/* ========================================================================== */
 /*                                   Writing                                  */
 /* ========================================================================== */
 
-export async function createCard(table:'posts' | 'drafts', title:string | null, content:string) {
+async function createCard(table:'posts' | 'drafts', title:string | null, content:string) {
   const supabase = createClient();
   const { data:user, error } = await getProfile();
 
   if (!user || error)
     return { data: null, error };
 
+  title = title?.length ? title : null;
   if (content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 16)
     return { data: null, error: {} };
-
-  title = title?.length ? title : null;
 
   return await supabase
     .from(table)
@@ -63,4 +111,27 @@ export async function createPost(title:string, content:string) {
 
 export async function createDraft(title:string, content:string) {
   return await createCard('drafts', title, content)
+}
+
+/* ========================================================================== */
+/*                                  Deleting                                  */
+/* ========================================================================== */
+
+async function deleteCard(table:'posts' | 'drafts', id:number) {
+  const supabase = createClient();
+
+  return await supabase
+    .from(table)
+    .delete()
+    .eq('id', id)
+    .select()
+    .single();
+}
+
+// export async function deletePost(id:number) {
+//   return deleteCard('posts', id);
+// }
+
+export async function deleteDraft(id:number) {
+  return deleteCard('drafts', id);
 }

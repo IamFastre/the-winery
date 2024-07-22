@@ -1,7 +1,7 @@
 import type { Session, User } from "@supabase/supabase-js";
 import type { ErrorCode } from "@supabase/auth-js/src/lib/error-codes";
 import type { getProfile, getPublicProfile } from "./user";
-import type { getFeedPosts } from "./post";
+import type { getDraft, getPost } from "./post";
 
 export interface AuthError {
   name: string,
@@ -17,4 +17,5 @@ export interface AuthData {
 
 export type PublicProfile = NonNullable<Awaited<ReturnType<typeof getPublicProfile>>['data']>;
 export type Profile = NonNullable<Awaited<ReturnType<typeof getProfile>>['data']>;
-export type Post = NonNullable<Awaited<ReturnType<typeof getFeedPosts>>['data']>[number];
+export type Post = NonNullable<Awaited<ReturnType<typeof getPost>>['data']>;
+export type Draft = NonNullable<Awaited<ReturnType<typeof getDraft>>['data']>;
