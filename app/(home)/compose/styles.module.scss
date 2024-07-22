@@ -1,123 +1,134 @@
 @import '@/styles/colors.module.scss';
 
-.sectionContent {
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  gap: 30px;
-}
-
-.title {
-  span {
-    font-size: 22px;
-    color: $quinary;
+@mixin styling($action-height, $posting-as-size, $action-font-size) {
+  .sectionContent {
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    gap: 30px;
   }
 
-  hr {
-    border-color: $accent;
-    margin-top: 5px;
-  }
-}
+  .title {
+    span {
+      font-size: 22px;
+      color: $quinary;
+    }
 
-.post {
-  width: 800px;
-  max-width: 90%;
-  gap: 10px;
-}
-
-.card {
-  min-height: 400px;
-  max-height: 80%;
-}
-
-$padding: 20px;
-
-.cardContent {
-  padding: $padding !important;
-
-  > textarea {
-    flex: 1;
-    margin-top: 10px;
-    resize: none;
-    caret-color: $accent;
-  }
-
-  > div {
-    flex: 1;
-  }
-}
-
-.showPrev {
-  user-select: none;
-  transform: scale(0.8);
-  transform-origin: bottom right;
-  position: absolute;
-  right: $padding;
-  bottom: $padding;
-  padding: 2.5px;
-  border-radius: 50%;
-}
-
-.footer {
-  align-self: stretch;
-  flex-direction: row;
-}
-
-.asUser {
-  flex: 1;
-
-  > span {
-    user-select: none;
-    font-size: 12px;
-  }
-}
-
-.actions {
-  flex: 1;
-  flex-direction: row;
-  align-self: flex-end;
-  justify-content: flex-end;
-  gap: 5px;
-  height: 35px;
-
-  > div {
-    > div:nth-child(1) { width: 33px; }
-    > div:nth-child(2) { font-size: 12px; }
-  }
-}
-
-.error {
-  color: $secondary;
-  font-size: 14px;
-  animation: showUp 1s ease-in-out;
-
-  > span {
-    color: inherit;
-
-    &::before {
-      content: "..";
-      color: $none;
+    hr {
+      border-color: $accent;
+      margin-top: 5px;
     }
   }
 
-  &::before {
-    content: "× ";
-    color: $red;
+  .post {
+    width: 800px;
+    max-width: 90%;
+    gap: 10px;
+  }
+
+  .card {
+    min-height: 400px;
+    max-height: 80%;
+  }
+
+  $padding: 20px;
+
+  .cardContent {
+    padding: $padding !important;
+
+    > textarea {
+      flex: 1;
+      margin-top: 10px;
+      resize: none;
+      caret-color: $accent;
+    }
+
+    > div {
+      flex: 1;
+    }
+  }
+
+  .showPrev {
+    user-select: none;
+    transform: scale(0.8);
+    transform-origin: bottom right;
+    position: absolute;
+    right: $padding;
+    bottom: $padding;
+    padding: 2.5px;
+    border-radius: 50%;
+  }
+
+  .footer {
+    align-self: stretch;
+    flex-direction: row;
+  }
+
+  .asUser {
+    flex: 1;
+
+    > span {
+      user-select: none;
+      font-size: $posting-as-size;
+    }
+  }
+
+  .actions {
+    flex: 1;
+    flex-direction: row;
+    align-self: flex-end;
+    justify-content: flex-end;
+    gap: 5px;
+    height: $action-height;
+
+    > div {
+      > div:nth-child(1) { width: $action-height - 2px; }
+      > div:nth-child(2) { font-size: $action-font-size; }
+    }
+  }
+
+  .error {
+    color: $secondary;
+    font-size: 14px;
+    animation: showUp 1s ease-in-out;
+
+    > span {
+      color: inherit;
+
+      &::before {
+        content: "..";
+        color: $none;
+      }
+    }
+
+    &::before {
+      content: "× ";
+      color: $red;
+    }
+  }
+
+  @keyframes showUp {
+    0% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    80% {
+      transform: translateX(100px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }
 
-@keyframes showUp {
-  0% {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling($action-height: 30px, $posting-as-size: 10px, $action-font-size: 12px);
+}
 
-  80% {
-    transform: translateX(100px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+@media screen and (min-width: 787px) {
+  @include styling($action-height: 35px, $posting-as-size: 12px, $action-font-size: 12px);
 }
