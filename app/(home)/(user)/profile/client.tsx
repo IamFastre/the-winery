@@ -8,7 +8,7 @@ import { IoBuildOutline, IoCloseOutline, IoEllipsisHorizontalOutline, IoSaveOutl
 import { cropAvatar, focusable } from "@/utils";
 import { Bio, Button, C } from "@/components";
 import { editAvatar, editProfile } from "@/supabase/actions/user";
-import { Database } from "@/supabase/types";
+import { Profile } from "@/supabase/actions/types";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "../styles.module.scss";
@@ -32,7 +32,7 @@ const LabelTitle = ({ title, subtitle }:{ title:string; subtitle?:string; }) => 
   );
 };
 
-export function ProfileInfo({ profile }:{ profile:Database['public']['Tables']['profiles']['Row'] }) {
+export function ProfileInfo({ profile }:{ profile:Profile }) {
   const router = useRouter();
 
   const [editing, setEditing] = useState<boolean>(false);
@@ -42,6 +42,10 @@ export function ProfileInfo({ profile }:{ profile:Database['public']['Tables']['
 
   const changed = !!avatarData || (profile.display_name ?? "") !== displayName || profile.bio !== bio;
   const imgInputRef = useRef<HTMLInputElement>(null);
+
+  const toDrafts = () => {
+    router.push('/profile/drafts');
+  }
 
   const cancel = () => {
     setEditing(false);
@@ -192,7 +196,7 @@ export function ProfileInfo({ profile }:{ profile:Database['public']['Tables']['
           icon={{ element: editing ? IoCloseOutline : IoEllipsisHorizontalOutline }}
           className={`${styles.button} ${styles.bigIcon}`}
           color={editing ? colors.red : colors.accent}
-          onClick={editing ? cancel : undefined}
+          onClick={editing ? cancel : toDrafts}
           iconBackground
           noMinimum
         />
