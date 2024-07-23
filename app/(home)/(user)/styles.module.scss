@@ -272,6 +272,25 @@
       }
     }
   }
+
+  .noCards {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    user-select: none;
+
+    svg {
+      font-size: 50px;
+      fill: $secondary;
+      stroke: $secondary;
+    }
+
+    span {
+      color: $secondary;
+      font-style: italic;
+    }
+  }
 }
 
 @media screen and (min-width: 0px)

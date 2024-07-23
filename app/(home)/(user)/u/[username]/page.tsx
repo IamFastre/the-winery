@@ -4,10 +4,10 @@ import Image from "next/image";
 import { getPublicProfile } from "@/supabase/actions/user";
 import { getUserPosts } from "@/supabase/actions/post";
 import { Section } from "@/components/Section";
-import { B, C } from "@/components/C";
-import { Card } from "@/components/Card";
+import { C } from "@/components/C";
 import { Bio } from "@/components/Bio";
 
+import { CardList } from "../../server";
 import { DataBox } from "../../client";
 import styles from "../../styles.module.scss";
 
@@ -68,19 +68,7 @@ export default async function UserPage({ params }:Props) {
         <DataBox cards={posts.length} joined={profile.created_at} />
       </div>
       <hr/>
-      <div className={styles.cardsHolder}>
-        <div className={styles.cards}>
-          {posts.map(post => (
-            <Card
-              title={post.title}
-              content={post.content}
-              timestamp={post.timestamp}
-              key={post.id}
-              centered
-            />
-          ))}
-        </div>
-      </div>
+      <CardList posts={posts} />
     </Section>
   );
 }

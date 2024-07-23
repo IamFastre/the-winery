@@ -5,6 +5,7 @@ import { Section } from "@/components/Section";
 import { getUserPosts } from "@/supabase/actions/post";
 import { getProfile } from "@/supabase/actions/user";
 
+import { CardList } from "../server";
 import { DataBox } from "../client";
 import { ProfileInfo } from "./client";
 import styles from "../styles.module.scss";
@@ -28,19 +29,7 @@ export default async function UserPage() {
         <DataBox cards={posts.length} joined={profile.created_at} />
       </div>
       <hr/>
-      <div className={styles.cardsHolder}>
-        <div className={styles.cards}>
-          {posts.map(post => (
-            <Card
-              title={post.title}
-              content={post.content}
-              timestamp={post.timestamp}
-              key={post.id}
-              centered
-            />
-          ))}
-        </div>
-      </div>
+      <CardList posts={posts} />
     </Section>
   );
 }
