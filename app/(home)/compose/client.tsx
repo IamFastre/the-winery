@@ -44,7 +44,7 @@ const Editor = (props:{ title:string; content:string; show:boolean; setShow:Stat
       :
       <textarea
         name="span"
-        placeholder="What's on your mind? (min. 16)"
+        placeholder="What's on your mind? (min. 8)"
         value={props.content}
         onChange={e => { props.setContent(e.target.value); props.setError(null); }}
         onBlur={() => props.setContent(c => c.trim())}
@@ -120,7 +120,7 @@ export function PostEditor({ user }:{ user:Profile; }) {
   const [showPrev, setShowPrev] = useState<boolean>(false);
   const [error, setError] = useState<AuthError | PostgrestError | null>();
 
-  const isOK = content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length >= 16;
+  const isOK = content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length >= 8;
 
   const onPost = async () => {
     const { error: postError } = await createPost(title, content);
@@ -185,7 +185,7 @@ export function DraftEditor({ user, draft }:{ user:Profile; draft:Draft; }) {
   const [showPrev, setShowPrev] = useState<boolean>(true);
   const [error, setError] = useState<AuthError | PostgrestError | null>();
 
-  const isOK = content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length >= 16;
+  const isOK = content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length >= 8;
 
   const onPost = async () => {
     const { error: postError } = await createPost(title, content);

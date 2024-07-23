@@ -65,7 +65,7 @@ async function editCard(table:'posts' | 'drafts', id:number, title:string | null
   const supabase = createClient();
 
   title = title?.length ? title : null;
-  if (content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 16)
+  if (content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 8)
     return { data: null, error: {} };
 
   return await supabase
@@ -96,7 +96,7 @@ async function createCard(table:'posts' | 'drafts', title:string | null, content
     return { data: null, error };
 
   title = title?.length ? title : null;
-  if (content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 16)
+  if (content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 8)
     return { data: null, error: {} };
 
   return await supabase
