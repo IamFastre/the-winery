@@ -4,7 +4,7 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 
 import { signIn } from "@/supabase/actions/user";
 import { AuthError } from "@/supabase/actions/types";
-import { Button, C, GoHomeLogo, Section } from "@/components";
+import { Button, C, GoHomeLogo, LabelTitle, Section } from "@/components";
 import { useGoTo } from "@/hooks";
 
 import colors from '@/styles/colors.module.scss';
@@ -17,17 +17,6 @@ const checkEmail = (str:string) : boolean => {
 
     return /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/i
            .test(str);
-}
-
-const LabelTitle = ({ title }:{ title:string }) => {
-  return (
-    <span>
-      <C.ACCENT>
-        {'> '}
-      </C.ACCENT>
-      {title}
-    </span>
-  );
 }
 
 const PasswordChecker = ({ password }:{ password:string; }) => {

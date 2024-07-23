@@ -5,7 +5,7 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import { multiplyString } from "@/utils";
 import { signUp } from "@/supabase/actions/user";
 import { AuthError } from "@/supabase/actions/types";
-import { Button, C, GoHomeLogo, Section } from "@/components";
+import { Button, C, GoHomeLogo, LabelTitle, Section } from "@/components";
 import { useGoTo } from "@/hooks";
 
 import colors from '@/styles/colors.module.scss';
@@ -36,26 +36,7 @@ const checkPassword = (str:string) : boolean => {
          .test(str);
 };
 
-const LabelTitle = ({ title, subtitle }:{ title:string; subtitle?:string; }) => {
-  return (
-    <span>
-      <C.ACCENT>
-        {'> '}
-      </C.ACCENT>
-      {title}
-      {
-        subtitle ?
-          <C.SECONDARY style={{ fontSize: 12 }}>
-            {` (${subtitle})`}
-          </C.SECONDARY>
-      : null
-      }
-    </span>
-  );
-};
-
 const UsernameChecker = ({ username }:{ username:string; }) => {
-
   return (
     <div className={styles.badInput}>
       <span className={/^[0-9a-zA-Z_\-]*$/.test(username) ? styles.good : styles.bad}>

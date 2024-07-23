@@ -6,31 +6,13 @@ import { GoPencil, GoTrash } from "react-icons/go";
 import { IoBuildOutline, IoCloseOutline, IoEllipsisHorizontalOutline, IoSaveOutline } from "react-icons/io5";
 
 import { cropAvatar, focusable } from "@/utils";
-import { Bio, Button, C } from "@/components";
+import { Bio, Button, C, LabelTitle } from "@/components";
 import { editAvatar, editProfile } from "@/supabase/actions/user";
 import { Profile } from "@/supabase/actions/types";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "../styles.module.scss";
 
-
-const LabelTitle = ({ title, subtitle }:{ title:string; subtitle?:string; }) => {
-  return (
-    <span>
-      <C.ACCENT>
-        {'> '}
-      </C.ACCENT>
-      {title}
-      {
-        subtitle ?
-          <C.SECONDARY style={{ fontSize: 12 }}>
-            {` (${subtitle})`}
-          </C.SECONDARY>
-        : null
-      }
-    </span>
-  );
-};
 
 export function ProfileInfo({ profile }:{ profile:Profile }) {
   const router = useRouter();
