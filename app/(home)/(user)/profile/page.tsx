@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 
-import { Card } from "@/components/Card";
 import { Section } from "@/components/Section";
 import { getUserPosts } from "@/supabase/actions/post";
 import { getProfile } from "@/supabase/actions/user";

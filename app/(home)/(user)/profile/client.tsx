@@ -1,23 +1,54 @@
 'use client';
-import { ChangeEventHandler, useRef, useState } from "react";
+import { ChangeEventHandler, Fragment, MouseEventHandler, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { IconType } from "react-icons";
 import { GoPencil, GoTrash } from "react-icons/go";
 import { IoBuildOutline, IoCloseOutline, IoEllipsisHorizontalOutline, IoSaveOutline } from "react-icons/io5";
 
 import { cropAvatar, focusable } from "@/utils";
-import { Bio, Button, C, LabelTitle } from "@/components";
+import { Bio, Button, C, LabelTitle, Section } from "@/components";
 import { editAvatar, editProfile } from "@/supabase/actions/user";
 import { Profile } from "@/supabase/actions/types";
 
 import colors from '@/styles/colors.module.scss';
+import profileStyles from "./styles.module.scss";
 import styles from "../styles.module.scss";
 
+type Option = { title:string; icon?: IconType; action?:MouseEventHandler<HTMLDivElement>; };
+
+function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEventHandler<HTMLDivElement>; }) {
+  return (
+    <div className={profileStyles.overlay}>
+      <div className={profileStyles.background} />
+      <Section className={profileStyles.menu} containerClassName={profileStyles.menuContainer}>
+        {options.map(o => (
+          <Fragment key={o.title}>
+            <div className={profileStyles.option} onClick={o.action}>
+              { o.icon ? <o.icon /> : null }
+              <div>
+                <span>{o.title}</span>
+              </div>
+            </div>
+            <hr/>
+          </Fragment>
+        ))}
+        <Button
+          title="Close"
+          className={profileStyles.closeButton}
+          onClick={close}
+          noBrackets
+        />
+      </Section>
+    </div>
+  );
+}
 
 export function ProfileInfo({ profile }:{ profile:Profile }) {
   const router = useRouter();
 
   const [editing, setEditing] = useState<boolean>(false);
+  const [showOptions, setShowOptions] = useState<boolean>(false);
   const [avatarData, setAvatarData] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState<string>(profile.display_name ?? profile.username);
   const [bio, setBio] = useState<string>(profile.bio);
@@ -25,8 +56,12 @@ export function ProfileInfo({ profile }:{ profile:Profile }) {
   const changed = !!avatarData || (profile.display_name ?? "") !== displayName || profile.bio !== bio;
   const imgInputRef = useRef<HTMLInputElement>(null);
 
-  const toDrafts = () => {
-    router.push('/profile/drafts');
+  const openMenu = () => {
+    setShowOptions(true);
+  }
+
+  const closeMenu = () => {
+    setShowOptions(false);
   }
 
   const cancel = () => {
@@ -178,11 +213,21 @@ export function ProfileInfo({ profile }:{ profile:Profile }) {
           icon={{ element: editing ? IoCloseOutline : IoEllipsisHorizontalOutline }}
           className={`${styles.button} ${styles.bigIcon}`}
           color={editing ? colors.red : colors.accent}
-          onClick={editing ? cancel : toDrafts}
+          onClick={editing ? cancel : openMenu}
           iconBackground
           noMinimum
         />
       </div>
+      {
+        showOptions ?
+        <ProfileOptions
+          options={[
+            { title: "Drafts", icon: IoSaveOutline, action: e => router.push('/profile/drafts') },
+          ]}
+          close={closeMenu}
+        />
+        : null
+      }
     </>
   );
 }

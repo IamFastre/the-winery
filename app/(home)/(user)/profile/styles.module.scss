@@ -1,0 +1,104 @@
+@import '@/styles/colors.module.scss';
+
+@mixin styling() {
+  $time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    transition: all 500ms $time-func;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba($primary, 0.5);
+  }
+
+  .menu {
+    min-width: fit-content;
+    width: 200px;
+    max-width: 80%;
+    min-height: fit-content;
+
+    hr {
+      width: auto;
+      align-self: stretch;
+      margin: 10px 0;
+
+      &::after {
+        content: none;
+      }
+    }
+  }
+
+  .menuContainer {
+    padding: 15px 15px !important;
+    align-items: stretch;
+  }
+
+  .option {
+    user-select: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 40px;
+    padding: 10px 0;
+    background-color: rgba($secondary, 0.1);
+
+    svg {
+      position: relative;
+      left: 5px;
+      font-size: 20px;
+      fill: $primary;
+      stroke: $primary;
+      background-color: $accent;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    > div {
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &:hover, &:focus-visible {
+      background-color: rgba($secondary, 0.15);
+      span {
+        font-weight: bold;
+      }
+    }
+
+    &:active, .active {
+      background-color: rgba($secondary, 0.3);
+    }
+  }
+
+  .closeButton {
+    align-self: stretch;
+    margin-top: 5px;
+    padding: 5px 0;
+    font-size: smaller;
+  }
+}
+
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling();
+}
+
+@media screen and (min-width: 787px) {
+  @include styling();
+}
