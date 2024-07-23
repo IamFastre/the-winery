@@ -8,4 +8,4 @@ export type Toast = {
   duration?: number;
 };
 
-export type ToastWithID = Toast & { id: number };
+export type ToastWithID = Toast & { duration:number; id: number; };

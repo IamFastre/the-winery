@@ -1,7 +1,7 @@
 import { RiShiningFill } from 'react-icons/ri';
 import { IoSkullSharp, IoWarning } from 'react-icons/io5';
 
-import { Toast as Props, ToastWithID } from '../types';
+import { ToastWithID } from '../types';
 
 import styles from "./style.module.scss";
 
@@ -15,11 +15,14 @@ export function ToastHolder({ toasts }:{ toasts:ToastWithID[] }) {
   );
 }
 
-export function Toast(props:Props) {
+export function Toast(props:ToastWithID) {
+  const deathDur = 500;
+  const animation = `${styles.popIn} 1s ease-out, ${styles.popOut} ${deathDur}ms ease-in ${props.duration - deathDur}ms forwards`;
+
   return (
     <div
       className={`${styles.toast} ${styles[props.type!]}`}
-      style={{ animation: `${styles.popIn} 1s ease-out, ${styles.popOut} 1s ease-in ${(props?.duration ?? 6000) - 750}ms`}}
+      style={{ animation}}
     >
       {
         props.icon ?
