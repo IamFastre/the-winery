@@ -18,10 +18,14 @@ import styles from "../styles.module.scss";
 type Option = { title:string; icon?: IconType; action?:MouseEventHandler<HTMLDivElement>; };
 
 function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEventHandler<HTMLDivElement>; }) {
+  const [dying, setDying] = useState<boolean>(false);
+  const duration = 500;
+  const animation = `${profileStyles.death} ${duration}ms ease-in-out forwards`;
+
   return (
     <div className={profileStyles.overlay}>
-      <div className={profileStyles.background} />
-      <Section className={profileStyles.menu} containerClassName={profileStyles.menuContainer}>
+      <div className={profileStyles.background} style={{ animation: dying ? animation : "" }} />
+      <Section className={profileStyles.menu} containerClassName={profileStyles.menuContainer} style={{ animation: dying ? animation : "" }}>
         {options.map(o => (
           <Fragment key={o.title}>
             <div className={profileStyles.option} onClick={o.action}>
@@ -36,7 +40,13 @@ function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEvent
         <Button
           title="Close"
           className={profileStyles.closeButton}
-          onClick={close}
+          onClick={e => {
+            setDying(true);
+            setTimeout(() => {
+              close(e);
+              setDying(false);
+            }, duration);
+          }}
           noBrackets
         />
       </Section>

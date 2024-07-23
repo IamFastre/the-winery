@@ -22,6 +22,8 @@
     left: 0;
     right: 0;
     background-color: rgba($primary, 0.5);
+    backdrop-filter: blur(5px);
+    animation: birth 500ms ease-in-out;
   }
 
   .menu {
@@ -29,6 +31,7 @@
     width: 200px;
     max-width: 80%;
     min-height: fit-content;
+    animation: birth 500ms ease-in-out;
 
     hr {
       width: auto;
@@ -39,6 +42,16 @@
         content: none;
       }
     }
+  }
+
+  @keyframes birth {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes death {
+    from { opacity: 1; }
+    to   { opacity: 0; }
   }
 
   .menuContainer {
