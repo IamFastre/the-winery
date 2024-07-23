@@ -71,27 +71,6 @@
     height: 50px;
   }
 
-  .msg {
-    display: block;
-    border-style: solid;
-    border-color: $highlight;
-    border-width: 0;
-    border-bottom-width: 2px;
-    background-color: $lowlight;
-    padding: 7.5px;
-    max-width: 80%;
-    color: $quinary;
-    text-align: center;
-    position: fixed;
-    bottom: 40px;
-    transition: all 500ms $time-func 250ms;
-
-    &::before {
-      color: $highlight;
-      content: "◈ ";
-    }
-  }
-
   @keyframes beat {
     0% {
       filter: $shadow;
