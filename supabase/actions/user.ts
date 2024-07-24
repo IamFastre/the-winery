@@ -8,6 +8,8 @@ import { AuthData, AuthError } from "./types";
 /*                                   Reading                                  */
 /* ========================================================================== */
 
+const publicProfile = "username, display_name, identifier, avatar, bio, created_at";
+
 export async function getProfile() {
   const supabase = createClient();
   const { data: { user }, error } = await supabase.auth.getUser();
@@ -27,9 +29,18 @@ export async function getPublicProfile(identifier:string) {
 
   return await supabase
     .from('profiles')
-    .select('username, display_name, avatar, bio, created_at')
+    .select(publicProfile)
     .eq('identifier', identifier.toLowerCase())
     .single();
+}
+
+export async function searchProfiles(query:string) {
+  const supabase = createClient();
+
+  return await supabase
+    .from('profiles')
+    .select(publicProfile)
+    .ilike('username_displayname', `%${query.toLowerCase()}%`);
 }
 
 /* ========================================================================== */

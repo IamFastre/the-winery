@@ -83,6 +83,7 @@ export type Database = {
           id: string
           identifier: string
           username: string
+          username_displayname: string | null
         }
         Insert: {
           avatar: string
@@ -119,7 +120,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      username_displayname: {
+        Args: {
+          "": unknown
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
