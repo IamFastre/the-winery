@@ -1,5 +1,22 @@
 @import '@/styles/colors.module.scss';
 
+@mixin message($icon-color, $text-color, $icon-size: 50px) {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    font-size: $icon-size;
+    fill: $icon-color;
+    stroke: $icon-color;
+  }
+
+  span {
+    color: $text-color;
+    font-style: italic;
+  }
+}
+
 @mixin styling($searcher-margin, $input-height, $user-padding, $avatar-size, $sep-width) {
   .sectionContainer {
     align-items: stretch;
@@ -82,22 +99,10 @@
     }
   }
 
-  .hint {
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-
-    svg {
-      font-size: 50px;
-      fill: $secondary;
-      stroke: $secondary;
-    }
-
-    span {
-      color: $secondary;
-      font-style: italic;
-    }
-  }
+  .loading { flex: 1; align-items: center; justify-content: center; }
+  .hint { @include message($secondary, $secondary); }
+  .error { @include message($red, $secondary); }
+  .noResult { @include message($secondary, $accent, $icon-size: 40px); }
 }
 
 @media screen and (min-width: 0px)

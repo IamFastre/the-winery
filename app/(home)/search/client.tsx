@@ -1,16 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import { IoCloseCircleOutline, IoSadOutline, IoSearch, IoSearchCircleOutline } from "react-icons/io5";
+import Link from "next/link";
+import Image from "next/image";
 
-import { Button, C, Section } from "@/components";
+import { humanizeTime } from "@/utils";
+import { Button, C, LoadingText, Section } from "@/components";
+import { PublicProfile } from "@/supabase/actions/types";
+import { searchProfiles } from "@/supabase/actions/user";
+import { useHydration } from "@/hooks";
 
 import styles from "./styles.module.scss";
-import { IoSearch, IoSearchCircleOutline } from "react-icons/io5";
-import { Profile } from "@/supabase/actions/types";
-import Image from "next/image";
-import { humanizeTime } from "@/utils";
-import { useHydration } from "@/hooks";
-import Link from "next/link";
 
 
 const setQuery = (value:string) => {
@@ -19,7 +20,7 @@ const setQuery = (value:string) => {
   return params.toString();
 };
 
-const Result = ({ user }:{ user:Profile; }) => {
+const Result = ({ user }:{ user:PublicProfile; }) => {
   const hydrated = useHydration();
   return (
     <Link href={`/u/${user.username}`} id="wrapper">
@@ -62,24 +63,38 @@ export function Searcher() {
   const initialQ = useSearchParams().get('q') ?? "";
   const [q, setQ] = useState<string>(initialQ);
   const [search, setSearch] = useState<string>(q);
+  const [results, setResults] = useState<PublicProfile[] | null>(null);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
-    window.history.pushState(null, '', q.length ? `?${setQuery(q)}` : path);
+    if (q.length)
+      onSubmit();
+  }, []);
+
+  useEffect(() => {
+    window.history.pushState(null, '', (q.length ? `?${setQuery(q)}` : path));
   }, [q]);
 
-  const onSubmit = () => {
-    setQ(search);
+  const onSubmit = async () => {
+    const query = search;
+    setQ(query);
+    setResults(null);
+
+    const { data, error } = await searchProfiles(query);
+    setResults(data);
+    setError(!!error);
   };
 
   return (
     <div className={styles.searcher}>
       <div className={styles.inputHolder}>
+        {/* TODO: Add an (x) to remove query button thing */}
         <input
           type="text"
-          placeholder="User or display name"
+          placeholder="Search"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          onSubmit={onSubmit}
+          onSubmit={e => { e.preventDefault(); onSubmit(); }}
           onKeyDown={e => { if (e.key === 'Enter') onSubmit(); }}
         />
         <Button
@@ -94,7 +109,30 @@ export function Searcher() {
         {
           q.length ?
           <div className={styles.results}>
-            <span>on that teehee</span>
+            {
+              error ?
+              <div className={styles.error}>
+                <IoCloseCircleOutline />
+                <span>
+                  An unexpected error has occurred
+                </span>
+              </div>
+              : !results ?
+                <div className={styles.loading}>
+                  <LoadingText text="Searching" />
+                </div>
+              : results.length ?
+                results.map(r => (
+                  <Result user={r} key={r.username} />
+                ))
+              :
+              <div className={styles.noResult}>
+                <IoSadOutline />
+                <span>
+                  No such user was found
+                </span>
+              </div>
+            }
           </div>
           :
           <div className={styles.hint}>
