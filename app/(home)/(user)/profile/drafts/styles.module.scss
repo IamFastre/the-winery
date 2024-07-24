@@ -32,17 +32,6 @@
     gap: 30px;
 
     > a {
-      display: flex;
-      color: inherit;
-      font-style: inherit;
-      text-decoration: inherit;
-      text-decoration-style: inherit;
-
-      &:hover, &:focus-visible {
-        font-weight: inherit;
-        text-decoration-style: inherit;
-      }
-
       > div {
         flex: 1;
         > div:nth-child(1) {

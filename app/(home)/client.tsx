@@ -57,7 +57,7 @@ export function FeedNavigator({ feed, users }:Props) {
 
   useEffect(() => {
     window.history.pushState(null, '', `?${setCardIndex(index + 1)}`);
-  }, [index])
+  }, [index]);
 
   return (
     <>
@@ -107,7 +107,7 @@ export function Sidebar() {
         />
         <div className={layoutStyles.sep} />
         <div className={layoutStyles.icons}>
-          <Icon icon={IoSearchOutline} />
+          <Icon icon={IoSearchOutline} dest='/search' />
           <Icon icon={IoPersonCircleOutline} dest='/profile' />
           <Icon icon={IoWineOutline} dest='/compose'/>
           <Icon icon={IoCogOutline} />
