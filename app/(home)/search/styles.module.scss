@@ -1,0 +1,110 @@
+@import '@/styles/colors.module.scss';
+
+@mixin styling($searcher-margin, $input-height, $user-padding, $avatar-size, $sep-width) {
+  .sectionContainer {
+    align-items: stretch;
+  }
+
+  .searcher {
+    margin: $searcher-margin;
+    align-items: stretch;
+    flex: 1;
+  }
+
+  .inputHolder {
+    flex-direction: row;
+    gap: 5px;
+    
+    input {
+      flex: 1;
+      height: $input-height;
+      border-radius: 5px;
+      font-size: inherit;
+    }
+  }
+
+  .button {
+    width: 60px;
+    border-radius: 5px;
+  }
+
+  .resultsHolder {
+    flex: 1;
+  }
+
+  .results {
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    gap: 15px;
+    padding: 15px 0;
+
+    > a {
+      > div {
+        flex: 1;
+      }
+    }
+  }
+
+  .userContainer {
+    flex-direction: row;
+    align-items: center;
+    padding: $user-padding !important;
+    gap: 10px;
+
+    .sep {
+      background-color: $accent;
+      width: $sep-width;
+      height: 100%;
+      margin: 0 10px;
+    }
+  }
+
+  .avatar {
+    img {
+      width: $avatar-size;
+      height: $avatar-size;
+      border-radius: 5px;
+    }
+  }
+
+  .text {
+    > span:nth-child(1) {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    > span:nth-child(2) {
+      font-size: 12px;
+    }
+  }
+
+  .hint {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      font-size: 50px;
+      fill: $secondary;
+      stroke: $secondary;
+    }
+
+    span {
+      color: $secondary;
+      font-style: italic;
+    }
+  }
+}
+
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling($searcher-margin: 20px 10px 0 10px, $input-height: 38px, $user-padding: 10px, $avatar-size: 48px, $sep-width: 1px);
+}
+
+@media screen and (min-width: 787px) {
+  @include styling($searcher-margin: 20px 15px 0 15px, $input-height: 48px, $user-padding: 15px, $avatar-size: 75px, $sep-width: 2px);
+}
