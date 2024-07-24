@@ -50,3 +50,15 @@ export async function cropAvatar(base64Image:string, sharpen:boolean = false) {
   }
   catch { return null; }
 }
+
+export async function getCurrentURL(trailingSlash:boolean = false) {
+  let url = process?.env?.NEXT_PUBLIC_VERCEL_URL ?? 'http://localhost:3000';
+  url = url.startsWith('http') ? url : `https://${url}`;
+
+  if (trailingSlash)
+    url = url.endsWith('/') ? url : `${url}/`;
+  else while (url.endsWith('/'))
+    url = url.slice(0, -1);
+
+  return url;
+}

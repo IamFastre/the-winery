@@ -1,5 +1,5 @@
 "use server";
-import { cropAvatar, getAvatarUrl } from "@/utils/server";
+import { cropAvatar, getAvatarUrl, getCurrentURL } from "@/utils/server";
 import { createClient } from "@/supabase/server";
 
 import { AuthData, AuthError } from "./types";
@@ -119,13 +119,6 @@ export async function editAvatar(base64Image:string | null) {
 const emailRegex = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/i;
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[?!@#$%~^&()\[\]\{\}\.\,\-\+\*\/=\\]).{1,}$/;
 
-function getURL() {
-  let url = process?.env?.NEXT_PUBLIC_VERCEL_URL ?? 'http://localhost:3000/';
-  url = url.startsWith('http') ? url : `https://${url}`;
-  url = url.endsWith('/') ? url : `${url}/`;
-  return url;
-}
-
 export async function signUp(username:string, email:string, password:string) {
   const supabase = createClient();
   const avatar   = await getAvatarUrl(username);
@@ -138,7 +131,7 @@ export async function signUp(username:string, email:string, password:string) {
       email,
       password,
       options: {
-        emailRedirectTo: getURL(),
+        emailRedirectTo: await getCurrentURL(),
         data: { username, avatar }
       }
     });
