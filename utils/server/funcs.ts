@@ -52,7 +52,7 @@ export async function cropAvatar(base64Image:string, sharpen:boolean = false) {
 }
 
 export async function getCurrentURL(trailingSlash:boolean = false) {
-  let url = process?.env?.NEXT_PUBLIC_VERCEL_URL ?? 'http://localhost:3000';
+  let url = process?.env?.VERCEL_PROJECT_PRODUCTION_URL ?? 'http://localhost:3000';
   url = url.startsWith('http') ? url : `https://${url}`;
 
   if (trailingSlash)
