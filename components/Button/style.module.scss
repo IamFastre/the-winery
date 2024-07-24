@@ -10,6 +10,7 @@ $placeholder: $quinary;
   flex-direction: row;
   border-color: $placeholder;
   background-color: rgba($placeholder, 0.1);
+  overflow: hidden;
 
   &:not(.noMin) {
     min-width: 75px;
