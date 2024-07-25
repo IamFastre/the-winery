@@ -1,6 +1,7 @@
 import Image from "next/image";
 import CSS from 'csstype';
 
+import consts from "@/utils/consts";
 import { getLogo, LogoKind } from "@/utils";
 import { useGoTo } from "@/hooks";
 
@@ -35,7 +36,7 @@ export function GoHomeLogo(props:HomeIconProps) {
     >
       <a href={dest} onClick={e => e.preventDefault()}>
         <Image
-          alt="the Winery logo; a purple heart suit with a golden spiky hexagram on top"
+          alt={`${consts.name} logo; a purple heart suit with a golden spiky hexagram on top`}
           src={getLogo(props.logo ?? "brand outline")}
           priority
         />

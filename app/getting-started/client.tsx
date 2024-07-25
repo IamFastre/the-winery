@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { IoWine, IoWineOutline } from "react-icons/io5";
 
+import consts from "@/utils/consts";
 import { getLogo } from "@/utils";
 import { B, Button, C, RI } from "@/components";
 import { Database } from "@/supabase/types";
@@ -42,7 +43,7 @@ export function Content({ profile }: { profile:Database['public']['Tables']['pro
       >
         <Image
           src={getLogo("main")}
-          alt="the Winery logo; a purple heart suit with a sharp spiky hexagram on top"
+          alt={`${consts.name} logo; a purple heart suit with a sharp spiky hexagram on top`}
           className={styles.image}
           priority
         />
@@ -57,7 +58,7 @@ export function Content({ profile }: { profile:Database['public']['Tables']['pro
 
       <div className={styles.desc}>
         <p>
-          Welcome to <B title="Such a creative name, right?!"><C.ACCENT>The Winery</C.ACCENT></B> where,{' '}
+          Welcome to <B title="Such a creative name, right?!"><C.ACCENT>{consts.name}</C.ACCENT></B> where,{' '}
           <span title="Kinda obvious">no sadly, we don't make wine</span>, but where we <span title="And other stuff too">whine!</span>
           <br/>
           <span title="Guess who doesn't care about your opinion? me!!">Close enough for me, I'll take it.</span>

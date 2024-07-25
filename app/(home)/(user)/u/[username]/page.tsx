@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 
+import consts from "@/utils/consts";
 import { getPublicProfile } from "@/supabase/actions/user";
 import { getUserPosts } from "@/supabase/actions/post";
 import { Section } from "@/components/Section";
@@ -22,12 +23,12 @@ export async function generateMetadata({ params }:Props) : Promise<Metadata> {
 
   if (profile)
     return {
-      title: `u:${username} • The Winery`,
+      title: `u:${username} • ${consts.name}`,
       description: `${username}'s profile page.`,
     };
   else
     return {
-      title: 'Not Found • The Winery',
+      title: `Not Found • ${consts.name}`,
       description: `Requested user '${username}', was not found.`,
     };
 }

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 
+import consts from "@/utils/consts";
 import { getProfile } from "@/supabase/actions/user";
 import { Header } from "@/components/Header";
 import { Section } from "@/components/Section";
@@ -15,8 +16,8 @@ const Nail = () => (
 );
 
 export const metadata:Metadata = {
-  title: "Getting Started • The Winery",
-  description: "You just landed in the Winery! here's where you get started.",
+  title: `Getting Started • ${consts.name}`,
+  description: `You just landed in ${consts.name}! here's where you get started.`,
 };
 
 export default async function GettingStartedPage() {
@@ -25,7 +26,7 @@ export default async function GettingStartedPage() {
   return (
     <div style={{ flex: 1 }}>
       <Header
-        title="The Winery"
+        title={consts.name}
         left={<Nail />}
         right={<Nail />}
         margin="20px"

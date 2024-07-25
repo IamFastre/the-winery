@@ -1,3 +1,3 @@
-export default {
-  name: "Winery DeFastre",
+module.exports = {
+  name: "The Winery",
 };

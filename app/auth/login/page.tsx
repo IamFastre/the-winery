@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 
+import consts from "@/utils/consts";
 import { signIn } from "@/supabase/actions/user";
 import { AuthError } from "@/supabase/actions/types";
 import { Button, C, GoHomeLogo, LabelTitle, Section } from "@/components";
@@ -75,7 +76,7 @@ export default function LoginPage() {
             <C.SECONDARY>
               {'•-{ '}
               <span style={{ color: showPass ? colors.quinary : colors.accent }}>
-                The Winery
+                {consts.name}
               </span>
               {' }-•'}
             </C.SECONDARY>

@@ -7,7 +7,7 @@ import { Toaster } from "@/providers/Toaster";
 
 export const metadata:Metadata = {
   title: consts.name,
-  description: "Welcome to The Winery where, no sadly, we don't make wine, but where we whine!",
+  description: `Welcome to ${consts.name} where, no sadly, we don't make wine, but where we whine!`,
 };
 
 export const viewport:Viewport = {

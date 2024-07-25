@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
+import consts from "@/utils/consts";
 import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
 import { Card } from "@/components/Card";
@@ -11,7 +12,7 @@ import { BackButton } from "./client";
 import styles from "./styles.module.scss";
 
 export const metadata:Metadata = {
-  title: "My drafts • The Winery",
+  title: `My drafts • ${consts.name}`,
   description: "View user's drafts.",
 };
 

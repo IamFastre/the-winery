@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 
+import consts from "@/utils/consts";
 import { multiplyString } from "@/utils";
 import { signUp } from "@/supabase/actions/user";
 import { AuthError } from "@/supabase/actions/types";
@@ -144,7 +145,7 @@ export default function RegisterPage() {
             <C.SECONDARY>
               {'•-{ '}
               <span style={{ color: showPass ? colors.quinary : colors.accent }}>
-                The Winery
+                {consts.name}
               </span>
               {' }-•'}
             </C.SECONDARY>
