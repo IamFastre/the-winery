@@ -9,9 +9,11 @@ export default function HomeLayout({ children }: Readonly<{ children:React.React
       <div className={styles.bar}>
         <Sidebar />
       </div>
-      <Toaster>
-        {children}
-      </Toaster>
+      <div className={styles.page}>
+        <Toaster>
+          {children}
+        </Toaster>
+      </div>
     </div>
   );
 }
