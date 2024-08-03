@@ -1,7 +1,6 @@
 @import '@/styles/colors.module.scss';
 
 @mixin styling($border-width, $margin, $padding) {
-
   .background {
     background-color: $primary;
     border-radius: 0;

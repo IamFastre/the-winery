@@ -17,40 +17,42 @@ import { RiBallPenLine, RiDeleteBin6Line } from "react-icons/ri";
 type State<T> = Dispatch<SetStateAction<T>>;
 
 const Editor = (props:{ title:string; content:string; show:boolean; setShow:State<boolean>; setTitle:State<string>; setContent:State<string>; setError: State<null>; }) => (
-  <Section
-    title={props.show ?
-      props.title :
-      <input
-        type="text"
-        name="span"
-        placeholder="Change title"
-        value={props.title}
-        onChange={e => props.setTitle(e.target.value)}
-        onBlur={() => props.setTitle(t => t.trim())}
-        style={{ width: (props.title ? props.title.length : 12) * 11.72 }}
-        autoComplete="off"
+  <div className={styles.editor}>
+    <Section
+      title={props.show ?
+        props.title :
+        <input
+          type="text"
+          name="span"
+          placeholder="Change title"
+          value={props.title}
+          onChange={e => props.setTitle(e.target.value)}
+          onBlur={() => props.setTitle(t => t.trim())}
+          style={{ width: (props.title ? props.title.length : 12) * 11.72 }}
+          autoComplete="off"
+          />
+        }
+      className={styles.card}
+      containerClassName={styles.cardContent}
+      isCard
+    >
+      {
+        props.show ?
+        <MarkDown>
+          {/* TODO: replace the link with an internal `/help/markdown` one */}
+          { props.content ? props.content : "### *Input Preview*\n*Try actually doing some [basic markdown](https://www.markdownguide.org/cheat-sheet/#basic-syntax), and some [extended syntax](https://www.markdownguide.org/cheat-sheet/#basic-syntax).*"}
+        </MarkDown>
+        :
+        <textarea
+          name="span"
+          placeholder="What's on your mind? (min. 8)"
+          value={props.content}
+          onChange={e => { props.setContent(e.target.value); props.setError(null); }}
+          onBlur={() => props.setContent(c => c.trim())}
+          autoComplete="off"
         />
       }
-    className={styles.card}
-    containerClassName={styles.cardContent}
-    isCard
-  >
-    {
-      props.show ?
-      <MarkDown>
-      {/* TODO: replace the link with an internal `/help/markdown` one */}
-      { props.content ? props.content : "### *Input Preview*\n*Try actually doing some [basic markdown](https://www.markdownguide.org/cheat-sheet/#basic-syntax), and some [extended syntax](https://www.markdownguide.org/cheat-sheet/#basic-syntax).*"}
-    </MarkDown>
-      :
-      <textarea
-        name="span"
-        placeholder="What's on your mind? (min. 8)"
-        value={props.content}
-        onChange={e => { props.setContent(e.target.value); props.setError(null); }}
-        onBlur={() => props.setContent(c => c.trim())}
-        autoComplete="off"
-      />
-    }
+    </Section>
     <Button
       noMinimum
       iconBackground
@@ -59,7 +61,7 @@ const Editor = (props:{ title:string; content:string; show:boolean; setShow:Stat
       color={colors.highlight}
       icon={{ element: props.show ? IoEyeOutline : IoEye }}
     />
-  </Section>
+  </div>
 );
 
 const AsUser = ({ username }:{ username:string; }) => (

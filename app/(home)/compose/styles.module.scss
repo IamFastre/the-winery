@@ -23,28 +23,30 @@
   .post {
     width: 800px;
     max-width: 90%;
+    max-height: 90%;
+    bottom: 0;
     gap: 10px;
   }
 
+  .editor {
+    height: 500px;
+  }
+
   .card {
-    min-height: 400px;
-    max-height: 80%;
+    height: 100%;
   }
 
   $padding: 20px;
 
-  .cardContent {
-    padding: $padding !important;
+  div.cardContent {
+    flex: 1;
+    padding: $padding;
+    overflow-y: scroll;
 
     > textarea {
       flex: 1;
-      margin-top: 10px;
       resize: none;
       caret-color: $accent;
-    }
-
-    > div {
-      flex: 1;
     }
   }
 
