@@ -46,17 +46,24 @@ export function FeedNavigator({ feed, users }:Props) {
   const card = getCardIndex(useSearchParams().get('card'), feed.length) - 1;
  
   const [index, setIndex] = useState<number>(card);
+  const [inpt, setInpt] = useState<number>(index);
   const post = feed[index];
   const author = users[post.author ?? ""];
 
   const inc = (num:number = 1) => {
     if (feed)
       if (index + num < feed.length && index + num >= 0)
-        setIndex(index + num);
+        setIndex(index + num);    
+  };
+
+  const submit = () => {
+    inc(inpt - index);
+    setInpt(index);
   };
 
   useEffect(() => {
     window.history.pushState(null, '', `?${setCardIndex(index + 1)}`);
+    setInpt(index);
   }, [index]);
 
   return (
@@ -75,9 +82,17 @@ export function FeedNavigator({ feed, users }:Props) {
           className={index <= 0 ? pageStyles.disabled : null}
           {...focusable(pageStyles.active, () => inc(-1)) as any}
         />
-        <span>
-          {index+1}
-        </span>
+        <input
+          id="span"
+          name="wine-page-number"
+          type="text"
+          value={inpt + 1}
+          placeholder={`${index + 1}`}
+          onChange={e => setInpt(e.target.valueAsNumber - 1)}
+          onBlur={e => submit()}
+          onKeyDown={e => { if (e.key === 'Enter') { submit(); e.currentTarget.blur(); } }}
+          style={{ width: `${inpt ? inpt.toFixed().length : index.toFixed().length}ch` }}
+        />
         <IoArrowForward
           className={index >= feed.length-1 ? pageStyles.disabled : null}
           {...focusable(pageStyles.active, () => inc(+1)) as any}

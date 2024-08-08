@@ -23,15 +23,25 @@ $arrow-size: 28px;
   justify-content: center;
   position: absolute;
   bottom: 15px;
-  gap: 20px;
+  gap: 10px;
 
-  span {
+  input {
+    padding: 0 10px;
+    font-size: 28px;
     height: $arrow-size;
     line-height: $arrow-size;
     overflow: hidden;
     text-align: center;
     font-size: 22px;
     user-select: none;
+
+    appearance: textfield;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
   }
 
   svg {

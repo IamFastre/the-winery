@@ -23,7 +23,8 @@ const Editor = (props:{ title:string; content:string; show:boolean; setShow:Stat
         props.title :
         <input
           type="text"
-          name="span"
+          id="span"
+          name="wine-card-title"
           placeholder="Change title"
           value={props.title}
           onChange={e => props.setTitle(e.target.value)}
@@ -44,7 +45,8 @@ const Editor = (props:{ title:string; content:string; show:boolean; setShow:Stat
         </MarkDown>
         :
         <textarea
-          name="span"
+          id="span"
+          name="wine-card-content"
           placeholder="What's on your mind? (min. 8)"
           value={props.content}
           onChange={e => { props.setContent(e.target.value); props.setError(null); }}

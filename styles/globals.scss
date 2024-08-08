@@ -238,7 +238,7 @@ input, textarea {
   min-height: 30px;
   padding: 0 10px;
 
-  &[name="span"] {
+  &:where(#span) {
     display: inline;
     background-color: $none;
     border: none;
