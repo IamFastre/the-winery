@@ -34,6 +34,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${currentURL}/search`,
+      priority: 0.75,
+    },
+    {
       url: `${currentURL}/compose`,
       priority: 0.7,
     },
@@ -45,13 +49,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${currentURL}/profile/drafts`,
       priority: 0.6,
     },
-    {
-      url: `${currentURL}/search`,
-      priority: 0.7,
-    },
     ...userSlugs.map(slug => ({
       url: `${currentURL}/u/${slug}`,
-      priority: 0.75,
+      priority: 0.7,
     })),
   ];
 }
