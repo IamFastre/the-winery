@@ -1,5 +1,7 @@
+import { Metadata } from "next";
 import { redirect, RedirectType } from "next/navigation";
 
+import consts from "@/utils/consts";
 import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
 import { C, RI } from "@/components/C";
@@ -8,6 +10,11 @@ import { createClient } from "@/supabase/admin";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
+
+export const metadata:Metadata = {
+  title: `One more step • ${consts.name}`,
+  description: `So good so far! Now all you need is to confirm your email address. Unless an error happened that is...`,
+}
 
 export default async function CheckMailPage({ searchParams }:{searchParams: { [key: string]: string | string[] | undefined }}) {
   const supabase = createClient();
@@ -63,7 +70,7 @@ export default async function CheckMailPage({ searchParams }:{searchParams: { [k
         </span>
       </Section>
       <span className={styles.note}>
-        You can (or perhaps should) close this page.
+        You can (or perhaps should) close this page now.
       </span>
     </div>
   );

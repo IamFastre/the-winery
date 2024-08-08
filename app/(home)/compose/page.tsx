@@ -1,3 +1,6 @@
+import { Metadata } from "next";
+
+import consts from "@/utils/consts";
 import { Section } from "@/components/Section";
 import { getProfile } from "@/supabase/actions/user";
 import { getDraft } from "@/supabase/actions/post";
@@ -6,6 +9,11 @@ import { Draft } from "@/supabase/actions/types";
 import { DraftEditor, PostEditor } from "./client";
 import styles from "./styles.module.scss";
 
+
+export const metadata:Metadata = {
+  title: `Compose • ${consts.name}`,
+  description: `That's where you ferment your beautiful cards... at least we hope they actually are.`,
+}
 
 export default async function ComposePage({ searchParams }:{ searchParams: { draft:string | undefined; } }) {
   const { data:user, error } = await getProfile();

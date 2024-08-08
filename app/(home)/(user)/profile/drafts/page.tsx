@@ -13,7 +13,7 @@ import styles from "./styles.module.scss";
 
 export const metadata:Metadata = {
   title: `My drafts • ${consts.name}`,
-  description: "View user's drafts.",
+  description: "Oh hey! These are your drafts!",
 };
 
 export default async function DraftsPage() {

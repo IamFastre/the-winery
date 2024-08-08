@@ -1,13 +1,20 @@
+import { Metadata } from "next";
 import { redirect, RedirectType } from "next/navigation";
 
+import consts from "@/utils/consts";
 import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
-import { C, RI } from "@/components/C";
+import { C } from "@/components/C";
 
 import { createClient } from "@/supabase/admin";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
+
+export const metadata:Metadata = {
+  title: `Error • ${consts.name}`,
+  description: `Uh-oh, seems we can't confirm your email address.`,
+}
 
 export default async function MailErrorPage({ searchParams }:{searchParams: { [key: string]: string | string[] | undefined }}) {
   const supabase = createClient();
@@ -35,7 +42,7 @@ export default async function MailErrorPage({ searchParams }:{searchParams: { [k
           </h3>
           <C.SECONDARY>
             <p>
-              Seems an error has occurred while doing that, which you know,
+              Seems an error has occurred while confirming your email, which you know,
               <br/>
               errors aren't supposed to happen.
               <br/>
@@ -50,7 +57,7 @@ export default async function MailErrorPage({ searchParams }:{searchParams: { [k
         </span>
       </Section>
       <span className={styles.note}>
-        You can (or perhaps should) close this page.
+        You can (or perhaps should) close this page now.
       </span>
     </div>
   );
