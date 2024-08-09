@@ -1,6 +1,13 @@
 "use server";
 import sharp from "sharp";
 
+async function callAPI(path:string, searchParams:{ [key:string]:string }) {
+  const fullPath = `${await getCurrentURL()}/api${path.startsWith("/") ? path : '/' + path}`;
+  const url = new URL(fullPath);
+  Object.keys(searchParams).forEach(key => url.searchParams.set(key, searchParams[key]));
+  return await fetch(url);
+}
+
 async function httpURLToBase64(httpURL:string) {
   return (await fetch(httpURL)).arrayBuffer();
 }
@@ -79,6 +86,11 @@ export async function getCurrentURL(trailingSlash:boolean = false) {
   return url;
 }
 
+async function getLogo() {
+  const res = await callAPI('logo', { variant: 'brand-outline' });
+  return await res.arrayBuffer();
+}
+
 export async function addLogoBadge(input:string) {
   const IMAGE_DIM   = 256,
         BADGE_DIM   = 145,
@@ -100,7 +112,7 @@ export async function addLogoBadge(input:string) {
     if (avatar === "unknown")
       throw new TypeError(`Input not recognized as data or http url: '${input}'`);
 
-    const icon = await sharp('public/static/images/logo/NaipeDeCopasBrandO.png')
+    const icon = await sharp(await getLogo())
       .resize({ width: BADGE_DIM, height: BADGE_DIM })
       .toBuffer();
 
