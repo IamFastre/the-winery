@@ -1,6 +1,9 @@
 "use server";
-import fs from "fs";
 import sharp from "sharp";
+
+async function httpURLToBase64(httpURL:string) {
+  return (await fetch(httpURL)).arrayBuffer();
+}
 
 function dataURLToBase64(dataURL:string) {
   return dataURL.split(';base64,').pop()!;
@@ -76,7 +79,7 @@ export async function getCurrentURL(trailingSlash:boolean = false) {
   return url;
 }
 
-export async function addLogoBadge(base64Image:string) {
+export async function addLogoBadge(input:string) {
   const IMAGE_DIM   = 256,
         BADGE_DIM   = 145,
         SMASK_DIM   = 160,
@@ -88,7 +91,14 @@ export async function addLogoBadge(base64Image:string) {
     const background = Buffer.from(`<svg><rect x="0" y="0" width="${FULL_DIM}" height="${FULL_DIM}" fill="transparent" stroke="transparent"/></svg>`);
     const bigMask = Buffer.from(`<svg><rect x="0" y="0" width="${IMAGE_DIM}" height="${IMAGE_DIM}" rx="${IMAGE_DIM/4}" ry="${IMAGE_DIM/4}"/></svg>`);
     const smallMask = Buffer.from(`<svg><rect x="0" y="0" width="${SMASK_DIM}" height="${SMASK_DIM}" rx="${SMASK_DIM/2}" ry="${SMASK_DIM/2}"/></svg>`);
-    const avatar = Buffer.from(dataURLToBase64(base64Image), 'base64');
+    const avatar = input.startsWith("data:")
+                 ? Buffer.from(dataURLToBase64(input), 'base64')
+                 : input.startsWith("http:") || input.startsWith("https:")
+                 ? Buffer.from(await httpURLToBase64(input))
+                 : "unknown";
+
+    if (avatar === "unknown")
+      throw new TypeError(`Input not recognized as data or http url: '${input}'`);
 
     const icon = await sharp('public/static/images/logo/NaipeDeCopasBrandO.png')
       .resize({ width: BADGE_DIM, height: BADGE_DIM })
