@@ -85,7 +85,7 @@ export function FeedNavigator({ feed, users }:Props) {
         <input
           id="span"
           name="wine-page-number"
-          type="text"
+          type="number"
           value={inpt + 1}
           placeholder={`${index + 1}`}
           onChange={e => setInpt(e.target.valueAsNumber - 1)}
