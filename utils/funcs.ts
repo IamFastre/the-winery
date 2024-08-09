@@ -44,9 +44,9 @@ export function getLogo(kind:LogoKind) : StaticImageData {
        ? NDCB
        : kind === "mono"
        ? NDCM
-       : kind === "brand outline"
+       : kind === "brand-outline"
        ? NDCBO
-       : kind === "mono outline"
+       : kind === "mono-outline"
        ? NDCMO
        : kind === "touch"
        ? NDCTI
