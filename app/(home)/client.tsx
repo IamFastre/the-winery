@@ -102,7 +102,7 @@ export function FeedNavigator({ feed, users }:Props) {
   );
 }
 
-export function Sidebar() {
+export function Sidebar({ username }:{ username:string; }) {
   const [redirecting, goto, current] = useGoTo();
 
   const Icon = (props:{ icon:IconType; dest?:string; }) => (
@@ -122,11 +122,11 @@ export function Sidebar() {
         />
         <div className={layoutStyles.sep} />
         <div className={layoutStyles.icons}>
-          <Icon icon={IoSearchOutline} dest='/search' />
-          <Icon icon={IoPersonCircleOutline} dest='/profile' />
-          <Icon icon={IoWineOutline} dest='/compose'/>
+          <Icon icon={IoSearchOutline} dest={'/search'} />
+          <Icon icon={IoPersonCircleOutline} dest={`/u/${username}`} />
+          <Icon icon={IoWineOutline} dest={'/compose'}/>
           <Icon icon={IoCogOutline} />
-          <Icon icon={IoInformationCircleOutline} dest='/getting-started' />
+          <Icon icon={IoInformationCircleOutline} dest={'/getting-started'} />
         </div>
       </div>
     </Section>

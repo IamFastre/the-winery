@@ -1,17 +1,14 @@
 import { Metadata } from "next";
-import Image from "next/image";
 
 import consts from "@/utils/consts";
-import { getPublicProfile } from "@/supabase/actions/user";
+import { getProfile, getPublicProfile } from "@/supabase/actions/user";
 import { getUserPosts } from "@/supabase/actions/post";
 import { Section } from "@/components/Section";
-import { C } from "@/components/C";
-import { Bio } from "@/components/Bio";
 import { addLogoBadge } from "@/utils/server";
 
-import { CardList } from "../../server";
-import { DataBox } from "../../client";
-import styles from "../../styles.module.scss";
+import { CardList, ProfileInfo } from "./server";
+import { DataBox, ProfileEditor } from "./client";
+import styles from "./styles.module.scss";
 
 
 interface Props {
@@ -41,8 +38,15 @@ export async function generateMetadata({ params }:Props) : Promise<Metadata> {
 }
 
 export default async function UserPage({ params }:Props) {
-  const { data:profile } = await getPublicProfile(params.username);
-  const { data:posts } = await getUserPosts(profile?.username ?? "");
+  const self = (await getProfile()).data;
+
+  if (!self)
+    return;
+
+  const isSelf  = self.identifier === params.username.toLowerCase();
+  const other = !isSelf ? (await getPublicProfile(params.username)).data : null;
+  const profile = isSelf ? self : other;
+  const posts = profile ? (await getUserPosts(profile.username)).data : null;
 
   if (!profile || !posts)
     return; // not found
@@ -50,29 +54,7 @@ export default async function UserPage({ params }:Props) {
   return (
     <Section className={styles.section} containerClassName={styles.sectionContainer}>
       <div className={styles.userBox}>
-        <Image
-          alt={`${profile.username}'s profile picture.`}
-          src={profile.avatar}
-          width={128}
-          height={128}
-          className={styles.avatar}
-        />
-        <div className={styles.textStuff}>
-          <div className={styles.names}>
-            <span>
-              {profile.display_name ?? profile.username}
-            </span>
-            <span>
-              <C.QUINARY>
-                u:
-              </C.QUINARY>
-              <C.ACCENT>
-                {profile.username}
-              </C.ACCENT>
-            </span>
-          </div>
-          <Bio content={profile.bio} />
-        </div>
+        { isSelf ? <ProfileEditor profile={self} /> : <ProfileInfo profile={profile} /> }
         <DataBox cards={posts.length} joined={profile.created_at} />
       </div>
       <hr/>

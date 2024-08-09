@@ -6,29 +6,29 @@ import { IconType } from "react-icons";
 import { GoPencil, GoTrash } from "react-icons/go";
 import { IoBuildOutline, IoCloseOutline, IoEllipsisHorizontalOutline, IoSaveOutline } from "react-icons/io5";
 
-import { cropAvatar, focusable } from "@/utils";
-import { Bio, Button, C, LabelTitle, Section } from "@/components";
+import { cropAvatar, focusable, humanizeTime } from "@/utils";
+import { B, Bio, Button, C, LabelTitle, Section } from "@/components";
 import { editAvatar, editProfile } from "@/supabase/actions/user";
 import { Profile } from "@/supabase/actions/types";
+import { useHydration } from "@/hooks";
 
 import colors from '@/styles/colors.module.scss';
-import profileStyles from "./styles.module.scss";
-import styles from "../styles.module.scss";
+import styles from "./styles.module.scss";
 
 type Option = { title:string; icon?: IconType; action?:MouseEventHandler<HTMLDivElement>; };
 
 function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEventHandler<HTMLDivElement>; }) {
   const [dying, setDying] = useState<boolean>(false);
   const duration = 500;
-  const animation = `${profileStyles.death} ${duration}ms ease-in-out forwards`;
+  const animation = `${styles.death} ${duration}ms ease-in-out forwards`;
 
   return (
-    <div className={profileStyles.overlay}>
-      <div className={profileStyles.background} style={{ animation: dying ? animation : "" }} />
-      <Section className={profileStyles.menu} containerClassName={profileStyles.menuContainer} style={{ animation: dying ? animation : "" }}>
+    <div className={styles.overlay}>
+      <div className={styles.background} style={{ animation: dying ? animation : "" }} />
+      <Section className={styles.menu} containerClassName={styles.menuContainer} style={{ animation: dying ? animation : "" }}>
         {options.map(o => (
           <Fragment key={o.title}>
-            <div className={profileStyles.option} onClick={o.action}>
+            <div className={styles.option} onClick={o.action}>
               { o.icon ? <o.icon /> : null }
               <div>
                 <span>{o.title}</span>
@@ -39,7 +39,7 @@ function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEvent
         ))}
         <Button
           title="Close"
-          className={profileStyles.closeButton}
+          className={styles.closeButton}
           onClick={e => {
             setDying(true);
             setTimeout(() => {
@@ -54,7 +54,7 @@ function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEvent
   );
 }
 
-export function ProfileInfo({ profile }:{ profile:Profile }) {
+export function ProfileEditor({ profile }:{ profile:Profile }) {
   const router = useRouter();
 
   const [editing, setEditing] = useState<boolean>(false);
@@ -232,12 +232,45 @@ export function ProfileInfo({ profile }:{ profile:Profile }) {
         showOptions ?
         <ProfileOptions
           options={[
-            { title: "Drafts", icon: IoSaveOutline, action: e => router.push('/profile/drafts') },
+            { title: "Drafts", icon: IoSaveOutline, action: e => router.push('/drafts') },
           ]}
           close={closeMenu}
         />
         : null
       }
     </>
+  );
+}
+
+interface DataBoxProps {
+  cards: number;
+  joined: number | string;
+}
+
+export function DataBox({ cards, joined }:DataBoxProps) {
+  const hydrated = useHydration();
+  return (
+    <div className={styles.dataBox}>
+      <div className={styles.data}>
+        <span className={styles.dataItem}>
+          <C.QUINARY>
+            cards
+          </C.QUINARY>
+          {': '}
+          <B>
+            {cards}
+          </B>
+        </span>
+        <span className={styles.dataItem}>
+          <C.QUINARY>
+            joined
+          </C.QUINARY>
+          {': '}
+          <B suppressHydrationWarning>
+            {humanizeTime(joined, !hydrated, true)}
+          </B>
+        </span>
+      </div>
+    </div>
   );
 }

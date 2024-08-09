@@ -12,7 +12,7 @@ import { BackButton } from "./client";
 import styles from "./styles.module.scss";
 
 export const metadata:Metadata = {
-  title: `My drafts • ${consts.name}`,
+  title: `Drafts • ${consts.name}`,
   description: "Oh hey! These are your drafts!",
 };
 
