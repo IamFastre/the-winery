@@ -1,5 +1,18 @@
 "use server";
+import fs from "fs";
 import sharp from "sharp";
+
+function dataURLToBase64(dataURL:string) {
+  return dataURL.split(';base64,').pop()!;
+}
+
+function bufferToDataURL(buffer:Buffer, extension:string = 'png') {
+  return `data:image/${extension};base64,${buffer.toString('base64')}`;
+}
+
+/* ========================================================================== */
+/*                                 End Points                                 */
+/* ========================================================================== */
 
 export async function getAvatarUrl(username:string) {
   const color = [
@@ -37,7 +50,7 @@ export async function getAvatarUrl(username:string) {
 
 export async function cropAvatar(base64Image:string, sharpen:boolean = false) {
   const WIDTH = 256, HEIGHT = 256;
-  const uri = base64Image.split(';base64,').pop()!;
+  const uri = dataURLToBase64(base64Image);
   const buffer = Buffer.from(uri, 'base64');
 
   try {
@@ -46,7 +59,7 @@ export async function cropAvatar(base64Image:string, sharpen:boolean = false) {
       .resize({ width: WIDTH, height: HEIGHT, fit: 'cover', kernel: sharpen ? 'nearest' : 'lanczos3' })
       .toBuffer();
 
-    return "data:image/png;base64," + resizedImage.toString('base64');
+    return bufferToDataURL(resizedImage);
   }
   catch { return null; }
 }
@@ -61,4 +74,38 @@ export async function getCurrentURL(trailingSlash:boolean = false) {
     url = url.slice(0, -1);
 
   return url;
+}
+
+export async function addLogoBadge(base64Image:string) {
+  const IMAGE_DIM   = 256,
+        BADGE_DIM   = 145,
+        SMASK_DIM   = 160,
+        FULL_DIM    = IMAGE_DIM + Math.floor(BADGE_DIM / 2),
+        MASK_OFFSET = FULL_DIM - SMASK_DIM + Math.floor((SMASK_DIM - BADGE_DIM) / 2),
+        ICON_OFFSET = FULL_DIM - BADGE_DIM;
+
+  try {
+    const background = Buffer.from(`<svg><rect x="0" y="0" width="${FULL_DIM}" height="${FULL_DIM}" fill="transparent" stroke="transparent"/></svg>`);
+    const bigMask = Buffer.from(`<svg><rect x="0" y="0" width="${IMAGE_DIM}" height="${IMAGE_DIM}" rx="${IMAGE_DIM/4}" ry="${IMAGE_DIM/4}"/></svg>`);
+    const smallMask = Buffer.from(`<svg><rect x="0" y="0" width="${SMASK_DIM}" height="${SMASK_DIM}" rx="${SMASK_DIM/2}" ry="${SMASK_DIM/2}"/></svg>`);
+    const avatar = Buffer.from(dataURLToBase64(base64Image), 'base64');
+
+    const icon = await sharp('public/static/images/logo/NaipeDeCopasBrandO.png')
+      .resize({ width: BADGE_DIM, height: BADGE_DIM })
+      .toBuffer();
+
+    const result = await sharp(background)
+      .composite([
+        { input: avatar },
+        { input: bigMask, blend: 'dest-in' },
+        { input: smallMask, top: MASK_OFFSET, left: MASK_OFFSET, blend: 'dest-out' },
+        { input: icon, top: ICON_OFFSET, left: ICON_OFFSET },
+      ])
+      .toBuffer();
+
+    return bufferToDataURL(result);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
