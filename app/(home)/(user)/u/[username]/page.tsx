@@ -7,6 +7,7 @@ import { getUserPosts } from "@/supabase/actions/post";
 import { Section } from "@/components/Section";
 import { C } from "@/components/C";
 import { Bio } from "@/components/Bio";
+import { addLogoBadge } from "@/utils/server";
 
 import { CardList } from "../../server";
 import { DataBox } from "../../client";
@@ -20,17 +21,23 @@ interface Props {
 export async function generateMetadata({ params }:Props) : Promise<Metadata> {
   const username = params.username;
   const { data:profile  } = await getPublicProfile(params.username);
-
-  if (profile)
+  
+  if (profile) {
+    const profileWithBadge = await addLogoBadge(profile.avatar);
     return {
       title: `u:${username} • ${consts.name}`,
       description: `${username}'s profile page.`,
+      icons: {
+        icon: profileWithBadge!,
+        apple: profileWithBadge!,
+      },
     };
-  else
+  } else {
     return {
       title: `Not Found • ${consts.name}`,
       description: `Requested user '${username}', was not found.`,
     };
+  }
 }
 
 export default async function UserPage({ params }:Props) {
