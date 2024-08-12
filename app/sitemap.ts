@@ -42,11 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
-      url: `${currentURL}/profile`,
-      priority: 0.7,
-    },
-    {
-      url: `${currentURL}/profile/drafts`,
+      url: `${currentURL}/drafts`,
       priority: 0.6,
     },
     ...userSlugs.map(slug => ({

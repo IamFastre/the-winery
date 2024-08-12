@@ -132,7 +132,7 @@ export function PostEditor({ user }:{ user:Profile; }) {
 
     if (!postError) {
       toaster.add({ message: "Post added", icon: IoWine });
-      router.push('/profile');
+      router.push(`/u/${user.username}`);
     }
   };
 
@@ -142,7 +142,7 @@ export function PostEditor({ user }:{ user:Profile; }) {
 
     if (!draftError) {
       toaster.add({ message: "Draft added", icon: IoFolder });
-      router.push('/profile/drafts');
+      router.push('/drafts');
     }
   };
 
@@ -201,7 +201,7 @@ export function DraftEditor({ user, draft }:{ user:Profile; draft:Draft; }) {
 
       if (!draftError) { 
         toaster.add({ message: "Post added", icon: IoWine });
-        router.push('/profile');
+        router.push(`/u/${user.username}`);
       }
     }
   };
@@ -212,7 +212,7 @@ export function DraftEditor({ user, draft }:{ user:Profile; draft:Draft; }) {
 
     if (!error) {
       toaster.add({ message: "Changes saved", icon: IoFolder });
-      router.push('/profile/drafts');
+      router.push('/drafts');
     }
   };
 
@@ -222,7 +222,7 @@ export function DraftEditor({ user, draft }:{ user:Profile; draft:Draft; }) {
 
     if (!error) {
       toaster.add({ message: "Draft deleted", icon: RiDeleteBin6Line, type: "error" });
-      router.push('/profile/drafts');
+      router.push('/drafts');
     }
   };
 
