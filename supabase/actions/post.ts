@@ -37,6 +37,25 @@ export async function getUserDrafts(identifier:string) {
   return getUserCards('drafts', identifier);
 }
 
+export async function getUserSaved(identifier:string) {
+  const supabase = createClient();
+
+  const { data:saves, error } = await supabase
+    .from('saved')
+    .select()
+    .eq('user', identifier.toLowerCase())
+    .order('timestamp', { ascending: false });
+
+  if (!saves || error)
+    return { data: null, error };
+
+  const responds = await Promise.all(
+    saves.map(save => getPost(save.id))
+  );
+
+  return { data: responds.map(res => res.data).filter(d => d !== null), error: null }
+}
+
 /* ========================================================================== */
 
 async function getCard(table:'posts' | 'drafts', id:number) {

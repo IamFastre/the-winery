@@ -16,6 +16,14 @@
     -ms-overflow-style: none;
     &::-webkit-scrollbar { display: none; }
     word-break: break-word;
+
+    > a {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
   }
 }
 

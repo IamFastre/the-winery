@@ -115,6 +115,39 @@ export type Database = {
           },
         ]
       }
+      saved: {
+        Row: {
+          created_at: string
+          id: number
+          user: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          user?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          user?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "saved_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["identifier"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

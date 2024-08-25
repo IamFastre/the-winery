@@ -8,8 +8,8 @@ import { Card } from "@/components/Card";
 import { getProfile } from "@/supabase/actions/user";
 import { getUserDrafts } from "@/supabase/actions/post";
 
-import { BackButton } from "./client";
-import styles from "./styles.module.scss";
+import { BackButton } from "../client";
+import styles from "../styles.module.scss";
 
 export const metadata:Metadata = {
   title: `Drafts • ${consts.name}`,

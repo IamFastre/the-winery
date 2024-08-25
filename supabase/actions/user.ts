@@ -2,7 +2,7 @@
 import { cropAvatar, getAvatarUrl, getCurrentURL } from "@/utils/server";
 import { createClient } from "@/supabase/server";
 
-import { AuthData, AuthError } from "./types";
+import { AuthData, AuthError, PublicProfile } from "./types";
 
 /* ========================================================================== */
 /*                                   Reading                                  */
@@ -41,6 +41,26 @@ export async function searchProfiles(query:string) {
     .from('profiles')
     .select(publicProfile)
     .ilike('username_displayname', `%${query.toLowerCase()}%`);
+}
+
+export async function getAuthorsMap(authors:string[]) {
+  const users:{ [identifier:string]:PublicProfile } = {};
+  let hasError = false;
+ 
+  for (const author of authors ?? []) {
+    if (author && !users[author]) {
+      const { data, error } = await getPublicProfile(author);
+
+      if (error)
+        hasError = true;
+
+      if (data) {
+        users[author] = data;
+      }
+    }
+  }
+
+  return { data:users, hasError};
 }
 
 /* ========================================================================== */

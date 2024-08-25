@@ -327,7 +327,7 @@
     hr {
       width: auto;
       align-self: stretch;
-      margin: 10px 0;
+      margin: 0;
   
       &::after {
         content: none;
@@ -347,6 +347,7 @@
   
   .menuContainer {
     padding: 15px 15px !important;
+    gap: 10px;
     align-items: stretch;
   }
   

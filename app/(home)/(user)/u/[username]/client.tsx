@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { IconType } from "react-icons";
 import { GoPencil, GoTrash } from "react-icons/go";
-import { IoBuildOutline, IoCloseOutline, IoEllipsisHorizontalOutline, IoSaveOutline } from "react-icons/io5";
+import { IoBookmarkOutline, IoBuildOutline, IoCloseOutline, IoEllipsisHorizontalOutline, IoFolderOutline, IoSaveOutline } from "react-icons/io5";
 
 import { cropAvatar, focusable, humanizeTime } from "@/utils";
 import { B, Bio, Button, C, LabelTitle, Section } from "@/components";
@@ -26,7 +26,7 @@ function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEvent
     <div className={styles.overlay}>
       <div className={styles.background} style={{ animation: dying ? animation : "" }} />
       <Section className={styles.menu} containerClassName={styles.menuContainer} style={{ animation: dying ? animation : "" }}>
-        {options.map(o => (
+        {options.map((o, i) => (
           <Fragment key={o.title}>
             <div className={styles.option} onClick={o.action}>
               { o.icon ? <o.icon /> : null }
@@ -34,9 +34,9 @@ function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEvent
                 <span>{o.title}</span>
               </div>
             </div>
-            <hr/>
           </Fragment>
         ))}
+        <hr/>
         <Button
           title="Close"
           className={styles.closeButton}
@@ -232,7 +232,8 @@ export function ProfileEditor({ profile }:{ profile:Profile }) {
         showOptions ?
         <ProfileOptions
           options={[
-            { title: "Drafts", icon: IoSaveOutline, action: e => router.push('/drafts') },
+            { title: "Saved", icon: IoBookmarkOutline, action: e => router.push('/saved') },
+            { title: "Drafts", icon: IoFolderOutline, action: e => router.push('/drafts') },
           ]}
           close={closeMenu}
         />
