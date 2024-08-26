@@ -42,16 +42,19 @@
   }
 
   .backButton {    
+    margin-left: $back-button-size/2;
+    cursor: pointer;
+    padding: 2.5px;
+    
     svg {
-      cursor: pointer;
       font-size: $back-button-size;
-      padding: 2.5px;
+      transform-origin: right;
       transition: all 500ms $time-func;
       fill: $red;
       stroke: $red;
-      margin-left: $back-button-size/2;
+
       &:hover, &:focus-visible {
-          transform: scale(1.2);
+        transform: scale(1.2);
       }
       
       &:active, &.active {

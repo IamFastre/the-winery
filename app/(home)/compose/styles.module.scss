@@ -5,7 +5,17 @@
     align-items: center;
     justify-content: center;
     padding: 0;
+  }
+
+  .content {
+    align-items: center;
+    justify-content: center;
     gap: 30px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 
   .title {
@@ -23,13 +33,13 @@
   .post {
     width: 800px;
     max-width: 90%;
-    max-height: 90%;
+    max-height: 75%;
     bottom: 0;
     gap: 10px;
   }
 
   .editor {
-    height: 500px;
+    height: calc(50vh - 75px);
   }
 
   .card {
@@ -43,7 +53,7 @@
     padding: $padding;
     overflow-y: scroll;
 
-    > textarea {
+    > textarea, > div {
       flex: 1;
       resize: none;
       caret-color: $accent;

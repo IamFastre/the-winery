@@ -1,6 +1,16 @@
 @import '@/styles/colors.module.scss';
 
 .self {
+  >:first-child {
+    margin-top: 0;
+    margin-block-start: 0;
+  }
+
+  >:last-child {
+    margin-bottom: 0;
+    margin-block-end: 0;
+  }
+
   p {
     font-weight: 200;
   }

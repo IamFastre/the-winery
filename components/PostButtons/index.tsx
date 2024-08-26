@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { IoBookmark, IoHeart } from "react-icons/io5";
 
 import { focusable } from "@/utils";
+import { LoadingText } from "@/components/LoadingText";
 import { isPostSaved, savePost } from "@/supabase/actions/post";
 
 import styles from "./style.module.scss";
-import { LoadingText } from "../LoadingText";
 
 interface PostButtonsProps {
   postId: number;
@@ -20,7 +20,7 @@ export function PostButtons(props:PostButtonsProps) {
   useEffect(() => {
     var start = async () => {
       const res = await isPostSaved(props.postId);
-      
+
       if (res !== null)
         setIsSaved(res);
 

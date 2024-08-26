@@ -76,6 +76,7 @@ export function FeedNavigator({ feed, users }:Props) {
         timestamp={post.timestamp}
         postId={post.id}
         className={pageStyles.card}
+        sectionClassName={pageStyles.cardSection}
       />
 
       <div className={pageStyles.quiver}>

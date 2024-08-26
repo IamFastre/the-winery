@@ -16,14 +16,6 @@
     -ms-overflow-style: none;
     &::-webkit-scrollbar { display: none; }
     word-break: break-word;
-
-    > a {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
   }
 }
 
@@ -68,11 +60,10 @@
 
 .interactionsHolder {
   flex: 1;
-  height: 24px;
+  align-items: end;
+  justify-content: start;
   
   > div {
-    position: absolute;
-    align-self: center;
-    right: 0;
+    flex-direction: row;
   }  
 }

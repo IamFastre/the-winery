@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Section } from "@/components/Section";
 import { MarkDown } from "@/components/MarkDown";
 import { C } from "@/components/C";
-import { PostButtons } from "@/components/PostButton";
+import { PostButtons } from "@/components/PostButtons";
 
 import { Time } from "./client";
 import styles from "./style.module.scss";
@@ -14,6 +14,8 @@ export type CardProps = {
   content: string;
   timestamp?: number | string;
   className?:string;
+  sectionClassName?:string;
+  sectionContainerClassName?:string;
   centered?:boolean;
   postId?:number;
 } & ({
@@ -27,7 +29,14 @@ export type CardProps = {
 export function Card(props:CardProps) {
   return (
     <div className={`${styles.card} ${props.className}`}>
-      <Section title={props.title} className={styles.section} containerClassName={styles.sectionContent} noFlex isCard centered={props.centered}>
+      <Section
+        title={props.title}
+        className={`${styles.section} ${props.sectionClassName}`}
+        containerClassName={`${styles.sectionContent} ${props.sectionContainerClassName}`}
+        centered={props.centered}
+        noFlex
+        isCard
+      >
         <MarkDown>
           {props.content}
         </MarkDown>

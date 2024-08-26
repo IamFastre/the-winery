@@ -6,7 +6,7 @@
   $image-size: 0px;
 
   @if $direction == row {
-    $size: 85px;
+    $size: 80px;
     $image-size: 65px;
   }
   @else {

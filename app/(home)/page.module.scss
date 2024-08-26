@@ -11,10 +11,12 @@ $arrow-size: 28px;
 
 .card {
   padding: 0 20px;
-  position: absolute;
-  max-height: 70%;
+}
+
+.cardSection {
+  max-height: calc(80vh - 150px);
+  min-width: 200px;
   max-width: 600px;
-  height: 90%;
 }
 
 .quiver {
