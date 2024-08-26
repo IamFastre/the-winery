@@ -9,6 +9,7 @@ import { addLogoBadge } from "@/utils/server";
 import { CardList, ProfileInfo } from "./server";
 import { DataBox, ProfileEditor } from "./client";
 import styles from "./styles.module.scss";
+import Image from "next/image";
 
 
 interface Props {
@@ -53,6 +54,13 @@ export default async function UserPage({ params }:Props) {
 
   return (
     <Section className={styles.section} containerClassName={styles.sectionContainer}>
+      <Image
+        src={profile.avatar}
+        alt={''}
+        width={256}
+        height={256}
+        className={styles.avatarBlur}
+      />
       <div className={styles.userBox}>
         { isSelf ? <ProfileEditor profile={self} /> : <ProfileInfo profile={profile} /> }
         <DataBox cards={posts.length} joined={profile.created_at} />

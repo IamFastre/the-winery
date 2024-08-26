@@ -31,6 +31,15 @@
     }
   }
 
+  .avatarBlur {
+    position: absolute;
+    align-self: center;
+    top: 0;
+    user-select: none;
+    pointer-events: none;
+    filter: blur(30px) opacity(0.35);
+  }
+
   .userBox {
     align-items: center;
     gap: 10px;
