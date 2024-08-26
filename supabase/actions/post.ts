@@ -37,6 +37,8 @@ export async function getUserDrafts(identifier:string) {
   return getUserCards('drafts', identifier);
 }
 
+/* ========================================================================== */
+
 export async function getUserSaved(identifier:string) {
   const supabase = createClient();
 
@@ -54,6 +56,25 @@ export async function getUserSaved(identifier:string) {
   );
 
   return { data: responds.map(res => res.data).filter(d => d !== null), error: null }
+}
+
+export async function isPostSaved(id:number) {
+  const supabase = createClient();
+  const { data:user } = await getProfile();
+
+  if (!user)
+    return null;
+
+  const { data:saved } = await supabase
+    .from('saved')
+    .select()
+    .eq('user', user.identifier)
+    .eq('id', id);
+
+  if (!saved)
+    return null;
+  
+  return saved.length > 0;
 }
 
 /* ========================================================================== */
@@ -130,6 +151,28 @@ export async function createPost(title:string, content:string) {
 
 export async function createDraft(title:string, content:string) {
   return await createCard('drafts', title, content)
+}
+
+/* ========================================================================== */
+
+export async function savePost(id:number, action: 'save' | 'unsave') {
+  const supabase = createClient();
+  const { data:user } = await getProfile();
+
+  if (!user)
+    return false;
+
+  const res = action === 'save'
+    ? await supabase
+        .from('saved')
+        .insert({ user: user.identifier, id })
+    : await supabase
+        .from('saved')
+        .delete()
+        .eq('user', user.identifier)
+        .eq('id', id);
+
+  return res.error === null;
 }
 
 /* ========================================================================== */

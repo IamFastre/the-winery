@@ -47,7 +47,15 @@ export function CardList({ posts }:{ posts:Post[] }) {
         posts.length ?
         <div className={styles.cards}>
           { posts.map(post => (
-            <Card title={post.title} content={post.content} timestamp={post.timestamp} key={post.id} centered />)) }
+            <Card
+              title={post.title}
+              content={post.content}
+              timestamp={post.timestamp}
+              postId={post.id}
+              key={post.id}
+              centered
+            />
+            )) }
         </div>
       :
       <div className={styles.noCards}>

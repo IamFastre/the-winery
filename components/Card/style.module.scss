@@ -65,3 +65,14 @@
 .noUser {
   margin-top: -5px;
 }
+
+.interactionsHolder {
+  flex: 1;
+  height: 24px;
+  
+  > div {
+    position: absolute;
+    align-self: center;
+    right: 0;
+  }  
+}

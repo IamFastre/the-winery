@@ -40,6 +40,7 @@ export default async function SavesPage() {
                 title={post.title}
                 content={post.content}
                 timestamp={post.timestamp}
+                postId={post.id}
                 centered
               />
             </div>

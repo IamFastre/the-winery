@@ -1,0 +1,56 @@
+@import '@/styles/colors.module.scss';
+
+.container {
+  flex-direction: row;
+  gap: 5px;
+
+  > div {
+    cursor: pointer;
+
+    > svg {
+      font-size: 24px;
+      fill: $none;
+      stroke: $secondary;
+      path { stroke-width: 40px; }
+    }
+
+    &:hover, &:focus-visible {
+      > svg {
+        fill: $secondary;
+        stroke: $secondary;  
+      }
+    }
+  
+    &:active, &.active {
+      > svg {
+        fill: $tertiary;
+        stroke: $tertiary;  
+      }
+    }  
+  }
+
+  &.error {
+    opacity: 0.5;
+    > div {
+      cursor: not-allowed;
+      > svg {
+        fill: $none;
+        stroke: $red;
+      }
+    }
+  }
+}
+
+div.isSaved {
+  > svg {
+    fill: $cold;
+    stroke: $cold;
+  }
+}
+
+div.isLiked {
+  > svg {
+    fill: $red;
+    stroke: $red;
+  }
+}

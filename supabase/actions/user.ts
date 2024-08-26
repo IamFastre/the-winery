@@ -60,7 +60,7 @@ export async function getAuthorsMap(authors:string[]) {
     }
   }
 
-  return { data:users, hasError};
+  return { data:users, hasError };
 }
 
 /* ========================================================================== */

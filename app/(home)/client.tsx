@@ -74,6 +74,7 @@ export function FeedNavigator({ feed, users }:Props) {
         title={post.title}
         content={post.content}
         timestamp={post.timestamp}
+        postId={post.id}
         className={pageStyles.card}
       />
 

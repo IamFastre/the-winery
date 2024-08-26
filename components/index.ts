@@ -7,4 +7,5 @@ export * from "./Header";
 export * from "./LabelTitle";
 export * from "./LoadingText";
 export * from "./MarkDown";
+export * from "./PostButton";
 export * from "./Section";

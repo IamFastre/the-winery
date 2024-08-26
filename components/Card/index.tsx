@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Section } from "@/components/Section";
 import { MarkDown } from "@/components/MarkDown";
 import { C } from "@/components/C";
+import { PostButtons } from "@/components/PostButton";
 
 import { Time } from "./client";
 import styles from "./style.module.scss";
@@ -14,6 +15,7 @@ export type CardProps = {
   timestamp?: number | string;
   className?:string;
   centered?:boolean;
+  postId?:number;
 } & ({
   username: string;
   userAvatar: string;
@@ -60,12 +62,21 @@ export function Card(props:CardProps) {
           }
           {
             props.timestamp ?
-            <div className={`${styles.date} ${props.username ? "" : styles.noUser}`}>
+            <div className={`${styles.date} ${props.username || props.postId ? "" : styles.noUser}`}>
               <Time timestamp={props.timestamp} />
             </div>
             : null
           }
         </div>
+        {
+          props.postId ?
+            <div className={styles.interactionsHolder}>
+              <div>
+                <PostButtons postId={props.postId} />
+              </div>
+            </div>
+          : null
+        }
       </div>
     </div>
   );

@@ -1,35 +1,20 @@
 import { C } from "@/components/C";
 import { Section } from "@/components/Section";
 import { getFeedPosts } from "@/supabase/actions/post";
-import { getPublicProfile } from "@/supabase/actions/user";
-import { PublicProfile } from "@/supabase/actions/types";
+import { getAuthorsMap } from "@/supabase/actions/user";
 
 import { FeedNavigator } from "./client";
 import styles from "./page.module.scss";
 
 
 export default async function HomePage() {
-  const users:{ [identifier:string]:PublicProfile } = {};
-  const { data:feed, error } = await getFeedPosts(20);
   let errorClue:string | null = null;
 
-  if (error)
-    errorClue = 'loading feed posts';
-  if (feed)
-    errorClue = null;
+  const { data:feed, error } = await getFeedPosts(20);
+  errorClue ??= error ? 'loading feed posts' : null;
 
-  for (const post of feed ?? []) {
-    if (post?.author && !users[post.author]) {
-      const { data, error } = await getPublicProfile(post.author);
-      
-      if (error)
-        errorClue = 'loading users info';
-      if (data) {
-        errorClue = null;
-        users[post.author] = data;
-      }
-    }
-  }
+  const { data:users, hasError } = await getAuthorsMap((feed ?? []).map(e => e.author!));
+  errorClue ??= hasError ? 'loading users info' : null;
 
   return (
     <Section title="Home" style={{ flex: 1 }} containerClassName={styles.sectionContent}>
