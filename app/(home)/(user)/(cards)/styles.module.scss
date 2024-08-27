@@ -41,12 +41,11 @@
     }
   }
 
-  .backButton {    
+  .backButton {
     margin-left: $back-button-size/2;
     cursor: pointer;
-    padding: 2.5px;
     
-    svg {
+    > svg {
       font-size: $back-button-size;
       transform-origin: right;
       transition: all 500ms $time-func;
@@ -56,10 +55,35 @@
       &:hover, &:focus-visible {
         transform: scale(1.2);
       }
-      
+
       &:active, &.active {
-        transform: scale(0.8);        
+        transform: scale(0.8);
       }
+    }
+  }
+
+  .pageIcon {
+    margin-right: $back-button-size/2;
+
+    > svg {
+      font-size: $back-button-size*3/4;
+      transition: all 500ms $time-func;
+      fill: $accent;
+      stroke: $accent;
+      path { stroke-width: 40px; }
+
+      &:hover, &:focus-visible {
+        transform: scale(1.2);
+      }
+
+      &:active, &.active {
+        animation: spin 750ms ease-in-out infinite;
+      }
+    }
+
+    @keyframes spin {
+      from { rotate: 0deg; }
+      to { rotate: 360deg; }
     }
   }
 }

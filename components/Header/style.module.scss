@@ -1,6 +1,6 @@
 @import '@/styles/colors.module.scss';
 
-@mixin styling($font-size, $small-font-size) {
+@mixin styling($font-size, $bracket-font-size) {
   .container {
     flex: 1;
     justify-content: center;
@@ -8,17 +8,29 @@
     flex-direction: row;
   }
 
+  .middle {
+    justify-content: center;
+    align-items: center;
+  }
+
   .title {
     justify-content: center;
     align-items: center;
     flex-direction: row;
     gap: 10px;
-    font-size: $small-font-size;
+    font-size: $bracket-font-size;
+
+    .text {
+      font-size: $font-size;
+      color: $accent;
+    }
   }
 
-  .text {
-    font-size: $font-size;
-    color: $accent;
+  .subtitle {
+    .text {
+      font-size: 12px;
+      color: $secondary;
+    }
   }
 
   .children {
@@ -28,9 +40,9 @@
 
 @media screen and (min-width: 0px)
               and (max-width: 786px) {
-  @include styling($font-size: 22px, $small-font-size: 14px);
+  @include styling($font-size: 22px, $bracket-font-size: 14px);
 }
 
 @media screen and (min-width: 787px) {
-  @include styling($font-size: 28px, $small-font-size: 20px);
+  @include styling($font-size: 28px, $bracket-font-size: 20px);
 }

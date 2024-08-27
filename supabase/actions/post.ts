@@ -7,13 +7,13 @@ import XRegExp from "xregexp";
 /*                                   Reading                                  */
 /* ========================================================================== */
 
-export async function getFeedPosts(amount:number = 5) {
+export async function getFeedPosts(limit:number = 20) {
   const supabase = createClient();
 
   return await supabase
     .from('posts')
     .select()
-    .limit(amount)
+    .limit(limit)
     .order('timestamp', { ascending: false });
 }
 
@@ -37,15 +37,34 @@ export async function getUserDrafts(identifier:string) {
   return getUserCards('drafts', identifier);
 }
 
+export async function getDraftCount(identifier:string) {
+  const supabase = createClient();
+
+  return await supabase
+    .from('drafts')
+    .select('*', { count: 'exact', head: true })
+    .eq('author', identifier.toLowerCase());
+}
+
 /* ========================================================================== */
 
-export async function getUserSaved(identifier:string) {
+export async function getSavedCount(identifier:string) {
+  const supabase = createClient();
+
+  return await supabase
+    .from('saved')
+    .select('*', { count: 'exact', head: true })
+    .eq('user', identifier.toLowerCase());
+}
+
+export async function getUserSaved(identifier:string, limit:number = 20) {
   const supabase = createClient();
 
   const { data:saves, error } = await supabase
     .from('saved')
     .select()
     .eq('user', identifier.toLowerCase())
+    .limit(limit)
     .order('timestamp', { ascending: false });
 
   if (!saves || error)
