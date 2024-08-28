@@ -115,20 +115,20 @@ export type Database = {
           },
         ]
       }
-      saved: {
+      saves: {
         Row: {
-          created_at: string
           id: number
+          timestamp: string
           user: string | null
         }
         Insert: {
-          created_at?: string
           id?: number
+          timestamp?: string
           user?: string | null
         }
         Update: {
-          created_at?: string
           id?: number
+          timestamp?: string
           user?: string | null
         }
         Relationships: [

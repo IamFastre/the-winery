@@ -52,7 +52,7 @@ export async function getSavedCount(identifier:string) {
   const supabase = createClient();
 
   return await supabase
-    .from('saved')
+    .from('saves')
     .select('*', { count: 'exact', head: true })
     .eq('user', identifier.toLowerCase());
 }
@@ -61,7 +61,7 @@ export async function getUserSaved(identifier:string, limit:number = 20) {
   const supabase = createClient();
 
   const { data:saves, error } = await supabase
-    .from('saved')
+    .from('saves')
     .select()
     .eq('user', identifier.toLowerCase())
     .limit(limit)
@@ -85,7 +85,7 @@ export async function isPostSaved(id:number) {
     return null;
 
   const { data:saved } = await supabase
-    .from('saved')
+    .from('saves')
     .select()
     .eq('user', user.identifier)
     .eq('id', id);
@@ -183,10 +183,10 @@ export async function savePost(id:number, action: 'save' | 'unsave') {
 
   const res = action === 'save'
     ? await supabase
-        .from('saved')
+        .from('saves')
         .insert({ user: user.identifier, id })
     : await supabase
-        .from('saved')
+        .from('saves')
         .delete()
         .eq('user', user.identifier)
         .eq('id', id);
