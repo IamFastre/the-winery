@@ -70,6 +70,23 @@ export function humanizeTime(stamp: number | string, utc:boolean = true, noTime:
   return day + (noTime ? "" : `, at ${date.format("h:mma")}`);
 }
 
+export function humanizeLikes(count: number) : string {
+  let result = '';
+
+  if (count > 999_999_999_999)
+    result = `${Math.floor(count / 10000)/10}T`;
+  else if (count > 999_999_999)
+    result = `${Math.floor(count / 10000)/10}B`;
+  else if (count > 999_999)
+    result = `${Math.floor(count / 1000)/10}M`;
+  else if (count > 999)
+    result = `${Math.floor(count / 100)/10}K`;
+  else
+    result = `${count}`;
+
+  return result;
+}
+
 export function cropAvatar(base64Image:string, onDone:(dataUrl:string) => void, sharpen:boolean = false) {
   const WIDTH = 256, HEIGHT = 256;
   const image = document.createElement("img");

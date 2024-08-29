@@ -1,8 +1,32 @@
 @import '@/styles/colors.module.scss';
 @import '@/styles/consts.module.scss';
 
+@mixin isActive($color: $accent) {
+  > svg {
+    fill: $color;
+    stroke: $color;
+
+    &:hover, &:focus-visible {
+      fill: $none;
+      stroke: $color;
+    }
+
+    &:active, &.active {
+      fill: $none;
+      stroke: $tertiary;
+    }
+  }
+}
+
+@keyframes popUp {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
 .container {
   flex-direction: row;
+  align-items: center;
   gap: 5px;
 
   > div {
@@ -43,16 +67,18 @@
   }
 }
 
-div.isSaved {
-  > svg {
-    fill: $cold;
-    stroke: $cold;
+.count {
+  justify-content: center;
+  align-items: center;
+
+  > span {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    font-size: 12px;
+    line-height: 0;
   }
 }
 
-div.isLiked {
-  > svg {
-    fill: $red;
-    stroke: $red;
-  }
-}
+div.isSaved { @include isActive($cold); }
+div.isLiked { @include isActive($hot); }

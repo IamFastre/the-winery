@@ -48,6 +48,15 @@ export async function getDraftCount(identifier:string) {
 
 /* ========================================================================== */
 
+export async function getLikeCount(id:number) {
+  const supabase = createClient();
+
+  return await supabase
+    .from('likes')
+    .select('*', { count: 'exact', head: true })
+    .eq('post', id);
+}
+
 export async function getSavedCount(identifier:string) {
   const supabase = createClient();
 
@@ -77,7 +86,7 @@ export async function getUserSaved(identifier:string, limit:number = 20) {
   return { data: responds.map(res => res.data).filter(d => d !== null), error: null }
 }
 
-export async function isPostSaved(id:number) {
+export async function isPost(id:number, what:'likes' | 'saves') {
   const supabase = createClient();
   const { data:user } = await getProfile();
 
@@ -85,15 +94,23 @@ export async function isPostSaved(id:number) {
     return null;
 
   const { data:saved } = await supabase
-    .from('saves')
+    .from(what)
     .select()
     .eq('user', user.identifier)
     .eq('post', id);
 
   if (!saved)
     return null;
-  
+
   return saved.length > 0;
+}
+
+export async function isPostLiked(id:number) {
+  return await isPost(id, 'likes')
+}
+
+export async function isPostSaved(id:number) {
+  return await isPost(id, 'saves')
 }
 
 /* ========================================================================== */
@@ -173,6 +190,26 @@ export async function createDraft(title:string, content:string) {
 }
 
 /* ========================================================================== */
+
+export async function likePost(id:number, action: 'like' | 'unlike') {
+  const supabase = createClient();
+  const { data:user } = await getProfile();
+
+  if (!user)
+    return false;
+
+  const res = action === 'like'
+    ? await supabase
+        .from('likes')
+        .insert({ user: user.identifier, post: id })
+    : await supabase
+        .from('likes')
+        .delete()
+        .eq('user', user.identifier)
+        .eq('post', id);
+
+  return res.error === null;
+}
 
 export async function savePost(id:number, action: 'save' | 'unsave') {
   const supabase = createClient();
