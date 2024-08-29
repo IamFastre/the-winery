@@ -1,18 +1,27 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { Dispatch, ReactElement, SetStateAction, useContext, useEffect, useState } from "react";
 
 import { ModalContext } from "./context";
 import { ModalContextValue } from "./types";
 import { ModalHolder } from "./ModalHolder";
+import { CloseButton } from "./CloseButton";
 
 interface ModalProps {
   shown: boolean;
+  setShown?: Dispatch<SetStateAction<boolean>>;
   children?: React.ReactNode;
   animationDuration?: number;
 }
 
 export function Modal(props:ModalProps) {
   const ctx = useContext(ModalContext);
+
+  const children = () => (
+    <>
+      {props.children}
+      {props.setShown && <CloseButton setter={props.setShown} />}
+    </>
+  );
 
   useEffect(() => {
     return () => {
@@ -21,7 +30,7 @@ export function Modal(props:ModalProps) {
   }, [])
 
   useEffect(() => {
-    ctx.setModal(props.children);
+    ctx.setModal(children);
     ctx.setShown(props.shown);
     ctx.setAnimationDuration(props.animationDuration);
   }, [props]);

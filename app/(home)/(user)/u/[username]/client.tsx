@@ -217,7 +217,7 @@ export function ProfileEditor({ profile }:{ profile:Profile }) {
         />
       </div>
 
-      <Modal shown={showOptions}>
+      <Modal shown={showOptions} setShown={setShowOptions}>
         <ProfileOptions
           close={closeMenu}
           options={[
