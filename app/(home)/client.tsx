@@ -11,6 +11,7 @@ import { useGoTo } from "@/hooks";
 
 import layoutStyles from "./layout.module.scss";
 import pageStyles from "./page.module.scss";
+import { Modal } from "@/providers/ModalProvider";
 
 
 interface Props {
@@ -106,13 +107,25 @@ export function FeedNavigator({ feed, users }:Props) {
 
 export function Sidebar({ username }:{ username:string; }) {
   const [redirecting, goto, current] = useGoTo();
+  const [modalShown, setModalShown] = useState<boolean>(false);
 
-  const Icon = (props:{ icon:IconType; dest?:string; }) => (
-    <props.icon
-      className={`${layoutStyles.icon} ${current.startsWith(props.dest!) ? layoutStyles.current : ""}`}
-      {...focusable(layoutStyles.active, props.dest ? () => goto(props.dest!) : undefined) as {}}
-    />
-  );
+  const Icon = (props:{ icon:IconType; dest?:string; onClick?: Function }) => {
+    const handleClick = () => {
+      if (props.dest) {
+        props.onClick?.();
+        goto(props.dest)
+      } else if (props.onClick) {
+        props.onClick();
+      }
+    };
+
+    return (
+      <props.icon
+        className={`${layoutStyles.icon} ${current.startsWith(props.dest!) ? layoutStyles.current : ""}`}
+        {...focusable(layoutStyles.active, handleClick) as {}}
+      />
+    );
+  };
 
   return (
     <Section style={{ flex: 1 }} containerStyle={{ borderStyle: redirecting ? 'dashed' : 'solid' }}>
@@ -127,10 +140,14 @@ export function Sidebar({ username }:{ username:string; }) {
           <Icon icon={IoSearchOutline} dest={'/search'} />
           <Icon icon={IoPersonCircleOutline} dest={`/u/${username}`} />
           <Icon icon={IoWineOutline} dest={'/compose'}/>
-          <Icon icon={IoCogOutline} />
+          <Icon icon={IoCogOutline} onClick={() => setModalShown(true)} />
           <Icon icon={IoInformationCircleOutline} dest={'/getting-started'} />
         </div>
       </div>
+
+      <Modal shown={modalShown} setShown={setModalShown}>
+        Soon...
+      </Modal>
     </Section>
   );
 }
