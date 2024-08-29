@@ -18,6 +18,7 @@
   .toastHolder {
     pointer-events: none;
     position: absolute;
+    z-index: 10;
     flex-direction: column-reverse;
     bottom: $bottom;
     padding-bottom: 15px;

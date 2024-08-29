@@ -6,5 +6,4 @@ export const DefaultToasterValue = {
   duration: {} as number,
 };
 
-export type ToasterValue = typeof DefaultToasterValue;
 export const ToasterContext = createContext(DefaultToasterValue);

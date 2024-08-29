@@ -1,17 +1,14 @@
 "use client";
 import { useContext, useState } from 'react';
 
-import { ToastWithID } from './types';
-import { ToasterContext, ToasterValue } from './context';
-import { ToastHolder } from './toast';
+import { ToastWithID, ToasterValue } from './types';
+import { ToasterContext } from './context';
+import { ToastHolder } from './Toast';
 
 
 export function useToaster() {
   const context = useContext(ToasterContext);
-
-  return {
-    add: context.add,
-  };
+  return { add: context.add };
 }
 
 export function Toaster({ children }:{ children:React.ReactNode }) {
@@ -31,11 +28,11 @@ export function Toaster({ children }:{ children:React.ReactNode }) {
   }
 
   return (
-    <div style={{ flex: 1 }}>
+    <>
       <ToasterContext.Provider value={value}>
         {children}
         <ToastHolder toasts={toasts} />
       </ToasterContext.Provider>
-    </div>
+    </>
   );
 }

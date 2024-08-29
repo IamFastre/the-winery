@@ -41,6 +41,39 @@ export type Database = {
           },
         ]
       }
+      likes: {
+        Row: {
+          id: number
+          timestamp: string
+          user: string
+        }
+        Insert: {
+          id?: number
+          timestamp?: string
+          user: string
+        }
+        Update: {
+          id?: number
+          timestamp?: string
+          user?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "likes_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "likes_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["identifier"]
+          },
+        ]
+      }
       posts: {
         Row: {
           author: string | null
@@ -119,17 +152,17 @@ export type Database = {
         Row: {
           id: number
           timestamp: string
-          user: string | null
+          user: string
         }
         Insert: {
           id?: number
           timestamp?: string
-          user?: string | null
+          user: string
         }
         Update: {
           id?: number
           timestamp?: string
-          user?: string | null
+          user?: string
         }
         Relationships: [
           {

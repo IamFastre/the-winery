@@ -1,4 +1,7 @@
 import { IconType } from "react-icons";
+import { DefaultToasterValue } from "./context";
+
+export type ToasterValue = typeof DefaultToasterValue;
 
 export type Toast = {
   message: string;
@@ -8,4 +11,7 @@ export type Toast = {
   duration?: number;
 };
 
-export type ToastWithID = Toast & { duration:number; id: number; };
+export type ToastWithID = Toast & {
+  duration:number;
+  id: number;
+};
