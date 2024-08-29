@@ -23,7 +23,7 @@ function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEvent
     <Section className={styles.menu} containerClassName={styles.menuContainer}>
       {options.map((o, i) => (
         <Fragment key={o.title}>
-          <div className={styles.option} onClick={e => { o.action?.(e); close(e) }}>
+          <div className={styles.option} onClick={o.action}>
             { o.icon ? <o.icon /> : null }
             <div>
               <span>{o.title}</span>
@@ -219,11 +219,11 @@ export function ProfileEditor({ profile }:{ profile:Profile }) {
 
       <Modal shown={showOptions}>
         <ProfileOptions
+          close={closeMenu}
           options={[
             { title: "Saved", icon: IoBookmarkOutline, action: e => router.push('/saved') },
             { title: "Drafts", icon: IoFolderOutline, action: e => router.push('/drafts') },
           ]}
-          close={closeMenu}
         />
       </Modal>
     </>

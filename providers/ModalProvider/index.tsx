@@ -8,14 +8,22 @@ import { ModalHolder } from "./ModalHolder";
 interface ModalProps {
   shown: boolean;
   children?: React.ReactNode;
+  animationDuration?: number;
 }
 
 export function Modal(props:ModalProps) {
   const ctx = useContext(ModalContext);
 
   useEffect(() => {
+    return () => {
+      ctx.setIsOrphan(true);
+    }
+  }, [])
+
+  useEffect(() => {
     ctx.setModal(props.children);
     ctx.setShown(props.shown);
+    ctx.setAnimationDuration(props.animationDuration);
   }, [props]);
 
   return null;
@@ -24,13 +32,24 @@ export function Modal(props:ModalProps) {
 export function ModalProvider({ children }:{ children:React.ReactNode }) {
   const [modal, setModal] = useState<React.ReactNode>(null);
   const [shown, setShown] = useState<boolean>(false);
+  const [isOrphan, setIsOrphan] = useState<boolean>(false);
   const [animationDuration, setAnimationDuration] = useState<number | undefined>(undefined);
 
   const value:ModalContextValue = {
     setModal,
     setShown,
+    setIsOrphan,
     setAnimationDuration,
   };
+
+  useEffect(() => {
+    if (isOrphan) {
+      setModal(null);
+      setShown(false);
+      setIsOrphan(false);
+      setAnimationDuration(0);
+    }
+  }, [isOrphan])
 
   return (
     <>
