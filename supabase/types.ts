@@ -43,25 +43,35 @@ export type Database = {
       }
       likes: {
         Row: {
-          id: number
+          post: number
           timestamp: string
           user: string
+          uuid: string
         }
         Insert: {
-          id?: number
+          post?: number
           timestamp?: string
           user: string
+          uuid?: string
         }
         Update: {
-          id?: number
+          post?: number
           timestamp?: string
           user?: string
+          uuid?: string
         }
         Relationships: [
           {
             foreignKeyName: "likes_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            columns: ["post"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "likes_post_fkey"
+            columns: ["post"]
+            isOneToOne: false
             referencedRelation: "posts"
             referencedColumns: ["id"]
           },
@@ -150,34 +160,37 @@ export type Database = {
       }
       saves: {
         Row: {
-          id: number
+          post: number
           timestamp: string
           user: string
+          uuid: string
         }
         Insert: {
-          id?: number
+          post?: number
           timestamp?: string
           user: string
+          uuid?: string
         }
         Update: {
-          id?: number
+          post?: number
           timestamp?: string
           user?: string
+          uuid?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "saved_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "posts"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "saved_user_fkey"
             columns: ["user"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["identifier"]
+          },
+          {
+            foreignKeyName: "saves_post_fkey"
+            columns: ["post"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
           },
         ]
       }

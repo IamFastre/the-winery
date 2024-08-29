@@ -71,7 +71,7 @@ export async function getUserSaved(identifier:string, limit:number = 20) {
     return { data: null, error };
 
   const responds = await Promise.all(
-    saves.map(save => getPost(save.id))
+    saves.map(save => getPost(save.post))
   );
 
   return { data: responds.map(res => res.data).filter(d => d !== null), error: null }
@@ -88,7 +88,7 @@ export async function isPostSaved(id:number) {
     .from('saves')
     .select()
     .eq('user', user.identifier)
-    .eq('id', id);
+    .eq('post', id);
 
   if (!saved)
     return null;
@@ -184,12 +184,12 @@ export async function savePost(id:number, action: 'save' | 'unsave') {
   const res = action === 'save'
     ? await supabase
         .from('saves')
-        .insert({ user: user.identifier, id })
+        .insert({ user: user.identifier, post: id })
     : await supabase
         .from('saves')
         .delete()
         .eq('user', user.identifier)
-        .eq('id', id);
+        .eq('post', id);
 
   return res.error === null;
 }
