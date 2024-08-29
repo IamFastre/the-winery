@@ -14,7 +14,6 @@ export function Modal(props:ModalProps) {
   const ctx = useContext(ModalContext);
 
   useEffect(() => {
-    console.log(props)
     ctx.setModal(props.children);
     ctx.setShown(props.shown);
   }, [props]);

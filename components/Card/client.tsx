@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { humanizeTime } from "@/utils";
 import { useHydration } from "@/hooks";
 

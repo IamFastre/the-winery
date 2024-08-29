@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { ChangeEventHandler, Fragment, MouseEventHandler, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -8,6 +8,7 @@ import { IoBookmarkOutline, IoBuildOutline, IoCloseOutline, IoEllipsisHorizontal
 
 import { cropAvatar, focusable, humanizeTime } from "@/utils";
 import { B, Bio, Button, C, LabelTitle, Section } from "@/components";
+import { Modal } from "@/providers/ModalProvider";
 import { editAvatar, editProfile } from "@/supabase/actions/user";
 import { Profile } from "@/supabase/actions/types";
 import { useHydration } from "@/hooks";
@@ -18,39 +19,26 @@ import styles from "./styles.module.scss";
 type Option = { title:string; icon?: IconType; action?:MouseEventHandler<HTMLDivElement>; };
 
 function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEventHandler<HTMLDivElement>; }) {
-  const [dying, setDying] = useState<boolean>(false);
-  const duration = 500;
-  const animation = `${styles.death} ${duration}ms ease-in-out forwards`;
-
   return (
-    <div className={styles.overlay}>
-      <div className={styles.background} style={{ animation: dying ? animation : undefined }} />
-      <Section className={styles.menu} containerClassName={styles.menuContainer} style={{ animation: dying ? animation : undefined }}>
-        {options.map((o, i) => (
-          <Fragment key={o.title}>
-            <div className={styles.option} onClick={o.action}>
-              { o.icon ? <o.icon /> : null }
-              <div>
-                <span>{o.title}</span>
-              </div>
+    <Section className={styles.menu} containerClassName={styles.menuContainer}>
+      {options.map((o, i) => (
+        <Fragment key={o.title}>
+          <div className={styles.option} onClick={e => { o.action?.(e); close(e) }}>
+            { o.icon ? <o.icon /> : null }
+            <div>
+              <span>{o.title}</span>
             </div>
-          </Fragment>
-        ))}
-        <hr/>
-        <Button
-          title="Close"
-          className={styles.closeButton}
-          onClick={e => {
-            setDying(true);
-            setTimeout(() => {
-              close(e);
-              setDying(false);
-            }, duration);
-          }}
-          noBrackets
-        />
-      </Section>
-    </div>
+          </div>
+        </Fragment>
+      ))}
+      <hr/>
+      <Button
+        title="Close"
+        className={styles.closeButton}
+        onClick={close}
+        noBrackets
+      />
+    </Section>
   );
 }
 
@@ -228,8 +216,8 @@ export function ProfileEditor({ profile }:{ profile:Profile }) {
           noMinimum
         />
       </div>
-      {
-        showOptions ?
+
+      <Modal shown={showOptions}>
         <ProfileOptions
           options={[
             { title: "Saved", icon: IoBookmarkOutline, action: e => router.push('/saved') },
@@ -237,8 +225,7 @@ export function ProfileEditor({ profile }:{ profile:Profile }) {
           ]}
           close={closeMenu}
         />
-        : null
-      }
+      </Modal>
     </>
   );
 }
