@@ -99,7 +99,7 @@ export function FeedNavigator({ feed, users }:Props) {
           className={index >= feed.length-1 ? pageStyles.disabled : null}
           {...focusable(pageStyles.active, () => inc(+1)) as any}
         />
-      </div>      
+      </div>
     </>
   );
 }

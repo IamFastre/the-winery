@@ -24,8 +24,8 @@ function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEvent
 
   return (
     <div className={styles.overlay}>
-      <div className={styles.background} style={{ animation: dying ? animation : "" }} />
-      <Section className={styles.menu} containerClassName={styles.menuContainer} style={{ animation: dying ? animation : "" }}>
+      <div className={styles.background} style={{ animation: dying ? animation : undefined }} />
+      <Section className={styles.menu} containerClassName={styles.menuContainer} style={{ animation: dying ? animation : undefined }}>
         {options.map((o, i) => (
           <Fragment key={o.title}>
             <div className={styles.option} onClick={o.action}>

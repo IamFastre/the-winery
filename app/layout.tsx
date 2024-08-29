@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 
 import consts from "@/utils/consts";
-import "@/styles/globals.scss";
 import { Toaster } from "@/providers/Toaster";
+import { ModalProvider } from "@/providers/ModalProvider";
+
+import "@/styles/globals.scss";
 
 
 export const metadata:Metadata = {
@@ -22,7 +24,9 @@ export default function RootLayout({ children }: Readonly<{ children:React.React
     <html lang="en">
       <body>
         <Toaster>
-          {children}
+          <ModalProvider>
+            {children}
+          </ModalProvider>
         </Toaster>
       </body>
     </html>
