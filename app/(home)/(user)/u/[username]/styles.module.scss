@@ -1,8 +1,7 @@
 @import '@/styles/colors.module.scss';
+@import '@/styles/consts.module.scss';
 
 @mixin styling($padding-top, $data-font-size, $cards-grid) {
-  $time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
-
   .section {
     flex: 1;
   }
@@ -308,7 +307,7 @@
     left: 0;
     right: 0;
     z-index: 10;
-    transition: all 500ms $time-func;
+    transition: all 500ms $ease-out-quartic;
     align-items: center;
     justify-content: center;
   }

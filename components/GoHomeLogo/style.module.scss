@@ -1,6 +1,6 @@
 @import '@/styles/colors.module.scss';
+@import '@/styles/consts.module.scss';
 
-$time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
 $shrink-transform: scale(0.8);
 $shadow: drop-shadow(-5px -5px 10px $highlight)
          drop-shadow(5px 5px 10px $accent);
@@ -13,7 +13,7 @@ $shrink-filter: $shadow blur(3px);
 
   img {
     cursor: pointer;
-    transition: all 500ms $time-func;
+    transition: all 500ms $ease-out-quartic;
     
     &:hover, &:focus-visible {
       transform: scale(0.85);

@@ -1,7 +1,7 @@
 @import '@/styles/colors.module.scss';
+@import '@/styles/consts.module.scss';
 
 @mixin styling($img-size) {
-  $time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
   $shadow: drop-shadow(0 0 5em rgba($highlight, 0.75));
 
   $shrink-filter: $shadow blur(3px);
@@ -38,7 +38,7 @@
   .icon {
     user-select: none;
     cursor: pointer;
-    transition: all 500ms $time-func;
+    transition: all 500ms $ease-out-quartic;
 
     &:hover, &:focus-visible {
       filter: $shadow;

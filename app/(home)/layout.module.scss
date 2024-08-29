@@ -1,7 +1,7 @@
 @import '@/styles/colors.module.scss';
+@import '@/styles/consts.module.scss';
 
 @mixin styling($direction, $icon-size) {
-  $time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
   $size: 0px;
   $image-size: 0px;
 
@@ -84,7 +84,7 @@
     fill: $quinary;
     stroke: $quinary;
     font-size: $icon-size;
-    transition: all 500ms $time-func;
+    transition: all 500ms $ease-out-quartic;
 
     &:hover, &:focus-visible {
       fill: $tertiary;
@@ -94,7 +94,7 @@
     }
 
     &:active, &.active {
-      transition: transform 100ms $time-func;
+      transition: transform 100ms $ease-out-quartic;
       transform: scale(0.8);
     }
 

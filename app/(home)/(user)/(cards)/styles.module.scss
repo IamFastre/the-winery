@@ -1,8 +1,7 @@
 @import '@/styles/colors.module.scss';
+@import '@/styles/consts.module.scss';
 
 @mixin styling($cards-grid, $back-button-size) {
-  $time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
-
   .section {
     flex: 1;
   }
@@ -48,7 +47,7 @@
     > svg {
       font-size: $back-button-size;
       transform-origin: right;
-      transition: all 500ms $time-func;
+      transition: all 500ms $ease-out-quartic;
       fill: $red;
       stroke: $red;
 
@@ -67,7 +66,7 @@
 
     > svg {
       font-size: $back-button-size*3/4;
-      transition: all 500ms $time-func;
+      transition: all 500ms $ease-out-quartic;
       fill: $accent;
       stroke: $accent;
       path { stroke-width: 40px; }

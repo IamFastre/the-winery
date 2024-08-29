@@ -1,6 +1,6 @@
 @import '@/styles/colors.module.scss';
+@import '@/styles/consts.module.scss';
 
-$time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
 $min-width: 350px;
 $max-width: 70%;
 
@@ -23,7 +23,7 @@ $max-width: 70%;
 .section {
   min-height: 300px;
   max-height: 90%;
-  transition: all 500ms $time-func;
+  transition: all 500ms $ease-out-quartic;
 
   form {
     display: flex;
@@ -84,7 +84,7 @@ $max-width: 70%;
   justify-content: center;
 
   div {
-    transition: all 500ms $time-func;
+    transition: all 500ms $ease-out-quartic;
     position: absolute;
     right: 10px;
     margin-bottom: 2px;
@@ -105,7 +105,7 @@ $max-width: 70%;
   margin-top: 5px;
   font-size: 10px;
   transform-origin: top;
-  animation: load-animation 1s $time-func;
+  animation: load-animation 1s $ease-out-quartic;
 
   > span {
     &.bad{
@@ -131,7 +131,7 @@ $max-width: 70%;
       border-radius: 5px;
 
       > div {
-        transition: all 500ms $time-func;
+        transition: all 500ms $ease-out-quartic;
         transform-origin: left;
         height: 100%;
         width: 100%;

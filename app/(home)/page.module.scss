@@ -1,6 +1,6 @@
 @import '@/styles/colors.module.scss';
+@import '@/styles/consts.module.scss';
 
-$time-func: cubic-bezier(0.165, 0.84, 0.44, 1);
 $arrow-size: 28px;
 
 .sectionContent {
@@ -48,12 +48,12 @@ $arrow-size: 28px;
 
   svg {
     font-size: $arrow-size;
-    transition: all 500ms $time-func;
+    transition: all 500ms $ease-out-quartic;
     stroke: $quinary;
     fill: $quinary;
 
     path {
-      transition: all 500ms $time-func;
+      transition: all 500ms $ease-out-quartic;
     }
 
     &.disabled {

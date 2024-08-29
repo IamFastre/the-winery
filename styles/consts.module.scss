@@ -1,0 +1,5 @@
+$ease-out-quartic: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+:export {
+  ease-out-quartic: $ease-out-quartic;
+}
