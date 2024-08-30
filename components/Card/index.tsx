@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { Section } from "@/components/Section";
 import { MarkDown } from "@/components/MarkDown";
-import { C } from "@/components/C";
+import { UsernameHandle } from "@/components/UsernameHandle";
 import { PostButtons } from "@/components/PostButtons";
 
 import { Time } from "./client";
@@ -56,18 +56,8 @@ export function Card(props:CardProps) {
         }
         <div className={styles.text}>
           {
-            props.username ?
-              <div className={styles.author}>
-                <a href={`/u/${props.username}`}>
-                  <C.QUINARY>
-                    u:
-                  </C.QUINARY>
-                  <C.ACCENT>
-                    {props.username}
-                  </C.ACCENT>
-                </a>
-              </div>
-            : null
+            props.username &&
+              <UsernameHandle username={props.username} />
           }
           {
             props.timestamp ?
@@ -78,13 +68,12 @@ export function Card(props:CardProps) {
           }
         </div>
         {
-          props.postId ?
+          props.postId &&
             <div className={styles.interactionsHolder}>
               <div>
                 <PostButtons postId={props.postId} />
               </div>
             </div>
-          : null
         }
       </div>
     </div>

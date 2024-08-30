@@ -1,0 +1,14 @@
+@import '@/styles/colors.module.scss';
+
+.main {
+  a {
+    font-size: 16px;
+    font-style: normal;
+    text-decoration: none;
+    line-height: 18px;
+    
+    &:hover, &:focus-visible {
+      text-decoration: $quinary underline dotted;
+    }  
+  }
+}
