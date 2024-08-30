@@ -9,3 +9,4 @@ export * from "./LoadingText";
 export * from "./MarkDown";
 export * from "./PostButtons";
 export * from "./Section";
+export * from "./UsernameHandle";

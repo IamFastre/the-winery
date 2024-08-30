@@ -68,17 +68,132 @@
 }
 
 .count {
-  justify-content: center;
-  align-items: center;
+  cursor: pointer;
+  font-size: 12px;
+  user-select: none;
 
   > span {
-    position: absolute;
-    pointer-events: none;
-    user-select: none;
-    font-size: 12px;
-    line-height: 0;
+    color: $secondary;
+    font-style: italic;
+  }
+
+  &:hover, &:focus-visible {
+    text-decoration-color: $accent;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+  }
+
+  &:active, &.active {
+    font-weight: bold;
   }
 }
 
 div.isSaved { @include isActive($cold); }
 div.isLiked { @include isActive($hot); }
+
+.modalSection {
+  min-width: fit-content;
+  width: 225px;
+  max-width: 80%;
+  min-height: 150px;
+}
+
+.modalSectionContent {
+  align-items: stretch;
+
+  hr {
+    align-self: center;
+    margin: 4px 0;
+  }
+}
+
+.modalHead {
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+
+  > span {
+    font-weight: bold;
+  }
+}
+
+.modalCloseButton {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+
+  > svg {
+    font-size: 24px;
+    transition: all 500ms $ease-out-quartic;
+    fill: $secondary;
+    stroke: $secondary;
+  }
+
+  &:hover, &:focus-visible {
+    > svg {
+      fill: $quinary;
+      stroke: $quinary;
+    }
+  }
+
+  &:active, &.active {
+    > svg {
+      fill: $tertiary;
+      stroke: $tertiary;
+    }
+  }
+}
+
+.modalBody {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+
+  > hr {
+    margin: 0;
+    border-color: $quaternary;
+    border-style: dashed;
+  }
+}
+
+.liker {
+  flex-direction: row;
+  align-self: stretch;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+
+  > img {
+    border-radius: 5px;
+  }
+
+  .hasDisplayName {
+    > div {
+      > a {
+        font-size: 12px;
+      }
+    }  
+  }
+}
+
+.noLikers {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  gap: 5px;
+
+  > svg {
+    font-size: 30px;
+    fill: $secondary;
+    stroke: $secondary;
+  }
+
+  > span {
+    font-size: 14px;
+    color: $secondary;
+    font-style: italic;
+  }
+}

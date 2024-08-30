@@ -1,6 +1,6 @@
 "use server";
 import { createClient } from "@/supabase/server";
-import { getProfile } from "./user";
+import { getProfile, getPublicProfile } from "./user";
 import XRegExp from "xregexp";
 
 /* ========================================================================== */
@@ -83,7 +83,26 @@ export async function getUserSaved(identifier:string, limit:number = 20) {
     saves.map(save => getPost(save.post))
   );
 
-  return { data: responds.map(res => res.data).filter(d => d !== null), error: null }
+  return { data: responds.map(res => res.data).filter(d => d !== null), error: null };
+}
+
+export async function getPostLikes(id:number) {
+  const supabase = createClient();
+
+  const { data:likes, error } = await supabase
+    .from('likes')
+    .select()
+    .eq('post', id)
+    .order('timestamp', { ascending: false });
+
+  if (!likes || error)
+    return { data: null, error };
+
+  const responds = await Promise.all(
+    likes.map(like => getPublicProfile(like.user))
+  );
+
+  return { data: responds.map(res => res.data).filter(d => d !== null), error: null };
 }
 
 export async function isPost(id:number, what:'likes' | 'saves') {
