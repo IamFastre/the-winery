@@ -114,7 +114,7 @@ export function Searcher() {
               <div className={styles.error}>
                 <IoCloseCircleOutline />
                 <span>
-                  An unexpected error has occurred
+                  Oops, an unexpected error has occurred
                 </span>
               </div>
               : !results ?
