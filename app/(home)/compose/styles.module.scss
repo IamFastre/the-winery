@@ -99,6 +99,11 @@
     }
   }
 
+  .loading {
+    align-self: center;
+    margin-right: 5px;
+  }
+  
   .error {
     color: $secondary;
     font-size: 14px;

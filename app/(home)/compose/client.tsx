@@ -6,7 +6,7 @@ import { IoEyeOutline, IoEye, IoFolderOutline, IoAdd, IoWine, IoFolder } from "r
 import XRegExp from "xregexp";
 
 import { SetState } from "@/utils";
-import { Section, MarkDown, Button, C } from "@/components";
+import { Section, MarkDown, Button, C, LoadingText } from "@/components";
 import { createPost, createDraft, editDraft, deleteDraft } from "@/supabase/actions/post";
 import { type AuthError, PostgrestError } from "@supabase/supabase-js";
 import { Draft, Profile } from "@/supabase/actions/types";
@@ -105,7 +105,7 @@ const Error = (props:{ error:AuthError | PostgrestError; isOK:boolean; }) => (
       :
       <>
         <span>
-          Seems an error has occurred, try again?
+          Oops, seems an error has occurred, try again?
         </span>
         <br/>
         <span>
@@ -131,27 +131,32 @@ export function PostEditor({ user }:{ user:Profile; }) {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [showPrev, setShowPrev] = useState<boolean>(false);
+  const [uploading, setUploading] = useState<boolean>(false);
   const [error, setError] = useState<AuthError | PostgrestError | null>(null);
 
-  const isOK = content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length >= 8;
+  const isEnough = content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length >= 8;
 
   const onPost = async () => {
+    setUploading(true);
     const { error: postError } = await createPost(title, content);
     setError(postError);
 
     if (!postError) {
       toaster.add({ message: "Post added", icon: IoWine });
       router.push(`/u/${user.username}`);
+      setUploading(false);
     }
   };
 
   const onDraft = async () => {
+    setUploading(true);
     const { error: draftError } = await createDraft(title, content);
     setError(draftError);
 
     if (!draftError) {
       toaster.add({ message: "Draft added", icon: IoFolder });
       router.push('/drafts');
+      setUploading(false);
     }
   };
 
@@ -169,22 +174,23 @@ export function PostEditor({ user }:{ user:Profile; }) {
       <div className={styles.footer}>
         <AsUser username={user.username} />
         <div className={styles.actions}>
+          {uploading && <LoadingText className={styles.loading} compact />}
           <Button
             noMinimum
             icon={{ element: IoFolderOutline }}
             onClick={onDraft}
-            disabled={!(isOK && user.username)}
+            disabled={!(isEnough && user.username) || uploading}
           />
           <Button
             noMinimum
             title="Post"
             icon={{ element: IoAdd }}
             onClick={onPost}
-            disabled={!(isOK && user.username)}
+            disabled={!(isEnough && user.username) || uploading}
           />
         </div>
       </div>
-      { error ? <Error error={error} isOK={isOK} /> : null }
+      { error ? <Error error={error} isOK={isEnough} /> : null }
     </div>
   );
 }
@@ -196,11 +202,13 @@ export function DraftEditor({ user, draft }:{ user:Profile; draft:Draft; }) {
   const [title, setTitle] = useState<string>(draft.title ?? "");
   const [content, setContent] = useState<string>(draft.content);
   const [showPrev, setShowPrev] = useState<boolean>(true);
+  const [uploading, setUploading] = useState<boolean>(false);
   const [error, setError] = useState<AuthError | PostgrestError | null>(null);
 
-  const isOK = content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length >= 8;
+  const isEnough = content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length >= 8;
 
   const onPost = async () => {
+    setUploading(true);
     const { error: postError } = await createPost(title, content);
     setError(postError);
 
@@ -211,27 +219,32 @@ export function DraftEditor({ user, draft }:{ user:Profile; draft:Draft; }) {
       if (!draftError) { 
         toaster.add({ message: "Post added", icon: IoWine });
         router.push(`/u/${user.username}`);
+        setUploading(false);
       }
     }
   };
 
   const onEdit = async () => {
+    setUploading(true);
     const { error } = await editDraft(draft.id, title, content);
     setError(error);
 
     if (!error) {
       toaster.add({ message: "Changes saved", icon: IoFolder });
       router.push('/drafts');
+      setUploading(false);
     }
   };
 
   const onDelete = async () => {
+    setUploading(true);
     const { error } = await deleteDraft(draft.id);
     setError(error);
 
     if (!error) {
       toaster.add({ message: "Draft deleted", icon: RiDeleteBin6Line, type: "error" });
       router.push('/drafts');
+      setUploading(false);
     }
   };
 
@@ -249,30 +262,31 @@ export function DraftEditor({ user, draft }:{ user:Profile; draft:Draft; }) {
       <div className={styles.footer}>
         <AsUser username={user.username} />
         <div className={styles.actions}>
+          {uploading && <LoadingText className={styles.loading} compact />}
           <Button
             noMinimum
             icon={{ element: RiDeleteBin6Line }}
             onClick={onDelete}
             color={colors.red}
-            disabled={!user.username}
+            disabled={!user.username || uploading}
             iconBackground
           />
           <Button
             noMinimum
             icon={{ element: RiBallPenLine }}
             onClick={onEdit}
-            disabled={!(isOK && user.username)}
+            disabled={!(isEnough && user.username) || uploading}
           />
           <Button
             noMinimum
             title="Post"
             icon={{ element: IoAdd }}
             onClick={onPost}
-            disabled={!(isOK && user.username)}
+            disabled={!(isEnough && user.username) || uploading}
           />
         </div>
       </div>
-      { error ? <Error error={error} isOK={isOK} /> : null }
+      { error ? <Error error={error} isOK={isEnough} /> : null }
     </div>
   );
 }
