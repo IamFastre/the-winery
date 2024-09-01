@@ -1,22 +1,31 @@
 "use client";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
+import { RiBallPenLine, RiDeleteBin6Line } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 import { IoEyeOutline, IoEye, IoFolderOutline, IoAdd, IoWine, IoFolder } from "react-icons/io5";
 import XRegExp from "xregexp";
 
+import { SetState } from "@/utils";
+import { Section, MarkDown, Button, C } from "@/components";
 import { createPost, createDraft, editDraft, deleteDraft } from "@/supabase/actions/post";
 import { type AuthError, PostgrestError } from "@supabase/supabase-js";
 import { Draft, Profile } from "@/supabase/actions/types";
-import { Section, MarkDown, Button, C } from "@/components";
 import { useToaster } from "@/providers/Toaster";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
-import { RiBallPenLine, RiDeleteBin6Line } from "react-icons/ri";
 
-type State<T> = Dispatch<SetStateAction<T>>;
+interface EditorProps {
+  title: string;
+  content: string;
+  show: boolean;
+  setShow: SetState<boolean>;
+  setTitle: SetState<string>;
+  setContent: SetState<string>;
+  resetError:  () => void;
+}
 
-const Editor = (props:{ title:string; content:string; show:boolean; setShow:State<boolean>; setTitle:State<string>; setContent:State<string>; setError: State<null>; }) => (
+const Editor = (props:EditorProps) => (
   <div className={styles.editor}>
     <Section
       title={props.show ?
@@ -49,7 +58,7 @@ const Editor = (props:{ title:string; content:string; show:boolean; setShow:Stat
           name="wine-card-content"
           placeholder="What's on your mind? (min. 8)"
           value={props.content}
-          onChange={e => { props.setContent(e.target.value); props.setError(null); }}
+          onChange={e => { props.setContent(e.target.value); props.resetError(); }}
           onBlur={() => props.setContent(c => c.trim())}
           autoComplete="off"
         />
@@ -122,13 +131,13 @@ export function PostEditor({ user }:{ user:Profile; }) {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [showPrev, setShowPrev] = useState<boolean>(false);
-  const [error, setError] = useState<AuthError | PostgrestError | null>();
+  const [error, setError] = useState<AuthError | PostgrestError | null>(null);
 
   const isOK = content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length >= 8;
 
   const onPost = async () => {
     const { error: postError } = await createPost(title, content);
-    setError(postError as any);
+    setError(postError);
 
     if (!postError) {
       toaster.add({ message: "Post added", icon: IoWine });
@@ -138,7 +147,7 @@ export function PostEditor({ user }:{ user:Profile; }) {
 
   const onDraft = async () => {
     const { error: draftError } = await createDraft(title, content);
-    setError(draftError as any);
+    setError(draftError);
 
     if (!draftError) {
       toaster.add({ message: "Draft added", icon: IoFolder });
@@ -155,7 +164,7 @@ export function PostEditor({ user }:{ user:Profile; }) {
         setTitle={setTitle}
         setContent={setContent}
         setShow={setShowPrev}
-        setError={setError as any}
+        resetError={() => setError(null)}
       />
       <div className={styles.footer}>
         <AsUser username={user.username} />
@@ -187,17 +196,17 @@ export function DraftEditor({ user, draft }:{ user:Profile; draft:Draft; }) {
   const [title, setTitle] = useState<string>(draft.title ?? "");
   const [content, setContent] = useState<string>(draft.content);
   const [showPrev, setShowPrev] = useState<boolean>(true);
-  const [error, setError] = useState<AuthError | PostgrestError | null>();
+  const [error, setError] = useState<AuthError | PostgrestError | null>(null);
 
   const isOK = content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length >= 8;
 
   const onPost = async () => {
     const { error: postError } = await createPost(title, content);
-    setError(postError as any);
+    setError(postError);
 
     if (!postError) {
       const { error: draftError } = await deleteDraft(draft.id);
-      setError(draftError as any);
+      setError(draftError);
 
       if (!draftError) { 
         toaster.add({ message: "Post added", icon: IoWine });
@@ -208,7 +217,7 @@ export function DraftEditor({ user, draft }:{ user:Profile; draft:Draft; }) {
 
   const onEdit = async () => {
     const { error } = await editDraft(draft.id, title, content);
-    setError(error as any);
+    setError(error);
 
     if (!error) {
       toaster.add({ message: "Changes saved", icon: IoFolder });
@@ -218,7 +227,7 @@ export function DraftEditor({ user, draft }:{ user:Profile; draft:Draft; }) {
 
   const onDelete = async () => {
     const { error } = await deleteDraft(draft.id);
-    setError(error as any);
+    setError(error);
 
     if (!error) {
       toaster.add({ message: "Draft deleted", icon: RiDeleteBin6Line, type: "error" });
@@ -235,7 +244,7 @@ export function DraftEditor({ user, draft }:{ user:Profile; draft:Draft; }) {
         setTitle={setTitle}
         setContent={setContent}
         setShow={setShowPrev}
-        setError={setError as any}
+        resetError={() => setError(null)}
       />
       <div className={styles.footer}>
         <AsUser username={user.username} />

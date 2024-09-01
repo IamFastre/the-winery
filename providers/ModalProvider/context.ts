@@ -1,10 +1,11 @@
-import { createContext, Dispatch, ReactNode, SetStateAction } from "react";
+import { createContext, ReactNode } from "react";
+import { SetState } from "@/utils";
 
 export const DefaultModalContextValue = {
-  setModal: {} as Dispatch<SetStateAction<ReactNode>>,
-  setShown: {} as Dispatch<SetStateAction<boolean>>,
-  setIsOrphan: {} as Dispatch<SetStateAction<boolean>>,
-  setAnimationDuration: {} as Dispatch<SetStateAction<number | undefined>>,
+  setModal: {} as SetState<ReactNode>,
+  setShown: {} as SetState<boolean>,
+  setIsOrphan: {} as SetState<boolean>,
+  setAnimationDuration: {} as SetState<number | undefined>,
 };
 
 export const ModalContext = createContext(DefaultModalContextValue);

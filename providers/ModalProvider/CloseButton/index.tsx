@@ -1,11 +1,10 @@
-import { Dispatch, SetStateAction } from "react";
 import { IoClose } from "react-icons/io5";
+import { focusable, SetState } from "@/utils";
 
 import styles from "./style.module.scss";
-import { focusable } from "@/utils";
 
 interface CloseButtonProps{
-  setter: Dispatch<SetStateAction<boolean>>;
+  setter: SetState<boolean>;
 }
 
 export function CloseButton(props:CloseButtonProps) {

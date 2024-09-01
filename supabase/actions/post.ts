@@ -1,7 +1,8 @@
 "use server";
-import { createClient } from "@/supabase/server";
-import { getProfile, getPublicProfile } from "./user";
 import XRegExp from "xregexp";
+import { createClient } from "@/supabase/server";
+import { PostgrestError } from "@supabase/supabase-js";
+import { getProfile, getPublicProfile } from "./user";
 
 /* ========================================================================== */
 /*                                   Reading                                  */
@@ -105,7 +106,7 @@ export async function getPostLikes(id:number) {
   return { data: responds.map(res => res.data).filter(d => d !== null), error: null };
 }
 
-export async function isPost(id:number, what:'likes' | 'saves') {
+async function isPost(id:number, what:'likes' | 'saves') {
   const supabase = createClient();
   const { data:user } = await getProfile();
 
@@ -171,7 +172,7 @@ async function editCard(table:'posts' | 'drafts', id:number, title:string | null
 
   title = title?.length ? title : null;
   if (content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 8)
-    return { data: null, error: {} };
+    return { data: null, error: {} as PostgrestError };
 
   return await supabase
     .from(table)
@@ -202,7 +203,7 @@ async function createCard(table:'posts' | 'drafts', title:string | null, content
 
   title = title?.length ? title : null;
   if (content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length < 8)
-    return { data: null, error: {} };
+    return { data: null, error: {} as PostgrestError };
 
   return await supabase
     .from(table)

@@ -1,5 +1,6 @@
 "use client";
-import { Dispatch, ReactElement, SetStateAction, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { SetState } from "@/utils";
 
 import { ModalContext } from "./context";
 import { ModalContextValue } from "./types";
@@ -8,7 +9,7 @@ import { CloseButton } from "./CloseButton";
 
 interface ModalProps {
   shown: boolean;
-  setShown?: Dispatch<SetStateAction<boolean>>;
+  setShown?: SetState<boolean>;
   children?: React.ReactNode;
   animationDuration?: number;
 }
