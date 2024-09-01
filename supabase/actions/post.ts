@@ -132,6 +132,16 @@ export async function isPostSaved(id:number) {
   return await isPost(id, 'saves')
 }
 
+export async function getPostInteractions(id:number) {
+  const [liked, saved, { count:likeCount }] = await Promise.all([
+    isPostLiked(id),
+    isPostSaved(id),
+    getLikeCount(id)
+  ]);
+
+  return { liked, saved, likeCount };
+}
+
 /* ========================================================================== */
 
 async function getCard(table:'posts' | 'drafts', id:number) {

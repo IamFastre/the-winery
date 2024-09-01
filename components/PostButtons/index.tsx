@@ -5,7 +5,7 @@ import { IoBookmark, IoClose, IoHeart, IoHeartDislikeOutline, IoWarning } from "
 import { focusable, humanizeLikes } from "@/utils";
 import { Section, LoadingText, UsernameHandle } from "@/components";
 import {  } from "@/components";
-import { getLikeCount, getPostLikes, isPostLiked, isPostSaved, likePost, savePost } from "@/supabase/actions/post";
+import { getLikeCount, getPostInteractions, getPostLikes, isPostLiked, isPostSaved, likePost, savePost } from "@/supabase/actions/post";
 import { PublicProfile } from "@/supabase/actions/types";
 import { Modal } from "@/providers/ModalProvider";
 
@@ -104,17 +104,17 @@ function LikesModal(props:LikesModalProps) {
 
 export function PostButtons(props:PostButtonsProps) {
   const [modalShown, setModalShown] = useState<boolean>(false);
+
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+
   const [lc, setLC] = useState<number>(0);
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
   useEffect(() => {
     var start = async () => {
-      const { count } = await getLikeCount(props.postId);
-      const liked = await isPostLiked(props.postId);
-      const saved = await isPostSaved(props.postId);
+      const { liked, saved, likeCount:count } = await getPostInteractions(props.postId);
 
       if (count !== null)
         setLC(count);
