@@ -11,6 +11,7 @@ import { Modal } from "@/providers/ModalProvider";
 
 import styles from "./style.module.scss";
 import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
 
 interface PostButtonsProps {
   postId: number;
@@ -106,32 +107,26 @@ export function PostButtons(props:PostButtonsProps) {
   const [modalShown, setModalShown] = useState<boolean>(false);
 
   const [error, setError] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
 
   const [lc, setLC] = useState<number>(0);
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
+  const { data, status, isLoading } = useQuery({
+    queryFn: async () => await getPostInteractions(props.postId),
+    queryKey: ['post-buttons', props.postId],
+  });
+
   useEffect(() => {
-    var start = async () => {
-      const { liked, saved, likeCount:count } = await getPostInteractions(props.postId);
-
-      if (count !== null)
-        setLC(count);
-
-      if (liked !== null)
-        setIsLiked(liked);
-
-      if (saved !== null)
-        setIsSaved(saved);
-
-      setError(liked === null && saved === null && count === null);
-      setLoading(false);
+    if (data) {
+      setIsLiked(!!data.liked);
+      setIsSaved(!!data.saved);
+      setLC(data.likeCount ?? 0);
+      setError(false);
+    } else if (status === 'error') {
+      setError(true);
     }
-
-    setLoading(true);
-    start();
-  }, [props.postId])
+  }, [data]);
 
   const onLike = async () => {
     const success = await likePost(props.postId, isLiked ? 'unlike' : 'like');
@@ -153,7 +148,7 @@ export function PostButtons(props:PostButtonsProps) {
       setIsSaved(s => !s)
   };
 
-  if (loading)
+  if (isLoading)
     return <LoadingText compact />;
 
   return (

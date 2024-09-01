@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 
 import consts from "@/utils/consts";
+import { QueryProvider } from "@/providers/Query";
 import { Toaster } from "@/providers/Toaster";
 import { ModalProvider } from "@/providers/ModalProvider";
 
@@ -23,11 +24,13 @@ export default function RootLayout({ children }: Readonly<{ children:React.React
   return (
     <html lang="en">
       <body>
-        <Toaster>
-          <ModalProvider>
-            {children}
-          </ModalProvider>
-        </Toaster>
+        <QueryProvider>
+          <Toaster>
+            <ModalProvider>
+              {children}
+            </ModalProvider>
+          </Toaster>
+        </QueryProvider>
       </body>
     </html>
   );
