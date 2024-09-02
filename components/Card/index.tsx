@@ -7,6 +7,7 @@ import { PostButtons } from "@/components/PostButtons";
 import { HydratedTime } from "@/components/HydratedTime";
 
 import styles from "./style.module.scss";
+import { ExpandButton } from "./client";
 
 
 export type CardProps = {
@@ -76,6 +77,7 @@ export function Card(props:CardProps) {
             </div>
         }
       </div>
+      { props.postId && <ExpandButton id={props.postId} /> }
     </div>
   );
 }

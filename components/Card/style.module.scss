@@ -1,4 +1,5 @@
 @import '@/styles/colors.module.scss';
+@import '@/styles/consts.module.scss';
 
 .card {
   justify-content: center;
@@ -16,6 +17,31 @@
     -ms-overflow-style: none;
     &::-webkit-scrollbar { display: none; }
     word-break: break-word;
+  }
+}
+
+.expand {
+  $size: 25px;
+  position: absolute;
+  top: -$size / 2 - 4px;
+  right: -$size / 2 - 4px;
+  padding: 5px;
+  background: radial-gradient(circle, $primary 25%, $none 80%);
+  transition: all 500ms $ease-out-quartic;
+  cursor: pointer;
+
+  > svg {
+    font-size: $size;
+    fill: $accent;
+    stroke: $accent;
+  }
+
+  &:hover, &:focus-visible {
+    transform: scale(1.2);
+  }
+
+  &:active, &.active {
+    transform: scale(0.8);
   }
 }
 
