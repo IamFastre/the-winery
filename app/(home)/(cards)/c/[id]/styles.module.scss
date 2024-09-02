@@ -1,0 +1,111 @@
+@import '@/styles/colors.module.scss';
+
+@mixin styling($buttons-scale) {
+  .sectionContent {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cardContent {
+    position: absolute;
+    max-height: calc(100%);
+    width: 100%;
+    max-width: 750px;
+    align-items: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 25px;
+
+    > hr {
+      margin: 25px 0;
+    }
+  }
+  .cardTitle {
+    margin-bottom: 25px;
+
+    > h1 {
+      font-size: 24px;
+      max-width: 100%;
+      word-break: break-all;
+      text-wrap: balance;
+      margin-block: 0;
+      
+      &::before { content: none; }
+    }
+    
+    > hr {
+      margin: 10px 0 0 0;
+      border-color: $highlight;
+    }
+  }
+  .footer {
+    align-self: stretch;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+
+    > img {
+      border-radius: 5px;
+    }
+  }
+
+  .authorText {
+    > div > a {
+      font-size: 16px;
+    }
+    > span {
+      color: $secondary;
+      font-size: 12px;
+    }
+  }
+
+  .footerEnd {
+    flex: 1;
+  }
+
+  .buttons {
+    margin-left: 20px;
+    align-items: end;
+
+    > div {
+      gap: 4px;
+      align-items: end;
+      transform: scale($buttons-scale);
+      transform-origin: right;
+    }
+  }
+
+  .error {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    > svg {
+      font-size: 50px;
+      fill: $red;
+      stroke: $red;
+    }
+
+    > span {
+      text-align: center;
+      font-size: larger;
+      color: $red;
+
+      > span {
+        font-size: smaller;
+        color: $secondary;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling($buttons-scale: 1.1);
+}
+
+@media screen and (min-width: 787px) {
+  @include styling($buttons-scale: 1.2);
+}
