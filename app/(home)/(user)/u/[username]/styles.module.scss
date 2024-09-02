@@ -10,7 +10,7 @@
     padding: $padding-top 10px 0 10px !important;
     gap: 5px;
 
-    hr {
+    > hr {
       width: 90%;
       overflow: visible;
       display: flex;
@@ -322,7 +322,7 @@
     backdrop-filter: blur(5px);
     animation: birth 500ms ease-in-out;
   }
-  
+
   .menu {
     min-width: fit-content;
     width: 200px;
@@ -330,27 +330,15 @@
     min-height: fit-content;
     animation: birth 500ms ease-in-out;
   
-    hr {
-      width: auto;
+    > hr {
+      width: 100%;
       align-self: stretch;
       margin: 0;
   
-      &::after {
-        content: none;
-      }
+      &::after { content: none; }
     }
   }
 
-  @keyframes birth {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  
-  @keyframes death {
-    from { opacity: 1; }
-    to   { opacity: 0; }
-  }
-  
   div.menuContainer {
     padding: 15px;
     gap: 10px;

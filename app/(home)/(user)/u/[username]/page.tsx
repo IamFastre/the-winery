@@ -12,11 +12,11 @@ import styles from "./styles.module.scss";
 import Image from "next/image";
 
 
-interface Props {
+interface UserPageProps {
   params: { username: string }
 }
 
-export async function generateMetadata({ params }:Props) : Promise<Metadata> {
+export async function generateMetadata({ params }:UserPageProps) : Promise<Metadata> {
   const username = params.username;
   const { data:profile  } = await getPublicProfile(params.username);
   
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }:Props) : Promise<Metadata> {
   }
 }
 
-export default async function UserPage({ params }:Props) {
+export default async function UserPage({ params }:UserPageProps) {
   const self = (await getProfile()).data;
 
   if (!self)
