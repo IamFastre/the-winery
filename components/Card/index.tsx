@@ -4,8 +4,8 @@ import { Section } from "@/components/Section";
 import { MarkDown } from "@/components/MarkDown";
 import { UsernameHandle } from "@/components/UsernameHandle";
 import { PostButtons } from "@/components/PostButtons";
+import { HydratedTime } from "@/components/HydratedTime";
 
-import { Time } from "./client";
 import styles from "./style.module.scss";
 
 
@@ -62,7 +62,7 @@ export function Card(props:CardProps) {
           {
             props.timestamp ?
             <div className={`${styles.date} ${props.username || props.postId ? "" : styles.noUser}`}>
-              <Time timestamp={props.timestamp} />
+              <HydratedTime timestamp={props.timestamp} />
             </div>
             : null
           }

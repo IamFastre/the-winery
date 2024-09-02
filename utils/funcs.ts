@@ -116,5 +116,5 @@ export function cropAvatar(base64Image:string, onDone:(dataUrl:string) => void, 
 }
 
 export function routerCanGoBack() {
-  return typeof window.history?.length === 'number' && window.history.length > 1;
+  return window && window.history.length > 1 && document.referrer.includes(location.origin);
 }

@@ -1,5 +1,4 @@
-import { HTMLAttributes } from "react";
-import CSS from "csstype";
+import { CSSProperties, HTMLAttributes } from "react";
 
 import styles from "./style.module.scss";
 
@@ -8,8 +7,8 @@ export interface SectionProps {
   title?: string | React.ReactElement | null;
   children?: React.ReactNode;
 
-  style?: CSS.Properties;
-  containerStyle?: CSS.Properties;
+  style?: CSSProperties;
+  containerStyle?: CSSProperties;
 
   className?: string;
   containerClassName?: string;
@@ -17,7 +16,7 @@ export interface SectionProps {
   attrs?: HTMLAttributes<HTMLDivElement>;
   containerAttrs?: HTMLAttributes<HTMLDivElement>;
 
-  titleColor?: CSS.Property.Color;
+  titleColor?: CSSProperties['color'];
   noFlex?: boolean;
   isCard?: boolean;
   centered?: boolean;

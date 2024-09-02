@@ -1,4 +1,4 @@
-import CSS from "csstype";
+import { CSSProperties } from "react";
 
 import { Section } from "@/components/Section";
 import styles from "./style.module.scss";
@@ -9,8 +9,8 @@ export interface HeaderProps {
   subtitle?: string;
   titleColor?: string;
   subtitleColor?: string;
-  height?: CSS.Property.Height;
-  margin?: CSS.Property.Margin;
+  height?: CSSProperties['height'];
+  margin?: CSSProperties['margin'];
   left?: React.ReactNode;
   right?: React.ReactNode;
   noBrackets?: boolean;
