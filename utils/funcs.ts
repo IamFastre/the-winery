@@ -114,3 +114,7 @@ export function cropAvatar(base64Image:string, onDone:(dataUrl:string) => void, 
     onDone(ctx.canvas.toDataURL('image/png'));
   };
 }
+
+export function routerCanGoBack() {
+  return typeof window.history?.length === 'number' && window.history.length > 1;
+}
