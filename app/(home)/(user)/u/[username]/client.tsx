@@ -46,7 +46,7 @@ export function ProfileEditor({ profile }:{ profile:Profile }) {
   const router = useRouter();
 
   const [editing, setEditing] = useState<boolean>(false);
-  const [showOptions, setShowOptions] = useState<boolean>(false);
+  const showOptionsState = useState<boolean>(false);
   const [avatarData, setAvatarData] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState<string>(profile.display_name ?? profile.username);
   const [bio, setBio] = useState<string>(profile.bio);
@@ -55,11 +55,11 @@ export function ProfileEditor({ profile }:{ profile:Profile }) {
   const imgInputRef = useRef<HTMLInputElement>(null);
 
   const openMenu = () => {
-    setShowOptions(true);
+    showOptionsState[1](true);
   }
 
   const closeMenu = () => {
-    setShowOptions(false);
+    showOptionsState[1](false);
   }
 
   const cancel = () => {
@@ -217,7 +217,7 @@ export function ProfileEditor({ profile }:{ profile:Profile }) {
         />
       </div>
 
-      <Modal shown={showOptions} setShown={setShowOptions}>
+      <Modal state={showOptionsState}>
         <ProfileOptions
           close={closeMenu}
           options={[

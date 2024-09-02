@@ -104,7 +104,7 @@ function LikesModal(props:LikesModalProps) {
 }
 
 export function PostButtons(props:PostButtonsProps) {
-  const [modalShown, setModalShown] = useState<boolean>(false);
+  const modalShownState = useState<boolean>(false);
 
   const [error, setError] = useState<boolean>(false);
 
@@ -167,7 +167,7 @@ export function PostButtons(props:PostButtonsProps) {
           <IoBookmark />
         </div>
       </div>
-      <span className={styles.count} {...focusable(styles.active, () => setModalShown(true))}>
+      <span className={styles.count} {...focusable(styles.active, () => modalShownState[1](true))}>
         {humanizeLikes(lc)}
         <span>
           {' '}
@@ -175,10 +175,10 @@ export function PostButtons(props:PostButtonsProps) {
         </span>
       </span>
 
-      <Modal shown={modalShown}>
+      <Modal state={modalShownState}>
         <LikesModal
           postId={props.postId}
-          close={() => setModalShown(false)}
+          close={() => modalShownState[1](false)}
         />
       </Modal>
     </>

@@ -107,7 +107,7 @@ export function FeedNavigator({ feed, users }:Props) {
 
 export function Sidebar({ username }:{ username:string; }) {
   const [redirecting, goto, current] = useGoTo();
-  const [modalShown, setModalShown] = useState<boolean>(false);
+  const modalShownState = useState<boolean>(false);
 
   const Icon = (props:{ icon:IconType; dest?:string; onClick?: Function }) => {
     const handleClick = () => {
@@ -140,12 +140,12 @@ export function Sidebar({ username }:{ username:string; }) {
           <Icon icon={IoSearchOutline} dest={'/search'} />
           <Icon icon={IoPersonCircleOutline} dest={`/u/${username}`} />
           <Icon icon={IoWineOutline} dest={'/compose'}/>
-          <Icon icon={IoCogOutline} onClick={() => setModalShown(true)} />
+          <Icon icon={IoCogOutline} onClick={() => modalShownState[1](true)} />
           <Icon icon={IoInformationCircleOutline} dest={'/getting-started'} />
         </div>
       </div>
 
-      <Modal shown={modalShown} setShown={setModalShown}>
+      <Modal state={modalShownState} closeButton>
         Soon...
       </Modal>
     </Section>
