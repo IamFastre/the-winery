@@ -16,6 +16,8 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
       const { data } = await getPost(id);
       if (data)
         setTitle(data.title ?? id);
+      else if (id === 12)
+        setTitle(undefined);
       else
         setTitle(null);
     };
