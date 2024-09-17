@@ -26,22 +26,22 @@
   top: -$size / 2 - 4px;
   right: -$size / 2 - 4px;
   padding: 5px;
-  background: radial-gradient(circle, $primary 25%, $none 80%);
-  transition: all 500ms $ease-out-quartic;
-  cursor: pointer;
+  gap: 5px;
+  background: radial-gradient(circle, $primary 50%, $none 85%);
+  
+  > a, div {
+    cursor: pointer;
+    transition: all 500ms $ease-out-quartic;
 
-  > svg {
-    font-size: $size;
-    fill: $accent;
-    stroke: $accent;
-  }
-
-  &:hover, &:focus-visible {
-    transform: scale(1.2);
-  }
-
-  &:active, &.active {
-    transform: scale(0.8);
+    > svg { font-size: $size; }
+    
+    &:hover, &:focus-visible {
+      transform: scale(1.2);
+    }
+    
+    &:active, &.active {
+      transform: scale(0.8);
+    }
   }
 }
 

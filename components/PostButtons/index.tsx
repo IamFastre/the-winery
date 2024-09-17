@@ -1,20 +1,20 @@
 "use client";
 import { Fragment, MouseEventHandler, useEffect, useState } from "react";
 import { IoBookmark, IoClose, IoHeart, IoHeartDislikeOutline, IoWarning } from "react-icons/io5";
+import { useQuery } from "@tanstack/react-query";
 
 import { focusable, humanizeLikes } from "@/utils";
-import { Section, LoadingText, UsernameHandle } from "@/components";
-import {  } from "@/components";
-import { getLikeCount, getPostInteractions, getPostLikes, isPostLiked, isPostSaved, likePost, savePost } from "@/supabase/actions/post";
+import { Section, LoadingText, UsernameHandle, CopyLinkButton } from "@/components";
+import { getPostInteractions, getPostLikes, likePost, savePost } from "@/supabase/actions/post";
 import { PublicProfile } from "@/supabase/actions/types";
 import { Modal } from "@/providers/ModalProvider";
 
 import styles from "./style.module.scss";
 import Image from "next/image";
-import { useQuery } from "@tanstack/react-query";
 
 interface PostButtonsProps {
   postId: number;
+  showShare?: boolean;
 }
 
 interface LikesModalProps {
@@ -166,6 +166,7 @@ export function PostButtons(props:PostButtonsProps) {
         >
           <IoBookmark />
         </div>
+        {props.showShare && <CopyLinkButton id={props.postId} activeClassName={styles.active} />}
       </div>
       <span className={styles.count} {...focusable(styles.active, () => modalShownState[1](true))}>
         {humanizeLikes(lc)}

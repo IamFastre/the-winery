@@ -95,6 +95,7 @@
   }
 
   .info    { @include icon($highlight); }
+  .success { @include icon($accent); }
   .warning { @include icon($yellow); }
   .error   { @include icon($red); }
 }

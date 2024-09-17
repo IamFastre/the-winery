@@ -5,7 +5,7 @@ export type ToasterValue = typeof DefaultToasterValue;
 
 export type Toast = {
   message: string;
-  type?: "info" | "warning" | "error";
+  type?: "info" | "success" | "warning" | "error";
   title?: string;
   icon?: IconType;
   duration?: number;
