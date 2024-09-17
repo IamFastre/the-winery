@@ -256,24 +256,27 @@ input, textarea {
   }
 }
 
-.mention {
+@mixin mention($tag-color, $link-color, $link-bg-opacity: 0.1, $link-bg-opacity-hover: 0.2) {
   font-weight: bold;
-  color: $quinary;
-  background-color: rgba($accent, 0.1);
+  color: $tag-color;
+  background-color: rgba($link-color, $link-bg-opacity);
   cursor: pointer;
   border-radius: 4px;
   padding: 2px 4px;
 
   &:hover, &:focus-visible {
-    background-color: rgba($accent, 0.2);
+    background-color: rgba($link-color, $link-bg-opacity-hover);
   } 
 
   a {
-    color: $accent;
+    color: $link-color;
     font-style: inherit;
     text-decoration: inherit; 
   }
 }
+
+.user-mention { @include mention($quinary, $accent); }
+.card-mention { @include mention($quinary, $highlight, 0.2, 0.35); }
 
 @media screen and (min-width: 0px)
               and (max-width: 786px) {
