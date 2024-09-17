@@ -63,7 +63,8 @@ export function humanizeTime(stamp: number | string, utc:boolean = true, noTime:
   let day = now.year() === date.year() && now.month() === date.month()
           ? (dif === 0 ? "today" : dif === 1 ? "yesterday" : `${dif} days ago`)
           : now.year() === date.year()
-          ? (mif === 1 ? `${date.date()}th of last month` : `${date.format("DD/MM")} this year`)
+          ? (mif === 1 ? (date.date() === 1 ? `${date.date()}st` : date.date() === 2 ? `${date.date()}nd` : `${date.date()}th` )
+            + ` of last month` : `${date.format("DD/MM")} this year`)
           : date.format("DD/MM/YYYY");
 
   day = (date.valueOf() > now.valueOf() ? "the future " : "") + day;
