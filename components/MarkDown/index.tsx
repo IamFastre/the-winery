@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, Suspense } from "react";
 import MD, { Options } from "react-markdown";
 import gfm from "remark-gfm";
 import headingId from "remark-heading-id";
@@ -20,7 +20,11 @@ const plugins:Options["remarkPlugins"] = [
 
 function HandleSpan(props:HTMLAttributes<HTMLSpanElement>) {
   if (props.className?.includes("card-mention"))
-    return <CardTag {...props} />;
+    return (
+      <Suspense>
+        <CardTag {...props} />
+      </Suspense>
+    );
 
   return <span {...props} />;
 }

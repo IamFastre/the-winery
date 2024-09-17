@@ -156,11 +156,11 @@ async function getCard(table:'posts' | 'drafts', id:number) {
 }
 
 export async function getPost(id:number) {
-  return getCard('posts', id);
+  return await getCard('posts', id);
 }
 
 export async function getDraft(id:number) {
-  return getCard('drafts', id);
+  return await getCard('drafts', id);
 }
 
 /* ========================================================================== */
