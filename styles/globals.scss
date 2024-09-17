@@ -287,10 +287,12 @@ input, textarea {
 @media screen and (min-width: 0px)
               and (max-width: 786px) {
   body { font-size: 14px; }
+  hr { border-width: 0.75px; }
 }
 
 @media screen and (min-width: 787px) {
   body { font-size: 16px; }
+  hr { border-width: 1px; }
 }
 
 * {
