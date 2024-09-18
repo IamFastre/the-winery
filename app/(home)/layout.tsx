@@ -1,5 +1,4 @@
 import { Toaster } from "@/providers/Toaster";
-import { Shortcuts } from "@/providers/Shortcuts";
 import { getProfile } from "@/supabase/actions/user";
 
 import { HomeShortcuts } from "./shortcuts";
@@ -17,10 +16,8 @@ export default async function HomeLayout({ children }: Readonly<{ children:React
       </div>
       <div className={styles.page}>
         <Toaster>
-          <Shortcuts>
-            {children}
-            <HomeShortcuts />
-          </Shortcuts>
+          {children}
+          <HomeShortcuts />
         </Toaster>
       </div>
     </div>
