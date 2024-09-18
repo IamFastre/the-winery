@@ -144,7 +144,7 @@ export function Sidebar({ username }:{ username:string; }) {
           <Icon icon={IoSearchOutline} id="search-page-button" dest={'/search'} />
           <Icon icon={IoPersonCircleOutline} id="user-page-button" dest={`/u/${username}`} />
           <Icon icon={IoWineOutline} id="compose-page-button" dest={'/compose'}/>
-          <Icon icon={IoCogOutline} id="settings-page-button" onClick={() => modalShownState[1](true)} />
+          <Icon icon={IoCogOutline} id="settings-page-button" onClick={() => modalShownState[1](s => !s)} />
           <Icon icon={IoInformationCircleOutline} id="info-page-button" dest={'/getting-started'} />
         </div>
       </div>
