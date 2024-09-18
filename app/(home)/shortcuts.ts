@@ -1,7 +1,7 @@
 "use client";
 import { useShortcuts } from "@/providers/Shortcuts";
 
-export function HomeShortcutsProvider({ children }:{ children:React.ReactNode }) {
+export function HomeShortcuts() {
   useShortcuts([
     { key: 'h', alt: true, clickableId: 'home-page-button' },
     { key: '1', alt: true, clickableId: 'search-page-button' },
@@ -11,5 +11,5 @@ export function HomeShortcutsProvider({ children }:{ children:React.ReactNode })
     { key: '5', alt: true, clickableId: 'info-page-button' },
   ]);
 
-  return children;
+  return null;
 }

@@ -58,7 +58,7 @@ export function Card(props:CardProps) {
         <div className={styles.text}>
           {
             props.username &&
-              <UsernameHandle id={`user-post-${props.postId}`} username={props.username} />
+              <UsernameHandle id="user-post" username={props.username} />
           }
           {
             props.timestamp ?

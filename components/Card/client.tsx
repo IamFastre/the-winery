@@ -12,7 +12,7 @@ export function CornerButtons({ id }:{ id:number; }) {
     <div className={styles.expand}>
       <a
         type="wrapper"
-        id={`expand-post-${id}`}
+        id="expand-post"
         href={`/c/${id}`}
         {...focusable(styles.active)}
       >

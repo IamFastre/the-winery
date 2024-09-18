@@ -12,6 +12,7 @@ import { getPublicProfile } from "@/supabase/actions/user";
 
 import { BackButton } from "../../client";
 import styles from "./styles.module.scss";
+import { CardPageShortcuts } from "./shortcuts";
 
 interface CardPageProps {
   params: { id: string }
@@ -100,7 +101,7 @@ export default async function CardPage({ params }:CardPageProps) {
               height={50}
             />
             <div className={styles.authorText}>
-              <UsernameHandle username={author.username} />
+              <UsernameHandle username={author.username} id="user-post" />
               <HydratedTime timestamp={post.timestamp} />
             </div>
             <div className={styles.footerEnd}>
@@ -113,6 +114,7 @@ export default async function CardPage({ params }:CardPageProps) {
           </div>
         </div>
       </Section>
+      <CardPageShortcuts />
     </div>
   );
 }

@@ -155,14 +155,14 @@ export function PostButtons(props:PostButtonsProps) {
     <>
       <div className={`${styles.container} ${error ? styles.error : ""}`}>
         <div
-          id={`like-post-${props.postId}`}
+          id="like-post"
           className={isLiked && !error ? styles.isLiked : ""}
           {...focusable(styles.active, error ? undefined : () => onLike())}
         >
           <IoHeart />
         </div>
         <div
-          id={`save-post-${props.postId}`}
+          id="save-post"
           className={isSaved && !error ? styles.isSaved : ""}
           {...focusable(styles.active, error ? undefined : () => onSave())}
         >
@@ -171,7 +171,7 @@ export function PostButtons(props:PostButtonsProps) {
         {props.showShare && <CopyLinkButton id={props.postId} activeClassName={styles.active} />}
       </div>
       <span
-        id={`like-list-${props.postId}`}
+        id="like-list"
         className={styles.count}
         {...focusable(styles.active, () => modalShownState[1](s => !s))}
       >

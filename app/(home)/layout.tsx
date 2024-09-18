@@ -1,10 +1,10 @@
 import { Toaster } from "@/providers/Toaster";
-import { HomeShortcutsProvider } from "@/providers/HomeShortcutsProvider";
+import { Shortcuts } from "@/providers/Shortcuts";
 import { getProfile } from "@/supabase/actions/user";
 
+import { HomeShortcuts } from "./shortcuts";
 import { Sidebar } from "./client";
 import styles from "./layout.module.scss";
-import { Shortcuts } from "@/providers/Shortcuts";
 
 export default async function HomeLayout({ children }: Readonly<{ children:React.ReactNode }>) {
   const self = (await getProfile()).data;
@@ -18,9 +18,8 @@ export default async function HomeLayout({ children }: Readonly<{ children:React
       <div className={styles.page}>
         <Toaster>
           <Shortcuts>
-            <HomeShortcutsProvider>
-              {children}
-            </HomeShortcutsProvider>
+            {children}
+            <HomeShortcuts />
           </Shortcuts>
         </Toaster>
       </div>

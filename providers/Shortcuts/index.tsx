@@ -14,8 +14,12 @@ export function useShortcut(shortcut:Shortcut) {
   }, []);
 }
 
-export function useShortcuts(shortcuts:Shortcut[]) {
+export function useShortcuts(shortcuts:Shortcut[], deps?:any[]) {
   const context = useContext(ShortcutsContext);
+  
+  if (deps) {
+    shortcuts.push({ key: null, deps } as unknown as Shortcut)
+  }
 
   useEffect(() => {
     shortcuts.forEach(s => context.add(s));
@@ -63,6 +67,9 @@ export function Shortcuts({ children }:{ children:React.ReactNode }) {
   useEffect(() => {
     const onKeyDown = (e:KeyboardEvent) => {
       for (var shortcut of shortcuts) {
+        if (shortcut.key === null)
+          continue;
+
         const altDown = shortcut.alt ?? false;
         const ctrlDown = shortcut.ctrl ?? false;
 
