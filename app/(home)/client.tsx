@@ -7,7 +7,7 @@ import { IoCogOutline, IoInformationCircleOutline, IoPersonCircleOutline, IoSear
 import { focusable } from "@/utils";
 import { Card, GoHomeLogo, Section } from "@/components";
 import { Post, PublicProfile } from "@/supabase/actions/types";
-import { useGoTo } from "@/hooks";
+import { useCardShortcuts, useGoTo } from "@/hooks";
 
 import layoutStyles from "./layout.module.scss";
 import pageStyles from "./page.module.scss";
@@ -51,16 +51,19 @@ export function FeedNavigator({ feed, users }:Props) {
   const post = feed[index];
   const author = users[post.author ?? ""];
 
-  const inc = (num:number = 1) => {
+
+  const increment = (num:number = 1) => {
     if (feed)
       if (index + num < feed.length && index + num >= 0)
         setIndex(index + num);    
   };
 
   const submit = () => {
-    inc(inpt - index);
+    increment(inpt - index);
     setInpt(index);
   };
+
+  useCardShortcuts(post.id);
 
   useEffect(() => {
     window.history.pushState(null, '', `?${setCardIndex(index + 1)}`);
@@ -81,10 +84,9 @@ export function FeedNavigator({ feed, users }:Props) {
       />
 
       <div className={pageStyles.quiver}>
-        <IoArrowBack
-          className={index <= 0 ? pageStyles.disabled : null}
-          {...focusable(pageStyles.active, () => inc(-1)) as any}
-        />
+        <div id={`go-back-${post.id}`} {...focusable(pageStyles.active, () => increment(-1)) as any}>
+          <IoArrowBack className={index <= 0 ? pageStyles.disabled : undefined} />
+        </div>
         <input
           id="span"
           name="wine-page-number"
@@ -96,10 +98,9 @@ export function FeedNavigator({ feed, users }:Props) {
           onKeyDown={e => { if (e.key === 'Enter') { submit(); e.currentTarget.blur(); } }}
           style={{ width: `${inpt ? inpt.toFixed().length : index.toFixed().length}ch` }}
         />
-        <IoArrowForward
-          className={index >= feed.length-1 ? pageStyles.disabled : null}
-          {...focusable(pageStyles.active, () => inc(+1)) as any}
-        />
+        <div id={`go-forward-${post.id}`} {...focusable(pageStyles.active, () => increment(+1)) as any}>
+          <IoArrowForward className={index >= feed.length-1 ? pageStyles.disabled : undefined} />
+        </div>
       </div>
     </>
   );

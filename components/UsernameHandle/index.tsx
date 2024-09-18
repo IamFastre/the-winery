@@ -4,13 +4,14 @@ import styles from "./style.module.scss";
 
 interface UsernameHandleProps {
   username: string;
+  id?: string;
   className?: string;
 }
 
 export function UsernameHandle(props:UsernameHandleProps) {
   return (
     <div className={`${styles.main} ${props.className }`}>
-      <a href={`/u/${props.username}`}>
+      <a id={props.id} href={`/u/${props.username}`}>
         <C.QUINARY>
           u:
         </C.QUINARY>

@@ -30,6 +30,7 @@ export function GoHomeLogo(props:HomeIconProps) {
 
   return (
     <div
+      id="home-button"
       className={`${styles.image} ${redirecting ? styles.redirecting : ""} ${props.className}`}
       style={props.style}
       onClick={() => goto(dest, 'assign')}

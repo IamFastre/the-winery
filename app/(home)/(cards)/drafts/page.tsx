@@ -37,7 +37,7 @@ export default async function DraftsPage() {
       <div className={styles.cardsHolder}>
         <div className={styles.cards}>
           {drafts.map(draft => (
-            <Link href={`/compose?draft=${draft.id}`} id="wrapper" key={draft.id}>
+            <Link href={`/compose?draft=${draft.id}`} type="wrapper" key={draft.id}>
               <Card
                 title={draft.title}
                 content={draft.content}

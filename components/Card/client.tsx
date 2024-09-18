@@ -7,11 +7,12 @@ import { focusable } from "@/utils";
 import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";
 
-export function ExpandButton({ id }:{ id:number; }) {
+export function CornerButtons({ id }:{ id:number; }) {
   return (
     <div className={styles.expand}>
       <a
-        id="wrapper"
+        type="wrapper"
+        id={`expand-post-${id}`}
         href={`/c/${id}`}
         {...focusable(styles.active)}
       >

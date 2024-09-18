@@ -24,6 +24,7 @@ export default function RootLayout({ children }: Readonly<{ children:React.React
   return (
     <html lang="en">
       <body>
+        <div id="NO-SELECT" tabIndex={0} />
         <QueryProvider>
           <Toaster>
             <ModalProvider>

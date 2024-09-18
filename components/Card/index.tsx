@@ -6,8 +6,8 @@ import { UsernameHandle } from "@/components/UsernameHandle";
 import { PostButtons } from "@/components/PostButtons";
 import { HydratedTime } from "@/components/HydratedTime";
 
+import { CornerButtons } from "./client";
 import styles from "./style.module.scss";
-import { ExpandButton } from "./client";
 
 
 export type CardProps = {
@@ -58,7 +58,7 @@ export function Card(props:CardProps) {
         <div className={styles.text}>
           {
             props.username &&
-              <UsernameHandle username={props.username} />
+              <UsernameHandle id={`user-post-${props.postId}`} username={props.username} />
           }
           {
             props.timestamp ?
@@ -77,7 +77,7 @@ export function Card(props:CardProps) {
             </div>
         }
       </div>
-      { props.postId && <ExpandButton id={props.postId} /> }
+      { props.postId && <CornerButtons id={props.postId} /> }
     </div>
   );
 }

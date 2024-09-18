@@ -18,39 +18,63 @@ export function useCardShortcuts(id:number) {
 
   useEffect(() => {
     const onKeyDown = (e:KeyboardEvent) => {
-      const click = (elementId:string) => {
+      const click = (elementId:string, includeId:boolean = true) => {
         e.preventDefault();
-        document.getElementById(`${elementId}-${id}`)?.click?.();
+        document.getElementById(includeId ? `${elementId}-${id}` : elementId)?.click?.();
       }
 
-      if (e.key === 'Control')
-        setCtrl(true);
-      else if (e.key === 'Alt')
-        setAlt(true);
-      else if (e.key === 'Escape')
-        document.getElementById("NO-SELECT")?.focus();
+      switch (e.key) {
+        case 'Control':
+          setCtrl(true);
+          break;
+        case 'Alt':
+          setAlt(true);
+          break;
+        case 'Escape':
+          document.getElementById("NO-SELECT")?.focus();
+          break;
+      }
 
       if (!alt && !ctrl) {
-        if (e.key === 'ArrowRight')
-          click("go-forward");
-        else if (e.key === 'ArrowLeft')
-          click("go-back");
+        switch (e.key) {
+          case 'ArrowRight':
+            click("go-forward");
+            break;
+          case 'ArrowLeft':
+            click("go-back");
+            break;
+        }
       }
 
       if (alt) { 
-        if (e.key === 'l')
-          click("like-post");
-        else if (e.key === 's')
-          click("save-post");
-        else if (e.key === 'c')
-          click("share-post");
-        else if (e.key === 'e')
-          click("expand-post");
+        switch (e.key) {
+          case 'h':
+            click("home-button", false);
+            break;
+          case 'l':
+            click("like-post");
+            break;
+          case 's':
+            click("save-post");
+            break;
+          case 'c':
+            click("share-post");
+            break;
+          case 'u':
+            click("user-post");
+            break;
+          case 'e':
+            click("expand-post");
+            break;
+        }
       }
 
       if (ctrl && alt) {
-        if (e.key === 'l')
-          click("like-list");
+        switch (e.key) {
+          case 'l':
+            click("like-list");
+            break;
+        }
       }
     }
 

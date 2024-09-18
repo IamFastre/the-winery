@@ -23,7 +23,7 @@ const setQuery = (value:string) => {
 const Result = ({ user }:{ user:PublicProfile; }) => {
   const hydrated = useHydration();
   return (
-    <Link href={`/u/${user.username}`} id="wrapper">
+    <Link href={`/u/${user.username}`} type="wrapper">
       <Section containerClassName={styles.userContainer} isCard>
         <div className={styles.avatar}>
           <Image

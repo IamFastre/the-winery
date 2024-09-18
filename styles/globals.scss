@@ -100,7 +100,7 @@ a {
     }
   }
 
-  &#wrapper {
+  &[type="wrapper"] {
     display: flex;
     color: inherit;
     font-style: inherit;
@@ -301,11 +301,17 @@ input, textarea {
 
   &:focus {
     outline: none;
-    
-    &:focus-visible {
+
+    &:focus-visible:not(#NO-SELECT) {
       outline-width: 1px;
       outline-color: $accent;
       outline-style: dashed;
     }
   }
+}
+
+#NO-SELECT {
+  width: 0;
+  height: 0;
+  z-index: -1;
 }
