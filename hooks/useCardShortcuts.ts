@@ -38,6 +38,24 @@ export function useCardShortcuts(id:number) {
       
       if (ctrl && alt) {
         switch (e.key) {
+          case 'h':
+            click("home-page-button", false);
+            break;
+          case '1':
+            click("search-page-button", false);
+            break;
+          case '2':
+            click("user-page-button", false);
+            break;
+          case '3':
+            click("compose-page-button", false);
+            break;
+          case '4':
+            click("settings-page-button", false);
+            break;
+          case '5':
+            click("info-page-button", false);
+            break;
           case 'l':
             click("like-list");
             break;
@@ -46,9 +64,6 @@ export function useCardShortcuts(id:number) {
 
       else if (alt) { 
         switch (e.key) {
-          case 'h':
-            click("home-button", false);
-            break;
           case 'l':
             click("like-post");
             break;

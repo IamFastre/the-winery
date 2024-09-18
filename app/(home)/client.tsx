@@ -110,7 +110,7 @@ export function Sidebar({ username }:{ username:string; }) {
   const [redirecting, goto, current] = useGoTo();
   const modalShownState = useState<boolean>(false);
 
-  const Icon = (props:{ icon:IconType; dest?:string; onClick?: Function }) => {
+  const Icon = (props:{ icon:IconType; dest?:string; id:string, onClick?: Function }) => {
     const handleClick = () => {
       if (props.dest) {
         props.onClick?.();
@@ -121,10 +121,13 @@ export function Sidebar({ username }:{ username:string; }) {
     };
 
     return (
-      <props.icon
+      <div
         className={`${layoutStyles.icon} ${current.startsWith(props.dest!) ? layoutStyles.current : ""}`}
+        id={props.id}
         {...focusable(layoutStyles.active, handleClick) as {}}
-      />
+      >
+        <props.icon />
+      </div>
     );
   };
 
@@ -138,11 +141,11 @@ export function Sidebar({ username }:{ username:string; }) {
         />
         <div className={layoutStyles.sep} />
         <div className={layoutStyles.icons}>
-          <Icon icon={IoSearchOutline} dest={'/search'} />
-          <Icon icon={IoPersonCircleOutline} dest={`/u/${username}`} />
-          <Icon icon={IoWineOutline} dest={'/compose'}/>
-          <Icon icon={IoCogOutline} onClick={() => modalShownState[1](true)} />
-          <Icon icon={IoInformationCircleOutline} dest={'/getting-started'} />
+          <Icon icon={IoSearchOutline} id="search-page-button" dest={'/search'} />
+          <Icon icon={IoPersonCircleOutline} id="user-page-button" dest={`/u/${username}`} />
+          <Icon icon={IoWineOutline} id="compose-page-button" dest={'/compose'}/>
+          <Icon icon={IoCogOutline} id="settings-page-button" onClick={() => modalShownState[1](true)} />
+          <Icon icon={IoInformationCircleOutline} id="info-page-button" dest={'/getting-started'} />
         </div>
       </div>
 

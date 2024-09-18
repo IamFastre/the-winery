@@ -81,30 +81,40 @@
   }
 
   .icon {
-    fill: $quinary;
-    stroke: $quinary;
-    font-size: $icon-size;
-    transition: all 500ms $ease-out-quartic;
+    > svg { 
+      fill: $quinary;
+      stroke: $quinary;
+      font-size: $icon-size;
+      transition: all 500ms $ease-out-quartic;
+    }
 
     &:hover, &:focus-visible {
-      fill: $tertiary;
-      stroke: $tertiary;
-      transform: scale(1.1);
-      filter: drop-shadow(0 0 5px $tertiary);
+      > svg {
+        fill: $tertiary;
+        stroke: $tertiary;
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 5px $tertiary);
+      }
     }
 
     &:active, &.active {
-      transition: transform 100ms $ease-out-quartic;
-      transform: scale(0.8);
+      > svg {
+        transition: transform 100ms $ease-out-quartic;
+        transform: scale(0.8);
+      }
     }
 
     &.current {
-      transform: scale(1.1);
-      fill: $accent;
-      stroke: $accent;
+      > svg {
+        transform: scale(1.1);
+        fill: $accent;
+        stroke: $accent;
+      }
 
       &:hover, &:focus-visible {
-        filter: drop-shadow(0 0 5px $accent);
+        > svg {
+          filter: drop-shadow(0 0 5px $accent);
+        }
       }
     }
   }
