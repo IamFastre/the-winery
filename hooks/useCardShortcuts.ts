@@ -35,18 +35,16 @@ export function useCardShortcuts(id:number) {
           break;
       }
 
-      if (!alt && !ctrl) {
+      
+      if (ctrl && alt) {
         switch (e.key) {
-          case 'ArrowRight':
-            click("go-forward");
-            break;
-          case 'ArrowLeft':
-            click("go-back");
+          case 'l':
+            click("like-list");
             break;
         }
       }
 
-      if (alt) { 
+      else if (alt) { 
         switch (e.key) {
           case 'h':
             click("home-button", false);
@@ -69,10 +67,13 @@ export function useCardShortcuts(id:number) {
         }
       }
 
-      if (ctrl && alt) {
+      else if (!alt && !ctrl) {
         switch (e.key) {
-          case 'l':
-            click("like-list");
+          case 'ArrowRight':
+            click("go-forward");
+            break;
+          case 'ArrowLeft':
+            click("go-back");
             break;
         }
       }
