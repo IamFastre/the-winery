@@ -187,3 +187,22 @@ export async function signIn(email:string, password:string) {
     error
   };
 }
+
+export async function resetPassword(password:string) {
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.updateUser({ password });
+
+  return { data, error: JSON.parse(JSON.stringify(error))}
+}
+
+export async function sendResetPassword(email:string) {
+  const supabase = createClient();
+  const url = await getCurrentURL();
+
+  if (emailRegex.test(email))
+    return await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${url}/auth/password/reset`
+    });
+
+  return { data: null, error: "Bad email" };
+}
