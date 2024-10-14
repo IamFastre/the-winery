@@ -197,11 +197,10 @@ export async function resetPassword(password:string) {
 
 export async function sendResetPassword(email:string) {
   const supabase = createClient();
-  const url = await getCurrentURL();
 
   if (emailRegex.test(email))
     return await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${url}/auth/password/reset`
+      redirectTo: await getCurrentURL(),
     });
 
   return { data: null, error: "Bad email" };
