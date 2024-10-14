@@ -8,11 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
-    "@supabase/ssr": "^0.4.0",
-    "@supabase/supabase-js": "^2.44.3",
+    "@supabase/ssr": "^0.4.1",
+    "@supabase/supabase-js": "^2.45.4",
     "@tanstack/react-query": "^5.53.1",
     "moment": "^2.30.1",
-    "next": "14.2.4",
+    "next": "^14.2.15",
     "object-hash": "^3.0.0",
     "react": "^18",
     "react-dom": "^18",
