@@ -146,7 +146,7 @@ export function LoginCard() {
           className={styles.button}
         />
 
-        <a href="">
+        <a href="/auth/password/forgot">
           Forgot password?
         </a>
       </form>

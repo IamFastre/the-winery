@@ -1,8 +1,8 @@
 @import '@/styles/colors.module.scss';
 @import '@/styles/consts.module.scss';
 
-$min-width: 350px;
-$max-width: 70%;
+$width: 365px;
+$max-width: 85%;
 
 .page {
   flex: 1;
@@ -15,7 +15,7 @@ $max-width: 70%;
   flex: 1;
   align-items: stretch;
   justify-content: center;
-  min-width: $min-width;
+  width: $width;
   max-width: $max-width;
   gap: 10px;
 }
@@ -25,12 +25,28 @@ $max-width: 70%;
   max-height: 90%;
   transition: all 500ms $ease-out-quartic;
 
+  .paragraph {
+    padding: 0 10px;
+    color: $secondary;
+    font-size: smaller;
+  }
+
+  .success {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    color: $accent;
+    background-color: rgba($accent, 0.2);
+    align-items: center;
+    gap: 10px;
+  }
+
   form {
     display: flex;
     flex-direction: column;
     padding: 10px;
     gap: 20px;
-
+    
     label {
       display: flex;
       flex-direction: column;
