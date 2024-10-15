@@ -141,7 +141,6 @@ const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[?!@#$%
 
 export async function signUp(username:string, email:string, password:string) {
   const supabase = createClient();
-  const avatar   = await getAvatarUrl(username);
 
   let data:AuthData | null = null;
   let error:AuthError | null = null;
@@ -152,7 +151,7 @@ export async function signUp(username:string, email:string, password:string) {
       password,
       options: {
         emailRedirectTo: await getCurrentURL(),
-        data: { username, avatar }
+        data: { username },
       }
     });
 

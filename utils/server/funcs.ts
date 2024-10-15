@@ -55,7 +55,7 @@ export async function getAvatarUrl(username:string) {
     "2b1000", // 12
   ];
 
-  return `https://api.dicebear.com/9.x/identicon/png?seed=${username}&rowColor=${color}&backgroundColor=${bgColor}&size=256&created=${Date.now()}`;
+  return `https://api.dicebear.com/9.x/identicon/png?seed=${username}&rowColor=${color}&backgroundColor=${bgColor}&size=256`;
 }
 
 export async function cropAvatar(base64Image:string, sharpen:boolean = false) {
