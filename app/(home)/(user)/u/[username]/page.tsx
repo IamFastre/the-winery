@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 import consts from "@/utils/consts";
-import { getProfile, getPublicProfile } from "@/supabase/actions/user";
+import { getProfile, getPublicProfile, isMailConfirmed } from "@/supabase/actions/user";
 import { getUserPosts } from "@/supabase/actions/post";
 import { Section } from "@/components/Section";
 import { addLogoBadge } from "@/utils/server";
@@ -48,6 +48,7 @@ export default async function UserPage({ params }:UserPageProps) {
   const other = !isSelf ? (await getPublicProfile(params.username)).data : null;
   const profile = isSelf ? self : other;
   const posts = profile ? (await getUserPosts(profile.username)).data : null;
+  const isConfirmed = profile ? await isMailConfirmed(profile.id) : null;
 
   if (!profile || !posts)
     return; // not found
@@ -62,7 +63,7 @@ export default async function UserPage({ params }:UserPageProps) {
         className={styles.avatarBlur}
       />
       <div className={styles.userBox}>
-        { isSelf ? <ProfileEditor profile={self} /> : <ProfileInfo profile={profile} /> }
+        { isSelf ? <ProfileEditor profile={self} /> : <ProfileInfo profile={profile} isConfirmed={!!isConfirmed} /> }
         <DataBox cards={posts.length} joined={profile.created_at} />
       </div>
       <hr/>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { IoFolderOpenOutline } from "react-icons/io5";
+import { IoFolderOpenOutline, IoHelpCircle } from "react-icons/io5";
 import { PublicProfile } from "@/supabase/actions/types";
 
 import { Post } from "@/supabase/actions/types";
@@ -10,7 +10,7 @@ import { Bio } from "@/components/Bio";
 
 import styles from "./styles.module.scss";
 
-export function ProfileInfo({ profile }:{ profile:PublicProfile; }) {
+export function ProfileInfo({ profile, isConfirmed }:{ profile:PublicProfile; isConfirmed: boolean; }) {
   return (
     <>
       <Image
@@ -33,6 +33,7 @@ export function ProfileInfo({ profile }:{ profile:PublicProfile; }) {
               {profile.username}
             </C.ACCENT>
           </span>
+          {isConfirmed || <IoHelpCircle title="Email not confirmed." />}
         </div>
         <Bio content={profile.bio} />
       </div>

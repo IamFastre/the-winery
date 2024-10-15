@@ -183,12 +183,24 @@
   .names {
     align-items: center;
 
-    > :nth-child(1) {
+    > svg {
+      cursor: help;
+      display: flex;
+      position: absolute;
+      left: 100%;
+      font-size: 20px;
+      fill: $yellow;
+      stroke: $yellow;
+      filter: drop-shadow(0 0 7.5px $yellow);
+    }
+    
+    > span:nth-of-type(1) {
+      line-height: 32px;
       font-size: 32px;
       font-weight: bold;
     }
 
-    > :nth-child(2) {
+    > span:nth-of-type(2) {
       font-weight: 200;
       user-select: text;
     }
