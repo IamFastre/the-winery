@@ -37,8 +37,20 @@ $max-width: 85%;
     border-radius: 5px;
     color: $accent;
     background-color: rgba($accent, 0.2);
-    align-items: center;
+    align-items: stretch;
     gap: 10px;
+    
+    > h3 {
+      color: $tertiary;
+      align-self: center;
+      &::before {
+        content: '';
+      }  
+    }
+
+    .successButton {
+      align-self: center;
+    }
   }
 
   form {

@@ -69,6 +69,7 @@ export function ForgotCard() {
             <Button
               icon={{ element: IoCheckmark, size: 20 }}
               onClick={() => goto('/auth/login')}
+              className={styles.successButton}
               noMinimum
             />
           </div>
