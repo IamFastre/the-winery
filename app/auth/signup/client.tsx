@@ -1,12 +1,12 @@
 "use client";
 import { useRef, useState } from "react";
-import { IoEye, IoEyeOff } from "react-icons/io5";
+import { IoCheckmark, IoEye, IoEyeOff } from "react-icons/io5";
 
 import consts from "@/utils/consts";
 import { multiplyString } from "@/utils";
 import { signUp } from "@/supabase/actions/user";
 import { AuthError } from "@/supabase/actions/types";
-import { Button, C, GoHomeLogo, LabelTitle, Section } from "@/components";
+import { Button, C, GoHomeLogo, LabelTitle, RI, Section } from "@/components";
 import { useGoTo } from "@/hooks";
 
 import colors from '@/styles/colors.module.scss';
@@ -93,6 +93,8 @@ const PasswordChecker = ({ password }:{ password:string; }) => {
 export function SignupCard() {
   const [redirecting, goto] = useGoTo();
 
+  const [success, setSuccess] = useState<boolean>(false);
+
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -123,16 +125,23 @@ export function SignupCard() {
 
       if (error)
         setError(error);
-
       else if (data) {
         setError(null);
-        goto(`/auth/checkmail?uuid=${data.user?.id}`, 'replace');
+        setSuccess(true);
+        setShowPass(true);
       }
     }
   };
 
   return (
-    <Section title="Create Account" className={`${styles.section}`} containerClassName={styles.sectionContent} containerStyle={{ borderStyle: redirecting ? 'dashed' : 'solid' }} isCard centered>
+    <Section
+      title={success ? "Success!" : "Create Account"}
+      className={`${styles.section}`}
+      containerClassName={styles.sectionContent}
+      containerStyle={{ borderStyle: redirecting ? 'dashed' : 'solid' }}
+      isCard
+      centered
+    >
       <GoHomeLogo
         goto={goto}
         redirecting={redirecting}
@@ -149,125 +158,150 @@ export function SignupCard() {
         </C.SECONDARY>
       </div>
 
-      <form>
-      <label>
-          <LabelTitle title="Username" subtitle={username.includes("69") ? "nice" : undefined} />
-          <input
-            name="username"
-            autoComplete="username"
-            spellCheck={false}
-            type="text"
-            title=""
-            value={username}
-            placeholder="username"
-            onChange={e => setUsername(e.target.value)}
-            required
-            onFocus={() => setNameChecker(true)}
-            onBlur={() => setNameChecker(!checkUsername(username) || username.length < 3)}
-            onKeyDown={e => {
-              if (e.key === 'Enter')
-                emailRef.current?.focus();
-            }}
+      {
+        success ?
+        <div className={styles.success}>
+          <h3>
+            Great, {username}!
+          </h3>
+          <p>
+            A confirmation email was sent to you at
+            {' '}
+            '<RI><C.TERTIARY>{email}</C.TERTIARY></RI>'.
+            Now all you have to do is check your inbox!
+          </p>
+          <p style={{ fontSize: 'smaller' }}>
+            If you're not signed in automatically just go to the <a href="/auth/login"><C.TERTIARY>login page</C.TERTIARY></a>.
+          </p>
+          <Button
+            icon={{ element: IoCheckmark, size: 20 }}
+            onClick={() => goto('/')}
+            className={styles.successButton}
+            noMinimum
           />
-          { nameChecker ? <UsernameChecker username={username} /> : null }
-        </label>
+        </div>
+        :
+        <form>
+          <label>
+            <LabelTitle title="Username" subtitle={username.includes("69") ? "nice" : undefined} />
+            <input
+              name="username"
+              autoComplete="username"
+              spellCheck={false}
+              type="text"
+              title=""
+              value={username}
+              placeholder="username"
+              onChange={e => setUsername(e.target.value)}
+              required
+              onFocus={() => setNameChecker(true)}
+              onBlur={() => setNameChecker(!checkUsername(username) || username.length < 3)}
+              onKeyDown={e => {
+                if (e.key === 'Enter')
+                  emailRef.current?.focus();
+              }}
+            />
+            { nameChecker ? <UsernameChecker username={username} /> : null }
+          </label>
 
-        <label>
-          <LabelTitle title="Email" />
-          <input
-            name="email"
-            autoComplete="email"
-            spellCheck={false}
-            type="email"
-            title=""
-            value={email}
-            placeholder="user@example.com"
-            onChange={e => setEmail(e.target.value)}
-            ref={emailRef}
-            required
-            onKeyDown={e => {
-              if (e.key === 'Enter')
-                passRef.current?.focus();
-            }}
-          />
-          { !checkEmail(email) ?
-              <div className={styles.badInput}>
-                <span className={styles.bad}>
-                  Invalid email address.
-                </span>
+          <label>
+            <LabelTitle title="Email" />
+            <input
+              name="email"
+              autoComplete="email"
+              spellCheck={false}
+              type="email"
+              title=""
+              value={email}
+              placeholder="user@example.com"
+              onChange={e => setEmail(e.target.value)}
+              ref={emailRef}
+              required
+              onKeyDown={e => {
+                if (e.key === 'Enter')
+                  passRef.current?.focus();
+              }}
+            />
+            { !checkEmail(email) ?
+                <div className={styles.badInput}>
+                  <span className={styles.bad}>
+                    Invalid email address.
+                  </span>
+                </div>
+            : null }
+          </label>
+
+          <label>
+            <LabelTitle title="Password" />
+            <div className={styles.passwordContainer}>
+              <input
+                name="password"
+                autoComplete="new-password"
+                spellCheck={false}
+                type={showPass ? "text" : "password"}
+                title=""
+                value={password}
+                placeholder="********"
+                onChange={e => setPassword(e.target.value)}
+                ref={passRef}
+                required
+                onFocus={() => setPassChecker(true)}
+                onBlur={() => setPassChecker(!checkPassword(password))}
+                onKeyDown={e => {
+                  if (e.key === 'Enter')
+                    cPassRef.current?.focus();
+                }}
+              />
+              <div
+                title={showPass ? "Hide Password" : "Show Password"}
+                onClick={() => setShowPass(p => !p)}
+              >
+                {showPass ? <IoEyeOff id="closed" /> : <IoEye id="open" />}
               </div>
-          : null }
-        </label>
+            </div>
+            { passChecker ? <PasswordChecker password={password} /> : null }
+          </label>
 
-        <label>
-          <LabelTitle title="Password" />
-          <div className={styles.passwordContainer}>
+          <label>
+            <LabelTitle title="Confirm Password" />
             <input
               name="password"
               autoComplete="new-password"
               spellCheck={false}
               type={showPass ? "text" : "password"}
               title=""
-              value={password}
-              placeholder="********"
-              onChange={e => setPassword(e.target.value)}
-              ref={passRef}
+              value={confPass}
+              placeholder={password ? multiplyString("*", password.length) : "********"}
+              onChange={e => setConfPass(e.target.value)}
+              ref={cPassRef}
               required
-              onFocus={() => setPassChecker(true)}
-              onBlur={() => setPassChecker(!checkPassword(password))}
+              onFocus={() => setCPassChecker(true)}
+              onBlur={() => setCPassChecker(password.length > 0 && confPass.length > 0 && password !== confPass)}
               onKeyDown={e => {
-                if (e.key === 'Enter')
-                  cPassRef.current?.focus();
+                if (e.key === 'Enter' && isOK)
+                  onSubmit();
               }}
             />
-            <div
-              title={showPass ? "Hide Password" : "Show Password"}
-              onClick={() => setShowPass(p => !p)}
-            >
-              {showPass ? <IoEyeOff id="closed" /> : <IoEye id="open" />}
-            </div>
-          </div>
-          { passChecker ? <PasswordChecker password={password} /> : null }
-        </label>
+            { cPassChecker ?
+              <div className={styles.badInput}>
+                <span className={password.length > 0 && password === confPass ? styles.good : styles.bad}>
+                  { password.length === 0 || !checkPassword(password)
+                  ? "Enter a valid password first."
+                  : "Matches password."}
+                </span>
+              </div>
+              : null }
+          </label>
 
-        <label>
-          <LabelTitle title="Confirm Password" />
-          <input
-            name="password"
-            autoComplete="new-password"
-            spellCheck={false}
-            type={showPass ? "text" : "password"}
-            title=""
-            value={confPass}
-            placeholder={password ? multiplyString("*", password.length) : "********"}
-            onChange={e => setConfPass(e.target.value)}
-            ref={cPassRef}
-            required
-            onFocus={() => setCPassChecker(true)}
-            onBlur={() => setCPassChecker(password.length > 0 && confPass.length > 0 && password !== confPass)}
-            onKeyDown={e => {
-              if (e.key === 'Enter' && isOK)
-                onSubmit();
-            }}
+          <Button
+            title="Sign up"
+            onClick={onSubmit}
+            disabled={!isOK}
+            className={styles.button}
           />
-          { cPassChecker ?
-            <div className={styles.badInput}>
-              <span className={password.length > 0 && password === confPass ? styles.good : styles.bad}>
-                { password.length === 0 || !checkPassword(password)
-                ? "Enter a valid password first."
-                : "Matches password."}
-              </span>
-            </div>
-            : null }
-        </label>
+        </form>
+      }
 
-        <Button
-          title="Sign up"
-          onClick={onSubmit}
-          disabled={!isOK}
-          className={styles.button}
-        />
-      </form>
       {
         error ?
         <span className={styles.error}>
