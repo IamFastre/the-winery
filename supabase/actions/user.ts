@@ -8,7 +8,11 @@ import { AuthData, AuthError, PublicProfile } from "./types";
 /*                                   Reading                                  */
 /* ========================================================================== */
 
-const publicProfile = "username, display_name, identifier, avatar, bio, created_at";
+
+export async function isMailConfirmed(id:string) {
+  const supabase = createClient();
+  return (await supabase.rpc('is_confirmed', { id })).data;
+}
 
 export async function getProfile() {
   const supabase = createClient();
@@ -29,7 +33,7 @@ export async function getPublicProfile(identifier:string) {
 
   return await supabase
     .from('profiles')
-    .select(publicProfile)
+    .select('*')
     .eq('identifier', identifier.toLowerCase())
     .single();
 }
@@ -39,7 +43,7 @@ export async function searchProfiles(query:string) {
 
   return await supabase
     .from('profiles')
-    .select(publicProfile)
+    .select('*')
     .ilike('username_displayname', `%${query.toLowerCase()}%`);
 }
 

@@ -196,6 +196,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      is_confirmed: {
+        Args: {
+          id: string
+        }
+        Returns: boolean
+      }
       username_displayname: {
         Args: {
           "": unknown
