@@ -128,7 +128,7 @@ export function SignupCard() {
       else if (data) {
         setError(null);
         setSuccess(true);
-        setShowPass(true);
+        setShowPass(false);
       }
     }
   };
