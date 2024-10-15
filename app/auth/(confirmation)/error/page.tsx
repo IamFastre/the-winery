@@ -1,12 +1,9 @@
 import { Metadata } from "next";
-import { redirect, RedirectType } from "next/navigation";
 
 import consts from "@/utils/consts";
 import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
 import { C } from "@/components/C";
-
-import { createClient } from "@/supabase/admin";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
@@ -17,13 +14,7 @@ export const metadata:Metadata = {
 }
 
 export default async function MailErrorPage({ searchParams }:{searchParams: { [key: string]: string | string[] | undefined }}) {
-  const supabase = createClient();
-  let  user = searchParams.uuid
-             ? (await supabase.from('profiles').select('username, email, id').eq('id', searchParams.uuid).single()).data ?? "bad" as const
-             : null;
-
-  if (user === "bad")
-    redirect('/', RedirectType.replace);
+  let username = searchParams.username ?? "you";
 
   return (
     <div className={styles.container}>
@@ -38,7 +29,7 @@ export default async function MailErrorPage({ searchParams }:{searchParams: { [k
         />
         <span className={styles.text}>
           <h3>
-            Hey, {user?.username ?? "you"}...
+            Hey, {username}...
           </h3>
           <C.SECONDARY>
             <p>
