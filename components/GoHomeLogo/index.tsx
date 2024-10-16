@@ -1,4 +1,5 @@
-import { CSSProperties } from "react";
+"use client";
+import { CSSProperties, useEffect, useState } from "react";
 import Image from "next/image";
 
 import consts from "@/utils/consts";
@@ -17,6 +18,8 @@ export interface HomeIconProps {
   dest?:string;
 }
 
+const WINE_CODE = "wine";
+
 export function GoHomeLogo(props:HomeIconProps) {
   let useHook = true;
   let dest    = props.dest ?? '/';
@@ -28,10 +31,32 @@ export function GoHomeLogo(props:HomeIconProps) {
 
   const [redirecting, goto] = useHook ? useGoTo() : [props.redirecting!, props.goto!];
 
+  const [code, setCode] = useState<string>('');
+  const [beating, setBeating] = useState<boolean>(false);
+
+  useEffect(() => {
+    const listen = (e:KeyboardEvent) => {
+      const full = code + e.key;
+      if (WINE_CODE.substring(0, full.length) === full)
+        setCode(c => c + e.key);
+      else
+        setCode('');
+    };
+    document.body.addEventListener('keypress', listen);
+
+    if (code === WINE_CODE) {
+      setCode('');
+      setBeating(true);
+      setTimeout(() => setBeating(false), 1000);
+    }
+
+    return () => document.body.removeEventListener('keypress', listen);
+  }, [code]);
+
   return (
     <div
       id="home-page-button"
-      className={`${styles.image} ${redirecting ? styles.redirecting : ""} ${props.className}`}
+      className={`${styles.image} ${beating || redirecting ? styles.redirecting : ""} ${props.className}`}
       style={props.style}
       onClick={() => goto(dest, 'assign')}
     >
