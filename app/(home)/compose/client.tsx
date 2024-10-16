@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RiBallPenLine, RiDeleteBin6Line } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 import { IoEyeOutline, IoEye, IoFolderOutline, IoAdd, IoWine, IoFolder } from "react-icons/io5";
@@ -22,58 +22,75 @@ interface EditorProps {
   setShow: SetState<boolean>;
   setTitle: SetState<string>;
   setContent: SetState<string>;
-  resetError:  () => void;
+  resetError: () => void;
 }
 
-const Editor = (props:EditorProps) => (
-  <div className={styles.editor}>
-    <Section
-      title={props.show ?
-        props.title :
-        <input
-          type="text"
-          id="span"
-          name="wine-card-title"
-          placeholder="Change title"
-          value={props.title}
-          onChange={e => props.setTitle(e.target.value)}
-          onBlur={() => props.setTitle(t => t.trim())}
-          style={{ width: (props.title ? props.title.length : 12) * 11.72 }}
-          autoComplete="off"
+const Editor = (props:EditorProps) => {
+  const toaster = useToaster();
+
+  useEffect(() => {
+    const handler = (e:BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = true;
+      toaster.add({ message: "You can always draft your card for later editing", icon: IoFolder, duration: 7500 });
+    };
+
+    if (!!props.title.length || !!props.content.length)
+      window.addEventListener('beforeunload', handler)
+
+    return () => window.removeEventListener('beforeunload', handler);
+  }, [!!props.title.length, !!props.content.length]);
+
+  return (
+    <div className={styles.editor}>
+      <Section
+        title={props.show ?
+          props.title :
+          <input
+            type="text"
+            id="span"
+            name="wine-card-title"
+            placeholder="Change title"
+            value={props.title}
+            onChange={e => props.setTitle(e.target.value)}
+            onBlur={() => props.setTitle(t => t.trim())}
+            style={{ width: (props.title ? props.title.length : 12) * 11.72 }}
+            autoComplete="off"
+            />
+          }
+        className={styles.card}
+        containerClassName={styles.cardContent}
+        isCard
+      >
+        {
+          props.show ?
+          <MarkDown>
+            {/* TODO: replace the link with an internal `/help/markdown` one */}
+            { props.content ? props.content : "### *Input Preview*\n*Try actually doing some [basic markdown](https://www.markdownguide.org/cheat-sheet/#basic-syntax), and some [extended syntax](https://www.markdownguide.org/cheat-sheet/#basic-syntax).*"}
+          </MarkDown>
+          :
+          <textarea
+            id="span"
+            name="wine-card-content"
+            placeholder="What's on your mind? (min. 8)"
+            value={props.content}
+            onChange={e => { props.setContent(e.target.value); props.resetError(); }}
+            onBlur={() => props.setContent(c => c.trim())}
+            autoComplete="off"
           />
         }
-      className={styles.card}
-      containerClassName={styles.cardContent}
-      isCard
-    >
-      {
-        props.show ?
-        <MarkDown>
-          {/* TODO: replace the link with an internal `/help/markdown` one */}
-          { props.content ? props.content : "### *Input Preview*\n*Try actually doing some [basic markdown](https://www.markdownguide.org/cheat-sheet/#basic-syntax), and some [extended syntax](https://www.markdownguide.org/cheat-sheet/#basic-syntax).*"}
-        </MarkDown>
-        :
-        <textarea
-          id="span"
-          name="wine-card-content"
-          placeholder="What's on your mind? (min. 8)"
-          value={props.content}
-          onChange={e => { props.setContent(e.target.value); props.resetError(); }}
-          onBlur={() => props.setContent(c => c.trim())}
-          autoComplete="off"
-        />
-      }
-    </Section>
-    <Button
-      noMinimum
-      iconBackground
-      className={styles.showPrev}
-      onClick={() => props.setShow(!props.show)}
-      color={colors.highlight}
-      icon={{ element: props.show ? IoEyeOutline : IoEye }}
-    />
-  </div>
-);
+      </Section>
+      <Button
+        noMinimum
+        iconBackground
+        className={styles.showPrev}
+        onClick={() => props.setShow(!props.show)}
+        color={colors.highlight}
+        icon={{ element: props.show ? IoEyeOutline : IoEye }}
+      />
+    </div>
+  );
+};
 
 const AsUser = ({ username }:{ username:string; }) => (
   <div className={styles.asUser}>
