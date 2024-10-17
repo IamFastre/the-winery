@@ -1,12 +1,6 @@
 "use server";
 import sharp from "sharp";
-
-async function callAPI(path:string, searchParams:{ [key:string]:string }) {
-  const fullPath = `${await getCurrentURL()}/api${path.startsWith("/") ? path : '/' + path}`;
-  const url = new URL(fullPath);
-  Object.keys(searchParams).forEach(key => url.searchParams.set(key, searchParams[key]));
-  return await fetch(url);
-}
+import { api } from "@/utils";
 
 async function httpURLToBase64(httpURL:string) {
   return (await fetch(httpURL)).arrayBuffer();
@@ -87,8 +81,8 @@ export async function getCurrentURL(trailingSlash:boolean = false) {
 }
 
 async function getLogo() {
-  const res = await callAPI('other/logo', { variant: 'brand-outline' });
-  return await res.arrayBuffer();
+  const res = await api('/other/logo', { variant: 'brand-outline' });
+  return res;
 }
 
 export async function addLogoBadge(input:string) {
