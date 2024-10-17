@@ -2,16 +2,34 @@ import { NextResponse } from 'next/server';
 import { getCurrentURL } from '@/utils/server';
 import type { Endpoints } from '.';
 
-export function success<T>(output:T, headers:Headers) {
-  return new NextResponse<typeof output>(JSON.stringify(output), { status: 200, statusText: 'OK', headers });
+export function success<T>(output:T, headers:Headers, stringified:boolean = true) {
+  return new NextResponse<typeof output>(
+    stringified ? JSON.stringify(output) : output as BodyInit, {
+      headers,
+      status: 200,
+      statusText: 'OK',
+    },
+  );
 }
 
-export function notFound<T>(output:T, headers:Headers) {
-  return new NextResponse<typeof output>(JSON.stringify(output), { status: 404, statusText: 'Not Found', headers });
+export function notFound<T>(output:T, headers:Headers, stringified:boolean = true) {
+  return new NextResponse<typeof output>(
+    stringified ? JSON.stringify(output) : output as BodyInit, {
+      headers,
+      status: 404,
+      statusText: 'Not Found',
+    },
+  );
 }
 
-export function badRequest<T>(output:T, headers:Headers) {
-  return new NextResponse<typeof output>(JSON.stringify(output), { status: 400, statusText: 'Bad Request', headers });
+export function badRequest<T>(output:T, headers:Headers, stringified:boolean = true) {
+  return new NextResponse<typeof output>(
+    stringified ? JSON.stringify(output) : output as BodyInit, {
+      headers,
+      status: 400,
+      statusText: 'Bad Request',
+    },
+  );
 }
 
 /* ========================================================================== */

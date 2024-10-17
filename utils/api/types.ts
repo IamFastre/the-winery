@@ -1,4 +1,8 @@
 import type { UserInfo, UserInfoParams } from "@/app/api/user/info/route";
+import type { UserSaves, UserSavesParams } from "@/app/api/user/saves/route";
+import type { UserDrafts, UserDraftsParams } from "@/app/api/user/drafts/route";
+
+import type { OtherLogo, OtherLogoParams } from "@/app/api/other/logo/route";
 
 interface Endpoint<A,R> {
   Arguments: A;
@@ -6,5 +10,15 @@ interface Endpoint<A,R> {
 }
 
 export interface Endpoints {
-  "/user/info":      Endpoint<UserInfoParams, UserInfo>,
+  "/user/info":   Endpoint<UserInfoParams,   UserInfo>,
+  "/user/drafts": Endpoint<UserDraftsParams, UserDrafts>,
+  "/user/saves":  Endpoint<UserSavesParams,  UserSaves>,
+
+  // "/card/feed":      Endpoint<CardFeedParams,     CardFeed>,
+  // "/card/post":      Endpoint<CardPostParams,     CardPost>,
+  // "/card/draft":     Endpoint<CardDraftParams,    CardDraft>,
+  // "/card/like-list": Endpoint<CardLikeListParams, CardLikeList>,
+  // "/card/buttons":   Endpoint<CardButtonsParams,  CardButtons>,
+
+  "/other/logo": Endpoint<OtherLogoParams, OtherLogo>,
 }

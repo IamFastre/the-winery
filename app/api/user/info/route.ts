@@ -1,7 +1,8 @@
+import { NextRequest } from 'next/server';
+
+import { badRequest, notFound, success } from '@/utils';
 import { createClient } from '@/supabase/server';
 import { Tables } from '@/supabase/types';
-import { badRequest, notFound, success } from '@/utils/api';
-import { NextRequest } from 'next/server';
 
 export type UserInfo = Tables<'profiles'> & { mail_confirmed: boolean };
 export type UserInfoParams = { id:string } | { username:string };
