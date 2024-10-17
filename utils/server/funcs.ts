@@ -76,7 +76,7 @@ export async function cropAvatar(base64Image:string, sharpen:boolean = false) {
 
 export async function getCurrentURL(trailingSlash:boolean = false) {
   let url = process?.env?.VERCEL_PROJECT_PRODUCTION_URL ?? 'http://localhost:3000';
-  url = url.startsWith('http') ? url : `https://${url}`;
+  url = url.includes('http://') ? url : `https://${url}`;
 
   if (trailingSlash)
     url = url.endsWith('/') ? url : `${url}/`;
@@ -87,7 +87,7 @@ export async function getCurrentURL(trailingSlash:boolean = false) {
 }
 
 async function getLogo() {
-  const res = await callAPI('logo', { variant: 'brand-outline' });
+  const res = await callAPI('other/logo', { variant: 'brand-outline' });
   return await res.arrayBuffer();
 }
 
