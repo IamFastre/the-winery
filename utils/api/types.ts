@@ -9,6 +9,13 @@ interface Endpoint<A,R> {
   Return: R;
 }
 
+export interface ErrorAPI {
+  code:number | string;
+  message:string;
+  details:string | null;
+  hint:string | null;
+}
+
 export interface Endpoints {
   "/user/info":   Endpoint<UserInfoParams,   UserInfo>,
   "/user/drafts": Endpoint<UserDraftsParams, UserDrafts>,
@@ -22,3 +29,15 @@ export interface Endpoints {
 
   "/other/logo": Endpoint<OtherLogoParams, OtherLogo>,
 }
+
+export interface ResultSuccess<T> {
+  data: T;
+  error: null;
+}
+
+export interface ResultFailure {
+  data: null;
+  error: ErrorAPI;
+}
+
+export type Result<T> = T extends null ? ResultFailure : ResultSuccess<T>;

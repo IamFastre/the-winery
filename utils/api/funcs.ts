@@ -1,13 +1,8 @@
 import { NextResponse } from 'next/server';
-import { getCurrentURL } from '@/utils/server';
-import type { Endpoints } from '.';
+import { PostgrestError } from '@supabase/supabase-js';
 
-interface ErrorAPI {
-  code:number | string;
-  message:string;
-  details:string | null;
-  hint:string | null;
-}
+import { getCurrentURL } from '@/utils/server';
+import type { Endpoints, ErrorAPI, Result } from '.';
 
 function error(code:number | string, message:string, details:string | null = null, hint:string | null = null) {
   return {
@@ -19,6 +14,10 @@ function error(code:number | string, message:string, details:string | null = nul
 }
 
 /* ========================================================================== */
+
+export function result<T>(data:T | null, error:PostgrestError | ErrorAPI | null) : Result<T> {
+  return { data, error: JSON.parse(JSON.stringify(error)) } as Result<T>;
+}
 
 export function success<T>(output:T, headers:Headers, stringified:boolean = true) {
   return new NextResponse<typeof output>(
