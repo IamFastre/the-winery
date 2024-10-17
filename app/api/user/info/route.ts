@@ -32,10 +32,7 @@ export async function GET(request:NextRequest) {
     if (confRes.error)
       return notFound(confRes.error, headers);
 
-    return success<UserInfo>({
-      ...userRes.data,
-      mail_confirmed: confRes.data
-    }, headers);
+    return success<UserInfo>({ ...userRes.data, mail_confirmed: confRes.data }, headers);
   }
 
   if (params.has('username')) {
@@ -54,11 +51,8 @@ export async function GET(request:NextRequest) {
     if (confRes.error)
       return notFound(confRes.error, headers);
 
-    return success<UserInfo>({
-      ...userRes.data,
-      mail_confirmed: confRes.data
-    }, headers);
+    return success<UserInfo>({ ...userRes.data, mail_confirmed: confRes.data }, headers);
   }
 
-  return badRequest({ code: 400, message: "Please supply an id/username parameter" }, headers);
+  return badRequest("Missing 'id' or 'username' parameter", headers);
 }

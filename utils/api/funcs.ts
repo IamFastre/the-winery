@@ -2,6 +2,24 @@ import { NextResponse } from 'next/server';
 import { getCurrentURL } from '@/utils/server';
 import type { Endpoints } from '.';
 
+interface ErrorAPI {
+  code:number | string;
+  message:string;
+  details:string | null;
+  hint:string | null;
+}
+
+function error(code:number | string, message:string, details:string | null = null, hint:string | null = null) {
+  return {
+    code,
+    details, 
+    hint,
+    message, 
+  };
+}
+
+/* ========================================================================== */
+
 export function success<T>(output:T, headers:Headers, stringified:boolean = true) {
   return new NextResponse<typeof output>(
     stringified ? JSON.stringify(output) : output as BodyInit, {
@@ -13,8 +31,12 @@ export function success<T>(output:T, headers:Headers, stringified:boolean = true
 }
 
 export function notFound<T>(output:T, headers:Headers, stringified:boolean = true) {
-  return new NextResponse<typeof output>(
-    stringified ? JSON.stringify(output) : output as BodyInit, {
+  return new NextResponse<ErrorAPI>(
+    typeof output === 'string'
+    ? JSON.stringify(error(404, output))
+    : stringified
+    ? JSON.stringify(output)
+    : output as BodyInit, {
       headers,
       status: 404,
       statusText: 'Not Found',
@@ -23,8 +45,12 @@ export function notFound<T>(output:T, headers:Headers, stringified:boolean = tru
 }
 
 export function badRequest<T>(output:T, headers:Headers, stringified:boolean = true) {
-  return new NextResponse<typeof output>(
-    stringified ? JSON.stringify(output) : output as BodyInit, {
+  return new NextResponse<ErrorAPI>(
+    typeof output === 'string'
+    ? JSON.stringify(error(400, output))
+    : stringified
+    ? JSON.stringify(output)
+    : output as BodyInit, {
       headers,
       status: 400,
       statusText: 'Bad Request',
