@@ -22,7 +22,6 @@ export async function getCardPost(id:string | number) {
 
 export async function GET(request:NextRequest) {
   const { searchParams: params } = new URL(request.url);
-  const supabase = createClient();
 
   const headers = new Headers();
   headers.set("Content-Type", "application/json");
