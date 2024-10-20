@@ -4,32 +4,14 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 
 import consts from "@/utils/consts";
 import { multiplyString } from "@/utils";
-import { getProfile, resetPassword } from "@/supabase/actions/user";
+import { resetPassword } from "@/supabase/actions/user";
 import { AuthError } from "@/supabase/actions/types";
 import { Button, C, GoHomeLogo, LabelTitle, Section } from "@/components";
 import { useGoTo } from "@/hooks";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "../../styles.module.scss";
-import { createClient } from "@/supabase/client";
 import { useToaster } from "@/providers/Toaster";
-
-
-const checkUsername = (str:string) : boolean => {
-  if (!str)
-    return true;
-
-  return /^(?![0-9\-])[a-z0-9_-]+(?![\-])$/i
-         .test(str);
-};
-
-const checkEmail = (str:string) : boolean => {
-    if (!str)
-      return true;
-
-    return /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/i
-           .test(str);
-};
 
 const checkPassword = (str:string) : boolean => {
   if (!str)
@@ -37,28 +19,6 @@ const checkPassword = (str:string) : boolean => {
 
   return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[?!@#$%~^&()\[\]\{\}\.\,\-\+\*\/=\\]).{1,}$/
          .test(str);
-};
-
-const UsernameChecker = ({ username }:{ username:string; }) => {
-  return (
-    <div className={styles.badInput}>
-      <span className={/^[0-9a-zA-Z_\-]*$/.test(username) ? styles.good : styles.bad}>
-        Allowed characters:
-        <br/>
-        {'- '}
-        <C.SECONDARY>0-9, a-z, - and _</C.SECONDARY>
-      </span>
-      <span className={username.length > 2 ? styles.good : styles.bad}>
-        Has 3 or more characters.
-      </span>
-      <span className={/^[0-9]/i.test(username) ? styles.bad : styles.good}>
-        Cannot start with numbers.
-      </span>
-      <span className={/^[\-]/i.test(username) || /[\-]$/i.test(username) ? styles.bad : styles.good}>
-        Cannot start or end with -.
-      </span>
-    </div>
-  );
 };
 
 const PasswordChecker = ({ password }:{ password:string; }) => {
