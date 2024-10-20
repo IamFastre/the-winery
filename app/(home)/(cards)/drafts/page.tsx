@@ -7,7 +7,7 @@ import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
 import { Card } from "@/components/Card";
 import { getProfile } from "@/supabase/actions/user";
-import { getDraftCount, getUserDrafts } from "@/supabase/actions/post";
+import { getUserDrafts } from "@/utils/api/user/drafts";
 
 import { PageIcon } from "../server";
 import { BackButton } from "../client";
@@ -20,11 +20,13 @@ export const metadata:Metadata = {
 
 export default async function DraftsPage() {
   const { data:profile } = await getProfile();
-  const { data:drafts } = await getUserDrafts(profile?.username ?? "");
-  const { count } = await getDraftCount(profile?.identifier ?? "");
+  const { data, error } = await getUserDrafts();
 
-  if (!profile || !drafts)
+  console.log(error)
+  if (!profile || !data)
     return; // not found
+
+  const { drafts, count } = data;
 
   return (
     <Section className={styles.section} containerClassName={styles.sectionContainer}>

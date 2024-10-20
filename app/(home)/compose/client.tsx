@@ -9,7 +9,7 @@ import { SetState } from "@/utils";
 import { Section, MarkDown, Button, C, LoadingText } from "@/components";
 import { createPost, createDraft, editDraft, deleteDraft } from "@/supabase/actions/post";
 import { type AuthError, PostgrestError } from "@supabase/supabase-js";
-import { Draft, Profile } from "@/supabase/actions/types";
+import { Tables } from "@/supabase/types";
 import { useToaster } from "@/providers/Toaster";
 
 import colors from '@/styles/colors.module.scss';
@@ -141,7 +141,7 @@ const Error = (props:{ error:AuthError | PostgrestError; isOK:boolean; }) => (
   </span>
 );
 
-export function PostEditor({ user }:{ user:Profile; }) {
+export function PostEditor({ user }:{ user:Tables<'profiles'> }) {
   const router = useRouter();
   const toaster = useToaster();
 
@@ -212,7 +212,7 @@ export function PostEditor({ user }:{ user:Profile; }) {
   );
 }
 
-export function DraftEditor({ user, draft }:{ user:Profile; draft:Draft; }) {
+export function DraftEditor({ user, draft }:{ user:Tables<'profiles'>; draft:Tables<'drafts'>; }) {
   const router = useRouter();
   const toaster = useToaster();
 

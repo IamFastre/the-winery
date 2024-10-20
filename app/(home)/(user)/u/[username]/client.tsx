@@ -10,7 +10,7 @@ import { cropAvatar, focusable, humanizeTime } from "@/utils";
 import { B, Bio, Button, C, LabelTitle, Section } from "@/components";
 import { Modal } from "@/providers/ModalProvider";
 import { editAvatar, editProfile } from "@/supabase/actions/user";
-import { Profile } from "@/supabase/actions/types";
+import { Tables } from "@/supabase/types";
 import { useHydration } from "@/hooks";
 
 import colors from '@/styles/colors.module.scss';
@@ -42,7 +42,7 @@ function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEvent
   );
 }
 
-export function ProfileEditor({ profile }:{ profile:Profile }) {
+export function ProfileEditor({ profile }:{ profile:Tables<'profiles'> }) {
   const router = useRouter();
 
   const [editing, setEditing] = useState<boolean>(false);

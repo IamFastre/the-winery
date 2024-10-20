@@ -2,17 +2,11 @@
 import { cropAvatar, getAvatarUrl, getCurrentURL } from "@/utils/server";
 import { createClient } from "@/supabase/server";
 
-import { AuthData, AuthError, PublicProfile } from "./types";
+import { AuthData, AuthError } from "./types";
 
 /* ========================================================================== */
 /*                                   Reading                                  */
 /* ========================================================================== */
-
-
-export async function isMailConfirmed(id:string) {
-  const supabase = createClient();
-  return (await supabase.rpc('is_confirmed', { id })).data;
-}
 
 export async function getProfile() {
   const supabase = createClient();
@@ -28,16 +22,6 @@ export async function getProfile() {
     .single();
 }
 
-export async function getPublicProfile(identifier:string) {
-  const supabase = createClient();
-
-  return await supabase
-    .from('profiles')
-    .select('*')
-    .eq('identifier', identifier.toLowerCase())
-    .single();
-}
-
 export async function searchProfiles(query:string) {
   const supabase = createClient();
 
@@ -45,26 +29,6 @@ export async function searchProfiles(query:string) {
     .from('profiles')
     .select('*')
     .ilike('username_displayname', `%${query.toLowerCase()}%`);
-}
-
-export async function getAuthorsMap(authors:string[]) {
-  const users:{ [identifier:string]:PublicProfile } = {};
-  let hasError = false;
- 
-  for (const author of authors ?? []) {
-    if (author && !users[author]) {
-      const { data, error } = await getPublicProfile(author);
-
-      if (error)
-        hasError = true;
-
-      if (data) {
-        users[author] = data;
-      }
-    }
-  }
-
-  return { data:users, hasError };
 }
 
 /* ========================================================================== */

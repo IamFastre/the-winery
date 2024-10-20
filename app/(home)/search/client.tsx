@@ -7,7 +7,7 @@ import Image from "next/image";
 
 import { humanizeTime } from "@/utils";
 import { Button, C, LoadingText, Section } from "@/components";
-import { PublicProfile } from "@/supabase/actions/types";
+import { Tables } from "@/supabase/types";
 import { searchProfiles } from "@/supabase/actions/user";
 import { useHydration } from "@/hooks";
 
@@ -20,7 +20,7 @@ const setQuery = (value:string) => {
   return params.toString();
 };
 
-const Result = ({ user }:{ user:PublicProfile; }) => {
+const Result = ({ user }:{ user:Tables<'profiles'>; }) => {
   const hydrated = useHydration();
   return (
     <Link href={`/u/${user.username}`} type="wrapper">
@@ -63,7 +63,7 @@ export function Searcher() {
   const initialQ = useSearchParams().get('q') ?? "";
   const [q, setQ] = useState<string>(initialQ);
   const [search, setSearch] = useState<string>(q);
-  const [results, setResults] = useState<PublicProfile[] | null>(null);
+  const [results, setResults] = useState<Tables<'profiles'>[] | null>(null);
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {

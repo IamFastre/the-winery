@@ -1,16 +1,15 @@
 import Image from "next/image";
 
 import { IoFolderOpenOutline, IoHelpCircle } from "react-icons/io5";
-import { PublicProfile } from "@/supabase/actions/types";
 
-import { Post } from "@/supabase/actions/types";
+import { Tables } from "@/supabase/types";
 import { Card } from "@/components/Card";
 import { C } from "@/components/C";
 import { Bio } from "@/components/Bio";
 
 import styles from "./styles.module.scss";
 
-export function ProfileInfo({ profile, isConfirmed }:{ profile:PublicProfile; isConfirmed: boolean; }) {
+export function ProfileInfo({ profile, isConfirmed }:{ profile:Tables<'profiles'>; isConfirmed: boolean; }) {
   return (
     <>
       <Image
@@ -41,7 +40,7 @@ export function ProfileInfo({ profile, isConfirmed }:{ profile:PublicProfile; is
   );
 }
 
-export function CardList({ posts }:{ posts:Post[] }) {
+export function CardList({ posts }:{ posts:Tables<'posts'>[] }) {
   return (
     <div className={styles.cardsHolder}>
       {

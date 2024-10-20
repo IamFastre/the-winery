@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import consts from "@/utils/consts";
 import { Section } from "@/components/Section";
 import { getProfile } from "@/supabase/actions/user";
-import { getDraft } from "@/supabase/actions/post";
-import { Draft } from "@/supabase/actions/types";
+import { getCardDraft } from "@/utils/api/card/draft";
+import { Tables } from "@/supabase/types";
 
 import { DraftEditor, PostEditor } from "./client";
 import styles from "./styles.module.scss";
@@ -17,7 +17,7 @@ export const metadata:Metadata = {
 
 export default async function ComposePage({ searchParams }:{ searchParams: { draft:string | undefined; } }) {
   const { data:user, error } = await getProfile();
-  let draft:Draft | null = null;
+  let draft:Tables<'drafts'> | null = null;
 
   if (!user || error)
     return;
@@ -25,7 +25,7 @@ export default async function ComposePage({ searchParams }:{ searchParams: { dra
   if (searchParams.draft) {  
     const id = Number.parseInt(searchParams.draft);
     if (Number.isInteger(id))
-      draft = (await getDraft(id)).data;
+      draft = (await getCardDraft(id)).data;
   }
 
   return (

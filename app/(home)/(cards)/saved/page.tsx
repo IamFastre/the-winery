@@ -5,8 +5,8 @@ import consts from "@/utils/consts";
 import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
 import { Card } from "@/components/Card";
-import { getAuthorsMap, getProfile } from "@/supabase/actions/user";
-import { getSavedCount, getUserSaved } from "@/supabase/actions/post";
+import { getProfile } from "@/supabase/actions/user";
+import { getUserSaves } from "@/utils/api/user/saves";
 
 import { PageIcon } from "../server";
 import { BackButton } from "../client";
@@ -19,28 +19,28 @@ export const metadata:Metadata = {
 
 export default async function SavesPage() {
   const { data:profile } = await getProfile();
-  const { data:posts } = await getUserSaved(profile?.identifier ?? "");
-  const { count } = await getSavedCount(profile?.identifier ?? "");
-  const { data:users } = await getAuthorsMap(posts?.map(p => p.author!)!);
+  const { data } = await getUserSaves();
 
-  if (!profile || !posts || !users)
+  if (!profile || !data )
     return; // not found
+
+  const { saves, users, count } = data;
 
   return (
     <Section className={styles.section} containerClassName={styles.sectionContainer}>
       <Header
         title="Saved"
-        subtitle={`${count} ${(count ?? posts.length) > 1 ? "cards" : "card"}`}
+        subtitle={`${count} ${count > 1 ? "cards" : "card"}`}
         left={<BackButton />}
         right={<PageIcon icon={IoBookmark} />}
       />
       <div className={styles.cardsHolder}>
         <div className={styles.cards}>
-          {posts.map(post => (
+          {saves.map(post => (
             <div key={post.id}>
               <Card
-                username={users[post.author!].username}
-                userAvatar={users[post.author!].avatar}
+                username={users[post.author_uuid!].username}
+                userAvatar={users[post.author_uuid!].avatar}
                 title={post.title}
                 content={post.content}
                 timestamp={post.timestamp}

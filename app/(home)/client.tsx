@@ -6,19 +6,14 @@ import { IoCogOutline, IoInformationCircleOutline, IoPersonCircleOutline, IoSear
 
 import { focusable } from "@/utils";
 import { Card, GoHomeLogo, Section } from "@/components";
-import { Post, PublicProfile } from "@/supabase/actions/types";
+import { Modal } from "@/providers/ModalProvider";
+import { useShortcuts } from "@/providers/Shortcuts";
+import { CardFeed } from "@/utils/api/card/feed";
 import { useGoTo } from "@/hooks";
 
 import layoutStyles from "./layout.module.scss";
 import pageStyles from "./page.module.scss";
-import { Modal } from "@/providers/ModalProvider";
-import { useShortcuts } from "@/providers/Shortcuts";
 
-
-interface Props {
-  feed: Post[];
-  users: { [identifier:string]:PublicProfile; };
-}
 
 const getCardIndex = (param:string | null, max:number | undefined) => {
   if (!param)
@@ -44,18 +39,18 @@ const setCardIndex = (value:number) => {
   return params.toString();
 };
 
-export function FeedNavigator({ feed, users }:Props) {
-  const card = getCardIndex(useSearchParams().get('card'), feed.length) - 1;
+export function FeedNavigator({ posts, users }:CardFeed) {
+  const card = getCardIndex(useSearchParams().get('card'), posts.length) - 1;
  
   const [index, setIndex] = useState<number>(card);
   const [inpt, setInpt] = useState<number>(index);
-  const post = feed[index];
-  const author = users[post.author ?? ""];
+  const post = posts[index];
+  const author = users[post.author_uuid ?? ""];
 
 
   const increment = (num:number = 1) => {
-    if (feed)
-      if (index + num < feed.length && index + num >= 0)
+    if (posts)
+      if (index + num < posts.length && index + num >= 0)
         setIndex(index + num);    
   };
 
@@ -111,7 +106,7 @@ export function FeedNavigator({ feed, users }:Props) {
           style={{ width: `${inpt ? inpt.toFixed().length : index.toFixed().length}ch` }}
         />
         <div id="go-forward" {...focusable(pageStyles.active, () => increment(+1)) as any}>
-          <IoArrowForward className={index >= feed.length-1 ? pageStyles.disabled : undefined} />
+          <IoArrowForward className={index >= posts.length-1 ? pageStyles.disabled : undefined} />
         </div>
       </div>
     </>

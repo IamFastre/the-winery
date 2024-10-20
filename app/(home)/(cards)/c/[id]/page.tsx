@@ -7,8 +7,8 @@ import { UsernameHandle } from "@/components/UsernameHandle";
 import { HydratedTime } from "@/components/HydratedTime";
 import { PostButtons } from "@/components/PostButtons";
 import { Header } from "@/components/Header";
-import { getPost } from "@/supabase/actions/post";
-import { getPublicProfile } from "@/supabase/actions/user";
+import { getCardPost } from "@/utils/api/card/post";
+import { getUserInfo } from "@/utils/api/user/info";
 
 import { BackButton } from "../../client";
 import styles from "./styles.module.scss";
@@ -20,8 +20,8 @@ interface CardPageProps {
 
 export default async function CardPage({ params }:CardPageProps) {
   const id = Number.parseInt(params.id);
-  const { data:post, error:postError } = await getPost(id);
-  const { data:author, error:userError } = await getPublicProfile(post?.author ?? "");
+  const { data:post, error:postError } = await getCardPost(id);
+  const { data:author, error:userError } = await getUserInfo('id', post?.author_uuid ?? "");
 
   if (Number.isNaN(id)) {
     return (

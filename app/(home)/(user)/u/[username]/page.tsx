@@ -1,15 +1,15 @@
 import { Metadata } from "next";
+import Image from "next/image";
 
 import consts from "@/utils/consts";
-import { getProfile, getPublicProfile, isMailConfirmed } from "@/supabase/actions/user";
-import { getUserPosts } from "@/supabase/actions/post";
+import { getUserPosts } from "@/utils/api/user/posts";
+import { getUserInfo } from "@/utils/api/user/info";
 import { Section } from "@/components/Section";
 import { addLogoBadge } from "@/utils/server";
 
 import { CardList, ProfileInfo } from "./server";
 import { DataBox, ProfileEditor } from "./client";
 import styles from "./styles.module.scss";
-import Image from "next/image";
 
 
 interface UserPageProps {
@@ -18,7 +18,7 @@ interface UserPageProps {
 
 export async function generateMetadata({ params }:UserPageProps) : Promise<Metadata> {
   const username = params.username;
-  const { data:profile  } = await getPublicProfile(params.username);
+  const { data:profile } = await getUserInfo('identifier', params.username);
   
   if (profile) {
     const profileWithBadge = await addLogoBadge(profile.avatar);
@@ -39,16 +39,15 @@ export async function generateMetadata({ params }:UserPageProps) : Promise<Metad
 }
 
 export default async function UserPage({ params }:UserPageProps) {
-  const self = (await getProfile()).data;
+  const self = (await getUserInfo('self', '')).data;
 
   if (!self)
     return;
 
   const isSelf  = self.identifier === params.username.toLowerCase();
-  const other = !isSelf ? (await getPublicProfile(params.username)).data : null;
+  const other = !isSelf ? (await getUserInfo('identifier', params.username)).data : null;
   const profile = isSelf ? self : other;
-  const posts = profile ? (await getUserPosts(profile.username)).data : null;
-  const isConfirmed = profile ? await isMailConfirmed(profile.id) : null;
+  const posts = profile ? (await getUserPosts('author_uuid', profile.id)).data : null;
 
   if (!profile || !posts)
     return; // not found
@@ -63,7 +62,7 @@ export default async function UserPage({ params }:UserPageProps) {
         className={styles.avatarBlur}
       />
       <div className={styles.userBox}>
-        { isSelf ? <ProfileEditor profile={self} /> : <ProfileInfo profile={profile} isConfirmed={!!isConfirmed} /> }
+        { isSelf ? <ProfileEditor profile={self} /> : <ProfileInfo profile={profile} isConfirmed={profile.mail_confirmed} /> }
         <DataBox cards={posts.length} joined={profile.created_at} />
       </div>
       <hr/>

@@ -80,11 +80,6 @@ export async function getCurrentURL(trailingSlash:boolean = false) {
   return url;
 }
 
-async function getLogo() {
-  const res = await api('/other/logo', { variant: 'brand-outline' });
-  return res;
-}
-
 export async function addLogoBadge(input:string) {
   const IMAGE_DIM   = 256,
         BADGE_DIM   = 145,
@@ -106,7 +101,7 @@ export async function addLogoBadge(input:string) {
     if (avatar === "unknown")
       throw new TypeError(`Input not recognized as data or http url: '${input}'`);
 
-    const icon = await sharp(await getLogo())
+    const icon = await sharp(await api('/other/logo', { variant: 'brand-outline' }))
       .resize({ width: BADGE_DIM, height: BADGE_DIM })
       .toBuffer();
 

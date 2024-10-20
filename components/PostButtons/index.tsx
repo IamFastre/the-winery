@@ -3,10 +3,10 @@ import { Fragment, MouseEventHandler, useEffect, useState } from "react";
 import { IoBookmark, IoClose, IoHeart, IoHeartDislikeOutline, IoWarning } from "react-icons/io5";
 import { useQuery } from "@tanstack/react-query";
 
-import { focusable, humanizeLikes } from "@/utils";
+import { api, focusable, humanizeLikes } from "@/utils";
 import { Section, LoadingText, UsernameHandle, CopyLinkButton } from "@/components";
-import { getPostInteractions, getPostLikes, likePost, savePost } from "@/supabase/actions/post";
-import { PublicProfile } from "@/supabase/actions/types";
+import { likePost, savePost } from "@/supabase/actions/post";
+import { Tables } from "@/supabase/types";
 import { Modal } from "@/providers/ModalProvider";
 
 import styles from "./style.module.scss";
@@ -25,16 +25,16 @@ interface LikesModalProps {
 function LikesModal(props:LikesModalProps) {
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [likers, setLikers] = useState<PublicProfile[]>([]);
+  const [likers, setLikers] = useState<Tables<'profiles'>[]>([]);
 
   useEffect(() => {
     const start = async () => {
-      const { data } = await getPostLikes(props.postId);
+      const data = await api("/card/like-list", { id: props.postId });
 
-      if (data === null)
+      if ((data as any).message)
         setError(true);
       else
-        setLikers(data);
+        setLikers(data.users);
 
       setLoading(false);
     }
@@ -113,15 +113,15 @@ export function PostButtons(props:PostButtonsProps) {
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
   const { data, status, isLoading } = useQuery({
-    queryFn: async () => await getPostInteractions(props.postId),
-    queryKey: ['post-buttons', props.postId],
+    queryFn: async () => await api("/card/interactions", { id: props.postId }),
+    queryKey: ['post-interactions', props.postId],
   });
 
   useEffect(() => {
     if (data) {
-      setIsLiked(!!data.liked);
-      setIsSaved(!!data.saved);
-      setLC(data.likeCount ?? 0);
+      setIsLiked(data.liked);
+      setIsSaved(data.saved);
+      setLC(data.likeCount);
       setError(false);
     } else if (status === 'error') {
       setError(true);

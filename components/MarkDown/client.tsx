@@ -1,10 +1,10 @@
 "use client";
-import { getPost } from "@/supabase/actions/post";
 import { HTMLAttributes, useEffect, useState } from "react";
 
 import { C, LoadingText } from "@/components";
 import { useQuery } from "@tanstack/react-query";
-import { getPublicProfile } from "@/supabase/actions/user";
+import { getUserInfo } from "@/utils/api/user/info";
+import { api } from "@/utils";
 
 export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
   if (!props.className?.includes("card-mention"))
@@ -15,13 +15,13 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
   const [isTwelve, setIsTwelve] = useState<boolean>(false);
 
   const id = parseInt((props.children as any)[1].props.children);
-  const { data:respond, isLoading } = useQuery({
-    queryFn: async () => await getPost(id),
+  const { data:post, isLoading } = useQuery({
+    queryFn: async () => await api("/card/post", { id }),
     queryKey: ["share-button", id]
   });
 
   useEffect(() => {
-    const resTitle = respond?.data?.title;
+    const resTitle = post?.title;
 
     if (id === 12)
       setIsTwelve(true);
@@ -32,18 +32,18 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
       setTitle(id);
     else
       setTitle(resTitle);
-  }, [respond]);
+  }, [post]);
 
   useEffect(() => {
     const start = async () => {
-      if (respond?.data?.author) {
-        const { data } = await getPublicProfile(respond.data.author);
+      if (post?.author) {
+        const { data } = await getUserInfo('id', post.author_uuid ?? "");
         setAuthor(data?.display_name ? `${data.display_name} (${data.username})` : data?.username ?? null);
       }
     }
 
     start();
-  }, [respond?.data?.author])
+  }, [post?.author])
 
   let text:string | number | JSX.Element
     = isLoading || isTwelve
