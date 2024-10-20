@@ -1,6 +1,4 @@
 import { NextResponse } from 'next/server';
-
-import { getCurrentURL } from '@/utils/server';
 import type { Endpoints, ErrorAPI, Result } from '.';
 
 function error(code:number | string, message:string, details:string | null = null, hint:string | null = null) {
@@ -59,7 +57,7 @@ export function badRequest<T>(output:T, headers:Headers, stringified:boolean = t
 /* ========================================================================== */
 
 export async function api<T extends keyof Endpoints>(path:T, args?:Endpoints[T]['Arguments']) : Promise<Endpoints[T]['Return']> {
-  const fullPath = `${await getCurrentURL()}/api/${path.startsWith("/") ? path : '/' + path}`;
+  const fullPath = `${location.origin}/api/${path.startsWith("/") ? path : '/' + path}`;
   const url = new URL(fullPath);
   if (args)
     Object.keys(args).forEach(key => url.searchParams.set(key, (args as any)[key]));

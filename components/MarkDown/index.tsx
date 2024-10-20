@@ -20,11 +20,7 @@ const plugins:Options["remarkPlugins"] = [
 
 function HandleSpan(props:HTMLAttributes<HTMLSpanElement>) {
   if (props.className?.includes("card-mention"))
-    return (
-      <Suspense>
-        <CardTag {...props} />
-      </Suspense>
-    );
+    return <CardTag {...props} />;
 
   return <span {...props} />;
 }

@@ -1,8 +1,7 @@
-"use server";
 import sharp from "sharp";
 import { api } from "@/utils";
 
-async function httpURLToBase64(httpURL:string) {
+async function httpToBase64(httpURL:string) {
   return (await fetch(httpURL)).arrayBuffer();
 }
 
@@ -13,10 +12,6 @@ function dataURLToBase64(dataURL:string) {
 function bufferToDataURL(buffer:Buffer, extension:string = 'png') {
   return `data:image/${extension};base64,${buffer.toString('base64')}`;
 }
-
-/* ========================================================================== */
-/*                                 End Points                                 */
-/* ========================================================================== */
 
 export async function getAvatarUrl(username:string) {
   const color = [
@@ -95,7 +90,7 @@ export async function addLogoBadge(input:string) {
     const avatar = input.startsWith("data:")
                  ? Buffer.from(dataURLToBase64(input), 'base64')
                  : input.startsWith("http:") || input.startsWith("https:")
-                 ? Buffer.from(await httpURLToBase64(input))
+                 ? Buffer.from(await httpToBase64(input))
                  : "unknown";
 
     if (avatar === "unknown")
