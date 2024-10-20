@@ -3,7 +3,6 @@ import { HTMLAttributes, useEffect, useState } from "react";
 
 import { C, LoadingText } from "@/components";
 import { useQuery } from "@tanstack/react-query";
-import { getUserInfo } from "@/utils/api/user/info";
 import { api } from "@/utils";
 
 export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
@@ -37,8 +36,8 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
   useEffect(() => {
     const start = async () => {
       if (post?.author) {
-        const { data } = await getUserInfo('id', post.author_uuid);
-        setAuthor(data?.display_name ? `${data.display_name} (${data.username})` : data?.username ?? null);
+        const user = await api('/user/info', { id: post.author_uuid! });
+        setAuthor(user?.display_name ? `${user.display_name} (${user.username})` : user?.username ?? null);
       }
     }
 
