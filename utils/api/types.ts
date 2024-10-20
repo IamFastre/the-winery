@@ -1,6 +1,7 @@
 import type { UserInfo, UserInfoParams } from "@/utils/api/user/info";
 import type { UserSaves, UserSavesParams } from "@/utils/api/user/saves";
 import type { UserDrafts, UserDraftsParams } from "@/utils/api/user/drafts";
+import type { UserSearch, UserSearchParams } from "@/utils/api/user/search";
 
 import type { CardFeed, CardFeedParams } from "@/utils/api/card/feed";
 import type { CardPost, CardPostParams } from "@/utils/api/card/post";
@@ -26,6 +27,7 @@ export interface Endpoints {
   "/user/info":   Endpoint<UserInfoParams,   UserInfo>,
   "/user/drafts": Endpoint<UserDraftsParams, UserDrafts>,
   "/user/saves":  Endpoint<UserSavesParams,  UserSaves>,
+  "/user/search":  Endpoint<UserSearchParams,  UserSearch>,
 
   "/card/feed":           Endpoint<CardFeedParams,     CardFeed>,
   "/card/post":           Endpoint<CardPostParams,     CardPost>,

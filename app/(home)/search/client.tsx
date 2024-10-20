@@ -5,10 +5,9 @@ import { IoCloseCircleOutline, IoSadOutline, IoSearch, IoSearchCircleOutline } f
 import Link from "next/link";
 import Image from "next/image";
 
-import { humanizeTime } from "@/utils";
+import { api, humanizeTime } from "@/utils";
 import { Button, C, LoadingText, Section } from "@/components";
 import { Tables } from "@/supabase/types";
-import { searchProfiles } from "@/supabase/actions/user";
 import { useHydration } from "@/hooks";
 
 import styles from "./styles.module.scss";
@@ -80,9 +79,9 @@ export function Searcher() {
     setQ(query);
     setResults(null);
 
-    const { data, error } = await searchProfiles(query);
+    const data = await api("/user/search", { q: query });
     setResults(data);
-    setError(!!error);
+    setError(!!(data as any).message);
   };
 
   return (

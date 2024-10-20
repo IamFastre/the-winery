@@ -6,19 +6,6 @@ import { getUserInfo } from "@/utils/api/user/info";
 import { AuthData, AuthError } from "./types";
 
 /* ========================================================================== */
-/*                                   Reading                                  */
-/* ========================================================================== */
-
-export async function searchProfiles(query:string) {
-  const supabase = createClient();
-
-  return await supabase
-    .from('profiles')
-    .select('*')
-    .ilike('username_displayname', `%${query.toLowerCase()}%`);
-}
-
-/* ========================================================================== */
 /*                                  Updating                                  */
 /* ========================================================================== */
 
