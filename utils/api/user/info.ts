@@ -20,7 +20,7 @@ export async function getUserInfo(what:'id' | 'identifier' | 'self', value:strin
   const userRes = await supabase
     .from('profiles')
     .select('*')
-    .eq(what, value ?? '')
+    .eq(what, value?.toLowerCase() ?? '')
     .single();
 
   if (userRes.error)

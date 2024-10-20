@@ -22,7 +22,7 @@ function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEvent
   return (
     <Section className={styles.menu} containerClassName={styles.menuContainer}>
       {options.map((o, i) => (
-        <Fragment key={o.title}>
+        <Fragment key={`${i}-${o.title}`}>
           <div className={styles.option} onClick={o.action}>
             { o.icon ? <o.icon /> : null }
             <div>
