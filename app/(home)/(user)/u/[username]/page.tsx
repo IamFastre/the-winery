@@ -39,7 +39,7 @@ export async function generateMetadata({ params }:UserPageProps) : Promise<Metad
 }
 
 export default async function UserPage({ params }:UserPageProps) {
-  const self = (await getUserInfo('self', '')).data;
+  const self = (await getUserInfo('self')).data;
 
   if (!self)
     return;

@@ -5,7 +5,7 @@ import { Tables } from '@/supabase/types';
 export type UserInfo = Tables<'profiles'> & { mail_confirmed: boolean };
 export type UserInfoParams = { id:string } | { username:string };
 
-export async function getUserInfo(what:'id' | 'identifier' | 'self', value:string) {
+export async function getUserInfo(what:'id' | 'identifier' | 'self', value:string | null = null) {
   const supabase = createClient();
 
   if (what === 'self') {
@@ -20,7 +20,7 @@ export async function getUserInfo(what:'id' | 'identifier' | 'self', value:strin
   const userRes = await supabase
     .from('profiles')
     .select('*')
-    .eq(what, value)
+    .eq(what, value ?? '')
     .single();
 
   if (userRes.error)

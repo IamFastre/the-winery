@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import consts from "@/utils/consts";
 import { Section } from "@/components/Section";
-import { getProfile } from "@/supabase/actions/user";
+import { getUserInfo } from "@/utils/api/user/info";
 import { getCardDraft } from "@/utils/api/card/draft";
 import { Tables } from "@/supabase/types";
 
@@ -16,7 +16,7 @@ export const metadata:Metadata = {
 }
 
 export default async function ComposePage({ searchParams }:{ searchParams: { draft:string | undefined; } }) {
-  const { data:user, error } = await getProfile();
+  const { data:user, error } = await getUserInfo('self');
   let draft:Tables<'drafts'> | null = null;
 
   if (!user || error)

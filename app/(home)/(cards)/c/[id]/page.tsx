@@ -21,7 +21,7 @@ interface CardPageProps {
 export default async function CardPage({ params }:CardPageProps) {
   const id = Number.parseInt(params.id);
   const { data:post, error:postError } = await getCardPost(id);
-  const { data:author, error:userError } = await getUserInfo('id', post?.author_uuid ?? "");
+  const { data:author, error:userError } = await getUserInfo('id', post?.author_uuid);
 
   if (Number.isNaN(id)) {
     return (

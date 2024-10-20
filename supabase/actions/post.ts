@@ -2,7 +2,7 @@
 import XRegExp from "xregexp";
 import { createClient } from "@/supabase/server";
 import { PostgrestError } from "@supabase/supabase-js";
-import { getProfile } from "./user";
+import { getUserInfo } from "@/utils/api/user/info";
 
 /* ========================================================================== */
 /*                                  Updating                                  */
@@ -37,7 +37,7 @@ export async function editDraft(id:number, title:string | null, content:string) 
 
 async function createCard(table:'posts' | 'drafts', title:string | null, content:string) {
   const supabase = createClient();
-  const { data:user, error } = await getProfile();
+  const { data:user, error } = await getUserInfo('self');
 
   if (!user || error)
     return { data: null, error };
@@ -64,7 +64,7 @@ export async function createDraft(title:string, content:string) {
 
 export async function likePost(id:number, action: 'like' | 'unlike') {
   const supabase = createClient();
-  const { data:user } = await getProfile();
+  const { data:user } = await getUserInfo('self');
 
   if (!user)
     return false;
@@ -84,7 +84,7 @@ export async function likePost(id:number, action: 'like' | 'unlike') {
 
 export async function savePost(id:number, action: 'save' | 'unsave') {
   const supabase = createClient();
-  const { data:user } = await getProfile();
+  const { data:user } = await getUserInfo('self');
 
   if (!user)
     return false;

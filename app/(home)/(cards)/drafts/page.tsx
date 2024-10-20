@@ -6,7 +6,7 @@ import consts from "@/utils/consts";
 import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
 import { Card } from "@/components/Card";
-import { getProfile } from "@/supabase/actions/user";
+import { getUserInfo } from "@/utils/api/user/info";
 import { getUserDrafts } from "@/utils/api/user/drafts";
 
 import { PageIcon } from "../server";
@@ -19,7 +19,7 @@ export const metadata:Metadata = {
 };
 
 export default async function DraftsPage() {
-  const { data:profile } = await getProfile();
+  const { data:profile } = await getUserInfo('self');
   const { data, error } = await getUserDrafts();
 
   console.log(error)

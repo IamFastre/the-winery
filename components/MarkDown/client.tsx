@@ -37,7 +37,7 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
   useEffect(() => {
     const start = async () => {
       if (post?.author) {
-        const { data } = await getUserInfo('id', post.author_uuid ?? "");
+        const { data } = await getUserInfo('id', post.author_uuid);
         setAuthor(data?.display_name ? `${data.display_name} (${data.username})` : data?.username ?? null);
       }
     }

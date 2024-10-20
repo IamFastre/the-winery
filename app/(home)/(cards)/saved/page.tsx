@@ -5,7 +5,7 @@ import consts from "@/utils/consts";
 import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
 import { Card } from "@/components/Card";
-import { getProfile } from "@/supabase/actions/user";
+import { getUserInfo } from "@/utils/api/user/info";
 import { getUserSaves } from "@/utils/api/user/saves";
 
 import { PageIcon } from "../server";
@@ -18,7 +18,7 @@ export const metadata:Metadata = {
 };
 
 export default async function SavesPage() {
-  const { data:profile } = await getProfile();
+  const { data:profile } = await getUserInfo('self');
   const { data } = await getUserSaves();
 
   if (!profile || !data )

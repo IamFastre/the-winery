@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import { getProfile } from "@/supabase/actions/user";
+import { getUserInfo } from "@/utils/api/user/info";
 
 export default async function UserPage() {
-  const { data:user } = await getProfile();
+  const { data:user } = await getUserInfo('self');
 
   if (user)
     redirect(`/u/${user.username}`);

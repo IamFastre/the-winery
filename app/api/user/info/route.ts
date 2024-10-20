@@ -29,7 +29,7 @@ export async function GET(request:NextRequest) {
     return success<UserInfo>(res.data, headers);
   }
 
-  const res = await getUserInfo('self', '');
+  const res = await getUserInfo('self');
 
   if (res.error)
     return notFound(res.error, headers);

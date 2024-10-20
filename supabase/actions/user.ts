@@ -1,26 +1,13 @@
 "use server";
 import { cropAvatar, getAvatarUrl, getCurrentURL } from "@/utils/server";
 import { createClient } from "@/supabase/server";
+import { getUserInfo } from "@/utils/api/user/info";
 
 import { AuthData, AuthError } from "./types";
 
 /* ========================================================================== */
 /*                                   Reading                                  */
 /* ========================================================================== */
-
-export async function getProfile() {
-  const supabase = createClient();
-  const { data: { user }, error } = await supabase.auth.getUser();
-
-  if (!user || error)
-    return { data: null, error };
-
-  return await supabase
-    .from('profiles')
-    .select()
-    .eq('id', user.id)
-    .single();
-}
 
 export async function searchProfiles(query:string) {
   const supabase = createClient();
@@ -60,7 +47,7 @@ export async function editProfile(partialUser:{ display_name?: string | null; bi
 
 export async function editAvatar(base64Image:string | null) {
   const supabase = createClient();
-  const { data:user, error } = await getProfile();
+  const { data:user, error } = await getUserInfo('self');
 
   if (!user)
     return { data: null, error };

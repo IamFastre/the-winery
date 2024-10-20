@@ -33,7 +33,7 @@ export async function getCardLikeList(id:string | number) {
   const users:CardLikeList['users'] = [];
 
   for (const author of likesRes.data.map(l => l.user_uuid)) {
-    const res = await getUserInfo('id', author ?? "");
+    const res = await getUserInfo('id', author);
 
     if (res.error)
       return result(null, res.error);

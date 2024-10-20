@@ -1,8 +1,8 @@
 import { redirect, RedirectType } from "next/navigation";
-import { getProfile } from "@/supabase/actions/user";
+import { getUserInfo } from "@/utils/api/user/info";
 
 export default async function AuthLayout({ children }: Readonly<{ children:React.ReactNode }>) {
-  const { data:user } = await getProfile();
+  const { data:user } = await getUserInfo('self');
 
   if (user)
     redirect('/', RedirectType.replace);

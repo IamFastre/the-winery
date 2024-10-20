@@ -1,12 +1,12 @@
 import { Toaster } from "@/providers/Toaster";
-import { getProfile } from "@/supabase/actions/user";
+import { getUserInfo } from "@/utils/api/user/info";
 
 import { HomeShortcuts } from "./shortcuts";
 import { Sidebar } from "./client";
 import styles from "./layout.module.scss";
 
 export default async function HomeLayout({ children }: Readonly<{ children:React.ReactNode }>) {
-  const self = (await getProfile()).data;
+  const self = (await getUserInfo('self')).data;
 
   return (
     <div className={styles.body}>

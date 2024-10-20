@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 import consts from "@/utils/consts";
-import { getProfile } from "@/supabase/actions/user";
+import { getUserInfo } from "@/utils/api/user/info";
 import { Header } from "@/components/Header";
 import { Section } from "@/components/Section";
 
@@ -21,7 +21,7 @@ export const metadata:Metadata = {
 };
 
 export default async function GettingStartedPage() {
-  const { data:profile } = await getProfile();
+  const { data:profile } = await getUserInfo('self');
 
   return (
     <div style={{ flex: 1 }}>
