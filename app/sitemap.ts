@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .from('profiles')
     .select('username')
     .order('created_at', { ascending: true })
-    .limit(49_900);
+    .limit(49_000);
 
   if (users)
     users.forEach(u => userSlugs.push(u.username));  
@@ -42,7 +42,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: `${currentURL}/auth/password/forgot`,
+      priority: 0.7,
+    },
+    {
       url: `${currentURL}/drafts`,
+      priority: 0.6,
+    },
+    {
+      url: `${currentURL}/saved`,
       priority: 0.6,
     },
     ...userSlugs.map(slug => ({
