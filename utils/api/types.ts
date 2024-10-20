@@ -1,14 +1,14 @@
-import type { UserInfo, UserInfoParams } from "@/app/api/user/info/route";
-import type { UserSaves, UserSavesParams } from "@/app/api/user/saves/route";
-import type { UserDrafts, UserDraftsParams } from "@/app/api/user/drafts/route";
+import type { UserInfo, UserInfoParams } from "@/utils/api/user/info";
+import type { UserSaves, UserSavesParams } from "@/utils/api/user/saves";
+import type { UserDrafts, UserDraftsParams } from "@/utils/api/user/drafts";
 
-import type { CardFeed, CardFeedParams } from "@/app/api/card/feed/route";
-import type { CardPost, CardPostParams } from "@/app/api/card/post/route";
-import type { CardDraft, CardDraftParams } from "@/app/api/card/draft/route";
-import { CardLikeList, CardLikeListParams } from "@/app/api/card/like-list/route";
-import { CardInteractions, CardInteractionsParams } from "@/app/api/card/interactions/route";
+import type { CardFeed, CardFeedParams } from "@/utils/api/card/feed";
+import type { CardPost, CardPostParams } from "@/utils/api/card/post";
+import type { CardDraft, CardDraftParams } from "@/utils/api/card/draft";
+import type { CardLikeList, CardLikeListParams } from "@/utils/api/card/like-list";
+import type { CardInteractions, CardInteractionsParams } from "@/utils/api/card/interactions";
 
-import type { OtherLogo, OtherLogoParams } from "@/app/api/other/logo/route";
+import type { OtherLogo, OtherLogoParams } from "@/utils/api/other/logo";
 
 interface Endpoint<A,R> {
   Arguments: A;

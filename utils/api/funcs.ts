@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { PostgrestError } from '@supabase/supabase-js';
 
 import { getCurrentURL } from '@/utils/server';
 import type { Endpoints, ErrorAPI, Result } from '.';

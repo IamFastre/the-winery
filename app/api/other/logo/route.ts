@@ -1,20 +1,16 @@
 import { NextRequest } from 'next/server';
 
-import { getLogo, LogoKind, success } from '@/utils';
-import { getCurrentURL } from '@/utils/server';
-
-export type OtherLogo = ArrayBuffer;
-export type OtherLogoParams = { variant:LogoKind | undefined };
+import { success } from '@/utils';
+import { getOtherLogo, OtherLogo, OtherLogoParams } from '@/utils/api/other/logo';
 
 export async function GET(request:NextRequest) {
   const { searchParams: params } = new URL(request.url);
 
-  const variant = params.get('variant') as OtherLogoParams['variant'];
-  const logo = getLogo(variant ?? 'main');
-  const url = await getCurrentURL();
-  const blob = await (await fetch(`${url}${logo.src}`)).arrayBuffer();
   const headers = new Headers();
   headers.set("Content-Type", "image/png");
 
-  return success(blob, headers, false);
+  const variant = (params.get('variant') ?? 'main') as OtherLogoParams['variant'];
+  const res = await getOtherLogo(variant);
+
+  return success<OtherLogo>(res.data, headers, false);
 }

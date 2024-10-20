@@ -1,24 +1,7 @@
 import { NextRequest } from 'next/server';
 
-import { badRequest, notFound, result, success } from '@/utils';
-import { createClient } from '@/supabase/server';
-import { Tables } from '@/supabase/types';
-
-export type CardLikeList = Tables<'likes'>[];
-export type CardLikeListParams = { id:number };
-
-export async function getCardLikeList(id:string | number) {
-  'use server';
-  const supabase = createClient();
-
-  const res = await supabase
-    .from('likes')
-    .select('*')
-    .eq('post', id)
-    .order('timestamp', { ascending: false });
-
-  return result<CardLikeList | null>(res.data, res.error);
-}
+import { badRequest, notFound, success } from '@/utils';
+import { CardLikeList, getCardLikeList } from '@/utils/api/card/like-list';
 
 export async function GET(request:NextRequest) {
   const { searchParams: params } = new URL(request.url);
