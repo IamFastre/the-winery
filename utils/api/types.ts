@@ -29,7 +29,7 @@ export interface Endpoints {
   "/card/post":      Endpoint<CardPostParams,     CardPost>,
   "/card/draft":     Endpoint<CardDraftParams,    CardDraft>,
   // "/card/like-list": Endpoint<CardLikeListParams, CardLikeList>,
-  // "/card/buttons":   Endpoint<CardButtonsParams,  CardButtons>,
+  // "/card/interactions":   Endpoint<CardButtonsParams,  CardButtons>,
 
   "/other/logo": Endpoint<OtherLogoParams, OtherLogo>,
 }

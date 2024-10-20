@@ -15,7 +15,7 @@ function error(code:number | string, message:string, details:string | null = nul
 
 /* ========================================================================== */
 
-export function result<T>(data:T | null, error:PostgrestError | ErrorAPI | null) : Result<T> {
+export function result<T>(data:T | null, error:Error | ErrorAPI | null) : Result<T> {
   return { data, error: JSON.parse(JSON.stringify(error)) } as Result<T>;
 }
 

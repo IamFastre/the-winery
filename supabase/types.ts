@@ -12,6 +12,7 @@ export type Database = {
       drafts: {
         Row: {
           author: string | null
+          author_uuid: string | null
           content: string
           id: number
           timestamp: string
@@ -19,6 +20,7 @@ export type Database = {
         }
         Insert: {
           author?: string | null
+          author_uuid?: string | null
           content: string
           id?: number
           timestamp?: string
@@ -26,6 +28,7 @@ export type Database = {
         }
         Update: {
           author?: string | null
+          author_uuid?: string | null
           content?: string
           id?: number
           timestamp?: string
@@ -39,6 +42,13 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["identifier"]
           },
+          {
+            foreignKeyName: "drafts_author_uuid_fkey"
+            columns: ["author_uuid"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
         ]
       }
       likes: {
@@ -46,18 +56,21 @@ export type Database = {
           post: number
           timestamp: string
           user: string
+          user_uuid: string | null
           uuid: string
         }
         Insert: {
           post?: number
           timestamp?: string
           user: string
+          user_uuid?: string | null
           uuid?: string
         }
         Update: {
           post?: number
           timestamp?: string
           user?: string
+          user_uuid?: string | null
           uuid?: string
         }
         Relationships: [
@@ -82,11 +95,19 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["identifier"]
           },
+          {
+            foreignKeyName: "likes_user_uuid_fkey"
+            columns: ["user_uuid"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
         ]
       }
       posts: {
         Row: {
           author: string | null
+          author_uuid: string | null
           content: string
           id: number
           timestamp: string
@@ -94,6 +115,7 @@ export type Database = {
         }
         Insert: {
           author?: string | null
+          author_uuid?: string | null
           content: string
           id?: number
           timestamp?: string
@@ -101,6 +123,7 @@ export type Database = {
         }
         Update: {
           author?: string | null
+          author_uuid?: string | null
           content?: string
           id?: number
           timestamp?: string
@@ -113,6 +136,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["identifier"]
+          },
+          {
+            foreignKeyName: "posts_author_uuid_fkey"
+            columns: ["author_uuid"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -145,33 +175,28 @@ export type Database = {
           identifier?: string
           username?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "users_id_fkey"
-            columns: ["id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       saves: {
         Row: {
           post: number
           timestamp: string
           user: string
+          user_uuid: string | null
           uuid: string
         }
         Insert: {
           post?: number
           timestamp?: string
           user: string
+          user_uuid?: string | null
           uuid?: string
         }
         Update: {
           post?: number
           timestamp?: string
           user?: string
+          user_uuid?: string | null
           uuid?: string
         }
         Relationships: [
@@ -189,6 +214,13 @@ export type Database = {
             referencedRelation: "posts"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "saves_user_uuid_fkey"
+            columns: ["user_uuid"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
         ]
       }
     }
@@ -201,6 +233,10 @@ export type Database = {
           id: string
         }
         Returns: boolean
+      }
+      saved_posts: {
+        Args: Record<PropertyKey, never>
+        Returns: Record<string, unknown>
       }
       username_displayname: {
         Args: {
@@ -298,4 +334,19 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof PublicSchema["CompositeTypes"]
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
+    ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never

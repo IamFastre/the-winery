@@ -13,7 +13,6 @@ export async function GET(request:NextRequest) {
   const logo = getLogo(variant ?? 'main');
   const url = await getCurrentURL();
   const blob = await (await fetch(`${url}${logo.src}`)).arrayBuffer();
-  console.log(`${url}${logo.src}`)
   const headers = new Headers();
   headers.set("Content-Type", "image/png");
 
