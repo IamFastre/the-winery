@@ -5,6 +5,8 @@ import type { UserDrafts, UserDraftsParams } from "@/app/api/user/drafts/route";
 import type { CardFeed, CardFeedParams } from "@/app/api/card/feed/route";
 import type { CardPost, CardPostParams } from "@/app/api/card/post/route";
 import type { CardDraft, CardDraftParams } from "@/app/api/card/draft/route";
+import { CardLikeList, CardLikeListParams } from "@/app/api/card/like-list/route";
+import { CardInteractions, CardInteractionsParams } from "@/app/api/card/interactions/route";
 
 import type { OtherLogo, OtherLogoParams } from "@/app/api/other/logo/route";
 
@@ -25,11 +27,11 @@ export interface Endpoints {
   "/user/drafts": Endpoint<UserDraftsParams, UserDrafts>,
   "/user/saves":  Endpoint<UserSavesParams,  UserSaves>,
 
-  "/card/feed":      Endpoint<CardFeedParams,     CardFeed>,
-  "/card/post":      Endpoint<CardPostParams,     CardPost>,
-  "/card/draft":     Endpoint<CardDraftParams,    CardDraft>,
-  // "/card/like-list": Endpoint<CardLikeListParams, CardLikeList>,
-  // "/card/interactions":   Endpoint<CardButtonsParams,  CardButtons>,
+  "/card/feed":           Endpoint<CardFeedParams,     CardFeed>,
+  "/card/post":           Endpoint<CardPostParams,     CardPost>,
+  "/card/draft":          Endpoint<CardDraftParams,    CardDraft>,
+  "/card/like-list":      Endpoint<CardLikeListParams, CardLikeList>,
+  "/card/interactions":   Endpoint<CardInteractionsParams,  CardInteractions>,
 
   "/other/logo": Endpoint<OtherLogoParams, OtherLogo>,
 }
