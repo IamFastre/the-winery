@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { IoEyeOutline, IoEye, IoFolderOutline, IoAdd, IoWine, IoFolder } from "react-icons/io5";
 import XRegExp from "xregexp";
 
-import { SetState } from "@/utils";
+import { ErrorAPI, SetState } from "@/utils";
 import { Section, MarkDown, Button, C, LoadingText } from "@/components";
 import { createPost, createDraft, editDraft, deleteDraft } from "@/supabase/actions/post";
 import { type AuthError, PostgrestError } from "@supabase/supabase-js";
@@ -108,7 +108,7 @@ const AsUser = ({ username }:{ username:string; }) => (
   </div>
 );
 
-const Error = (props:{ error:AuthError | PostgrestError; isOK:boolean; }) => (
+const Error = (props:{ error:ErrorAPI; isOK:boolean; }) => (
   <span className={styles.error}>
     Oops...
     <br/>
@@ -149,7 +149,7 @@ export function PostEditor({ user }:{ user:Tables<'profiles'> }) {
   const [content, setContent] = useState<string>("");
   const [showPrev, setShowPrev] = useState<boolean>(false);
   const [uploading, setUploading] = useState<boolean>(false);
-  const [error, setError] = useState<AuthError | PostgrestError | null>(null);
+  const [error, setError] = useState<ErrorAPI | null>(null);
 
   const isEnough = content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length >= 8;
 
@@ -220,7 +220,7 @@ export function DraftEditor({ user, draft }:{ user:Tables<'profiles'>; draft:Tab
   const [content, setContent] = useState<string>(draft.content);
   const [showPrev, setShowPrev] = useState<boolean>(true);
   const [uploading, setUploading] = useState<boolean>(false);
-  const [error, setError] = useState<AuthError | PostgrestError | null>(null);
+  const [error, setError] = useState<ErrorAPI | null>(null);
 
   const isEnough = content.replaceAll(XRegExp(`\\P{L}+`, `gu`), "").length >= 8;
 
