@@ -72,7 +72,7 @@ export async function likePost(id:number, action: 'like' | 'unlike') {
   const res = action === 'like'
     ? await supabase
         .from('likes')
-        .insert({ user: user.identifier, post: id })
+        .insert({ user: user.identifier, user_uuid: user.id, post: id })
     : await supabase
         .from('likes')
         .delete()
@@ -92,7 +92,7 @@ export async function savePost(id:number, action: 'save' | 'unsave') {
   const res = action === 'save'
     ? await supabase
         .from('saves')
-        .insert({ user: user.identifier, post: id })
+        .insert({ user: user.identifier, user_uuid: user.id, post: id })
     : await supabase
         .from('saves')
         .delete()

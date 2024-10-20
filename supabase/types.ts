@@ -12,7 +12,7 @@ export type Database = {
       drafts: {
         Row: {
           author: string | null
-          author_uuid: string | null
+          author_uuid: string
           content: string
           id: number
           timestamp: string
@@ -20,7 +20,7 @@ export type Database = {
         }
         Insert: {
           author?: string | null
-          author_uuid?: string | null
+          author_uuid: string
           content: string
           id?: number
           timestamp?: string
@@ -28,7 +28,7 @@ export type Database = {
         }
         Update: {
           author?: string | null
-          author_uuid?: string | null
+          author_uuid?: string
           content?: string
           id?: number
           timestamp?: string
@@ -56,21 +56,21 @@ export type Database = {
           post: number
           timestamp: string
           user: string
-          user_uuid: string | null
+          user_uuid: string
           uuid: string
         }
         Insert: {
           post?: number
           timestamp?: string
           user: string
-          user_uuid?: string | null
+          user_uuid: string
           uuid?: string
         }
         Update: {
           post?: number
           timestamp?: string
           user?: string
-          user_uuid?: string | null
+          user_uuid?: string
           uuid?: string
         }
         Relationships: [
@@ -155,7 +155,6 @@ export type Database = {
           id: string
           identifier: string
           username: string
-          username_displayname: string | null
         }
         Insert: {
           avatar: string
@@ -182,21 +181,21 @@ export type Database = {
           post: number
           timestamp: string
           user: string
-          user_uuid: string | null
+          user_uuid: string
           uuid: string
         }
         Insert: {
           post?: number
           timestamp?: string
           user: string
-          user_uuid?: string | null
+          user_uuid: string
           uuid?: string
         }
         Update: {
           post?: number
           timestamp?: string
           user?: string
-          user_uuid?: string | null
+          user_uuid?: string
           uuid?: string
         }
         Relationships: [
@@ -233,16 +232,6 @@ export type Database = {
           id: string
         }
         Returns: boolean
-      }
-      saved_posts: {
-        Args: Record<PropertyKey, never>
-        Returns: Record<string, unknown>
-      }
-      username_displayname: {
-        Args: {
-          "": unknown
-        }
-        Returns: string
       }
     }
     Enums: {
