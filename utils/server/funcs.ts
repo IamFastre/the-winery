@@ -1,5 +1,5 @@
 import sharp from "sharp";
-import { api } from "@/utils";
+import { getOtherLogo } from "@/utils/api/other/logo";
 
 async function httpToBase64(httpURL:string) {
   return (await fetch(httpURL)).arrayBuffer();
@@ -96,7 +96,8 @@ export async function addLogoBadge(input:string) {
     if (avatar === "unknown")
       throw new TypeError(`Input not recognized as data or http url: '${input}'`);
 
-    const icon = await sharp(await api('/other/logo', { variant: 'brand-outline' }))
+    const logo = await getOtherLogo('brand-outline');
+    const icon = await sharp(logo.data)
       .resize({ width: BADGE_DIM, height: BADGE_DIM })
       .toBuffer();
 
