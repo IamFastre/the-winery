@@ -19,7 +19,7 @@ interface UserPageProps {
 export async function generateMetadata({ params }:UserPageProps) : Promise<Metadata> {
   const username = params.username;
   const { data:profile } = await getUserInfo('identifier', params.username);
-  
+
   if (profile) {
     const profileWithBadge = await addLogoBadge(profile.avatar);
     return {

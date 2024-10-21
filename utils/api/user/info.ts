@@ -5,6 +5,12 @@ import { Tables } from '@/supabase/types';
 export type UserInfo = Tables<'profiles'> & { mail_confirmed: boolean };
 export type UserInfoParams = { id:string } | { username:string };
 
+function cureValue(value:string) {
+  return value
+    .replaceAll(/[^a-z0-9_-]/gi, '-')
+    .toLowerCase();
+}
+
 export async function getUserInfo(what:'id' | 'identifier' | 'self', value:string | null = null) {
   const supabase = createClient();
 
@@ -20,7 +26,7 @@ export async function getUserInfo(what:'id' | 'identifier' | 'self', value:strin
   const userRes = await supabase
     .from('profiles')
     .select('*')
-    .eq(what, value?.toLowerCase() ?? '')
+    .eq(what, cureValue(value ?? ''))
     .single();
 
   if (userRes.error)
