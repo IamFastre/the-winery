@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import type { Endpoints, ErrorAPI, Result } from '.';
+import type { Endpoints, ErrorAPI, Init, Result } from '.';
 
 function error(code:number | string, message:string, details:string | null = null, hint:string | null = null) {
   return {
@@ -16,17 +16,18 @@ export function result<T>(data:T | null, error:Error | ErrorAPI | null) : Result
   return { data, error: JSON.parse(JSON.stringify(error)) } as Result<T>;
 }
 
-export function success<T>(output:T, headers:Headers, stringified:boolean = true) {
+export function success<T>(output:T, headers:Headers, stringified:boolean = true, init:Init = {}) {
   return new NextResponse<typeof output>(
     stringified ? JSON.stringify(output) : output as BodyInit, {
       headers,
       status: 200,
       statusText: 'OK',
+      ...init,
     },
   );
 }
 
-export function notFound<T>(output:T, headers:Headers, stringified:boolean = true) {
+export function notFound<T>(output:T, headers:Headers, stringified:boolean = true, init:Init = {}) {
   return new NextResponse<ErrorAPI>(
     typeof output === 'string'
     ? JSON.stringify(error(404, output))
@@ -36,11 +37,12 @@ export function notFound<T>(output:T, headers:Headers, stringified:boolean = tru
       headers,
       status: 404,
       statusText: 'Not Found',
+      ...init,
     },
   );
 }
 
-export function badRequest<T>(output:T, headers:Headers, stringified:boolean = true) {
+export function badRequest<T>(output:T, headers:Headers, stringified:boolean = true, init:Init = {}) {
   return new NextResponse<ErrorAPI>(
     typeof output === 'string'
     ? JSON.stringify(error(400, output))
@@ -50,6 +52,7 @@ export function badRequest<T>(output:T, headers:Headers, stringified:boolean = t
       headers,
       status: 400,
       statusText: 'Bad Request',
+      ...init,
     },
   );
 }
