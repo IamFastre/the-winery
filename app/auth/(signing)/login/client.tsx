@@ -9,7 +9,7 @@ import { Button, C, GoHomeLogo, LabelTitle, Section } from "@/components";
 import { useGoTo } from "@/hooks";
 
 import colors from '@/styles/colors.module.scss';
-import styles from "../styles.module.scss";
+import styles from "../../styles.module.scss";
 
 
 const checkEmail = (str:string) : boolean => {

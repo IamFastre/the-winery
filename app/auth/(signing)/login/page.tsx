@@ -3,22 +3,22 @@ import { Metadata } from "next";
 import consts from "@/utils/consts";
 import { Section } from "@/components/Section";
 
-import { SignupCard } from "./client";
-import styles from "../styles.module.scss";
+import { LoginCard } from "./client";
+import styles from "../../styles.module.scss";
 
 export const metadata:Metadata = {
-  title: `Sign up • ${consts.name}`,
-  description: `You found ${consts.name}! Don't waste any more time, create a new ${consts.shortname} account now!`,
+  title: `Log in • ${consts.name}`,
+  description: `Good to see you again! Log into your ${consts.shortname} account right here.`,
 }
 
-export default function SignupPage() {
+export default function LoginPage() {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        <SignupCard />
+        <LoginCard />
         <Section isCard>
           <span className={styles.footer}>
-            Already have an account? <a href="/auth/login">log in</a> now!
+            Don't have an account? <a href="/auth/signup">sign up</a> now!
           </span>
         </Section>
       </div>
