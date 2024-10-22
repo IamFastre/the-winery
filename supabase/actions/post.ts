@@ -48,7 +48,7 @@ async function createCard(table:'posts' | 'drafts', title:string | null, content
 
   return await supabase
     .from(table)
-    .insert([{ title, content, author: user.identifier }])
+    .insert([{ title, content, author_uuid: user.id }])
     .select();
 }
 
@@ -72,11 +72,11 @@ export async function likePost(id:number, action: 'like' | 'unlike') {
   const res = action === 'like'
     ? await supabase
         .from('likes')
-        .insert({ user: user.identifier, user_uuid: user.id, post: id })
+        .insert({ user_uuid: user.id, post: id })
     : await supabase
         .from('likes')
         .delete()
-        .eq('user', user.identifier)
+        .eq('user_uuid', user.id)
         .eq('post', id);
 
   return res.error === null;
@@ -92,11 +92,11 @@ export async function savePost(id:number, action: 'save' | 'unsave') {
   const res = action === 'save'
     ? await supabase
         .from('saves')
-        .insert({ user: user.identifier, user_uuid: user.id, post: id })
+        .insert({ user_uuid: user.id, post: id })
     : await supabase
         .from('saves')
         .delete()
-        .eq('user', user.identifier)
+        .eq('user_uuid', user.id)
         .eq('post', id);
 
   return res.error === null;

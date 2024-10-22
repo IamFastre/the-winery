@@ -7,11 +7,16 @@ export type UserInfoParams = { id:string } | { username:string };
 
 function cureValue(value:string) {
   return value
-    .replaceAll(/[^a-z0-9_-]/gi, '-')
+    .replaceAll(/[^a-z0-9_-]/gi, '•')
     .toLowerCase();
 }
 
-export async function getUserInfo(what:'id' | 'identifier' | 'self', value:string | null = null) {
+async function mailConfirmed(supabase:ReturnType<typeof createClient>, id:string) {
+  const res = await supabase.rpc('is_confirmed', { id });
+  return res.data ?? false;
+}
+
+export async function getUserInfo(what:'id' | 'username' | 'self', value:string | null = null) {
   const supabase = createClient();
 
   if (what === 'self') {
@@ -22,20 +27,32 @@ export async function getUserInfo(what:'id' | 'identifier' | 'self', value:strin
 
     return getUserInfo('id', user.id);
   }
+  
+  let user:Tables<'profiles'> | null = null;
 
-  const userRes = await supabase
-    .from('profiles')
-    .select('*')
-    .eq(what, cureValue(value ?? ''))
-    .single();
+  if (what === 'id') {
+    const res = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', cureValue(value ?? ''))
+      .single();
 
-  if (userRes.error)
-    return result(null, userRes.error);
+    if (res.error)
+      return result(null, res.error);
+    user = res.data;
+  }
 
-  const confRes = await supabase.rpc('is_confirmed', { id: userRes.data.id });
+  if (what === 'username') {
+    const res = await supabase
+      .from('profiles')
+      .select('*')
+      .ilike('username', cureValue(value ?? ''))
+      .single();
 
-  if (confRes.error)
-    return result(null, confRes.error);
+    if (res.error)
+      return result(null, res.error);
+    user = res.data;
+  }
 
-  return result<UserInfo>({ ...userRes.data, mail_confirmed: confRes.data }, null);
+  return result<UserInfo>({ ...user!, mail_confirmed: await mailConfirmed(supabase, user!.id) }, null);
 }

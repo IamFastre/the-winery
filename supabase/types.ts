@@ -11,7 +11,6 @@ export type Database = {
     Tables: {
       drafts: {
         Row: {
-          author: string | null
           author_uuid: string
           content: string
           id: number
@@ -19,7 +18,6 @@ export type Database = {
           title: string | null
         }
         Insert: {
-          author?: string | null
           author_uuid: string
           content: string
           id?: number
@@ -27,7 +25,6 @@ export type Database = {
           title?: string | null
         }
         Update: {
-          author?: string | null
           author_uuid?: string
           content?: string
           id?: number
@@ -35,13 +32,6 @@ export type Database = {
           title?: string | null
         }
         Relationships: [
-          {
-            foreignKeyName: "drafts_author_fkey"
-            columns: ["author"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["identifier"]
-          },
           {
             foreignKeyName: "drafts_author_uuid_fkey"
             columns: ["author_uuid"]
@@ -55,21 +45,18 @@ export type Database = {
         Row: {
           post: number
           timestamp: string
-          user: string
           user_uuid: string
           uuid: string
         }
         Insert: {
           post?: number
           timestamp?: string
-          user: string
           user_uuid: string
           uuid?: string
         }
         Update: {
           post?: number
           timestamp?: string
-          user?: string
           user_uuid?: string
           uuid?: string
         }
@@ -89,13 +76,6 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "likes_user_fkey"
-            columns: ["user"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["identifier"]
-          },
-          {
             foreignKeyName: "likes_user_uuid_fkey"
             columns: ["user_uuid"]
             isOneToOne: false
@@ -106,7 +86,6 @@ export type Database = {
       }
       posts: {
         Row: {
-          author: string | null
           author_uuid: string | null
           content: string
           id: number
@@ -114,7 +93,6 @@ export type Database = {
           title: string | null
         }
         Insert: {
-          author?: string | null
           author_uuid?: string | null
           content: string
           id?: number
@@ -122,7 +100,6 @@ export type Database = {
           title?: string | null
         }
         Update: {
-          author?: string | null
           author_uuid?: string | null
           content?: string
           id?: number
@@ -130,13 +107,6 @@ export type Database = {
           title?: string | null
         }
         Relationships: [
-          {
-            foreignKeyName: "posts_author_fkey"
-            columns: ["author"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["identifier"]
-          },
           {
             foreignKeyName: "posts_author_uuid_fkey"
             columns: ["author_uuid"]
@@ -153,7 +123,6 @@ export type Database = {
           created_at: string
           display_name: string | null
           id: string
-          identifier: string
           username: string
         }
         Insert: {
@@ -162,7 +131,6 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           id: string
-          identifier: string
           username: string
         }
         Update: {
@@ -171,7 +139,6 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           id?: string
-          identifier?: string
           username?: string
         }
         Relationships: []
@@ -180,32 +147,22 @@ export type Database = {
         Row: {
           post: number
           timestamp: string
-          user: string
           user_uuid: string
           uuid: string
         }
         Insert: {
           post?: number
           timestamp?: string
-          user: string
           user_uuid: string
           uuid?: string
         }
         Update: {
           post?: number
           timestamp?: string
-          user?: string
           user_uuid?: string
           uuid?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "saved_user_fkey"
-            columns: ["user"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["identifier"]
-          },
           {
             foreignKeyName: "saves_post_fkey"
             columns: ["post"]
@@ -215,6 +172,49 @@ export type Database = {
           },
           {
             foreignKeyName: "saves_user_uuid_fkey"
+            columns: ["user_uuid"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      super_likes: {
+        Row: {
+          post: number
+          timestamp: string
+          user_uuid: string
+          uuid: string
+        }
+        Insert: {
+          post?: number
+          timestamp?: string
+          user_uuid: string
+          uuid?: string
+        }
+        Update: {
+          post?: number
+          timestamp?: string
+          user_uuid?: string
+          uuid?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "super_likes_post_fkey"
+            columns: ["post"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "super_likes_post_fkey1"
+            columns: ["post"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "super_likes_user_uuid_fkey"
             columns: ["user_uuid"]
             isOneToOne: false
             referencedRelation: "profiles"

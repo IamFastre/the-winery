@@ -21,7 +21,7 @@ export async function GET(request:NextRequest) {
 
   if (params.has('username')) {
     const username = params.get('username')!;
-    const res = await getUserInfo('identifier', username.toLowerCase());
+    const res = await getUserInfo('username', username.toLowerCase());
 
     if (res.error)
       return notFound(res.error);

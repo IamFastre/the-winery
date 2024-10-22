@@ -18,7 +18,7 @@ interface UserPageProps {
 
 export async function generateMetadata({ params }:UserPageProps) : Promise<Metadata> {
   const username = params.username;
-  const { data:profile } = await getUserInfo('identifier', params.username);
+  const { data:profile } = await getUserInfo('username', params.username);
 
   if (profile) {
     const profileWithBadge = await addLogoBadge(profile.avatar);
@@ -44,8 +44,8 @@ export default async function UserPage({ params }:UserPageProps) {
   if (!self)
     return;
 
-  const isSelf  = self.identifier === params.username.toLowerCase();
-  const other = !isSelf ? (await getUserInfo('identifier', params.username)).data : null;
+  const isSelf  = self.username.toLowerCase() === params.username.toLowerCase();
+  const other = !isSelf ? (await getUserInfo('username', params.username)).data : null;
   const profile = isSelf ? self : other;
   const posts = profile ? (await getUserPosts('author_uuid', profile.id)).data : null;
 

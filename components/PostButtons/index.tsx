@@ -68,7 +68,7 @@ function LikesModal(props:LikesModalProps) {
             <LoadingText compact />
           : likers.length > 0 ?
             likers.map((l, i) => (
-              <Fragment key={`${l.identifier}:${i}`}>
+              <Fragment key={`${l.username}:${i}`}>
                 <div className={styles.liker}>
                   <Image
                     src={l.avatar}

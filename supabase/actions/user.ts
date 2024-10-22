@@ -52,7 +52,7 @@ export async function editAvatar(base64Image:string | null) {
 
     const res = await supabase.storage
       .from('profiles')
-      .upload(`${user.identifier}/${file.name}`, file, { contentType: 'image/png', upsert: true });
+      .upload(`${user.username.toLowerCase()}/${file.name}`, file, { contentType: 'image/png', upsert: true });
 
     if (res.data)
       url = `${supabase.storage.from('profiles').getPublicUrl(res.data.path).data.publicUrl}?created=${Date.now()}`;
@@ -61,7 +61,7 @@ export async function editAvatar(base64Image:string | null) {
   } else {
     const res = await supabase.storage
       .from('profiles')
-      .remove([`${user.identifier}/avatar`]);
+      .remove([`${user.username.toLowerCase()}/avatar`]);
 
     if (res.data)
       url = await getAvatarUrl(user.username);

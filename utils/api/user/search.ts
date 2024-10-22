@@ -9,7 +9,7 @@ const escape = (s:string) => "\\" + s;
 
 function cureUsername(value:string) {
   return value
-    .replaceAll(/[^a-z0-9_-]/gi, '-');
+    .replaceAll(/[^a-z0-9_-]/gi, '•');
 }
 
 function cureDisplayName(value:string) {
