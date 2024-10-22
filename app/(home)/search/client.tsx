@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { IoCloseCircleOutline, IoSadOutline, IoSearch, IoSearchCircleOutline } from "react-icons/io5";
 import Link from "next/link";
@@ -66,20 +66,22 @@ export function Searcher() {
   const [results, setResults] = useState<Tables<'profiles'>[] | null>(null);
   const [error, setError] = useState<boolean>(false);
 
-  const onSubmit = useCallback(async () => {
+  const onSubmit = async () => {
     const query = search;
     setQ(query);
     setResults(null);
 
     const { data } = await api("/user/search", { q: query });
+
     setResults(data);
-    setError(!!data);
-  }, [search]);
+    setError(!data);
+  };
 
   useEffect(() => {
     if (initialQ.length)
       onSubmit();
-  }, [initialQ.length, onSubmit]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     window.history.pushState(null, '', (q.length ? `?${setQuery(q)}` : path));
