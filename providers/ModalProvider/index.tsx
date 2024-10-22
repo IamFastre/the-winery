@@ -8,6 +8,7 @@ import { ModalContext } from "./context";
 import { ModalContextValue } from "./types";
 import { ModalHolder } from "./ModalHolder";
 import { CloseButton } from "./CloseButton";
+import { usePathname } from "next/navigation";
 
 interface ModalProps {
   state: [boolean, SetState<boolean>];
@@ -58,6 +59,7 @@ export function Modal(props:ModalProps) {
 }
 
 export function ModalProvider({ children }:{ children:React.ReactNode }) {
+  const pth = usePathname();
   const [id, setId] = useState<string | null>(null);
   const [modal, setModal] = useState<React.ReactNode>(null);
   const [shown, setShown] = useState<boolean>(false);
@@ -74,14 +76,18 @@ export function ModalProvider({ children }:{ children:React.ReactNode }) {
   };
 
   useEffect(() => {
+    setIsOrphan(true);
+  }, [pth]);
+
+  useEffect(() => {
     if (isOrphan) {
       setId(null);
       setModal(null);
       setShown(false);
       setIsOrphan(false);
-      setAnimationDuration(0);
+      setAnimationDuration(undefined);
     }
-  }, [isOrphan])
+  }, [isOrphan]);
 
   return (
     <>
