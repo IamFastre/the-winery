@@ -62,7 +62,7 @@ export default async function CardPage({ params }:CardPageProps) {
             An error happened trying to fetch author.
             <br/>
             <span>
-              Author: {post.author}
+              Author: {post.id}
             </span>
           </span>
         </div>
