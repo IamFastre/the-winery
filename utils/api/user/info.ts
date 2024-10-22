@@ -31,7 +31,7 @@ export async function getUserInfo(what:'id' | 'identifier' | 'self', value:strin
 
   if (userRes.error)
     return result(null, userRes.error);
-  
+
   const confRes = await supabase.rpc('is_confirmed', { id: userRes.data.id });
 
   if (confRes.error)

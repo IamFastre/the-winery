@@ -79,9 +79,9 @@ export function Searcher() {
     setQ(query);
     setResults(null);
 
-    const data = await api("/user/search", { q: query });
+    const { data } = await api("/user/search", { q: query });
     setResults(data);
-    setError(!!(data as any).message);
+    setError(!!data);
   };
 
   return (

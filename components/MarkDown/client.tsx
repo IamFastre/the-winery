@@ -11,19 +11,17 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
 
   const [title, setTitle] = useState<string | number | null>(null);
   const [author, setAuthor] = useState<string | null>(null);
-  const [isTwelve, setIsTwelve] = useState<boolean>(false);
 
   const id = parseInt((props.children as any)[1].props.children);
-  const { data:post, isLoading } = useQuery({
-    queryFn: async () => await api("/card/post", { id }),
+  const isTwelve = id === 12;
+
+  const { data:response, isLoading } = useQuery({
+    queryFn: async () => isTwelve ? null : await api("/card/post", { id }),
     queryKey: ["share-button", id]
   });
 
   useEffect(() => {
-    const resTitle = post?.title;
-
-    if (id === 12)
-      setIsTwelve(true);
+    const resTitle = response?.data?.title;
 
     if (resTitle === undefined)
       setTitle(null);
@@ -31,18 +29,18 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
       setTitle(id);
     else
       setTitle(resTitle);
-  }, [post]);
+  }, [response]);
 
   useEffect(() => {
     const start = async () => {
-      if (post?.author) {
-        const user = await api('/user/info', { id: post.author_uuid! });
+      if (response?.data?.author) {
+        const { data:user } = await api('/user/info', { id: response.data.author_uuid! });
         setAuthor(user?.display_name ? `${user.display_name} (${user.username})` : user?.username ?? null);
       }
     }
 
     start();
-  }, [post?.author])
+  }, [response?.data?.author])
 
   let text:string | number | JSX.Element
     = isLoading || isTwelve

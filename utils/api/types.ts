@@ -11,16 +11,16 @@ import type { CardInteractions, CardInteractionsParams } from "@/utils/api/card/
 
 import type { OtherLogo, OtherLogoParams } from "@/utils/api/other/logo";
 
-interface Endpoint<A,R> {
-  Arguments: A;
-  Return: R;
-}
-
 export interface ErrorAPI {
   code:number | string;
   message:string;
   details:string | null;
   hint:string | null;
+}
+
+export interface Endpoint<A,R> {
+  Arguments: A;
+  Return: R;
 }
 
 export interface Endpoints {
@@ -49,3 +49,4 @@ export interface ResultFailure {
 }
 
 export type Result<T> = T extends null ? ResultFailure : ResultSuccess<T>;
+export type ResultAPI<T extends keyof Endpoints> = Result<Endpoints[T]['Return'] | null>;

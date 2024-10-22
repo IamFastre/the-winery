@@ -1,6 +1,5 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-import { success } from '@/utils';
 import { getOtherLogo, OtherLogo, OtherLogoParams } from '@/utils/api/other/logo';
 
 export async function GET(request:NextRequest) {
@@ -12,5 +11,11 @@ export async function GET(request:NextRequest) {
   const variant = (params.get('variant') ?? 'main') as OtherLogoParams['variant'];
   const res = await getOtherLogo(variant);
 
-  return success<OtherLogo>(res.data, headers, false);
+  return new NextResponse<OtherLogo>(
+    res.data, {
+      headers,
+      status: 200,
+      statusText: 'OK',
+    },
+  );
 }

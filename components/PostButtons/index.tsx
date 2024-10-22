@@ -29,9 +29,9 @@ function LikesModal(props:LikesModalProps) {
 
   useEffect(() => {
     const start = async () => {
-      const data = await api("/card/like-list", { id: props.postId });
+      const { data } = await api("/card/like-list", { id: props.postId });
 
-      if ((data as any).message)
+      if (!data)
         setError(true);
       else
         setLikers(data.users);
@@ -112,21 +112,21 @@ export function PostButtons(props:PostButtonsProps) {
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
-  const { data, status, isLoading } = useQuery({
+  const { data: response, status, isLoading } = useQuery({
     queryFn: async () => await api("/card/interactions", { id: props.postId }),
     queryKey: ['post-interactions', props.postId],
   });
 
   useEffect(() => {
-    if (data) {
-      setIsLiked(data.liked);
-      setIsSaved(data.saved);
-      setLC(data.likeCount);
+    if (response?.data) {
+      setIsLiked(response.data.liked);
+      setIsSaved(response.data.saved);
+      setLC(response.data.likeCount);
       setError(false);
     } else if (status === 'error') {
       setError(true);
     }
-  }, [data]);
+  }, [response]);
 
   const onLike = async () => {
     const success = await likePost(props.postId, isLiked ? 'unlike' : 'like');
