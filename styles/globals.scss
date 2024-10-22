@@ -102,6 +102,11 @@ a {
 
   &[type="wrapper"] {
     display: flex;
+    unicode-bidi: isolate;
+    box-sizing: border-box;
+    flex-direction: column;
+    position: relative;
+
     color: inherit;
     font-style: inherit;
     text-decoration: inherit;

@@ -1,6 +1,7 @@
 "use client";
 import { ChangeEventHandler, Fragment, MouseEventHandler, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { IconType } from "react-icons";
 import { GoPencil, GoTrash } from "react-icons/go";
@@ -17,19 +18,30 @@ import { useHydration } from "@/hooks";
 import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
 
-type Option = { title:string; icon?: IconType; action?:MouseEventHandler<HTMLDivElement>; };
+type Option = { title:string; icon?: IconType; action?:MouseEventHandler<HTMLDivElement>; href?:string; };
 
 function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEventHandler<HTMLDivElement>; }) {
   return (
     <Section className={styles.menu} containerClassName={styles.menuContainer}>
       {options.map((o, i) => (
         <Fragment key={`${i}-${o.title}`}>
-          <div className={styles.option} onClick={o.action}>
-            { o.icon ? <o.icon /> : null }
-            <div>
-              <span>{o.title}</span>
-            </div>
-          </div>
+          {
+            o.action ?
+              <div className={styles.option} onClick={o.action}>
+                { o.icon ? <o.icon /> : null }
+                <div>
+                  <span>{o.title}</span>
+                </div>
+              </div>
+            : o.href ?
+              <Link className={styles.option} href={o.href} type="wrapper">
+                { o.icon ? <o.icon /> : null }
+                <div>
+                  <span>{o.title}</span>
+                </div>
+              </Link>
+            : null
+          }
         </Fragment>
       ))}
       <hr/>
@@ -222,8 +234,8 @@ export function ProfileEditor({ profile }:{ profile:Tables<'profiles'> }) {
         <ProfileOptions
           close={closeMenu}
           options={[
-            { title: "Saved", icon: IoBookmarkOutline, action: () => router.push('/saved') },
-            { title: "Drafts", icon: IoFolderOutline, action: () => router.push('/drafts') },
+            { title: "Saved", icon: IoBookmarkOutline, href: '/saved' },
+            { title: "Drafts", icon: IoFolderOutline, href: '/drafts' },
           ]}
         />
       </Modal>

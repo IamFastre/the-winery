@@ -357,7 +357,7 @@
     align-items: stretch;
   }
   
-  .option {
+  div.option, a.option {
     user-select: none;
     flex-direction: row;
     align-items: center;
@@ -365,7 +365,6 @@
     cursor: pointer;
     border-radius: 5px;
     height: 40px;
-    padding: 10px 0;
     background-color: rgba($secondary, 0.1);
   
     > svg {

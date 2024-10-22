@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { IoScan } from "react-icons/io5";
 
 import { CopyLinkButton } from "@/components/CopyLinkButton";
@@ -10,14 +11,14 @@ import styles from "./style.module.scss";
 export function CornerButtons({ id }:{ id:number; }) {
   return (
     <div className={styles.expand}>
-      <a
+      <Link
         type="wrapper"
         id="expand-post"
         href={`/c/${id}`}
         {...focusable(styles.active)}
       >
         <IoScan color={colors.accent} />
-      </a>
+      </Link>
       <CopyLinkButton id={id} activeClassName={styles.active} />
     </div>
   );

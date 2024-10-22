@@ -27,7 +27,7 @@ export function cropAvatar(base64Image:string, onDone:(dataUrl:string) => void, 
   const image = document.createElement("img");
   image.src = base64Image;
 
-  image.onload = e => {
+  image.onload = () => {
     let w = 0, h = 0;
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d")!;
