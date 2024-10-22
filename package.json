@@ -1,6 +1,6 @@
 {
   "name": "winery-defastre",
-  "version": "0.8.15",
+  "version": "0.8.18",
   "private": true,
   "scripts": {
     "dev": "next dev",
