@@ -1,4 +1,5 @@
-import { getLogo, LogoKind, result } from "@/utils";
+import { result } from '@/utils/api';
+import { getLogo, LogoKind } from "@/utils";
 import { getCurrentURL } from "@/utils/server";
 
 export type OtherLogo = ArrayBuffer;

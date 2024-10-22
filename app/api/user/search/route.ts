@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 
-import { badRequest, notFound, success } from '@/utils';
+import { badRequest, notFound, success } from '@/utils/api';
 import { getUserSearch, UserSearch } from '@/utils/api/user/search';
 
 export async function GET(request:NextRequest) {

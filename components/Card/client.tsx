@@ -2,7 +2,7 @@
 import { IoScan } from "react-icons/io5";
 
 import { CopyLinkButton } from "@/components/CopyLinkButton";
-import { focusable } from "@/utils";
+import { focusable } from "@/utils/client";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";

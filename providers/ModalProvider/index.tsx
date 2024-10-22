@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import hash from "object-hash";
 
-import { SetState } from "@/utils";
+import { SetState } from "@/utils/client";
 
 import { ModalContext } from "./context";
 import { ModalContextValue } from "./types";

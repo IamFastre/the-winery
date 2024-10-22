@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { IoCheckmark, IoClose, IoShareOutline } from "react-icons/io5";
 
-import { focusable } from "@/utils";
+import { focusable } from "@/utils/client";
 import { useToaster } from "@/providers/Toaster";
 
 import colors from '@/styles/colors.module.scss';

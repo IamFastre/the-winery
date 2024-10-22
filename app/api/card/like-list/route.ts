@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 
-import { badRequest, notFound, success } from '@/utils';
+import { badRequest, notFound, success } from '@/utils/api';
 import { CardLikeList, getCardLikeList } from '@/utils/api/card/like-list';
 
 export async function GET(request:NextRequest) {

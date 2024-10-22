@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-import { focusable } from "@/utils";
+import { focusable } from "@/utils/client";
 import styles from "./style.module.scss";
 
 export function Bio(props:{ content:string; }) {

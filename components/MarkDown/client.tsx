@@ -3,7 +3,7 @@ import { HTMLAttributes, useEffect, useState } from "react";
 
 import { C, LoadingText } from "@/components";
 import { useQuery } from "@tanstack/react-query";
-import { api } from "@/utils";
+import { api } from "@/utils/client";
 
 export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
   if (!props.className?.includes("card-mention"))

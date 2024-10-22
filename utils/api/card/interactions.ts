@@ -1,4 +1,4 @@
-import { result } from '@/utils';
+import { result } from '@/utils/api';
 import { createClient } from '@/supabase/server';
 
 export type CardInteractions = { liked:boolean, saved:boolean, likeCount:number };

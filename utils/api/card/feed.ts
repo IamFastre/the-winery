@@ -1,4 +1,4 @@
-import { result } from '@/utils';
+import { result } from '@/utils/api';
 import { getUserInfo } from '@/utils/api/user/info';
 import { createClient } from '@/supabase/server';
 import { Tables } from '@/supabase/types';

@@ -1,5 +1,5 @@
 import { IoClose } from "react-icons/io5";
-import { focusable, SetState } from "@/utils";
+import { focusable, SetState } from "@/utils/client";
 
 import styles from "./style.module.scss";
 

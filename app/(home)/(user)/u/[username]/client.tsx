@@ -6,7 +6,8 @@ import { IconType } from "react-icons";
 import { GoPencil, GoTrash } from "react-icons/go";
 import { IoBookmarkOutline, IoBuildOutline, IoCloseOutline, IoEllipsisHorizontalOutline, IoFolderOutline, IoSaveOutline } from "react-icons/io5";
 
-import { cropAvatar, focusable, humanizeTime } from "@/utils";
+import { humanizeTime } from "@/utils";
+import { cropAvatar, focusable } from "@/utils/client";
 import { B, Bio, Button, C, LabelTitle, Section } from "@/components";
 import { Modal } from "@/providers/ModalProvider";
 import { editAvatar, editProfile } from "@/supabase/actions/user";

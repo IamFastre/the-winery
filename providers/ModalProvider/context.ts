@@ -1,5 +1,5 @@
 import { createContext, ReactNode } from "react";
-import { SetState } from "@/utils";
+import { SetState } from "@/utils/client";
 
 export const DefaultModalContextValue = {
   id: {} as string | null,

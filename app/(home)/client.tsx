@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { IconType } from "react-icons";
 import { IoCogOutline, IoInformationCircleOutline, IoPersonCircleOutline, IoSearchOutline, IoWineOutline, IoArrowBack, IoArrowForward } from "react-icons/io5";
 
-import { focusable } from "@/utils";
+import { focusable } from "@/utils/client";
 import { Card, GoHomeLogo, Section } from "@/components";
 import { Modal } from "@/providers/ModalProvider";
 import { useShortcuts } from "@/providers/Shortcuts";

@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import { IoEyeOutline, IoEye, IoFolderOutline, IoAdd, IoWine, IoFolder } from "react-icons/io5";
 import XRegExp from "xregexp";
 
-import { ErrorAPI, SetState } from "@/utils";
+import { ErrorAPI } from "@/utils";
+import { SetState } from "@/utils/client";
 import { Section, MarkDown, Button, C, LoadingText } from "@/components";
 import { createPost, createDraft, editDraft, deleteDraft } from "@/supabase/actions/post";
-import { type AuthError, PostgrestError } from "@supabase/supabase-js";
 import { Tables } from "@/supabase/types";
 import { useToaster } from "@/providers/Toaster";
 

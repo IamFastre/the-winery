@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { IoChevronBack, IoClose } from "react-icons/io5";
 
-import { focusable, routerCanGoBack } from "@/utils";
+import { focusable, routerCanGoBack } from "@/utils/client";
 
 import styles from "./styles.module.scss";
 import { useEffect, useState } from "react";

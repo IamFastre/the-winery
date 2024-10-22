@@ -5,7 +5,8 @@ import { IoCloseCircleOutline, IoSadOutline, IoSearch, IoSearchCircleOutline } f
 import Link from "next/link";
 import Image from "next/image";
 
-import { api, humanizeTime } from "@/utils";
+import { humanizeTime } from "@/utils";
+import { api } from "@/utils/client";
 import { Button, C, LoadingText, Section } from "@/components";
 import { Tables } from "@/supabase/types";
 import { useHydration } from "@/hooks";

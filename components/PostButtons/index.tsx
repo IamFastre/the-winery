@@ -3,7 +3,9 @@ import { Fragment, MouseEventHandler, useEffect, useState } from "react";
 import { IoBookmark, IoClose, IoHeart, IoHeartDislikeOutline, IoWarning } from "react-icons/io5";
 import { useQuery } from "@tanstack/react-query";
 
-import { api, focusable, humanizeLikes } from "@/utils";
+import { humanizeLikes } from "@/utils";
+import { focusable } from "@/utils/client";
+import { api } from "@/utils/client";
 import { Section, LoadingText, UsernameHandle, CopyLinkButton } from "@/components";
 import { likePost, savePost } from "@/supabase/actions/post";
 import { Tables } from "@/supabase/types";

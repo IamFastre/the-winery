@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 
-import { badRequest, notFound, success } from '@/utils';
+import { badRequest, notFound, success } from '@/utils/api';
 import { CardDraft, getCardDraft } from '@/utils/api/card/draft';
 
 export async function GET(request:NextRequest) {
