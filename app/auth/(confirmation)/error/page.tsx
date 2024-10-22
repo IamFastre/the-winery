@@ -14,7 +14,7 @@ export const metadata:Metadata = {
 }
 
 export default async function MailErrorPage({ searchParams }:{searchParams: { [key: string]: string | string[] | undefined }}) {
-  let username = searchParams.username ?? "you";
+  const username = searchParams.username ?? "you";
 
   return (
     <div className={styles.container}>

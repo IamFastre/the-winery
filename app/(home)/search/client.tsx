@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { IoCloseCircleOutline, IoSadOutline, IoSearch, IoSearchCircleOutline } from "react-icons/io5";
 import Link from "next/link";
@@ -66,16 +66,7 @@ export function Searcher() {
   const [results, setResults] = useState<Tables<'profiles'>[] | null>(null);
   const [error, setError] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (q.length)
-      onSubmit();
-  }, []);
-
-  useEffect(() => {
-    window.history.pushState(null, '', (q.length ? `?${setQuery(q)}` : path));
-  }, [q]);
-
-  const onSubmit = async () => {
+  const onSubmit = useCallback(async () => {
     const query = search;
     setQ(query);
     setResults(null);
@@ -83,7 +74,16 @@ export function Searcher() {
     const { data } = await api("/user/search", { q: query });
     setResults(data);
     setError(!!data);
-  };
+  }, [search]);
+
+  useEffect(() => {
+    if (initialQ.length)
+      onSubmit();
+  }, [initialQ.length, onSubmit]);
+
+  useEffect(() => {
+    window.history.pushState(null, '', (q.length ? `?${setQuery(q)}` : path));
+  }, [path, q]);
 
   return (
     <div className={styles.searcher}>

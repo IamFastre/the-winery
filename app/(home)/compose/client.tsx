@@ -16,6 +16,7 @@ import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
 
 interface EditorProps {
+  toaster: ReturnType<typeof useToaster>;
   title: string;
   content: string;
   show: boolean;
@@ -26,20 +27,21 @@ interface EditorProps {
 }
 
 const Editor = (props:EditorProps) => {
-  const toaster = useToaster();
+  const hasChanges = !!props.title.length || !!props.content.length;
 
   useEffect(() => {
     const handler = (e:BeforeUnloadEvent) => {
       e.preventDefault();
       e.returnValue = true;
-      toaster.add({ message: "You can always draft your card for later editing", icon: IoFolder, duration: 7500 });
+      props.toaster.add({ message: "You can always draft your card for later editing", icon: IoFolder, duration: 7500 });
     };
 
-    if (!!props.title.length || !!props.content.length)
+    if (hasChanges)
       window.addEventListener('beforeunload', handler)
 
     return () => window.removeEventListener('beforeunload', handler);
-  }, [!!props.title.length, !!props.content.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasChanges]);
 
   return (
     <div className={styles.editor}>
@@ -180,6 +182,7 @@ export function PostEditor({ user }:{ user:Tables<'profiles'> }) {
   return (
     <div className={styles.post}>
       <Editor
+        toaster={toaster}
         title={title}
         content={content}
         show={showPrev}
@@ -268,6 +271,7 @@ export function DraftEditor({ user, draft }:{ user:Tables<'profiles'>; draft:Tab
   return (
     <div className={styles.post}>
       <Editor
+        toaster={toaster}
         title={title}
         content={content}
         show={showPrev}

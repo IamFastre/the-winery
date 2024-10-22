@@ -11,9 +11,9 @@ import styles from "./style.module.scss";
 
 export interface HomeIconProps {
   className:string;
+  goto:ReturnType<typeof useGoTo>[1];
+  redirecting:ReturnType<typeof useGoTo>[0];
   style?:CSSProperties;
-  redirecting?:boolean;
-  goto?:(str:string) => void;
   logo?:LogoKind;
   dest?:string;
 }
@@ -21,15 +21,12 @@ export interface HomeIconProps {
 const WINE_CODE = "wine";
 
 export function GoHomeLogo(props:HomeIconProps) {
-  let useHook = true;
-  let dest    = props.dest ?? '/';
+  const dest = props.dest ?? '/';
 
   if (props.redirecting === undefined && props.goto !== undefined || props.redirecting !== undefined && props.goto === undefined)
     throw new Error("Can't have one but now the other");
-  else if (props.redirecting !== props.goto)
-    useHook = false;
 
-  const [redirecting, goto] = useHook ? useGoTo() : [props.redirecting!, props.goto!];
+  const [redirecting, goto] = [props.redirecting!, props.goto!];
 
   const [code, setCode] = useState<string>('');
   const [beating, setBeating] = useState<boolean>(false);

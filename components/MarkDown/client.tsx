@@ -1,18 +1,15 @@
 "use client";
-import { HTMLAttributes, useEffect, useState } from "react";
+import { HTMLAttributes, ReactElement, useEffect, useState } from "react";
 
 import { C, LoadingText } from "@/components";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/utils/client";
 
 export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
-  if (!props.className?.includes("card-mention"))
-    return <span {...props} />
-
   const [title, setTitle] = useState<string | number | null>(null);
   const [author, setAuthor] = useState<string | null>(null);
 
-  const id = parseInt((props.children as any)[1].props.children);
+  const id = parseInt((props.children as ReactElement[])[1].props.children);
   const isTwelve = id === 12;
 
   const { data:response, isLoading } = useQuery({
@@ -29,20 +26,20 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
       setTitle(id);
     else
       setTitle(resTitle);
-  }, [response]);
+  }, [id, response]);
 
   useEffect(() => {
     const start = async () => {
-      if (response?.data?.author) {
+      if (response?.data?.author_uuid) {
         const { data:user } = await api('/user/info', { id: response.data.author_uuid! });
         setAuthor(user?.display_name ? `${user.display_name} (${user.username})` : user?.username ?? null);
       }
     }
 
     start();
-  }, [response?.data?.author])
+  }, [response?.data?.author_uuid])
 
-  let text:string | number | JSX.Element
+  const text:string | number | JSX.Element
     = isLoading || isTwelve
     ? <LoadingText compact />
     : title === null

@@ -1,9 +1,7 @@
-import { NextRequest } from 'next/server';
-
 import { notFound, success } from '@/utils/api';
 import { getUserSaves, UserSaves } from '@/utils/api/user/saves';
 
-export async function GET(request:NextRequest) {
+export async function GET() {
   const headers = new Headers();
   headers.set("Content-Type", "application/json");
 

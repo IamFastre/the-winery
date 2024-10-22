@@ -22,7 +22,7 @@ const getCardIndex = (param:string | null, max:number | undefined) => {
   if (!max)
     max = 1;
 
-  let result = Number.parseInt(param);
+  const result = Number.parseInt(param);
 
   if (Number.isNaN(result) || result < 1)
     return 1;
@@ -91,7 +91,7 @@ export function FeedNavigator({ posts, users }:CardFeed) {
       />
 
       <div className={pageStyles.quiver}>
-        <div id="go-back" {...focusable(pageStyles.active, () => increment(-1)) as any}>
+        <div id="go-back" {...focusable(pageStyles.active, () => increment(-1))}>
           <IoArrowBack className={index <= 0 ? pageStyles.disabled : undefined} />
         </div>
         <input
@@ -101,11 +101,11 @@ export function FeedNavigator({ posts, users }:CardFeed) {
           value={inpt + 1}
           placeholder={`${index + 1}`}
           onChange={e => setInpt(e.target.valueAsNumber - 1)}
-          onBlur={e => submit()}
+          onBlur={submit}
           onKeyDown={e => { if (e.key === 'Enter') { submit(); e.currentTarget.blur(); } }}
           style={{ width: `${inpt ? inpt.toFixed().length : index.toFixed().length}ch` }}
         />
-        <div id="go-forward" {...focusable(pageStyles.active, () => increment(+1)) as any}>
+        <div id="go-forward" {...focusable(pageStyles.active, () => increment(+1))}>
           <IoArrowForward className={index >= posts.length-1 ? pageStyles.disabled : undefined} />
         </div>
       </div>
@@ -117,7 +117,7 @@ export function Sidebar({ username }:{ username:string; }) {
   const [redirecting, goto, current] = useGoTo();
   const modalShownState = useState<boolean>(false);
 
-  const Icon = (props:{ icon:IconType; dest?:string; id:string, onClick?: Function }) => {
+  const Icon = (props:{ icon:IconType; dest?:string; id:string, onClick?:() => void }) => {
     const handleClick = () => {
       if (props.dest) {
         props.onClick?.();
@@ -131,7 +131,7 @@ export function Sidebar({ username }:{ username:string; }) {
       <div
         className={`${layoutStyles.icon} ${current.startsWith(props.dest!) ? layoutStyles.current : ""}`}
         id={props.id}
-        {...focusable(layoutStyles.active, handleClick) as {}}
+        {...focusable(layoutStyles.active, handleClick)}
       >
         <props.icon />
       </div>

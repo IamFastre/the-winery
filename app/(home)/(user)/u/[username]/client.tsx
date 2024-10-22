@@ -78,7 +78,7 @@ export function ProfileEditor({ profile }:{ profile:Tables<'profiles'> }) {
 
     const reader = new FileReader;
     reader.readAsDataURL(file);
-    reader.onload = r => {
+    reader.onload = () => {
       cropAvatar(reader.result as string, s => {
         setAvatarData(s);
       });
@@ -222,8 +222,8 @@ export function ProfileEditor({ profile }:{ profile:Tables<'profiles'> }) {
         <ProfileOptions
           close={closeMenu}
           options={[
-            { title: "Saved", icon: IoBookmarkOutline, action: e => router.push('/saved') },
-            { title: "Drafts", icon: IoFolderOutline, action: e => router.push('/drafts') },
+            { title: "Saved", icon: IoBookmarkOutline, action: () => router.push('/saved') },
+            { title: "Drafts", icon: IoFolderOutline, action: () => router.push('/drafts') },
           ]}
         />
       </Modal>

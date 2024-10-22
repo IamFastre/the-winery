@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { C } from "@/components/C";
 import { Section } from "@/components/Section";
 import { getCardFeed } from "@/utils/api/card/feed";
@@ -23,7 +25,7 @@ export default async function HomePage() {
               An <C.RED>error</C.RED> has occurred loading feed.
             </C.SECONDARY>
             <C.SECONDARY>
-              try <a href="/">refreshing</a>?
+              try <Link href="/">refreshing</Link>?
             </C.SECONDARY>
           </div>
       }

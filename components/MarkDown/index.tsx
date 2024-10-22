@@ -1,4 +1,4 @@
-import { HTMLAttributes, Suspense } from "react";
+import { HTMLAttributes } from "react";
 import MD, { Options } from "react-markdown";
 import gfm from "remark-gfm";
 import headingId from "remark-heading-id";

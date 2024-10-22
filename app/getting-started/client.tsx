@@ -19,7 +19,7 @@ export function Content({ profile }: { profile:Database['public']['Tables']['pro
   const [clicks, setClicks] = useState<number>(0);
   const [hrtCls, setHrtCls] = useState<string>(styles.icon);
 
-  const isBeating = () => hrtCls !== styles.icon;
+  const isBeating = hrtCls !== styles.icon;
 
   useEffect(() => {
     if (clicks) {
@@ -30,10 +30,10 @@ export function Content({ profile }: { profile:Database['public']['Tables']['pro
 
     if (clicks >= 3) {
       setClicks(0);
-      setHrtCls(isBeating() ? styles.icon : `${hrtCls} ${styles.beating}`);
-      toaster.add({ message: `Wish ${isBeating() ? "giving someone a cardiac arrest" : "CPR"} was that easy...`});
+      setHrtCls(isBeating ? styles.icon : `${hrtCls} ${styles.beating}`);
+      toaster.add({ message: `Wish ${isBeating ? "giving someone a cardiac arrest" : "CPR"} was that easy...`});
     }
-    }, [clicks]);
+    }, [clicks, hrtCls, isBeating, toaster]);
 
   return (
     <>
@@ -97,7 +97,7 @@ export function Content({ profile }: { profile:Database['public']['Tables']['pro
 
       <Button
         title="Compose"
-        icon={{ element: isBeating() ? IoWine : IoWineOutline }}
+        icon={{ element: isBeating ? IoWine : IoWineOutline }}
         onClick={() => router.push('/compose')}
         className={styles.button}
         disabled={!profile?.username}

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@supabase/ssr": "^0.4.1",
@@ -32,6 +33,8 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/remark-heading-id": "^1.0.0",
+    "eslint": "8.57.1",
+    "eslint-config-next": "15.0.0",
     "sass": "^1.77.6",
     "typescript": "^5"
   }

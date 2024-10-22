@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { IoHome } from "react-icons/io5";
 
 import consts from "@/utils/consts";
@@ -21,9 +22,9 @@ export default function NotFoundPage() {
           <C.SECONDARY> | </C.SECONDARY>
           <RI><C.HOT>This page was not found</C.HOT></RI>
         </span>
-        <a href="/">
+        <Link href="/">
           <IoHome />
-        </a>
+        </Link>
       </Section>
     </div>
   );

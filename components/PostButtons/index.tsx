@@ -42,7 +42,7 @@ function LikesModal(props:LikesModalProps) {
     }
 
     start();
-  }, []);
+  }, [props.postId]);
 
   return (
     <Section className={styles.modalSection} containerClassName={styles.modalSectionContent}>
@@ -128,7 +128,7 @@ export function PostButtons(props:PostButtonsProps) {
     } else if (status === 'error') {
       setError(true);
     }
-  }, [response]);
+  }, [response, status]);
 
   const onLike = async () => {
     const success = await likePost(props.postId, isLiked ? 'unlike' : 'like');
