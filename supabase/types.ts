@@ -62,13 +62,6 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "likes_id_fkey"
-            columns: ["post"]
-            isOneToOne: false
-            referencedRelation: "posts"
-            referencedColumns: ["id"]
-          },
-          {
             foreignKeyName: "likes_post_fkey"
             columns: ["post"]
             isOneToOne: false
@@ -182,18 +175,21 @@ export type Database = {
       super_likes: {
         Row: {
           post: number
+          redacted: boolean
           timestamp: string
           user_uuid: string
           uuid: string
         }
         Insert: {
           post?: number
+          redacted?: boolean
           timestamp?: string
           user_uuid: string
           uuid?: string
         }
         Update: {
           post?: number
+          redacted?: boolean
           timestamp?: string
           user_uuid?: string
           uuid?: string
@@ -201,13 +197,6 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "super_likes_post_fkey"
-            columns: ["post"]
-            isOneToOne: false
-            referencedRelation: "posts"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "super_likes_post_fkey1"
             columns: ["post"]
             isOneToOne: false
             referencedRelation: "posts"
