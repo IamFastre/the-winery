@@ -15,7 +15,7 @@ export async function GET(request:NextRequest) {
   const res = await getCardFeed(limit);
 
   if (res.error)
-    return notFound(res.error, headers);
+    return notFound(res.error);
 
   return success<CardFeed>(res.data, headers);
 }

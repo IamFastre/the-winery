@@ -10,7 +10,7 @@ export async function GET(request:NextRequest) {
   const res = await getUserDrafts();
 
   if (res.error)
-    return notFound(res.error, headers);
+    return notFound(res.error);
 
   return success<UserDrafts>(res.data, headers);
 }

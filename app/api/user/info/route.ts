@@ -14,7 +14,7 @@ export async function GET(request:NextRequest) {
     const res = await getUserInfo('id', id);
 
     if (res.error)
-      return notFound(res.error, headers);
+      return notFound(res.error);
 
     return success<UserInfo>(res.data, headers);
   }
@@ -24,7 +24,7 @@ export async function GET(request:NextRequest) {
     const res = await getUserInfo('identifier', username.toLowerCase());
 
     if (res.error)
-      return notFound(res.error, headers);
+      return notFound(res.error);
 
     return success<UserInfo>(res.data, headers);
   }
@@ -32,7 +32,7 @@ export async function GET(request:NextRequest) {
   const res = await getUserInfo('self');
 
   if (res.error)
-    return notFound(res.error, headers);
+    return notFound(res.error);
 
   return success<UserInfo>(res.data, headers);
 }

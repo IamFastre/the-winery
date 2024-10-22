@@ -10,7 +10,7 @@ export async function GET(request:NextRequest) {
   const res = await getUserSaves();
 
   if (res.error)
-    return notFound(res.error, headers);
+    return notFound(res.error);
 
   return success<UserSaves>(res.data, headers);
 }

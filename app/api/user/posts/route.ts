@@ -14,7 +14,7 @@ export async function GET(request:NextRequest) {
     const res = await getUserPosts('author_uuid', id);
 
     if (res.error)
-      return notFound(res.error, headers);
+      return notFound(res.error);
 
     return success<UserPosts>(res.data, headers);
   }
@@ -24,10 +24,10 @@ export async function GET(request:NextRequest) {
     const res = await getUserPosts('author', username.toLowerCase());
 
     if (res.error)
-      return notFound(res.error, headers);
+      return notFound(res.error);
 
     return success<UserPosts>(res.data, headers);
   }
 
-  return badRequest("Missing 'id' or 'username' parameter", headers);
+  return badRequest("Missing 'id' or 'username' parameter");
 }

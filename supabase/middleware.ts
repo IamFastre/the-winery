@@ -5,7 +5,7 @@ import { Database } from './types';
 
 const noAuthPaths = ['/auth', '/getting-started'];
 
-export async function updateSession(request: NextRequest) {
+export async function updateSession(request:NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient<Database>(

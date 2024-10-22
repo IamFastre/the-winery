@@ -16,14 +16,6 @@ interface Endpoint<A,R> {
   Return: R;
 }
 
-export interface Init extends ResponseInit {
-  url?: string;
-  nextConfig?: {
-    basePath?: string;
-    trailingSlash?: boolean;
-  };
-}
-
 export interface ErrorAPI {
   code:number | string;
   message:string;

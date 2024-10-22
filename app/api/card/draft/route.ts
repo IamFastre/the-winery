@@ -14,10 +14,10 @@ export async function GET(request:NextRequest) {
     const res = await getCardDraft(id);
 
     if (res.error)
-      return notFound(res.error, headers);
+      return notFound(res.error);
 
     return success<CardDraft>(res.data, headers);
   }
 
-  return badRequest("Missing 'id' parameter", headers);
+  return badRequest("Missing 'id' parameter");
 }

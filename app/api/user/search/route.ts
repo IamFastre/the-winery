@@ -14,10 +14,10 @@ export async function GET(request:NextRequest) {
     const res = await getUserSearch(q);
 
     if (res.error)
-      return notFound(res.error, headers);
+      return notFound(res.error);
 
     return success<UserSearch>(res.data, headers);
   }
 
-  return badRequest("Missing 'q' parameter", headers);
+  return badRequest("Missing 'q' parameter");
 }
