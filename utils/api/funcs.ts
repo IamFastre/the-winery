@@ -36,3 +36,7 @@ export function notFound(err:ErrorAPI) {
 export function badRequest(message:string, details:string | null = null, hint:string | null = null) {
   return failure(400, 'Bad Request', { code: 400, details, hint, message });
 }
+
+export function unauthorized(message:string, details:string | null = null, hint:string | null = null) {
+  return failure(401, 'Unauthorized', { code: 400, details, hint, message });
+}

@@ -11,6 +11,8 @@ import type { CardInteractions, CardInteractionsParams } from "@/utils/api/card/
 
 import type { OtherLogo, OtherLogoParams } from "@/utils/api/other/logo";
 
+import type { CardSuperLike, CardSuperLikeParams } from "@/utils/api/mut/card/super-like";
+
 export type LogoKind = "main" | "brand" | "mono" | "brand-outline" | "mono-outline" | "touch";
 
 export interface ErrorAPI {
@@ -38,6 +40,9 @@ export interface Endpoints {
   "/card/interactions":   Endpoint<CardInteractionsParams,  CardInteractions>,
 
   "/other/logo": Endpoint<OtherLogoParams, OtherLogo>,
+
+
+  "/mut/card/super-like": Endpoint<CardSuperLikeParams, CardSuperLike>,
 }
 
 export interface ResultSuccess<T> {

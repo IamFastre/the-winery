@@ -1,13 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Endpoints, ResultAPI, ErrorAPI } from '@/utils';
 
 export async function api<T extends keyof Endpoints>(path:T, args?:Endpoints[T]['Arguments']) : Promise<ResultAPI<T>> {
+  const isPost = path.includes('/mut/');
   const fullPath = `${location.origin}/api/${path.startsWith("/") ? path : '/' + path}`;
   const url = new URL(fullPath);
 
-  if (args)
-    Object.keys(args).forEach(key => url.searchParams.set(key, (args as any)[key]));
+  if (args && !isPost)
+    Object.keys(args).forEach(key => url.searchParams.set(key, (args)[key as keyof Endpoints[T]['Arguments']] as string));
 
-  const response = await fetch(url);
+  const response = isPost
+    ? await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(args)
+    })
+    : await fetch(url, {
+      method: 'GET'
+    });
+  
   const json = await response.json() as Endpoints[T]['Return'] | ErrorAPI;
 
   if (response.status === 200)
