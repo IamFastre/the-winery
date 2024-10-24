@@ -4,11 +4,13 @@ import { Tables } from '@/supabase/types';
 
 import { getUserInfo } from '@/utils/api/user/info';
 
-export type CardLikeList = { users: Tables<'profiles'>[], count:number };
+export type CardLikeList = { likers:Tables<'profiles'>[], super_likers:Tables<'profiles'>[], count:number, super_count:number };
 export type CardLikeListParams = { id:number };
 
 export async function getCardLikeList(id:string | number) {
   const supabase = createClient();
+
+  /* ================================= Likes ================================ */
 
   // GET POSTS' LIKES
   const likesRes = await supabase
@@ -19,7 +21,7 @@ export async function getCardLikeList(id:string | number) {
 
   if (likesRes.error)
     return result(null, likesRes.error);
-  
+
   // GET POSTS' LIKE COUNT
   const countRes = await supabase
     .from('likes')
@@ -30,7 +32,7 @@ export async function getCardLikeList(id:string | number) {
     return result(null, countRes.error);
 
   // FETCH POSTS' LIKERS
-  const users:CardLikeList['users'] = [];
+  const likers:CardLikeList['likers'] = [];
 
   for (const author of likesRes.data.map(l => l.user_uuid)) {
     const res = await getUserInfo('id', author);
@@ -38,8 +40,46 @@ export async function getCardLikeList(id:string | number) {
     if (res.error)
       return result(null, res.error);
 
-    users.push(res.data);
+    likers.push(res.data);
   }
 
-  return result<CardLikeList>({ users, count: countRes.count ?? -1 }, likesRes.error);
+  /* ============================== Super Likes ============================= */
+
+  // GET POSTS' SUPER LIKES
+  const superLikesRes = await supabase
+    .from('super_likes')
+    .select('*')
+    .eq('post', id)
+    .order('timestamp', { ascending: false });
+
+  if (superLikesRes.error)
+    return result(null, superLikesRes.error);
+
+  // GET POSTS' SUPER LIKE COUNT
+  const superCountRes = await supabase
+    .from('super_likes')
+    .select('*', { count: 'exact', head: true })
+    .eq('post', id);
+
+  if (superCountRes.error)
+    return result(null, superCountRes.error);
+
+  // FETCH POSTS' SUPER LIKERS
+  const super_likers:CardLikeList['super_likers'] = [];
+
+  for (const author of superLikesRes.data.map(l => l.user_uuid)) {
+    const res = await getUserInfo('id', author);
+
+    if (res.error)
+      return result(null, res.error);
+
+    super_likers.push(res.data);
+  }
+
+  return result<CardLikeList>({
+    likers,
+    super_likers,
+    count: countRes.count ?? -1,
+    super_count: superCountRes.count ?? -1
+  }, likesRes.error);
 }

@@ -36,7 +36,7 @@ function LikesModal(props:LikesModalProps) {
       if (!data)
         setError(true);
       else
-        setLikers(data.users);
+        setLikers(data.likers);
 
       setLoading(false);
     }
@@ -123,7 +123,7 @@ export function PostButtons(props:PostButtonsProps) {
     if (response?.data) {
       setIsLiked(response.data.liked);
       setIsSaved(response.data.saved);
-      setLC(response.data.likeCount);
+      setLC(response.data.like_count);
       setError(false);
     } else if (status === 'error') {
       setError(true);
