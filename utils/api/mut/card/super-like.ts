@@ -63,7 +63,7 @@ export async function postCardSuperLike(id:string | number) {
       // LIKE ALREADY EXISTS BUT IS REDACTED, UNREDACT IT
       ? await supadmin
           .from('super_likes')
-          .update({ redacted: false })
+          .update({ redacted: false, timestamp: new Date().toISOString() })
           .eq('post', post)
           .eq('user_uuid', user.id)
       // LIKE DOESN'T EXIST, INSERT IT

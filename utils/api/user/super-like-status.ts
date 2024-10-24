@@ -1,17 +1,19 @@
 import { result } from '@/utils/api';
-import { createClient } from '@/supabase/server';
+import { createClient as createAdminClient } from '@/supabase/admin';
+import { createClient as createServerClient } from '@/supabase/server';
 
 export type UserSuperLikeStatus = { is_able:boolean, last:number, last_post_id:number | null };
 export type UserSuperLikeStatusParams = undefined;
 
 export async function getUserSuperLikeStatus() {
-  const supabase = createClient();
+  const supabase = createServerClient();
+  const supadmin = createAdminClient();
   const { data:{ user }, error:userError } = await supabase.auth.getUser();
 
   if (userError || !user)
     return result(null, userError);
 
-  const lastRes = await supabase
+  const lastRes = await supadmin
     .from('super_likes')
     .select('*')
     .eq('user_uuid', user.id)
