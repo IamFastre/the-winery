@@ -1,7 +1,9 @@
 import type { UserInfo, UserInfoParams } from "@/utils/api/user/info";
 import type { UserSaves, UserSavesParams } from "@/utils/api/user/saves";
+import type { UserPosts, UserPostsParams } from "@/utils/api/user/posts";
 import type { UserDrafts, UserDraftsParams } from "@/utils/api/user/drafts";
 import type { UserSearch, UserSearchParams } from "@/utils/api/user/search";
+import type { UserSuperLikeStatus, UserSuperLikeStatusParams } from "@/utils/api/user/super-like-status";
 
 import type { CardFeed, CardFeedParams } from "@/utils/api/card/feed";
 import type { CardPost, CardPostParams } from "@/utils/api/card/post";
@@ -28,19 +30,24 @@ export interface Endpoint<A,R> {
 }
 
 export interface Endpoints {
-  "/user/info":   Endpoint<UserInfoParams,   UserInfo>,
-  "/user/drafts": Endpoint<UserDraftsParams, UserDrafts>,
-  "/user/saves":  Endpoint<UserSavesParams,  UserSaves>,
-  "/user/search":  Endpoint<UserSearchParams,  UserSearch>,
+  /* ============================= Data Fetching ============================ */
 
-  "/card/feed":           Endpoint<CardFeedParams,     CardFeed>,
-  "/card/post":           Endpoint<CardPostParams,     CardPost>,
-  "/card/draft":          Endpoint<CardDraftParams,    CardDraft>,
-  "/card/like-list":      Endpoint<CardLikeListParams, CardLikeList>,
-  "/card/interactions":   Endpoint<CardInteractionsParams,  CardInteractions>,
+  "/user/info":              Endpoint<UserInfoParams,            UserInfo>,
+  "/user/posts":             Endpoint<UserPostsParams,           UserPosts>,
+  "/user/drafts":            Endpoint<UserDraftsParams,          UserDrafts>,
+  "/user/saves":             Endpoint<UserSavesParams,           UserSaves>,
+  "/user/search":            Endpoint<UserSearchParams,          UserSearch>,
+  "/user/super-like-status": Endpoint<UserSuperLikeStatusParams, UserSuperLikeStatus>,
 
-  "/other/logo": Endpoint<OtherLogoParams, OtherLogo>,
+  "/card/feed":              Endpoint<CardFeedParams,            CardFeed>,
+  "/card/post":              Endpoint<CardPostParams,            CardPost>,
+  "/card/draft":             Endpoint<CardDraftParams,           CardDraft>,
+  "/card/like-list":         Endpoint<CardLikeListParams,        CardLikeList>,
+  "/card/interactions":      Endpoint<CardInteractionsParams,    CardInteractions>,
 
+  "/other/logo":             Endpoint<OtherLogoParams,           OtherLogo>,
+
+  /* ============================= Data Mutation ============================ */
 
   "/mut/card/super-like": Endpoint<CardSuperLikeParams, CardSuperLike>,
 }
