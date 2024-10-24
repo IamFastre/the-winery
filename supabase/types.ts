@@ -147,7 +147,7 @@ export type Database = {
           id?: string
           post?: number
           timestamp?: string
-          user_uuid: string
+          user_uuid?: string
         }
         Update: {
           id?: string
@@ -181,11 +181,11 @@ export type Database = {
           user_uuid: string
         }
         Insert: {
-          id: string
+          id?: string
           post?: number
           redacted?: boolean
           timestamp?: string
-          user_uuid: string
+          user_uuid?: string
         }
         Update: {
           id?: string
