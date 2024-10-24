@@ -253,7 +253,7 @@ export function PostButtons(props:PostButtonsProps) {
               <C.TERTIARY>
                 {humanizeLikes(superLikeCount)}
               </C.TERTIARY>
-              <C.HIGHLIGHT style={{ filter: `drop-shadow(0 0 2px ${colors.highlight}) drop-shadow(0 0 5px ${colors.highlight})` }}>
+              <C.HIGHLIGHT style={{ filter: `drop-shadow(0 0 2px ${colors.highlight}) drop-shadow(0 0 6px ${colors.highlight})` }}>
                 <i>
                   super
                 </i>

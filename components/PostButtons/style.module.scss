@@ -183,8 +183,7 @@ div.cantSuperLike {
 div.isSaved { @include isActive($cold); }
 div.isLiked { @include isActive($hot); }
 div.isSuperLiked {
-  filter: drop-shadow(0 0 2.5px $highlight)
-          drop-shadow(0 0 7.5px $highlight);
+  filter: drop-shadow(0 0 7.5px $highlight);
 
   > svg {
     &:first-of-type {
