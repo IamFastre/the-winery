@@ -43,22 +43,22 @@ export type Database = {
       }
       likes: {
         Row: {
+          id: string
           post: number
           timestamp: string
           user_uuid: string
-          uuid: string
         }
         Insert: {
-          post?: number
-          timestamp?: string
-          user_uuid: string
-          uuid?: string
-        }
-        Update: {
+          id?: string
           post?: number
           timestamp?: string
           user_uuid?: string
-          uuid?: string
+        }
+        Update: {
+          id?: string
+          post?: number
+          timestamp?: string
+          user_uuid?: string
         }
         Relationships: [
           {
@@ -138,22 +138,22 @@ export type Database = {
       }
       saves: {
         Row: {
+          id: string
           post: number
           timestamp: string
           user_uuid: string
-          uuid: string
         }
         Insert: {
+          id?: string
           post?: number
           timestamp?: string
           user_uuid: string
-          uuid?: string
         }
         Update: {
+          id?: string
           post?: number
           timestamp?: string
           user_uuid?: string
-          uuid?: string
         }
         Relationships: [
           {
@@ -174,25 +174,25 @@ export type Database = {
       }
       super_likes: {
         Row: {
+          id: string
           post: number
           redacted: boolean
           timestamp: string
           user_uuid: string
-          uuid: string
         }
         Insert: {
+          id: string
           post?: number
           redacted?: boolean
           timestamp?: string
           user_uuid: string
-          uuid?: string
         }
         Update: {
+          id?: string
           post?: number
           redacted?: boolean
           timestamp?: string
           user_uuid?: string
-          uuid?: string
         }
         Relationships: [
           {
