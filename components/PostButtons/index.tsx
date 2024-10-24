@@ -1,16 +1,17 @@
 "use client";
 import { Fragment, MouseEventHandler, useEffect, useState } from "react";
-import { IoBookmark, IoClose, IoHeart, IoHeartDislikeOutline, IoWarning } from "react-icons/io5";
+import { IoBookmark, IoClose, IoHeart, IoHeartDislikeOutline, IoMedical, IoWarning } from "react-icons/io5";
 import { useQuery } from "@tanstack/react-query";
 
 import { humanizeLikes } from "@/utils";
 import { focusable } from "@/utils/client";
 import { api } from "@/utils/client";
-import { Section, LoadingText, UsernameHandle, CopyLinkButton } from "@/components";
+import { Section, LoadingText, UsernameHandle, CopyLinkButton, C } from "@/components";
 import { likePost, savePost } from "@/supabase/actions/post";
 import { Tables } from "@/supabase/types";
 import { Modal } from "@/providers/ModalProvider";
 
+import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";
 import Image from "next/image";
 
@@ -110,25 +111,61 @@ export function PostButtons(props:PostButtonsProps) {
 
   const [error, setError] = useState<boolean>(false);
 
-  const [lc, setLC] = useState<number>(0);
+  const [likeCount, setLikeCount] = useState<number>(0);
+  const [superLikeCount, setSuperLikeCount] = useState<number>(0);
   const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isSuperLiked, setIsSuperLiked] = useState<boolean>(false);
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
-  const { data: response, status, isLoading } = useQuery({
-    queryFn: async () => await api("/card/interactions", { id: props.postId }),
+  const [canUseSuper, setCanUseSuper] = useState<boolean>(false);
+  const [lastSuper, setLastSuper] = useState<number | null>(null);
+
+  const interactions = useQuery({
+    queryFn: async () => (await api("/card/interactions", { id: props.postId })).data,
     queryKey: ['post-interactions', props.postId],
   });
 
+  const status = useQuery({
+    queryFn: async () => (await api("/user/super-like-status")).data,
+    queryKey: ['user-super-like-status'],
+  });
+
   useEffect(() => {
-    if (response?.data) {
-      setIsLiked(response.data.liked);
-      setIsSaved(response.data.saved);
-      setLC(response.data.like_count);
-      setError(false);
-    } else if (status === 'error') {
-      setError(true);
+    if (interactions.data) {
+      setIsLiked(interactions.data.liked);
+      setIsSuperLiked(interactions.data.super_liked);
+      setIsSaved(interactions.data.saved);
+      setLikeCount(interactions.data.like_count);
+      setSuperLikeCount(interactions.data.super_like_count);
     }
-  }, [response, status]);
+
+    if (status.data) {
+      setCanUseSuper(status.data.is_able);
+      setLastSuper(status.data.last);
+    }
+
+    if (interactions.data === null || status.data === null)
+      setError(true);
+    else
+      setError(false);
+  }, [interactions.data, status.data]);
+
+  const onSuperLike = async () => {
+    const { data, error } = await api("/mut/card/super-like", { id: props.postId });
+
+    if (error)
+      setError(true);
+    else if (data.done) {
+      setCanUseSuper(data.last >= 24);
+      if (data.action === 'like') {
+        setSuperLikeCount(c => c + 1);
+        setIsSuperLiked(true);
+      } else {
+        setSuperLikeCount(c => c - 1);
+        setIsSuperLiked(false);
+      }
+    }
+  };
 
   const onLike = async () => {
     const success = await likePost(props.postId, isLiked ? 'unlike' : 'like');
@@ -136,8 +173,8 @@ export function PostButtons(props:PostButtonsProps) {
     if (!success)
       setError(true);
     else {
-      setLC(c => isLiked ? c - 1 : c + 1);
-      setIsLiked(l => !l)
+      setLikeCount(c => isLiked ? c - 1 : c + 1);
+      setIsLiked(l => !l);
     }
   };
 
@@ -147,42 +184,72 @@ export function PostButtons(props:PostButtonsProps) {
     if (!success)
       setError(true);
     else
-      setIsSaved(s => !s)
+      setIsSaved(s => !s);
   };
 
-  if (isLoading)
+  if (interactions.isLoading || status.isLoading)
     return <LoadingText compact />;
 
   return (
     <>
       <div className={`${styles.container} ${error ? styles.error : ""}`}>
         <div
+          id="super-like-post"
+          title={isSuperLiked ? "Unlike" : !canUseSuper && lastSuper !== null ? `${24 - lastSuper}h left...` : "Super Like"}
+          className={`${styles.superLike} ${isSuperLiked ? styles.isSuperLiked : ''} ${canUseSuper || isSuperLiked ? '' : styles.cantSuperLike}`}
+          {...focusable(styles.active, error || !(canUseSuper || isSuperLiked) ? undefined : onSuperLike)}
+        >
+          <IoMedical />
+          <IoHeart />
+        </div>
+        <div
           id="like-post"
+          title={isLiked ? "Unlike" : "Like"}
           className={isLiked && !error ? styles.isLiked : ""}
-          {...focusable(styles.active, error ? undefined : () => onLike())}
+          {...focusable(styles.active, error ? undefined : onLike)}
         >
           <IoHeart />
         </div>
         <div
           id="save-post"
+          title={isSaved ? "Unsave" : "Save"}
           className={isSaved && !error ? styles.isSaved : ""}
-          {...focusable(styles.active, error ? undefined : () => onSave())}
+          {...focusable(styles.active, error ? undefined : onSave)}
         >
           <IoBookmark />
         </div>
         {props.showShare && <CopyLinkButton id={props.postId} activeClassName={styles.active} />}
       </div>
-      <span
+      <div
         id="like-list"
         className={styles.count}
         {...focusable(styles.active, () => modalShownState[1](s => !s))}
       >
-        {humanizeLikes(lc)}
-        <span>
-          {' '}
-          {lc > 1 ? 'likes' : 'like'}
-        </span>
-      </span>
+        <div>
+          <C.TERTIARY>
+            {humanizeLikes(likeCount)}
+          </C.TERTIARY>
+          <C.SECONDARY>
+            <i>
+              {likeCount > 1 ? 'likes' : 'like'}
+            </i>
+          </C.SECONDARY>
+        </div>
+        { superLikeCount > 0 && <span>+</span> }
+        {
+          superLikeCount > 0 &&
+            <div>
+              <C.TERTIARY>
+                {humanizeLikes(superLikeCount)}
+              </C.TERTIARY>
+              <C.HIGHLIGHT style={{ filter: `drop-shadow(0 0 2px ${colors.highlight}) drop-shadow(0 0 5px ${colors.highlight})` }}>
+                <i>
+                  super
+                </i>
+              </C.HIGHLIGHT>
+            </div>
+        }
+      </div>
 
       <Modal state={modalShownState}>
         <LikesModal
