@@ -249,6 +249,8 @@ div.isSuperLiked {
   align-items: center;
   justify-content: center;
   height: 30px;
+  margin: 5px;
+  font-size: 18px;
 
   > span {
     font-weight: bold;
@@ -286,7 +288,7 @@ div.isSuperLiked {
   flex: 1;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   padding: 10px;
 
   > hr {
@@ -302,6 +304,27 @@ div.isSuperLiked {
   align-items: center;
   gap: 10px;
   user-select: none;
+
+  &.super {
+    > img {
+      outline: $gold dashed 2px;
+    }
+
+    .hasDisplayName {
+      > span {
+        color: $highlight;
+        filter: drop-shadow(0 0 7px $highlight)
+                drop-shadow(0 0 8px $highlight);
+
+        &::before {
+          display: inline-flex;
+          content: "✱";
+          margin-right: 2.5px;
+          color: $gold;
+        }
+      }
+    }
+  }
 
   > img {
     border-radius: 5px;

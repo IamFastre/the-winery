@@ -8,7 +8,6 @@ import { focusable } from "@/utils/client";
 import { api } from "@/utils/client";
 import { Section, LoadingText, UsernameHandle, CopyLinkButton, C } from "@/components";
 import { likePost, savePost } from "@/supabase/actions/post";
-import { Tables } from "@/supabase/types";
 import { Modal } from "@/providers/ModalProvider";
 
 import colors from '@/styles/colors.module.scss';
@@ -26,24 +25,10 @@ interface LikesModalProps {
 }
 
 function LikesModal(props:LikesModalProps) {
-  const [error, setError] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [likers, setLikers] = useState<Tables<'profiles'>[]>([]);
-
-  useEffect(() => {
-    const start = async () => {
-      const { data } = await api("/card/like-list", { id: props.postId });
-
-      if (!data)
-        setError(true);
-      else
-        setLikers(data.likers);
-
-      setLoading(false);
-    }
-
-    start();
-  }, [props.postId]);
+  const likeList = useQuery({
+    queryFn: async () => (await api("/card/like-list", { id: props.postId })).data,
+    queryKey: ['post-like-list', props.postId]
+  });
 
   return (
     <Section className={styles.modalSection} containerClassName={styles.modalSectionContent}>
@@ -58,41 +43,40 @@ function LikesModal(props:LikesModalProps) {
       <hr />
       <div className={styles.modalBody}>
         {
-          error ?
+          likeList.status === 'error' ?
             <div className={styles.noLikers}>
               <IoWarning />
               <span>
                 Oops, an unexpected error has occurred
               </span>
             </div>
-          : loading ?
+          : likeList.isPending ?
             <LoadingText compact />
-          : likers.length > 0 ?
-            likers.map((l, i) => (
-              <Fragment key={`${l.username}:${i}`}>
-                <div className={styles.liker}>
-                  <Image
-                    src={l.avatar}
-                    alt={`${l.username}'s avatar`}
-                    width={40}
-                    height={40}
-                  />
-                  {
-                    l.display_name ?
-                      <div className={styles.hasDisplayName}>
-                        <span>{l.display_name}</span>
-                        <UsernameHandle username={l.username} />
+          : likeList.data && (likeList.data.count > 0 || likeList.data.super_count > 0) ?
+            <>
+              {
+                likeList.data.likers.map((l, i) => {
+                  const isSuper = likeList.data!.super_likers.some(u => u.id === l.id);
+                  return (
+                    <Fragment key={`${l.username}:${i}`}>
+                      <div className={`${styles.liker} ${isSuper ? styles.super : ''}`}>
+                        <Image
+                          src={l.avatar}
+                          alt={`${l.username}'s avatar`}
+                          width={42}
+                          height={42}
+                        />
+                        <div className={styles.hasDisplayName}>
+                          <span>{l.display_name ?? l.username}</span>
+                          <UsernameHandle username={l.username} />
+                        </div>
                       </div>
-                    :
-                      <UsernameHandle username={l.username} />
-                  }
-                </div>
-                {
-                  i !== likers.length - 1 &&
-                  <hr />
-                }
-              </Fragment>
-            ))
+                      { i !== likeList.data!.count - 1 && <hr/> }
+                    </Fragment>
+                );
+              })
+              }
+            </>
           :
           <div className={styles.noLikers}>
             <IoHeartDislikeOutline />
