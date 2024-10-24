@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 
 import { badRequest, notFound, success } from '@/utils/api';
-import { CardSuperLike, CardSuperLikeParams, getCardSuperLike } from '@/utils/api/mut/card/super-like';
+import { CardSuperLike, CardSuperLikeParams, postCardSuperLike } from '@/utils/api/mut/card/super-like';
 
 export async function POST(request:NextRequest) {
   const params = await request.json() as CardSuperLikeParams;
@@ -11,7 +11,7 @@ export async function POST(request:NextRequest) {
 
   if (params.id) {
     const id = params.id;
-    const res = await getCardSuperLike(id);
+    const res = await postCardSuperLike(id);
 
     if (res.error)
       return notFound(res.error);

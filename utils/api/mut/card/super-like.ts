@@ -5,7 +5,7 @@ import { createClient as createServerClient } from '@/supabase/server';
 export type CardSuperLike = { action: 'like' | 'unlike', done:boolean, last:number };
 export type CardSuperLikeParams = { id:string | number };
 
-export async function getCardSuperLike(id:string | number) {
+export async function postCardSuperLike(id:string | number) {
   const supabase = createServerClient();
   const supadmin = createAdminClient();
   const { data:{ user }, error:userError } = await supabase.auth.getUser();
