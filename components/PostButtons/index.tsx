@@ -158,6 +158,9 @@ export function PostButtons(props:PostButtonsProps) {
     else if (data.done) {
       setCanUseSuper(data.last >= 24);
       if (data.action === 'like') {
+        setIsLiked(true);
+        setLikeCount(c => c + 1);
+
         setSuperLikeCount(c => c + 1);
         setIsSuperLiked(true);
       } else {
@@ -173,8 +176,16 @@ export function PostButtons(props:PostButtonsProps) {
     if (!success)
       setError(true);
     else {
-      setLikeCount(c => isLiked ? c - 1 : c + 1);
-      setIsLiked(l => !l);
+      if (isLiked) {
+        setLikeCount(c =>  c - 1);
+        setIsLiked(false);
+
+        setSuperLikeCount(c => c - 1);
+        setIsSuperLiked(false);
+      } else {
+        setLikeCount(c =>  c + 1);
+        setIsLiked(true);
+      }
     }
   };
 
