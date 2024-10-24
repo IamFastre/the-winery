@@ -18,6 +18,7 @@ export async function getUserSuperLikeStatus() {
     .select('*')
     .eq('user_uuid', user.id)
     .order('timestamp', { ascending: false })
+    .limit(1)
     .maybeSingle();
 
   if (lastRes.error)
