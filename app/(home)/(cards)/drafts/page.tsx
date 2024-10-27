@@ -3,11 +3,11 @@ import { IoFolder } from "react-icons/io5";
 import Link from "next/link";
 
 import consts from "@/utils/consts";
+import { getUserDrafts } from "@/utils/api/user/drafts";
 import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
 import { Card } from "@/components/Card";
-import { getUserInfo } from "@/utils/api/user/info";
-import { getUserDrafts } from "@/utils/api/user/drafts";
+import { ErrorPage } from "@/components/Pages";
 
 import { PageIcon } from "../server";
 import { BackButton } from "../client";
@@ -19,12 +19,16 @@ export const metadata:Metadata = {
 };
 
 export default async function DraftsPage() {
-  const { data:profile } = await getUserInfo('self');
   const { data, error } = await getUserDrafts();
 
-  console.log(error)
-  if (!profile || !data)
-    return; // not found
+  if (error)
+    return (
+      <ErrorPage
+        message={error?.message}
+        code={error?.code}
+        type="PG"
+      />
+    );
 
   const { drafts, count } = data;
 

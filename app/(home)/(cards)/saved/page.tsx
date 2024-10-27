@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import { IoBookmark } from "react-icons/io5";
 
 import consts from "@/utils/consts";
+import { getUserSaves } from "@/utils/api/user/saves";
 import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
 import { Card } from "@/components/Card";
-import { getUserInfo } from "@/utils/api/user/info";
-import { getUserSaves } from "@/utils/api/user/saves";
+import { ErrorPage } from "@/components/Pages";
 
 import { PageIcon } from "../server";
 import { BackButton } from "../client";
@@ -18,11 +18,16 @@ export const metadata:Metadata = {
 };
 
 export default async function SavesPage() {
-  const { data:profile } = await getUserInfo('self');
-  const { data } = await getUserSaves();
+  const { data, error } = await getUserSaves();
 
-  if (!profile || !data )
-    return; // not found
+  if (error)
+    return (
+      <ErrorPage
+        message={error?.message}
+        code={error?.code}
+        type="PG"
+      />
+    );
 
   const { saves, users, count } = data;
 

@@ -1,10 +1,9 @@
 import { Metadata } from "next";
-import Link from "next/link";
-import { IoHome } from "react-icons/io5";
+import { headers } from "next/headers";
 
 import consts from "@/utils/consts";
-import { Section } from "@/components/Section";
-import { RI, C } from "@/components/C";
+import { C, RI } from "@/components/C";
+import { ErrorPage } from "@/components/Pages";
 
 import styles from './not-found.module.scss';
 
@@ -14,18 +13,26 @@ export const metadata:Metadata = {
 }
 
 export default function NotFoundPage() {
+  const headersList = headers();
+  const path = headersList.get("x-request-url");
+  const url = path ? new URL(path) : null;
+
   return (
     <div className={styles.container}>
-      <Section title="Oops..." className={styles.section} containerClassName={styles.sectionContent} centered>
-        <span>
-          <C.TERTIARY>404</C.TERTIARY>
-          <C.SECONDARY> | </C.SECONDARY>
-          <RI><C.HOT>This page was not found</C.HOT></RI>
-        </span>
-        <Link href="/">
-          <IoHome />
-        </Link>
-      </Section>
+      <ErrorPage
+        message={
+          url ?
+          <>
+            Page <C.ACCENT><RI>'{url.pathname}'</RI></C.ACCENT> does not exist.
+          </>
+          :
+          <>
+            The page you're trying to request does not exits.
+          </>
+        }
+        code={404}
+        noFill
+      />
     </div>
   );
 }

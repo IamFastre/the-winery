@@ -4,8 +4,9 @@ import Image from "next/image";
 import consts from "@/utils/consts";
 import { getUserPosts } from "@/utils/api/user/posts";
 import { getUserInfo } from "@/utils/api/user/info";
-import { Section } from "@/components/Section";
 import { addLogoBadge } from "@/utils/server";
+import { Section } from "@/components/Section";
+import { ErrorPage } from "@/components/Pages";
 
 import { CardList, ProfileInfo } from "./server";
 import { DataBox, ProfileEditor } from "./client";
@@ -39,34 +40,54 @@ export async function generateMetadata({ params }:UserPageProps) : Promise<Metad
 }
 
 export default async function UserPage({ params }:UserPageProps) {
-  const self = (await getUserInfo('self')).data;
+  const self = await getUserInfo('self');
 
-  if (!self)
-    return;
+  if (self.error)
+    return (
+      <ErrorPage
+        message={self.error?.message}
+        code={self.error?.code}
+        type="PG"
+      />
+    );
 
-  const isSelf  = self.username.toLowerCase() === params.username.toLowerCase();
-  const other = !isSelf ? (await getUserInfo('username', params.username)).data : null;
-  const profile = isSelf ? self : other;
-  const posts = profile ? (await getUserPosts('author_uuid', profile.id)).data : null;
+  const isSelf  = self.data.username.toLowerCase() === params.username.toLowerCase();
+  const user = isSelf ? self : await getUserInfo('username', params.username);
+  const posts = user.data ? await getUserPosts('author_uuid', user.data.id) : null;
 
-  if (!profile || !posts)
-    return; // not found
+  if (user.error || !posts)
+    return (
+      <ErrorPage
+        message={user.error?.message}
+        code={user.error?.code}
+        type="PG"
+      />
+    );
+
+  if (posts.error)
+    return (
+      <ErrorPage
+        message={posts.error?.message}
+        code={posts.error?.code}
+        type="PG"
+      />
+    );
 
   return (
     <Section className={styles.section} containerClassName={styles.sectionContainer}>
       <Image
-        src={profile.avatar}
+        src={user.data.avatar}
         alt={''}
         width={256}
         height={256}
         className={styles.avatarBlur}
       />
       <div className={styles.userBox}>
-        { isSelf ? <ProfileEditor profile={self} /> : <ProfileInfo profile={profile} isConfirmed={profile.mail_confirmed} /> }
-        <DataBox cards={posts.length} joined={profile.created_at} />
+        { isSelf ? <ProfileEditor profile={self.data} /> : <ProfileInfo profile={user.data} isConfirmed={user.data.mail_confirmed} /> }
+        <DataBox cards={posts.data.length} joined={user.data.created_at} />
       </div>
       <hr/>
-      <CardList posts={posts} />
+      <CardList posts={posts.data} />
     </Section>
   );
 }

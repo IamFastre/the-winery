@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 
 import consts from "@/utils/consts";
-import { Section } from "@/components/Section";
 import { getUserInfo } from "@/utils/api/user/info";
 import { getCardDraft } from "@/utils/api/card/draft";
+import { Section } from "@/components/Section";
+import { ErrorPage } from "@/components/Pages";
 import { Tables } from "@/supabase/types";
 
 import { DraftEditor, PostEditor } from "./client";
@@ -19,8 +20,14 @@ export default async function ComposePage({ searchParams }:{ searchParams: { dra
   const { data:user, error } = await getUserInfo('self');
   let draft:Tables<'drafts'> | null = null;
 
-  if (!user || error)
-    return;
+  if (error)
+    return (
+      <ErrorPage
+        message={error?.message}
+        code={error?.code}
+        type="PG"
+      />
+    );
 
   if (searchParams.draft) {  
     const id = Number.parseInt(searchParams.draft);

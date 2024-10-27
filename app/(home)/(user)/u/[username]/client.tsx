@@ -84,17 +84,16 @@ export function ProfileEditor({ profile }:{ profile:Tables<'profiles'> }) {
 
   const onSubmitImage:ChangeEventHandler<HTMLInputElement> = e => {
     e.preventDefault();
-    const file = e.target.files?.[0];
-    if (!file)
-      return;
 
-    const reader = new FileReader;
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      cropAvatar(reader.result as string, s => {
-        setAvatarData(s);
-      });
-    };
+    if (e.target.files?.[0]) {
+      const reader = new FileReader;
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = () => {
+        cropAvatar(reader.result as string, s => {
+          setAvatarData(s);
+        });
+      };
+    }
   };
 
   const handleEditButton = async () => {
