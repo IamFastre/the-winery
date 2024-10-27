@@ -1,10 +1,17 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import { IoBug, IoClose } from "react-icons/io5";
 
+import consts from "@/utils/consts";
 import { B, C } from "@/components/C";
 import { Section } from "@/components/Section";
 
 import styles from "./styles.module.scss";
+
+export const metadata:Metadata = {
+  title: `505 • ${consts.name}`,
+  description: "A song was found.",
+}
 
 export default function E505() {
   return (
