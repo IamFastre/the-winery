@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 import { IconType } from "react-icons";
 import CSS from "csstype";
 
@@ -16,7 +16,7 @@ interface Icon {
 }
 
 export interface ButtonProps {
-  title?:string;
+  title?:ReactNode;
   icon?: Icon;
   onClick?: MouseEventHandler<HTMLDivElement>;
   color?: CSS.Property.Color;

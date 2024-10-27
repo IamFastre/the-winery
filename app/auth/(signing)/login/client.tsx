@@ -1,14 +1,15 @@
 "use client";
 import { useRef, useState } from "react";
-import { IoEye, IoEyeOff } from "react-icons/io5";
+import { IoCloseCircleOutline, IoEye, IoEyeOff, IoWarningOutline } from "react-icons/io5";
 
 import consts from "@/utils/consts";
+import { useToaster } from "@/providers/Toaster";
 import { signIn } from "@/supabase/actions/user";
 import { AuthError } from "@/supabase/actions/types";
-import { Button, C, GoHomeLogo, LabelTitle, Section } from "@/components";
+import { Button, C, GoHomeLogo, LabelTitle, LoadingText, Section } from "@/components";
 import { useGoTo } from "@/hooks";
 
-import colors from '@/styles/colors.module.scss';
+import colors from "@/styles/colors.module.scss";
 import styles from "../../styles.module.scss";
 
 
@@ -31,7 +32,10 @@ const PasswordChecker = ({ password }:{ password:string; }) => {
 };
 
 export function LoginCard() {
+  const toaster = useToaster();
   const [redirecting, goto] = useGoTo();
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -50,6 +54,7 @@ export function LoginCard() {
 
   const onSubmit = async () => {
     if (isOK) {
+      setLoading(true);
       const { data, error } = await signIn(email, password);
 
       if (error)
@@ -59,6 +64,7 @@ export function LoginCard() {
         setError(null);
         goto('/', 'replace');
       }
+      setLoading(false);
     }
   };
 
@@ -99,13 +105,14 @@ export function LoginCard() {
                 passRef.current?.focus();
             }}
           />
-          { !checkEmail(email) ?
+          {
+            checkEmail(email) ||
               <div className={styles.badInput}>
                 <span className={styles.bad}>
                   Invalid email address.
                 </span>
               </div>
-          : null }
+          }
         </label>
 
         <label>
@@ -118,7 +125,7 @@ export function LoginCard() {
               type={showPass ? "text" : "password"}
               title=""
               value={password}
-              placeholder="********"
+              placeholder="************"
               onChange={e => setPassword(e.target.value)}
               ref={passRef}
               required
@@ -131,18 +138,18 @@ export function LoginCard() {
             />
             <div
               title={showPass ? "Hide Password" : "Show Password"}
-              onClick={() => setShowPass(p => !p)}
+              onClick={e => { e.preventDefault(); setShowPass(p => !p)}}
             >
               {showPass ? <IoEyeOff id="closed" /> : <IoEye id="open" />}
             </div>
           </div>
-          { passChecker ? <PasswordChecker password={password} /> : null }
+          { passChecker && <PasswordChecker password={password} /> }
         </label>
 
         <Button
-          title="Log in"
+          title={loading ? <LoadingText text="Logging in" /> : "Log in"}
           onClick={onSubmit}
-          disabled={!isOK}
+          disabled={!isOK || loading}
           className={styles.button}
         />
 
@@ -151,14 +158,23 @@ export function LoginCard() {
         </a>
       </form>
       {
-        error ?
-        <span className={styles.error}>
-          <C.RED>
-            {error.message ?? "An error has occurred"}
-            <C.SECONDARY> [{error.status}]</C.SECONDARY>
-          </C.RED>
-        </span>
-        : null
+        error &&
+          <div className={styles.failure}>
+            <span style={{ textAlign: 'center' }}>
+              <IoCloseCircleOutline />
+              {' '}
+              <span>
+                {error.message ?? "An error has occurred"}.
+              </span>
+            </span>
+            <Button
+              icon={{ element: IoWarningOutline, size: 20 }}
+              onClick={() => toaster.add({ message: "In case of unexpected errors file a Github issue at IamFastre/the-winery", type: 'error', duration: 7500 })}
+              className={styles.resultButton}
+              color={colors.red}
+              noMinimum
+            />
+          </div>
       }
     </Section>
   );

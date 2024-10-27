@@ -1,15 +1,16 @@
 "use client";
 import { useRef, useState } from "react";
-import { IoCheckmark, IoEye, IoEyeOff } from "react-icons/io5";
+import { IoCheckmark, IoCloseCircleOutline, IoEye, IoEyeOff, IoWarningOutline } from "react-icons/io5";
 
 import consts from "@/utils/consts";
 import { multiplyString } from "@/utils";
+import { useToaster } from "@/providers/Toaster";
 import { signUp } from "@/supabase/actions/user";
 import { AuthError } from "@/supabase/actions/types";
-import { Button, C, GoHomeLogo, LabelTitle, RI, Section } from "@/components";
+import { Button, C, GoHomeLogo, LabelTitle, LoadingText, RI, Section } from "@/components";
 import { useGoTo } from "@/hooks";
 
-import colors from '@/styles/colors.module.scss';
+import colors from "@/styles/colors.module.scss";
 import styles from "../../styles.module.scss";
 
 
@@ -40,7 +41,7 @@ const checkPassword = (str:string) : boolean => {
 const UsernameChecker = ({ username }:{ username:string; }) => {
   return (
     <div className={styles.badInput}>
-      <span className={/^[0-9a-zA-Z_\-]*$/.test(username) ? styles.good : styles.bad}>
+      <span className={/^[0-9a-zA-Z_\-]+$/.test(username) ? styles.good : styles.bad}>
         Allowed characters:
         <br/>
         {'- '}
@@ -91,9 +92,11 @@ const PasswordChecker = ({ password }:{ password:string; }) => {
 };
 
 export function SignupCard() {
+  const toaster = useToaster();
   const [redirecting, goto] = useGoTo();
 
   const [success, setSuccess] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -121,6 +124,7 @@ export function SignupCard() {
 
   const onSubmit = async () => {
     if (isOK) {
+      setLoading(true);
       const { data, error } = await signUp(username, email, password);
 
       if (error)
@@ -130,6 +134,7 @@ export function SignupCard() {
         setSuccess(true);
         setShowPass(false);
       }
+      setLoading(false);
     }
   };
 
@@ -176,7 +181,7 @@ export function SignupCard() {
           <Button
             icon={{ element: IoCheckmark, size: 20 }}
             onClick={() => goto('/')}
-            className={styles.successButton}
+            className={styles.resultButton}
             noMinimum
           />
         </div>
@@ -201,7 +206,7 @@ export function SignupCard() {
                   emailRef.current?.focus();
               }}
             />
-            { nameChecker ? <UsernameChecker username={username} /> : null }
+            { nameChecker && <UsernameChecker username={username} /> }
           </label>
 
           <label>
@@ -222,13 +227,14 @@ export function SignupCard() {
                   passRef.current?.focus();
               }}
             />
-            { !checkEmail(email) ?
+            {
+              checkEmail(email) ||
                 <div className={styles.badInput}>
                   <span className={styles.bad}>
                     Invalid email address.
                   </span>
                 </div>
-            : null }
+            }
           </label>
 
           <label>
@@ -241,7 +247,7 @@ export function SignupCard() {
                 type={showPass ? "text" : "password"}
                 title=""
                 value={password}
-                placeholder="********"
+                placeholder="************"
                 onChange={e => setPassword(e.target.value)}
                 ref={passRef}
                 required
@@ -254,12 +260,12 @@ export function SignupCard() {
               />
               <div
                 title={showPass ? "Hide Password" : "Show Password"}
-                onClick={() => setShowPass(p => !p)}
+                onClick={e => { e.preventDefault(); setShowPass(p => !p)}}
               >
                 {showPass ? <IoEyeOff id="closed" /> : <IoEye id="open" />}
               </div>
             </div>
-            { passChecker ? <PasswordChecker password={password} /> : null }
+            { passChecker && <PasswordChecker password={password} /> }
           </label>
 
           <label>
@@ -271,7 +277,7 @@ export function SignupCard() {
               type={showPass ? "text" : "password"}
               title=""
               value={confPass}
-              placeholder={password ? multiplyString("*", password.length) : "********"}
+              placeholder={password ? multiplyString("*", password.length) : "************"}
               onChange={e => setConfPass(e.target.value)}
               ref={cPassRef}
               required
@@ -282,35 +288,44 @@ export function SignupCard() {
                   onSubmit();
               }}
             />
-            { cPassChecker ?
-              <div className={styles.badInput}>
-                <span className={password.length > 0 && password === confPass ? styles.good : styles.bad}>
-                  { password.length === 0 || !checkPassword(password)
-                  ? "Enter a valid password first."
-                  : "Matches password."}
-                </span>
-              </div>
-              : null }
+            {
+              cPassChecker &&
+                <div className={styles.badInput}>
+                  <span className={password.length > 0 && password === confPass ? styles.good : styles.bad}>
+                    { password.length === 0 || !checkPassword(password)
+                    ? "Enter a valid password first."
+                    : "Matches password."}
+                  </span>
+                </div>
+            }
           </label>
 
           <Button
-            title="Sign up"
+            title={loading ? <LoadingText text="Signing up"/> : "Sign up"}
             onClick={onSubmit}
-            disabled={!isOK}
+            disabled={!isOK || loading}
             className={styles.button}
           />
         </form>
       }
-
       {
-        error ?
-        <span className={styles.error}>
-          <C.RED>
-            {error.message ?? "An error has occurred"}
-            <C.SECONDARY>[{error.status}]</C.SECONDARY>
-          </C.RED>
-        </span>
-        : null
+        error &&
+          <div className={styles.failure}>
+            <span style={{ textAlign: 'center' }}>
+              <IoCloseCircleOutline />
+              {' '}
+              <span>
+                {error.message ?? "An error has occurred"}.
+              </span>
+            </span>
+            <Button
+              icon={{ element: IoWarningOutline, size: 20 }}
+              onClick={() => toaster.add({ message: "In case of unexpected errors file a Github issue at IamFastre/the-winery", type: 'error', duration: 7500 })}
+              className={styles.resultButton}
+              color={colors.red}
+              noMinimum
+            />
+          </div>
       }
     </Section>
   );

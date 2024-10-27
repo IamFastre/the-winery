@@ -4,6 +4,28 @@
 $width: 365px;
 $max-width: 85%;
 
+@mixin result($color) {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  color: $color;
+  background-color: rgba($color, 0.2);
+  align-items: stretch;
+  gap: 10px;
+  
+  > h3 {
+    color: $tertiary;
+    align-self: center;
+    &::before {
+      content: '';
+    }  
+  }
+
+  .resultButton {
+    align-self: center;
+  }
+}
+
 .page {
   flex: 1;
   align-items: center;
@@ -31,27 +53,8 @@ $max-width: 85%;
     font-size: smaller;
   }
 
-  .success {
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    color: $accent;
-    background-color: rgba($accent, 0.2);
-    align-items: stretch;
-    gap: 10px;
-    
-    > h3 {
-      color: $tertiary;
-      align-self: center;
-      &::before {
-        content: '';
-      }  
-    }
-
-    .successButton {
-      align-self: center;
-    }
-  }
+  .success { @include result($accent); }
+  .failure { @include result($red); }
 
   form {
     display: flex;

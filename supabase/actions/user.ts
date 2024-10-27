@@ -113,7 +113,7 @@ export async function signIn(email:string, password:string) {
   let data:AuthData | null = null;
   let error:AuthError | null = null;
 
-  if (emailRegex.test(email) && password.length > 7 && passwordRegex.test(password)) {
+  if (emailRegex.test(email) && password.length > 7) {
     const { data: dt, error: err } = await supabase.auth.signInWithPassword({
       email,
       password,
