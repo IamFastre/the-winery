@@ -41,10 +41,10 @@ export default function E505() {
               style="border-radius:12px"
               src="https://open.spotify.com/embed/track/0BxE4FqsDD1Ot4YuBXwAPp?utm_source=generator&theme=0"
               frameBorder="0"
-              allowfullscreen=""
+              allowfullscreen="true"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
-            />
+            ></iframe>
           `}}
         />
       </div>
