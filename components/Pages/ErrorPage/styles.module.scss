@@ -1,0 +1,65 @@
+@import '@/styles/colors.module.scss';
+
+@mixin color($color) {
+  border: 2px dashed $color;
+  background-color: rgba($color, 0.08);
+
+  > svg {
+    stroke: $color;
+    fill: $color;
+  }
+
+  &:hover {
+    background-color: rgba($color, 0.16);
+  }
+}
+
+.sectionContent {
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  > div {
+    user-select: none;
+    align-items: center;
+    gap: 10px;
+    margin: 35px;
+
+    > svg {
+      height: 100px;
+      width: 100px;
+      fill: $red;
+    }
+
+    h1 {
+      &::before { content: none; }
+    }
+
+    > p {
+      text-align: center;
+    }
+
+    > div {
+      gap: 10px;
+      flex-direction: row;
+
+      > a {
+        height: 32px;
+        width: 64px;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+
+        > svg { height: 100%; width: 100%; }
+
+        &:nth-of-type(1) { @include color($red); }
+        &:nth-of-type(2) { @include color($yellow); }
+        &:nth-of-type(3) { @include color($accent); }
+      }
+    }
+  }
+
+  &:hover, &:focus-visible {
+    border-color: $red;
+  }
+}
