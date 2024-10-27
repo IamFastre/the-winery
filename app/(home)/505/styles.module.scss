@@ -1,0 +1,73 @@
+@import '@/styles/consts.module.scss';
+@import '@/styles/colors.module.scss';
+
+@mixin styling($width) {
+  .sectionContent {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .box {
+    padding: 15px;
+    border-radius: 12px + 12px;
+    background-color: rgba($red, 0.2);
+    gap: 20px;
+    width: $width;
+  }
+
+  .text {
+    margin: 10px;
+
+    > h2 {
+      &::before { content: none; }
+
+      > svg {
+        width: 30px;
+        height: 30px;
+        padding: 0 7.5px 5px 0;
+      }
+    }
+  }
+
+  .iframeHolder {
+    iframe {
+      width: 100%;
+    }
+  }
+
+  a.closeButton {
+    position: absolute;
+    border-radius: 5px;
+    top: -5px;
+    right: -5px;
+    transition: all 500ms $ease-out-quartic;
+    outline: 7.5px solid $none;
+    padding: 2px;
+
+    > svg {
+      width: 24px;
+      height: 24px;
+      fill: $red;
+      stroke: $red;
+      transition: all 500ms $ease-out-quartic;
+    }
+
+    &:hover, &:focus-visible {
+      outline: 1px solid rgba($red, 0.25);
+
+      > svg {
+        fill: $tertiary;
+        stroke: $tertiary;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling($width: calc(100% - 20px));
+}
+
+@media screen and (min-width: 787px) {
+  @include styling($width: 500px);
+}
