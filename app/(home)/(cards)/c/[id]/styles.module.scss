@@ -1,6 +1,6 @@
 @import '@/styles/colors.module.scss';
 
-@mixin styling($buttons-scale) {
+@mixin styling() {
   .sectionContent {
     align-items: center;
     justify-content: center;
@@ -14,7 +14,7 @@
     align-items: center;
     overflow-y: scroll;
     overflow-x: hidden;
-    padding: 25px;
+    padding: 25px 15px;
 
     > hr {
       margin: 25px 0;
@@ -65,14 +65,11 @@
   }
 
   .buttons {
-    margin-left: 20px;
     align-items: end;
 
     > div {
       gap: 4px;
       align-items: end;
-      transform: scale($buttons-scale);
-      transform-origin: right;
     }
   }
 
@@ -103,9 +100,9 @@
 
 @media screen and (min-width: 0px)
               and (max-width: 786px) {
-  @include styling($buttons-scale: 1.1);
+  @include styling;
 }
 
 @media screen and (min-width: 787px) {
-  @include styling($buttons-scale: 1.2);
+  @include styling;
 }

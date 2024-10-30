@@ -28,7 +28,7 @@ export function ErrorPage(props:ErrorPageProps) {
       <div>
         <GiBrokenBottle />
         <h1>
-          Oh-uh...
+          Uh-oh...
         </h1>
         <p>
           <C.RED>
