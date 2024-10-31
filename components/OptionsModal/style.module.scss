@@ -1,0 +1,91 @@
+@import '@/styles/colors.module.scss';
+
+.menu {
+  min-width: fit-content;
+  width: 200px;
+  max-width: 80%;
+  min-height: fit-content;
+  animation: birth 500ms ease-in-out;
+
+  > hr {
+    width: 100%;
+    align-self: stretch;
+    margin: 0;
+
+    &::after { content: none; }
+  }
+}
+
+div.menuContainer {
+  padding: 15px;
+  gap: 10px;
+  align-items: stretch;
+
+  > h3 {
+    margin: 5px 0;
+    word-break: keep-all;
+    &::before { content: none; }
+  }
+}
+
+div.option, a.option {
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  height: 40px;
+  padding: 5px;
+
+  &:not(.field) {
+    user-select: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgba($secondary, 0.1);
+  }
+
+  > svg {
+    position: relative;
+    font-size: 20px;
+    fill: $primary;
+    stroke: $primary;
+    background-color: $accent;
+    padding: 5px;
+    border-radius: 5px;
+
+    &:not(.customStrokeWidth) path { stroke-width: 40px; }
+  }
+
+  > div {
+    flex: 1;
+    padding: 0 10px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:hover:not(.field), &:focus-visible:not(.field) {
+    background-color: rgba($secondary, 0.15);
+    span {
+      font-weight: bold;
+    }
+  }
+
+  &:active:not(.field), .active:not(.field) {
+    background-color: rgba($secondary, 0.3);
+  }
+}
+
+.optionTitle {
+  user-select: none;
+}
+
+.optionSubtitle {
+  color: $secondary;
+  font-size: 12px;
+  height: 12px;
+}
+
+.closeButton {
+  align-self: stretch;
+  margin-top: 5px;
+  padding: 5px 0;
+  font-size: smaller;
+}  

@@ -9,6 +9,7 @@ export * from "./HydratedTime";
 export * from "./LabelTitle";
 export * from "./LoadingText";
 export * from "./MarkDown";
+export * from "./OptionsModal";
 export * from "./PostButtons";
 export * from "./Section";
 export * from "./UsernameHandle";

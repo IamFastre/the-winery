@@ -3,6 +3,7 @@ import Link from "next/link";
 import { IoScan } from "react-icons/io5";
 
 import { CopyLinkButton } from "@/components/CopyLinkButton";
+import { CardOptionsButton } from "@/components/CardOptionsButton";
 import { focusable } from "@/utils/client";
 
 import colors from '@/styles/colors.module.scss';
@@ -20,6 +21,7 @@ export function CornerButtons({ id }:{ id:number; }) {
         <IoScan color={colors.accent} />
       </Link>
       <CopyLinkButton id={id} activeClassName={styles.active} />
+      <CardOptionsButton id={id} activeClassName={styles.active} />
     </div>
   );
 }

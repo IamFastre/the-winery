@@ -1,15 +1,13 @@
 "use client";
-import { ChangeEventHandler, Fragment, MouseEventHandler, useRef, useState } from "react";
+import { ChangeEventHandler, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { IconType } from "react-icons";
 import { GoPencil, GoTrash } from "react-icons/go";
 import { IoBookmarkOutline, IoBuildOutline, IoCloseOutline, IoEllipsisHorizontalOutline, IoFolderOutline, IoSaveOutline } from "react-icons/io5";
 
 import { humanizeTime } from "@/utils";
 import { cropAvatar, focusable } from "@/utils/client";
-import { B, Bio, Button, C, LabelTitle, Section } from "@/components";
+import { B, Bio, Button, C, LabelTitle, OptionsModal } from "@/components";
 import { Modal } from "@/providers/ModalProvider";
 import { editAvatar, editProfile } from "@/supabase/actions/user";
 import { Tables } from "@/supabase/types";
@@ -18,42 +16,6 @@ import { useHydration } from "@/hooks";
 import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
 
-type Option = { title:string; icon?: IconType; action?:MouseEventHandler<HTMLDivElement>; href?:string; };
-
-function ProfileOptions({ options, close }:{ options:Option[]; close: MouseEventHandler<HTMLDivElement>; }) {
-  return (
-    <Section className={styles.menu} containerClassName={styles.menuContainer}>
-      {options.map((o, i) => (
-        <Fragment key={`${i}-${o.title}`}>
-          {
-            o.action ?
-              <div className={styles.option} onClick={o.action}>
-                { o.icon ? <o.icon /> : null }
-                <div>
-                  <span>{o.title}</span>
-                </div>
-              </div>
-            : o.href ?
-              <Link className={styles.option} href={o.href} type="wrapper">
-                { o.icon ? <o.icon /> : null }
-                <div>
-                  <span>{o.title}</span>
-                </div>
-              </Link>
-            : null
-          }
-        </Fragment>
-      ))}
-      <hr/>
-      <Button
-        title="Close"
-        className={styles.closeButton}
-        onClick={close}
-        noBrackets
-      />
-    </Section>
-  );
-}
 
 export function ProfileEditor({ profile }:{ profile:Tables<'profiles'> }) {
   const router = useRouter();
@@ -230,7 +192,7 @@ export function ProfileEditor({ profile }:{ profile:Tables<'profiles'> }) {
       </div>
 
       <Modal state={showOptionsState}>
-        <ProfileOptions
+        <OptionsModal
           close={closeMenu}
           options={[
             { title: "Saved", icon: IoBookmarkOutline, href: '/saved' },
