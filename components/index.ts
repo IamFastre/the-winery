@@ -2,7 +2,8 @@ export * from "./Bio";
 export * from "./Button";
 export * from "./C";
 export * from "./Card";
-export * from "./CopyLinkButton"
+export * from "./CardOptionsButton";
+export * from "./CopyLinkButton";
 export * from "./GoHomeLogo";
 export * from "./Header";
 export * from "./HydratedTime";

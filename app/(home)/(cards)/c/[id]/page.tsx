@@ -107,7 +107,7 @@ export default async function CardPage({ params }:CardPageProps) {
             <div className={styles.footerEnd}>
               <div className={styles.buttons}>
                 <div>
-                  <PostButtons postId={post.id} showShare />
+                  <PostButtons postId={post.id} showShare showOptions />
                 </div>
               </div>
             </div>

@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { humanizeLikes } from "@/utils";
 import { focusable } from "@/utils/client";
 import { api } from "@/utils/client";
-import { Section, LoadingText, UsernameHandle, CopyLinkButton, C } from "@/components";
+import { Section, LoadingText, UsernameHandle, CopyLinkButton, C, CardOptionsButton } from "@/components";
 import { likePost, savePost } from "@/supabase/actions/post";
 import { Modal } from "@/providers/ModalProvider";
 
@@ -17,6 +17,7 @@ import Image from "next/image";
 interface PostButtonsProps {
   postId: number;
   showShare?: boolean;
+  showOptions?: boolean;
 }
 
 interface LikesModalProps {
@@ -213,7 +214,8 @@ export function PostButtons(props:PostButtonsProps) {
         >
           <IoBookmark />
         </div>
-        {props.showShare && <CopyLinkButton id={props.postId} activeClassName={styles.active} />}
+        {props.showShare   && <CopyLinkButton id={props.postId} activeClassName={styles.active} />}
+        {props.showOptions && <CardOptionsButton id={props.postId} activeClassName={styles.active} vertical />}
       </div>
       <div
         id="like-list"
