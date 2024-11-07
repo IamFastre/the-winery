@@ -1,17 +1,22 @@
 @import '@/styles/colors.module.scss';
 @import '@/styles/consts.module.scss';
 
+$corner-icon-size: 25px;
+
 .card {
   justify-content: center;
   gap: 10px;
 }
 
 .section {
+  height: 100%;
+  min-height: $corner-icon-size * 3;
+
   .sectionContent {
     flex: 1;
     overflow-y: scroll;
     align-items: stretch;
-    justify-content: start;
+    justify-content: space-around;
     padding: 20px;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -20,12 +25,11 @@
   }
 }
 
-.expand {
-  $size: 25px;
+.cornerButtons {
+
   position: absolute;
-  top: -$size / 2 - 4px;
-  right: -$size / 2 - 4px;
-  padding: 5px;
+  top: -$corner-icon-size / 2;
+  right: -$corner-icon-size / 2;
   gap: 5px;
   background: radial-gradient(circle, $primary 50%, $none 85%);
   
@@ -33,7 +37,7 @@
     cursor: pointer;
     transition: all 500ms $ease-out-quartic;
 
-    > svg { font-size: $size; }
+    > svg { font-size: $corner-icon-size; }
     
     &:hover, &:focus-visible {
       transform: scale(1.2);

@@ -277,9 +277,9 @@
     position: absolute;
     display: grid;
     grid-template-columns: $cards-grid;
-    align-items: stretch;
     justify-items: stretch;
     align-content: start;
+    align-items: start;
     top: 0;
     bottom: 0;
     overflow-y: scroll;

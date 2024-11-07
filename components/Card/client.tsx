@@ -11,7 +11,7 @@ import styles from "./style.module.scss";
 
 export function CornerButtons({ id }:{ id:number; }) {
   return (
-    <div className={styles.expand}>
+    <div className={styles.cornerButtons}>
       <Link
         type="wrapper"
         id="expand-post"
