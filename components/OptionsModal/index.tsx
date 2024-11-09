@@ -16,10 +16,14 @@ export type Option = {
   href?: string;
 
   flColor?: string;
-  skColor?: string;
   bgColor?: string;
-  txColor?: string;
+
+  skColor?: string;
   skWidth?: number | string;
+
+  txSize?: number | string;
+  txColor?: string;
+
   iconSide?: 'left' | 'right';
 };
 
@@ -36,20 +40,20 @@ export function OptionsModal(props:OptionsModalProps) {
       {props.options.map((o, i) => {
         const icon = o.icon &&
           <o.icon
+            className={o.skWidth ? styles.customStrokeWidth : undefined}
             style={{
+              backgroundColor: o.bgColor,
               fill: o.flColor,
               stroke: o.skColor,
-              backgroundColor: o.bgColor,
+              strokeWidth: o.skWidth,
             }}
-            className={o.skWidth ? styles.customStrokeWidth : undefined}
-            strokeWidth={o.skWidth}
           />;
 
         const option = (
           <>
             {(!o.iconSide || o.iconSide === 'left') && icon}
             <div>
-              <span className={styles.optionTitle} style={{ color: o.txColor }}>
+              <span className={styles.optionTitle} style={{ color: o.txColor, fontSize: o.txSize }}>
                 {o.title}
               </span>
               {
