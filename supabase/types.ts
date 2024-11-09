@@ -84,6 +84,7 @@ export type Database = {
           id: number
           timestamp: string
           title: string | null
+          generic_score: number | null
         }
         Insert: {
           author_uuid?: string | null
@@ -216,11 +217,23 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      generic_score: {
+        Args: {
+          "": unknown
+        }
+        Returns: number
+      }
       is_confirmed: {
         Args: {
           id: string
         }
         Returns: boolean
+      }
+      to_unix: {
+        Args: {
+          stamp: string
+        }
+        Returns: number
       }
     }
     Enums: {
