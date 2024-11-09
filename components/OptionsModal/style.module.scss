@@ -51,7 +51,15 @@ div.option, a.option {
     padding: 5px;
     border-radius: 5px;
 
-    &:not(.customStrokeWidth) path { stroke-width: 40px; }
+    path {
+      stroke-width: 40px;
+    }
+
+    &.customStrokeWidth {
+      path {
+        stroke-width: inherit;
+      }
+    }
   }
 
   > div {
@@ -75,6 +83,7 @@ div.option, a.option {
 
 .optionTitle {
   user-select: none;
+  font-size: 15px;
 }
 
 .optionSubtitle {
