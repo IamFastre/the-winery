@@ -16,6 +16,8 @@ import Image from "next/image";
 
 interface PostButtonsProps {
   postId: number;
+  postTitle: string | null;
+  postContent: string;
   showShare?: boolean;
   showOptions?: boolean;
 }
@@ -215,7 +217,7 @@ export function PostButtons(props:PostButtonsProps) {
           <IoBookmark />
         </div>
         {props.showShare   && <CopyLinkButton id={props.postId} activeClassName={styles.active} />}
-        {props.showOptions && <CardOptionsButton id={props.postId} activeClassName={styles.active} vertical />}
+        {props.showOptions && <CardOptionsButton id={props.postId} activeClassName={styles.active} postTitle={props.postTitle} postContent={props.postContent} vertical />}
       </div>
       <div
         id="like-list"

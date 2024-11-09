@@ -72,7 +72,7 @@ export function Card(props:CardProps) {
           props.postId &&
             <div className={styles.interactionsHolder}>
               <div>
-                <PostButtons postId={props.postId} />
+                <PostButtons postId={props.postId} postTitle={props.title} postContent={props.content} />
               </div>
             </div>
         }
