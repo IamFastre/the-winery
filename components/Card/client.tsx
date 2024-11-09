@@ -2,14 +2,14 @@
 import Link from "next/link";
 import { IoScan } from "react-icons/io5";
 
+import { focusable } from "@/utils/client";
 import { CopyLinkButton } from "@/components/CopyLinkButton";
 import { CardOptionsButton } from "@/components/CardOptionsButton";
-import { focusable } from "@/utils/client";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";
 
-export function CornerButtons({ id }:{ id:number; }) {
+export function CornerButtons({ id, postTitle, postContent }:{ id:number; postTitle:string | null; postContent:string; }) {
   return (
     <div className={styles.cornerButtons}>
       <Link
@@ -21,7 +21,7 @@ export function CornerButtons({ id }:{ id:number; }) {
         <IoScan color={colors.accent} />
       </Link>
       <CopyLinkButton id={id} activeClassName={styles.active} />
-      <CardOptionsButton id={id} activeClassName={styles.active} />
+      <CardOptionsButton id={id} activeClassName={styles.active} postTitle={postTitle} postContent={postContent} />
     </div>
   );
 }

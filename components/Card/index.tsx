@@ -77,7 +77,7 @@ export function Card(props:CardProps) {
             </div>
         }
       </div>
-      { props.postId && <CornerButtons id={props.postId} /> }
+      { props.postId && <CornerButtons id={props.postId} postTitle={props.title} postContent={props.content} /> }
     </div>
   );
 }
