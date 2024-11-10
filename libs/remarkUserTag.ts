@@ -55,10 +55,12 @@ export default function userTag() {
     });
     
     visit(tree, ['link'], (node, i, parent) => {
-      const url = new URL(node.url);
-      if (url.origin === location.origin && /^\/u\/[a-z0-9_-]+$/i.test(url.pathname)) {
-        const newNode = makeUserTag(url.pathname.replace('/u/', ''));
-        parent.children.splice(i, 1, newNode);
+      if (URL.canParse(node.url)) {
+        const url = new URL(node.url);
+        if (url.origin === location.origin && /^\/u\/[a-z0-9_-]+$/i.test(url.pathname)) {
+          const newNode = makeUserTag(url.pathname.replace('/u/', ''));
+          parent.children.splice(i, 1, newNode);
+        }
       }
     });
   };
