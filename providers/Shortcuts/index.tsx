@@ -28,8 +28,6 @@ export function useShortcuts(shortcuts:Shortcut[], deps?:any[]) {
 }
 
 export function Shortcuts({ children }:{ children:React.ReactNode }) {
-  const [alt, setAlt] = useState<boolean>(false);
-  const [ctrl, setCtrl] = useState<boolean>(false);
   const [shortcuts, setShortcuts] = useState<Shortcut[]>([]);
 
   const add = (sc:Shortcut) => {
@@ -46,34 +44,14 @@ export function Shortcuts({ children }:{ children:React.ReactNode }) {
 
   useEffect(() => {
     const onKeyDown = (e:KeyboardEvent) => {
-      if (e.key === 'Alt')     setAlt(true);
-      if (e.key === 'Control') setCtrl(true);
-    };
-
-    const onKeyUp = (e:KeyboardEvent) => {
-      if (e.key === 'Alt')     setAlt(false);
-      if (e.key === 'Control') setCtrl(false);
-    }
-
-    document.body.addEventListener('keydown', onKeyDown);
-    document.addEventListener('keyup', onKeyUp);
-    
-    return () => {
-      document.body.removeEventListener('keydown', onKeyDown);
-      document.removeEventListener('keyup', onKeyUp);
-    };
-  }, []);
-
-  useEffect(() => {
-    const onKeyDown = (e:KeyboardEvent) => {
-      for (var shortcut of shortcuts) {
+      for (const shortcut of shortcuts) {
         if (shortcut.key === null)
           continue;
 
         const altDown = shortcut.alt ?? false;
         const ctrlDown = shortcut.ctrl ?? false;
 
-        if (e.key === shortcut.key && alt === altDown && ctrl === ctrlDown) {
+        if (e.key === shortcut.key && e.altKey === altDown && e.ctrlKey === ctrlDown) {
           e.preventDefault();
           if ((shortcut as CallbackShortcut).callback)
             (shortcut as CallbackShortcut).callback();
@@ -85,11 +63,11 @@ export function Shortcuts({ children }:{ children:React.ReactNode }) {
 
     document.body.addEventListener('keydown', onKeyDown);
     return () => document.body.removeEventListener('keydown', onKeyDown);
-  }, [shortcuts, alt, ctrl]);
+  }, [shortcuts]);
 
   return (
     <>
-      <ShortcutsContext.Provider value={{ alt, ctrl, shortcuts, add, remove }}>
+      <ShortcutsContext.Provider value={{ shortcuts, add, remove }}>
         {children}
       </ShortcutsContext.Provider>
     </>
