@@ -11,9 +11,9 @@ export async function getCardFeed(limit:number = 25) {
 
   const res = await supabase
     .from('posts')
-    .select('*, generic_score')
+    .select('*, score')
     .limit(limit)
-    .order('generic_score', { ascending: false });
+    .order('score', { ascending: false });
 
   if (res.error)
     return result(null, res.error);
