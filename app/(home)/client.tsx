@@ -70,10 +70,12 @@ export function FeedNavigator({ posts, users }:CardFeed) {
 
     { key: 'l', alt: true, clickableId: 'like-post' },
     { key: 's', alt: true, clickableId: 'save-post' },
-    { key: 'c', alt: true, clickableId: 'share-post' },
     { key: 'u', alt: true, clickableId: 'user-post' },
     { key: 'e', alt: true, clickableId: 'expand-post' },
-
+    { key: 'c', alt: true, clickableId: 'share-post' },
+    { key: 'o', alt: true, clickableId: 'options-post' },
+    
+    { key: 's', alt: true, ctrl: true, clickableId: 'super-like-post' },
     { key: 'l', alt: true, ctrl: true, clickableId: 'like-list' },
   ]);
 
