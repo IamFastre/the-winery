@@ -10,13 +10,13 @@ $arrow-size: 28px;
 }
 
 .card {
-  margin: 0 15px;
+  max-width: calc(100% - 26px);
 }
 
 .cardSection {
   max-height: calc(80vh - 150px);
   min-width: 200px;
-  max-width: 600px;
+  max-width: 604px;
 }
 
 .quiver {
