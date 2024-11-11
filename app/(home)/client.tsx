@@ -103,7 +103,7 @@ export function FeedNavigator({ posts, users }:CardFeed) {
           onChange={e => setInpt(e.target.valueAsNumber - 1)}
           onBlur={submit}
           onKeyDown={e => { if (e.key === 'Enter') { submit(); e.currentTarget.blur(); } }}
-          style={{ width: `${inpt ? inpt.toFixed().length : index.toFixed().length}ch` }}
+          style={{ width: `${inpt ? (inpt + 1).toFixed().length : (index + 1).toFixed().length}ch` }}
         />
         <div id="go-forward" {...focusable(pageStyles.active, () => increment(+1))}>
           <IoArrowForward className={index >= posts.length-1 ? pageStyles.disabled : undefined} />
