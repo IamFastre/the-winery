@@ -274,19 +274,20 @@
   }
 
   .cards {
-    position: absolute;
     display: grid;
     grid-template-columns: $cards-grid;
     justify-items: stretch;
     align-content: start;
     align-items: start;
+    position: absolute;
     top: 0;
     bottom: 0;
     overflow-y: scroll;
-    padding: 15px 10%;
+    padding: 15px;
     gap: 30px;
 
     > div {
+      max-width: calc(100vw - 75px);
       > div:nth-child(1) {
         flex: 1;
       }
