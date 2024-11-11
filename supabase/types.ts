@@ -84,7 +84,7 @@ export type Database = {
           id: number
           timestamp: string
           title: string | null
-          generic_score: number | null
+          generic_score: number
         }
         Insert: {
           author_uuid?: string | null

@@ -10,7 +10,7 @@ export async function getCardPost(id:string | number) {
 
   const res = await supabase
     .from('posts')
-    .select('*')
+    .select('*, generic_score')
     .eq('id', id)
     .single();
 
