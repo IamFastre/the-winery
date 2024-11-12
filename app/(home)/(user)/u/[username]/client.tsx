@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEventHandler, useRef, useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { GoPencil, GoTrash } from "react-icons/go";
@@ -27,7 +27,6 @@ export function ProfileEditor({ profile }:{ profile:Tables<'profiles'> }) {
   const [bio, setBio] = useState<string>(profile.bio);
 
   const changed = !!avatarData || (profile.display_name ?? "") !== displayName || profile.bio !== bio;
-  const imgInputRef = useRef<HTMLInputElement>(null);
 
   const openMenu = () => {
     showOptionsState[1](true);
@@ -86,7 +85,7 @@ export function ProfileEditor({ profile }:{ profile:Tables<'profiles'> }) {
         />
         {
           editing ?
-          <div className={styles.avatarEdit} {...focusable(styles.active, () => imgInputRef.current?.click())}>
+          <div className={styles.avatarEdit}>
             <div className={styles.avatarEditIcon}>
               <GoPencil />
             </div>
@@ -94,7 +93,7 @@ export function ProfileEditor({ profile }:{ profile:Tables<'profiles'> }) {
               type="file"
               accept="image/png, image/jpeg, image/webp"
               onChange={onSubmitImage}
-              ref={imgInputRef}
+              {...focusable(styles.active)}
             />
           </div>
           : null
