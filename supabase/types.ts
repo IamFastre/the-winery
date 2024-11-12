@@ -112,6 +112,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          anniversary: Database["public"]["CompositeTypes"]["birth_date"] | null
           avatar: string
           bio: string
           created_at: string
@@ -120,6 +121,9 @@ export type Database = {
           username: string
         }
         Insert: {
+          anniversary?:
+            | Database["public"]["CompositeTypes"]["birth_date"]
+            | null
           avatar: string
           bio?: string
           created_at?: string
@@ -128,6 +132,9 @@ export type Database = {
           username: string
         }
         Update: {
+          anniversary?:
+            | Database["public"]["CompositeTypes"]["birth_date"]
+            | null
           avatar?: string
           bio?: string
           created_at?: string
@@ -217,6 +224,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_username: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
       is_confirmed: {
         Args: {
           id: string
@@ -240,7 +251,10 @@ export type Database = {
       [_ in never]: never
     }
     CompositeTypes: {
-      [_ in never]: never
+      birth_date: {
+        m: number
+        d: number
+      }
     }
   }
 }
