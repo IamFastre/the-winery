@@ -28,6 +28,7 @@
     "xregexp": "^5.1.1"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/object-hash": "^3.0.6",
     "@types/react": "^18",
