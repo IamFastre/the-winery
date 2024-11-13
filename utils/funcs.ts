@@ -106,6 +106,12 @@ export function getZodiac(day:number, month:number) : React.FC<React.SVGProps<SV
   return null;
 }
 
+export function numberOrder(n:number) {
+  const str = n.toFixed()
+  const l = str[str.length - 1];
+  return (l === "1" ? `${n}st` : l === "2" ? `${n}nd` : `${n}th`);
+}
+
 export function humanizeTime(stamp: number | string, utc:boolean = true, noTime:boolean = false) : string {
   const now  = utc ? moment.utc() : moment();
   const date = utc ? moment.utc(stamp) : moment(stamp);
@@ -116,7 +122,7 @@ export function humanizeTime(stamp: number | string, utc:boolean = true, noTime:
   let day = now.year() === date.year() && now.month() === date.month()
           ? (dif === 0 ? "today" : dif === 1 ? "yesterday" : `${dif} days ago`)
           : now.year() === date.year()
-          ? (mif === 1 ? (date.date() === 1 ? `${date.date()}st` : date.date() === 2 ? `${date.date()}nd` : `${date.date()}th` )
+          ? (mif === 1 ? numberOrder(date.date())
             + ` of last month` : `${date.format("DD/MM")} this year`)
           : date.format("DD/MM/YYYY");
 
