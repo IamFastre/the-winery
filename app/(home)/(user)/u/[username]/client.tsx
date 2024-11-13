@@ -7,17 +7,19 @@ import { IoBookmarkOutline, IoBuildOutline, IoCloseOutline, IoEllipsisHorizontal
 
 import { humanizeTime } from "@/utils";
 import { cropAvatar, focusable } from "@/utils/client";
-import { B, Bio, Button, C, LabelTitle, OptionsModal } from "@/components";
+import { B, Button, C, LabelTitle, OptionsModal } from "@/components";
 import { Modal } from "@/providers/ModalProvider";
 import { editAvatar, editProfile } from "@/supabase/actions/user";
-import { Tables } from "@/supabase/types";
+import { UserInfo } from "@/utils/api/user/info";
 import { useHydration } from "@/hooks";
+
+import { ProfileTextStuff } from "./server";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
 
 
-export function ProfileEditor({ profile }:{ profile:Tables<'profiles'> }) {
+export function ProfileEditor({ profile }:{ profile:UserInfo }) {
   const router = useRouter();
 
   const [editing, setEditing] = useState<boolean>(false);
@@ -153,23 +155,8 @@ export function ProfileEditor({ profile }:{ profile:Tables<'profiles'> }) {
           </label>
         </div>
         :
-        <div className={styles.textStuff}>
-          <div className={styles.names}>
-            <span>
-              {profile.display_name ?? profile.username}
-            </span>
-            <span>
-              <C.QUINARY>
-                u:
-              </C.QUINARY>
-              <C.ACCENT>
-                {profile.username}
-              </C.ACCENT>
-            </span>
-          </div>
-          <Bio content={profile.bio} />
-        </div>
-      }
+        <ProfileTextStuff profile={profile} />
+      }    
       <div className={styles.buttonRack}>
         <Button
           title={editing ? "Save Changes" : "Edit Profile"}

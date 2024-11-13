@@ -2,14 +2,15 @@ import Image from "next/image";
 
 import { IoFolderOpenOutline, IoHelpCircle } from "react-icons/io5";
 
-import { Tables } from "@/supabase/types";
+import { UserInfo } from "@/utils/api/user/info";
+import { CardPost } from "@/utils/api/card/post";
 import { Card } from "@/components/Card";
 import { C } from "@/components/C";
 import { Bio } from "@/components/Bio";
 
 import styles from "./styles.module.scss";
 
-export function ProfileInfo({ profile, isConfirmed }:{ profile:Tables<'profiles'>; isConfirmed: boolean; }) {
+export function ProfileInfo({ profile }:{ profile:UserInfo }) {
   return (
     <>
       <Image
@@ -19,28 +20,34 @@ export function ProfileInfo({ profile, isConfirmed }:{ profile:Tables<'profiles'
         height={128}
         className={styles.avatar}
       />
-      <div className={styles.textStuff}>
-        <div className={styles.names}>
-          <span>
-            {profile.display_name ?? profile.username}
-          </span>
-          <span>
-            <C.QUINARY>
-              u:
-            </C.QUINARY>
-            <C.ACCENT>
-              {profile.username}
-            </C.ACCENT>
-          </span>
-          {isConfirmed || <IoHelpCircle title="Email not confirmed." />}
-        </div>
-        <Bio content={profile.bio} />
-      </div>
+      <ProfileTextStuff profile={profile} />
     </>
   );
 }
 
-export function CardList({ posts }:{ posts:Tables<'posts'>[] }) {
+export function ProfileTextStuff({ profile }:{ profile:UserInfo }) {
+  return (
+    <div className={styles.textStuff}>
+      <div className={styles.names}>
+        <span>
+          {profile.display_name ?? profile.username}
+        </span>
+        <span>
+          <C.QUINARY>
+            u:
+          </C.QUINARY>
+          <C.ACCENT>
+            {profile.username}
+          </C.ACCENT>
+        </span>
+        {profile.mail_confirmed || <IoHelpCircle title="Email not confirmed." />}
+      </div>
+      <Bio content={profile.bio} anniversary={profile.anniversary} />
+    </div>
+  );
+}
+
+export function CardList({ posts }:{ posts:CardPost[] }) {
   return (
     <div className={styles.cardsHolder}>
       {

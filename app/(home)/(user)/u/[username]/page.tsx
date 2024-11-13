@@ -77,13 +77,13 @@ export default async function UserPage({ params }:UserPageProps) {
     <Section className={styles.section} containerClassName={styles.sectionContainer}>
       <Image
         src={user.data.avatar}
-        alt={''}
+        alt=''
         width={256}
         height={256}
         className={styles.avatarBlur}
       />
       <div className={styles.userBox}>
-        { isSelf ? <ProfileEditor profile={self.data} /> : <ProfileInfo profile={user.data} isConfirmed={user.data.mail_confirmed} /> }
+        { isSelf ? <ProfileEditor profile={self.data} /> : <ProfileInfo profile={user.data} /> }
         <DataBox cards={posts.data.length} joined={user.data.created_at} />
       </div>
       <hr/>
