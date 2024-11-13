@@ -75,7 +75,15 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
         await editAvatar(avatarData);
 
       if (formChanged)
-        await editProfile({ display_name: displayName, bio, anniversary: m && d ? { m, d } : undefined });
+        await editProfile({
+          display_name: displayName,
+          bio,
+          anniversary: isNaN(m??0) && isNaN(d??0)
+                     ? null
+                     : m && d
+                     ? { m, d }
+                     : undefined
+        });
 
       if (changed) {
         setEditing(false);
