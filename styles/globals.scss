@@ -249,9 +249,9 @@ td {
 }
 
 input, textarea {
-  background-color: $quaternary;
+  background-color: rgba($quaternary, 0.25);
   border: none;
-  border-radius: 0;
+  border-radius: 5px;
   border-bottom: 2px $accent solid;
   min-height: 30px;
   padding: 0 10px;

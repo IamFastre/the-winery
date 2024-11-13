@@ -179,6 +179,7 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
                 value={d}
                 onChange={e => setD(e.target.valueAsNumber)}
                 placeholder={profile.anniversary ? `Day - ${profile.anniversary.d}` : 'Day'}
+                inputMode="numeric"
                 min={1}
                 max={31}
               />
@@ -187,6 +188,7 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
                 value={m}
                 onChange={e => setM(e.target.valueAsNumber)}
                 placeholder={profile.anniversary ? `Month - ${profile.anniversary.m}` : 'Month'}
+                inputMode="numeric"
                 min={1}
                 max={12}
               />

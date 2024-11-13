@@ -100,6 +100,7 @@ export function FeedNavigator({ posts, users }:CardFeed) {
           id="span"
           name="wine-page-number"
           type="number"
+          inputMode="numeric"
           value={inpt + 1}
           placeholder={`${index + 1}`}
           onChange={e => setInpt(e.target.valueAsNumber - 1)}
