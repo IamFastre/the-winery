@@ -2,6 +2,7 @@
 import { useState } from "react";
 import moment from "moment";
 
+import { numberOrder } from "@/utils";
 import { focusable } from "@/utils/client";
 import { UserInfo } from "@/utils/api/user/info";
 import { Zodiac } from "@/components";
@@ -18,7 +19,7 @@ export function Bio(props:{ content:string; anniversary:UserInfo['anniversary'] 
         {props.content}
       </span>
       { props.anniversary &&
-        <div title={`${props.anniversary.d} ${moment.months(props.anniversary.m - 1)}`}>
+        <div title={`${moment.months(props.anniversary.m - 1)} ${numberOrder(props.anniversary.d)}`}>
           <Zodiac
             fill={colors.cold}
             date={props.anniversary}
