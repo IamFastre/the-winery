@@ -1,7 +1,7 @@
 "use server";
 import { cropAvatar, getAvatarUrl, getCurrentURL } from "@/utils/server";
 import { createClient } from "@/supabase/server";
-import { getUserInfo } from "@/utils/api/user/info";
+import { getUserInfo, UserInfo } from "@/utils/api/user/info";
 
 import { AuthData, AuthError } from "./types";
 
@@ -9,7 +9,7 @@ import { AuthData, AuthError } from "./types";
 /*                                  Updating                                  */
 /* ========================================================================== */
 
-export async function editProfile(partialUser:{ display_name?: string | null; bio?: string; }) {
+export async function editProfile(partialUser:{ display_name?:UserInfo['display_name']; bio?:UserInfo['bio']; anniversary?:UserInfo['anniversary'] }) {
   const supabase = createClient();
   const { data:{ user }, error } = await supabase.auth.getUser();
 
@@ -19,6 +19,7 @@ export async function editProfile(partialUser:{ display_name?: string | null; bi
   const trimmed = {
     display_name: partialUser.display_name?.trim() as string | null | undefined,
     bio: partialUser.bio?.trim(),
+    anniversary: partialUser.anniversary
   };
 
   if (trimmed.display_name === "")

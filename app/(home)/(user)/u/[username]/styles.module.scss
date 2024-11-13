@@ -211,6 +211,17 @@
     }
   }
 
+  .anniversary {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    input {
+      flex: 1;
+    }
+  }
+
   .buttonRack {
     align-self: stretch;
     align-items: center;

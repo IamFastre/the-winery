@@ -27,8 +27,16 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
   const [avatarData, setAvatarData] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState<string>(profile.display_name ?? profile.username);
   const [bio, setBio] = useState<string>(profile.bio);
+  const [d, setD] = useState<number | undefined>(profile.anniversary?.d);
+  const [m, setM] = useState<number | undefined>(profile.anniversary?.m);
 
-  const changed = !!avatarData || (profile.display_name ?? "") !== displayName || profile.bio !== bio;
+  const formChanged =
+    (profile.display_name ?? "") !== displayName ||
+    profile.bio !== bio ||
+    d !== profile.anniversary?.d ||
+    m !== profile.anniversary?.m;
+
+  const changed = !!avatarData || formChanged;
 
   const openMenu = () => {
     showOptionsState[1](true);
@@ -43,6 +51,8 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
     setAvatarData(null);
     setDisplayName(profile.display_name ?? profile.username);
     setBio(profile.bio);
+    setD(profile.anniversary?.d);
+    setM(profile.anniversary?.m);
   }
 
   const onSubmitImage:ChangeEventHandler<HTMLInputElement> = e => {
@@ -59,16 +69,16 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
     }
   };
 
-  const handleEditButton = async () => {
+  const onSubmitChanges = async () => {
     if (editing) {
       if (avatarData)
         await editAvatar(avatarData);
 
-      if ((profile.display_name ?? "") !== displayName || profile.bio !== bio)
-        await editProfile({ display_name: displayName, bio });
+      if (formChanged)
+        await editProfile({ display_name: displayName, bio, anniversary: m && d ? { m, d } : undefined });
 
       if (changed) {
-        cancel();
+        setEditing(false);
         router.refresh();
       }
     } else {
@@ -153,6 +163,27 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
               </C.SECONDARY>
             </div>
           </label>
+          <label>
+            <LabelTitle title="Anniversary"/>
+            <div className={styles.anniversary}>
+              <input
+                type="number"
+                value={d}
+                onChange={e => setD(e.target.valueAsNumber)}
+                placeholder={profile.anniversary ? `Day - ${profile.anniversary.d}` : 'Day'}
+                min={1}
+                max={31}
+              />
+              <input
+                type="number"
+                value={m}
+                onChange={e => setM(e.target.valueAsNumber)}
+                placeholder={profile.anniversary ? `Month - ${profile.anniversary.m}` : 'Month'}
+                min={1}
+                max={12}
+              />
+            </div>
+          </label>
         </div>
         :
         <ProfileTextStuff profile={profile} />
@@ -162,7 +193,7 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
           title={editing ? "Save Changes" : "Edit Profile"}
           icon={{ element: editing ? IoSaveOutline : IoBuildOutline }}
           className={styles.button}
-          onClick={handleEditButton}
+          onClick={onSubmitChanges}
           disabled={editing && !changed}
           noBrackets
           noMinimum
