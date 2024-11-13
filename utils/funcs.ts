@@ -24,21 +24,6 @@ import ZodiacSagittarius from "@/public/static/images/zodiacs/Sagittarius.svg";
 import ZodiacCapricorn   from "@/public/static/images/zodiacs/Capricorn.svg";
 
 
-export const ZODIAC_SVG = {
-  aquarius:    ZodiacAquarius,
-  pisces:      ZodiacPisces,
-  aries:       ZodiacAries,
-  taurus:      ZodiacTaurus,
-  gemini:      ZodiacGemini,
-  cancer:      ZodiacCancer,
-  leo:         ZodiacLeo,
-  virgo:       ZodiacVirgo,
-  libra:       ZodiacLibra,
-  scorpio:     ZodiacScorpio,
-  sagittarius: ZodiacSagittarius,
-  capricorn:   ZodiacCapricorn,
-}
-
 export function multiplyString(str:string, num:number) : string {
   let res = "";
 
@@ -81,7 +66,7 @@ export function getLogo(kind:LogoKind) : StaticImageData {
        : NDC;
 }
 
-export function getZodiac(day:number, month:number) {
+export function getZodiac(day:number, month:number) : React.FC<React.SVGProps<SVGSVGElement>> | null {
   if ((month === 1 && day >= 20) || (month === 2 && day <= 18))
     return ZodiacAquarius;
 

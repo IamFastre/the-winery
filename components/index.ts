@@ -14,3 +14,4 @@ export * from "./OptionsModal";
 export * from "./PostButtons";
 export * from "./Section";
 export * from "./UsernameHandle";
+export * from "./Zodiac";

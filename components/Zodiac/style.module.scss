@@ -1,0 +1,9 @@
+@import '@/styles/colors.module.scss';
+
+svg.icon {
+  path {
+    fill: inherit;
+    stroke: inherit;
+    stroke-width: inherit;
+  }
+}
