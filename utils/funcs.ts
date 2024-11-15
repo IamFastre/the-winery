@@ -109,7 +109,7 @@ export function getZodiac(day:number, month:number) : React.FC<React.SVGProps<SV
 export function numberOrder(n:number) {
   const str = n.toFixed()
   const l = str[str.length - 1];
-  return (l === "1" ? `${n}st` : l === "2" ? `${n}nd` : `${n}th`);
+  return (l === "1" ? `${n}st` : l === "2" ? `${n}nd` : l === "3" ? `${n}rd` : `${n}th`);
 }
 
 export function humanizeTime(stamp: number | string, utc:boolean = true, noTime:boolean = false) : string {
