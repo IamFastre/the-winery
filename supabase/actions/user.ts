@@ -55,24 +55,25 @@ export async function editAvatar(base64Image:string | null) {
       .from('profiles')
       .upload(`${user.username.toLowerCase()}/${file.name}`, file, { contentType: 'image/png', upsert: true });
 
-    if (res.data)
-      url = `${supabase.storage.from('profiles').getPublicUrl(res.data.path).data.publicUrl}?created=${Date.now()}`;
-    else
+    if (res.error)
       return res;
+    else
+      url = `${supabase.storage.from('profiles').getPublicUrl(res.data.path).data.publicUrl}?created=${Date.now()}`;
   } else {
     const res = await supabase.storage
       .from('profiles')
       .remove([`${user.username.toLowerCase()}/avatar`]);
 
-    if (res.data)
-      url = await getAvatarUrl(user.username);
-    else
+    if (res.error)
       return res;
+    else
+      url = await getAvatarUrl(user.username);
   }
 
   return await supabase
     .from('profiles')
-    .update({ avatar: url });
+    .update({ avatar: url })
+    .eq('id', user.id);
 }
 
 /* ========================================================================== */
