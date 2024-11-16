@@ -49,6 +49,10 @@
     }
   }
 
+  li {
+    position: relative;
+  }
+
   input[type="checkbox"]:disabled {
     &::before {
       content: "";
@@ -69,5 +73,9 @@
     top: 3px;
     margin: 0;
     min-height: 0;
+  }
+
+  table {
+    width: 100%;
   }
 }

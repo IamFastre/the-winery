@@ -1,3 +1,4 @@
+'use client';
 import { HTMLAttributes } from "react";
 import MD, { Options } from "react-markdown";
 import gfm from "remark-gfm";

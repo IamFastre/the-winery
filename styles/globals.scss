@@ -104,7 +104,7 @@ a {
     }
   }
 
-  &[type="wrapper"] {
+  &:where([type="wrapper"]) {
     display: flex;
     unicode-bidi: isolate;
     box-sizing: border-box;
