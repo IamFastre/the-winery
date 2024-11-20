@@ -27,16 +27,38 @@ export type Option = {
   iconSide?: 'left' | 'right';
 };
 
-export interface OptionsModalProps {
+export interface MenuModalProps {
+  title?: string;
+  children?: React.ReactNode;
+  close: MouseEventHandler<HTMLDivElement>; 
+}
+
+export interface OptionsModalProps extends Omit<MenuModalProps, 'children'> {
   title?: string;
   options: Option[];
   close: MouseEventHandler<HTMLDivElement>; 
 }
 
-export function OptionsModal(props:OptionsModalProps) {
+
+export function MenuModal(props:MenuModalProps) {
   return (
     <Section className={styles.menu} containerClassName={styles.menuContainer}>
       {props.title && <h3>{props.title}</h3>}
+      {props.children}
+      <hr/>
+      <Button
+        title="Close"
+        className={styles.closeButton}
+        onClick={props.close}
+        noBrackets
+      />
+    </Section>
+  );
+}
+
+export function OptionsModal(props:OptionsModalProps) {
+  return (
+    <MenuModal title={props.title} close={props.close}>
       {props.options.map((o, i) => {
         const icon = o.icon &&
           <o.icon
@@ -86,13 +108,6 @@ export function OptionsModal(props:OptionsModalProps) {
           </Fragment>
         );
       })}
-      <hr/>
-      <Button
-        title="Close"
-        className={styles.closeButton}
-        onClick={props.close}
-        noBrackets
-      />
-    </Section>
+    </MenuModal>
   );
 }
