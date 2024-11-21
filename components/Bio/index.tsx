@@ -1,24 +1,18 @@
-"use client";
-import { useState } from "react";
 import moment from "moment";
 import { IoMdFemale, IoMdMale } from "react-icons/io";
 import { GiToaster } from "react-icons/gi";
 
 import { getZodiacString, numberOrder, vowelStart } from "@/utils";
-import { focusable } from "@/utils/client";
 import { UserInfo } from "@/utils/api/user/info";
-import { C, RI, Zodiac, ProfileBadge } from "@/components";
+import { C, RI } from "@/components/C";
+import { Zodiac } from "@/components/Zodiac";
+import { ProfileBadge } from "@/components/ProfileBadge";
 
+import { BioText } from "./client";
 import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";
 
-interface BioProps {
-  content: string;
-  anniversary: UserInfo['anniversary'];
-  gender: UserInfo['gender'];
-}
-
-function GenderBadge({ gender }:{ gender:BioProps['gender'] }) {
+function GenderBadge({ gender }:{ gender:UserInfo['gender'] }) {
   const Icon = gender === 'male' ? IoMdMale : gender === 'female' ? IoMdFemale : GiToaster;
   const color = gender === 'male' ? colors.cyan : gender === 'female' ? colors.magenta : colors.yellow;
 
@@ -52,7 +46,7 @@ function GenderBadge({ gender }:{ gender:BioProps['gender'] }) {
   );
 }
 
-function ZodiacBadge({ anniversary }:{ anniversary:BioProps['anniversary'] }) {
+function ZodiacBadge({ anniversary }:{ anniversary:UserInfo['anniversary'] }) {
   const sign = anniversary ? getZodiacString(anniversary.d, anniversary.m) : null;
   const date = anniversary ? `${moment.months(anniversary.m - 1)} ${numberOrder(anniversary.d)}` : null;
 
@@ -76,17 +70,13 @@ function ZodiacBadge({ anniversary }:{ anniversary:BioProps['anniversary'] }) {
   );
 }
 
-export function Bio(props:BioProps) {
-  const [expanded, setExpanded] = useState<boolean>(false);
-
+export function Bio({ info }:{ info: UserInfo }) {
   return (
-    <div className={`${styles.bio} ${expanded ? styles.expanded : ""}`}>
-      <span {...focusable("", () => setExpanded(e => !e))}>
-        {props.content}
-      </span>
+    <div className={styles.bio}>
+      <BioText content={info.bio} />
       <div className={styles.badgeShelf}>
-        <GenderBadge gender={props.gender} />
-        <ZodiacBadge anniversary={props.anniversary} />
+        <GenderBadge gender={info.gender} />
+        <ZodiacBadge anniversary={info.anniversary} />
       </div>
     </div>
   );

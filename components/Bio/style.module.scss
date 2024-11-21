@@ -8,23 +8,21 @@
   align-items: center;
   overflow: hidden;
   gap: 7.5px;
+}
 
-  > span {
-    cursor: pointer;
-    max-width: 90%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+.bioText {
+  cursor: pointer;
+  max-width: 90%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .expanded {
-  > span {
-    word-break: break-word;
-    text-overflow: none;
-    white-space: normal;
-    overflow: visible;
-  }
+  word-break: break-word;
+  text-overflow: none;
+  white-space: normal;
+  overflow: visible;
 }
 
 .badgeShelf {
