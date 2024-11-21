@@ -25,3 +25,10 @@
     overflow: visible;
   }
 }
+
+.badgeShelf {
+  height: 40px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

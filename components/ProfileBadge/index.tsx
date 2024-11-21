@@ -27,7 +27,7 @@ export function ProfileBadge(props:ProfileBadgeProps) {
       </div>
       
       <Modal state={modalShown}>
-        <MenuModal title={props.title} close={() => modalShown[1](false)}>
+        <MenuModal title={props.title} alignTitle="center" close={() => modalShown[1](false)}>
           {props.description}
         </MenuModal>
       </Modal>

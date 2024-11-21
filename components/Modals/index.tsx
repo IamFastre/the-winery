@@ -30,7 +30,8 @@ export type Option = {
 export interface MenuModalProps {
   title?: string;
   children?: React.ReactNode;
-  close: MouseEventHandler<HTMLDivElement>; 
+  close: MouseEventHandler<HTMLDivElement>;
+  alignTitle?: 'left' | 'center' | 'right';
 }
 
 export interface OptionsModalProps extends Omit<MenuModalProps, 'children'> {
@@ -43,7 +44,7 @@ export interface OptionsModalProps extends Omit<MenuModalProps, 'children'> {
 export function MenuModal(props:MenuModalProps) {
   return (
     <Section className={styles.menu} containerClassName={styles.menuContainer}>
-      {props.title && <h3>{props.title}</h3>}
+      {props.title && <h2 style={{ textAlign: props.alignTitle }}>{props.title}</h2>}
       {props.children}
       <hr/>
       <Button
