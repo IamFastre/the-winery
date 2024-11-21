@@ -15,7 +15,7 @@ interface ZodiacProps extends React.SVGProps<SVGSVGElement> {
 export function Zodiac(props:ZodiacProps) {
   const Icon = getZodiac(props.date.d, props.date.m)!;
 
-  const size = props.size ?? 38;
+  const size = props.size ?? 25;
   const fill = props.fill ?? colors.tertiary;
   const stroke = props.stroke ?? colors.none;
   const strokeWidth = props.strokeWidth ?? 0;
