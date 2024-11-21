@@ -42,7 +42,7 @@ export function ProfileTextStuff({ profile }:{ profile:UserInfo }) {
         </span>
         {profile.mail_confirmed || <IoHelpCircle title="Email not confirmed." />}
       </div>
-      <Bio content={profile.bio} anniversary={profile.anniversary} />
+      <Bio content={profile.bio} anniversary={profile.anniversary} gender={profile.gender} />
     </div>
   );
 }

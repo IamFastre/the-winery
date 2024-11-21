@@ -7,6 +7,7 @@
   max-width: 600px;
   align-items: center;
   overflow: hidden;
+  gap: 7.5px;
 
   > span {
     cursor: pointer;
@@ -27,7 +28,8 @@
 }
 
 .badgeShelf {
-  height: 40px;
+  height: 30px;
+  gap: 5px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
