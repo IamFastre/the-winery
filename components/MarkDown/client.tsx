@@ -1,9 +1,12 @@
 "use client";
 import { HTMLAttributes, ReactElement, useEffect, useState } from "react";
-
-import { C, LoadingText } from "@/components";
+import Image from "next/image";
+import { IoExpand } from "react-icons/io5";
 import { useQuery } from "@tanstack/react-query";
+
+import { C, LoadingText, MarkDown, UsernameHandle } from "@/components";
 import { api } from "@/utils/client";
+import { UserInfo } from "@/utils/api/user/info";
 
 export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
   const [title, setTitle] = useState<string | number | null>(null);
@@ -13,8 +16,8 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
   const isTwelve = id === 12;
 
   const { data:response, isLoading } = useQuery({
-    queryFn: async () => isTwelve ? null : await api("/card/post", { id }),
-    queryKey: ["share-button", id]
+    queryFn: async () => await api("/card/post", { id }),
+    queryKey: ["card-tag", id]
   });
 
   useEffect(() => {
@@ -56,5 +59,70 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
       c:
       <a href={`/c/${id}`}>{text}</a>
     </span>
+  );
+}
+
+export function CardRepost(props:HTMLAttributes<HTMLSpanElement>) {
+  const id = parseInt(props.id ?? "0");
+  const [author, setAuthor] = useState<UserInfo | null>(null);
+
+  const { data:response, isLoading } = useQuery({
+    queryFn: async () => await api("/card/post", { id }),
+    queryKey: ["card-tag", id]
+  });
+
+  useEffect(() => {
+    const start = async () => {
+      if (response?.data?.author_uuid) {
+        const { data:user } = await api('/user/info', { id: response.data.author_uuid! });
+        setAuthor(user);
+      }
+    }
+
+    start();
+  }, [response?.data?.author_uuid])
+
+  if (response?.error)
+    return (
+      <div className="card-repost">
+        <C.SECONDARY>
+          {'> '} <C.RED>Card <C.SECONDARY>c:{id}</C.SECONDARY> not found ×</C.RED>
+        </C.SECONDARY>
+      </div>
+    );
+
+  if (isLoading || author === null)
+    return (
+      <div className="card-repost">
+        <span>
+          {'> '} <LoadingText text="Loading Repost" />
+        </span>
+      </div>
+    );
+
+  return (
+    <div className="card-repost">
+      {response?.data?.title && <h1>{response?.data?.title}</h1>}
+      <MarkDown>
+        {response?.data?.content}
+      </MarkDown>
+      <div>
+        <Image
+          src={author.avatar}
+          alt={`${author.username}'s profile picture`}
+          width={256}
+          height={256}
+        />
+        <div>
+          <span>
+            {author.display_name ?? author.username}
+          </span>
+          <UsernameHandle username={author.username} />
+        </div>
+        <a href={`/c/${id}`}>
+          <IoExpand />
+        </a>
+      </div>
+    </div>
   );
 }

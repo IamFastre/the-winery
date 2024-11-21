@@ -7,8 +7,9 @@ import superSub from "remark-supersub";
 
 import userTag from "@/libs/remarkUserTag";
 import cardTag from "@/libs/remarkCardTag";
+import cardRepost from "@/libs/remarkCardRepost";
 
-import { CardTag } from "./client";
+import { CardRepost, CardTag } from "./client";
 import styles from "./style.module.scss";
 
 const plugins:Options["remarkPlugins"] = [
@@ -17,11 +18,15 @@ const plugins:Options["remarkPlugins"] = [
   superSub,
   userTag,
   cardTag,
+  cardRepost,
 ];
 
 function HandleSpan(props:HTMLAttributes<HTMLSpanElement>) {
   if (props.className?.includes("card-mention"))
     return <CardTag {...props} />;
+
+  if (props.className?.includes("card-repost"))
+    return <CardRepost {...props} />;
 
   return <span {...props} />;
 }
