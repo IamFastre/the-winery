@@ -12,6 +12,7 @@ export * from "./LoadingText";
 export * from "./MarkDown";
 export * from "./Modals";
 export * from "./PostButtons";
+export * from "./ProfileBadge";
 export * from "./Section";
 export * from "./UsernameHandle";
 export * from "./Zodiac";

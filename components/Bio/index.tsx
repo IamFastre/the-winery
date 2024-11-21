@@ -5,8 +5,7 @@ import moment from "moment";
 import { getZodiacString, numberOrder, vowelStart } from "@/utils";
 import { focusable } from "@/utils/client";
 import { UserInfo } from "@/utils/api/user/info";
-import { C, RI, Zodiac } from "@/components";
-import { ProfileBadge } from "../ProfileBadge";
+import { C, RI, Zodiac, ProfileBadge } from "@/components";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";
