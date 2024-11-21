@@ -13,11 +13,11 @@ function makeCardRepost(card:number | string) {
 export default function cardRepost() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (tree:any) => {
-    visit(tree, ['text'], (node, i, parent) => {
-      if (!/re:[0-9]+/i.test(node.value))
+    visit(tree, ['paragraph'], (node, i, parent) => {
+      if (node.children.length !== 1 || !/^re:[0-9]+$/i.test(node.children[0].value))
         return;
 
-      const { value } = node;
+      const { value } = node.children[0];
       const values = value.split(" ") as string[];
 
       const children = values.map((str, i) => {
