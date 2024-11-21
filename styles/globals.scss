@@ -294,6 +294,73 @@ input, textarea {
 .user-mention { @include mention($quinary, $accent); }
 .card-mention { @include mention($quinary, $highlight, 0.2, 0.35); }
 
+.card-repost {
+  display: inline-flex;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 15px;
+  background-color: rgba($highlight, 0.15);
+  border: 1px solid $highlight;
+  gap: 20px;
+
+  > span {
+    font-weight: initial;
+  }
+
+  > h1 {
+    display: inline-flex;
+    position: relative;
+    align-self: center;
+    margin: 15px 0;
+
+    &::before { content: none; }
+    &::after {
+      content: '';
+      display: flex;
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: $highlight;
+      bottom: -5px;
+    }
+  }
+
+  > div:first-of-type { hr::after { content: none; } }
+
+  > div:last-of-type {
+    font-weight: initial;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+
+    > img {
+      width: 32px;
+      height: 32px;
+      border-radius: 10%;
+    }
+
+    > div:first-of-type {
+      flex: 1;
+
+      > span {
+        font-size: 18px;
+      }
+
+      > div > a {
+        font-size: 14px;
+      }
+    }
+
+    > a:last-of-type {
+      > svg {
+        stroke: $accent;
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 0px)
               and (max-width: 786px) {
   body { font-size: 14px; }
