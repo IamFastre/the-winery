@@ -211,6 +211,18 @@
     }
   }
 
+  .gender {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    gap: 2.5px;
+    padding: 5px;
+
+    .genderName {
+      flex: 1;
+    }
+  }
+
   .anniversary {
     flex-direction: row;
     align-items: center;

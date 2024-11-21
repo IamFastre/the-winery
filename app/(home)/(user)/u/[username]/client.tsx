@@ -3,7 +3,7 @@ import { ChangeEventHandler, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { GoPencil, GoTrash } from "react-icons/go";
-import { IoBookmarkOutline, IoBuildOutline, IoCloseOutline, IoEllipsisHorizontalOutline, IoFolderOutline, IoSaveOutline } from "react-icons/io5";
+import { IoArrowBack, IoArrowForward, IoBookmarkOutline, IoBuildOutline, IoCloseOutline, IoEllipsisHorizontalOutline, IoFolderOutline, IoSaveOutline } from "react-icons/io5";
 
 import { humanizeTime } from "@/utils";
 import { cropAvatar, focusable } from "@/utils/client";
@@ -18,6 +18,7 @@ import { ProfileTextStuff } from "./server";
 import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";
 
+const GENDERS = [null, 'male', 'female', 'toaster'] as UserInfo['gender'][];
 
 export function ProfileEditor({ profile }:{ profile:UserInfo }) {
   const router = useRouter();
@@ -27,12 +28,14 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
   const [avatarData, setAvatarData] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState<string>(profile.display_name ?? profile.username);
   const [bio, setBio] = useState<string>(profile.bio);
+  const [gender, setGender] = useState<number>(GENDERS.indexOf(profile.gender));
   const [d, setD] = useState<number | undefined>(profile.anniversary?.d);
   const [m, setM] = useState<number | undefined>(profile.anniversary?.m);
 
   const formChanged =
     (profile.display_name ?? "") !== displayName ||
     profile.bio !== bio ||
+    profile.gender !== GENDERS[gender] ||
     d !== profile.anniversary?.d ||
     m !== profile.anniversary?.m;
 
@@ -78,6 +81,7 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
         await editProfile({
           display_name: displayName,
           bio,
+          gender: GENDERS[gender],
           anniversary: isNaN(m??0) && isNaN(d??0)
                      ? null
                      : m && d
@@ -103,8 +107,7 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
           width={128}
           height={128}
         />
-        {
-          editing ?
+        {editing ? (
           <div className={styles.avatarEdit}>
             <div className={styles.avatarEditIcon}>
               <GoPencil />
@@ -116,47 +119,50 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
               {...focusable(styles.active)}
             />
           </div>
-          : null
-        }
-        {
-          editing && avatarData ?
-          <div className={styles.avatarRemoveIcon} {...focusable("", () => setAvatarData(null))}>
+        ) : null}
+        {editing && avatarData ? (
+          <div
+            className={styles.avatarRemoveIcon}
+            {...focusable("", () => setAvatarData(null))}
+          >
             <GoTrash />
           </div>
-          : null
-        }
+        ) : null}
       </div>
-      {
-        editing ?
+      {editing ? (
         <div className={styles.form}>
           <label>
-            <LabelTitle title="Display name"/>
+            <LabelTitle title="Display name" />
             <input
               value={displayName}
-              onChange={e => setDisplayName(e.target.value)}
-              onBlur={() => setDisplayName(d => d.trim())}
+              onChange={(e) => setDisplayName(e.target.value)}
+              onBlur={() => setDisplayName((d) => d.trim())}
               name="username"
               autoComplete="off"
               spellCheck={false}
               type="text"
-              placeholder={(profile.display_name ?? profile.username) + ` (max. 32)`}
+              placeholder={
+                (profile.display_name ?? profile.username) + ` (max. 32)`
+              }
               maxLength={32}
             />
             <div className={styles.maxLength}>
               <C.SECONDARY>
-                { displayName.length === 32 ?
-                  <C.RED>{displayName.length}</C.RED> :
-                  <C.ACCENT>{displayName.length}</C.ACCENT> }
+                {displayName.length === 32 ? (
+                  <C.RED>{displayName.length}</C.RED>
+                ) : (
+                  <C.ACCENT>{displayName.length}</C.ACCENT>
+                )}
                 /32
               </C.SECONDARY>
             </div>
           </label>
           <label>
-            <LabelTitle title="About me"/>
+            <LabelTitle title="About me" />
             <textarea
               value={bio}
-              onChange={e => setBio(e.target.value)}
-              onBlur={() => setBio(b => b.trim())}
+              onChange={(e) => setBio(e.target.value)}
+              onBlur={() => setBio((b) => b.trim())}
               name="description"
               autoComplete="off"
               placeholder={profile.bio + ` (max. 256)`}
@@ -164,21 +170,53 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
             />
             <div className={styles.maxLength}>
               <C.SECONDARY>
-                { bio.length === 256 ?
-                  <C.RED>{bio.length}</C.RED> :
-                  <C.ACCENT>{bio.length}</C.ACCENT> }
+                {bio.length === 256 ? (
+                  <C.RED>{bio.length}</C.RED>
+                ) : (
+                  <C.ACCENT>{bio.length}</C.ACCENT>
+                )}
                 /256
               </C.SECONDARY>
             </div>
           </label>
           <label>
-            <LabelTitle title="Anniversary"/>
+            <LabelTitle title="Gender" />
+            <div className={styles.gender}>
+              <Button
+                icon={{ element: IoArrowBack }}
+                onClick={() => setGender(g => (g - 1 + GENDERS.length) % GENDERS.length)}
+                noMinimum
+              />
+              <Button
+                title={GENDERS[gender] ?? 'none'}
+                className={styles.genderName}
+                color={
+                  GENDERS[gender] === "male"
+                  ? colors.cyan
+                  : GENDERS[gender] === "female"
+                  ? colors.magenta
+                  : GENDERS[gender] === "toaster"
+                  ? colors.yellow
+                  : colors.secondary
+                }
+              />
+              <Button
+                icon={{ element: IoArrowForward }}
+                onClick={() => setGender(g => (g + 1) % GENDERS.length)}
+                noMinimum
+              />
+            </div>
+          </label>
+          <label>
+            <LabelTitle title="Anniversary" />
             <div className={styles.anniversary}>
               <input
                 type="number"
                 value={d}
-                onChange={e => setD(e.target.valueAsNumber)}
-                placeholder={profile.anniversary ? `Day - ${profile.anniversary.d}` : 'Day'}
+                onChange={(e) => setD(e.target.valueAsNumber)}
+                placeholder={
+                  profile.anniversary ? `Day - ${profile.anniversary.d}` : "Day"
+                }
                 inputMode="numeric"
                 min={1}
                 max={31}
@@ -186,8 +224,12 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
               <input
                 type="number"
                 value={m}
-                onChange={e => setM(e.target.valueAsNumber)}
-                placeholder={profile.anniversary ? `Month - ${profile.anniversary.m}` : 'Month'}
+                onChange={(e) => setM(e.target.valueAsNumber)}
+                placeholder={
+                  profile.anniversary
+                    ? `Month - ${profile.anniversary.m}`
+                    : "Month"
+                }
                 inputMode="numeric"
                 min={1}
                 max={12}
@@ -195,9 +237,9 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
             </div>
           </label>
         </div>
-        :
+      ) : (
         <ProfileTextStuff profile={profile} />
-      }    
+      )}
       <div className={styles.buttonRack}>
         <Button
           title={editing ? "Save Changes" : "Edit Profile"}
@@ -209,7 +251,9 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
           noMinimum
         />
         <Button
-          icon={{ element: editing ? IoCloseOutline : IoEllipsisHorizontalOutline }}
+          icon={{
+            element: editing ? IoCloseOutline : IoEllipsisHorizontalOutline,
+          }}
           className={`${styles.button} ${styles.bigIcon}`}
           color={editing ? colors.red : colors.accent}
           onClick={editing ? cancel : openMenu}
@@ -222,8 +266,8 @@ export function ProfileEditor({ profile }:{ profile:UserInfo }) {
         <OptionsModal
           close={closeMenu}
           options={[
-            { title: "Saved", icon: IoBookmarkOutline, href: '/saved' },
-            { title: "Drafts", icon: IoFolderOutline, href: '/drafts' },
+            { title: "Saved", icon: IoBookmarkOutline, href: "/saved" },
+            { title: "Drafts", icon: IoFolderOutline, href: "/drafts" },
           ]}
         />
       </Modal>

@@ -9,7 +9,9 @@ import { AuthData, AuthError } from "./types";
 /*                                  Updating                                  */
 /* ========================================================================== */
 
-export async function editProfile(partialUser:{ display_name?:UserInfo['display_name']; bio?:UserInfo['bio']; anniversary?:UserInfo['anniversary'] }) {
+const GENDERS = [null, 'male', 'female', 'toaster'] as UserInfo['gender'][];
+
+export async function editProfile(partialUser:{ display_name?:UserInfo['display_name']; bio?:UserInfo['bio']; gender:UserInfo['gender']; anniversary?:UserInfo['anniversary'] }) {
   const supabase = createClient();
   const { data:{ user }, error } = await supabase.auth.getUser();
 
@@ -19,7 +21,8 @@ export async function editProfile(partialUser:{ display_name?:UserInfo['display_
   const trimmed = {
     display_name: partialUser.display_name?.trim() as string | null | undefined,
     bio: partialUser.bio?.trim(),
-    anniversary: partialUser.anniversary
+    gender: GENDERS.includes(partialUser.gender) ? partialUser.gender : null,
+    anniversary: partialUser.anniversary,
   };
 
   if (trimmed.display_name === "")
