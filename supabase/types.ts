@@ -117,6 +117,7 @@ export type Database = {
           bio: string
           created_at: string
           display_name: string | null
+          gender: Database["public"]["Enums"]["user_gender"] | null
           id: string
           username: string
         }
@@ -128,6 +129,7 @@ export type Database = {
           bio?: string
           created_at?: string
           display_name?: string | null
+          gender?: Database["public"]["Enums"]["user_gender"] | null
           id: string
           username: string
         }
@@ -139,6 +141,7 @@ export type Database = {
           bio?: string
           created_at?: string
           display_name?: string | null
+          gender?: Database["public"]["Enums"]["user_gender"] | null
           id?: string
           username?: string
         }
@@ -248,7 +251,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      user_gender: "male" | "female" | "toaster"
     }
     CompositeTypes: {
       birth_date: {
