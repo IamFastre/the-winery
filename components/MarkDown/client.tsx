@@ -1,12 +1,12 @@
 "use client";
 import { HTMLAttributes, ReactElement, useEffect, useState } from "react";
 import Image from "next/image";
-import { IoExpand } from "react-icons/io5";
 import { useQuery } from "@tanstack/react-query";
 
 import { C, LoadingText, MarkDown, UsernameHandle } from "@/components";
-import { api } from "@/utils/client";
+import { api, focusable } from "@/utils/client";
 import { UserInfo } from "@/utils/api/user/info";
+import { MdOpenInNew } from "react-icons/md";
 
 export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
   const [title, setTitle] = useState<string | number | null>(null);
@@ -119,8 +119,8 @@ export function CardRepost(props:HTMLAttributes<HTMLSpanElement>) {
           </span>
           <UsernameHandle username={author.username} />
         </div>
-        <a href={`/c/${id}`}>
-          <IoExpand />
+        <a href={`/c/${id}`} {...focusable('active')}>
+          <MdOpenInNew />
         </a>
       </div>
     </div>

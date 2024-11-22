@@ -1,3 +1,4 @@
+@import 'consts.module';
 @import 'colors.module';
 
 @font-face {
@@ -302,6 +303,19 @@ input, textarea {
   background-color: rgba($highlight, 0.15);
   border: 1px solid $highlight;
   gap: 20px;
+  overflow: hidden;
+
+  // It feels out of place, but gonna leave it here
+  // &::before {
+  //   content: 're:';
+  //   font-weight: 100;
+  //   position: absolute;
+  //   font-size: 69px;
+  //   opacity: 0.1;
+  //   top: -5px;
+  //   left: 10px;
+  //   filter: blur(3px);
+  // }
 
   > span {
     font-weight: initial;
@@ -343,20 +357,24 @@ input, textarea {
       flex: 1;
 
       > span {
-        font-size: 18px;
+        font-size: 16px;
       }
 
       > div > a {
-        font-size: 14px;
+        font-size: 12px;
       }
     }
 
     > a:last-of-type {
+      transition: all 500ms $ease-out-quartic;
       > svg {
         stroke: $accent;
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
       }
+
+      &:hover, &:focus-visible { transform: scale(1.2); }
+      &:active, &.active { transform: scale(0.8); }
     }
   }
 }
