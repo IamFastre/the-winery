@@ -52,8 +52,21 @@ function CheersDayBadge({ createdAt }:{ createdAt:UserInfo['created_at'] }) {
 }
 
 function GenderBadge({ gender }:{ gender:UserInfo['gender'] }) {
+  const nowDate = moment();
   const Icon = gender === 'male' ? IoMdMale : gender === 'female' ? IoMdFemale : GiToaster;
   const color = gender === 'male' ? colors.cyan : gender === 'female' ? colors.magenta : colors.yellow;
+
+  const fDay = nowDate.month() + 1 === 3 && nowDate.date() === 8;
+  const mDay = nowDate.month() + 1 === 11 && nowDate.date() === 19;
+  const tDay = nowDate.month() + 1 === 2 && nowDate.date() === nowDate.clone().month(1).endOf('month').day(4).date();
+
+  const effect = fDay && gender === 'female'
+               ? styles.fDay
+               : mDay && gender === 'male'
+               ? styles.mDay
+               : tDay && gender === 'toaster'
+               ? styles.tDay
+               : undefined;
 
   return (
     <ProfileBadge
@@ -61,14 +74,65 @@ function GenderBadge({ gender }:{ gender:UserInfo['gender'] }) {
       title="Gender"
       description={(
         <span>
-          This user is a <span style={{ color }}>{gender}</span> <Icon size={15} color={color} />
-          { gender === 'toaster' && <Note>We advise against taking a bath with them.</Note> }
+          This user is a
+          {' '}
+          <span className={effect} style={{ color }}>
+            {gender}
+            {' '}
+            <Icon size={15} color={color} />
+          </span>
+          {
+            gender === 'toaster' &&
+            <Note>
+              We advise against taking a bath with them.
+            </Note>
+          }
+          {
+            gender === 'female' && fDay &&
+            <Note>
+              Today is
+              {' '}
+              <a style={{ opacity: 0.75 }} href="https://en.wikipedia.org/wiki/International_Women%27s_Day" target="_blank">
+              International Women's Day
+              </a>
+              .
+              <br/>
+              Show her your appreciation.
+            </Note>
+          }
+          {
+            gender === 'male' && mDay &&
+            <Note>
+              Today is
+              {' '}
+              <a style={{ opacity: 0.75 }} href="https://en.wikipedia.org/wiki/International_Men%27s_Day" target="_blank">
+              International Men's Day
+              </a>
+              .
+              <br/>
+              Show him your appreciation.
+            </Note>
+          }
+          {
+            gender === 'toaster' && tDay &&
+            <Note>
+              Today is
+              {' '}
+              <a style={{ opacity: 0.75 }} href="https://www.nationaldaycalendar.com/national-day/national-toast-day-last-day-in-february" target="_blank">
+              National Toast Day
+              </a>
+              .
+              <br/>
+              Show them your appreciation.
+            </Note>
+          }
         </span>
       )}
     >
       <Icon
         size={30}
         color={color}
+        className={effect}
       />
     </ProfileBadge>
   );
