@@ -14,6 +14,17 @@ import { BioText } from "./client";
 import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";
 
+const Note = ({ children }:{ children:React.ReactNode }) => (
+  <>
+    <br/>
+    <C.SECONDARY style={{ display: 'inline-block', fontSize: 'smaller', marginTop: '7.5px' }}>
+      <RI>
+        {children}
+      </RI>
+    </C.SECONDARY>
+  </>
+);
+
 function CheersDayBadge({ createdAt }:{ createdAt:UserInfo['created_at'] }) {
   const nowDate = moment();
   const createdDate = moment(createdAt);
@@ -51,18 +62,7 @@ function GenderBadge({ gender }:{ gender:UserInfo['gender'] }) {
       description={(
         <span>
           This user is a <span style={{ color }}>{gender}</span> <Icon size={15} color={color} />
-          {
-            gender === 'toaster' && (
-              <>
-                <br/>
-                <C.SECONDARY style={{ fontSize: 'smaller' }}>
-                  <RI>
-                    We advise against taking a bath with them.
-                  </RI>
-                </C.SECONDARY>
-              </>
-            )
-          }
+          { gender === 'toaster' && <Note>We advise against taking a bath with them.</Note> }
         </span>
       )}
     >
@@ -101,17 +101,7 @@ function ZodiacBadge({ anniversary }:{ anniversary:UserInfo['anniversary'] }) {
           </span>
           <br/>
           Their anniversary is on <C.SECONDARY><RI>{date}</RI></C.SECONDARY>.
-          {
-            bdToday &&
-            <>
-              <br/>
-              <C.SECONDARY style={{ fontSize: 'smaller' }}>
-                <RI>
-                  And that happens to be today!! Wish them a happy birthday!
-                </RI>
-              </C.SECONDARY>
-            </>
-          }
+          { bdToday && <Note>And that happens to be today!! Wish them a happy birthday!</Note> }
         </span>
       )}
     >
