@@ -1,7 +1,9 @@
 import moment from "moment";
 import { IoMdFemale, IoMdMale } from "react-icons/io";
 import { GiToaster } from "react-icons/gi";
+import { PiWineDuotone } from "react-icons/pi";
 
+import consts from "@/utils/consts";
 import { getZodiacString, numberOrder, vowelStart } from "@/utils";
 import { UserInfo } from "@/utils/api/user/info";
 import { C, RI } from "@/components/C";
@@ -11,6 +13,32 @@ import { ProfileBadge } from "@/components/ProfileBadge";
 import { BioText } from "./client";
 import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";
+
+function CheersDayBadge({ createdAt }:{ createdAt:UserInfo['created_at'] }) {
+  const nowDate = moment();
+  const createdDate = moment(createdAt);
+  const age = Math.floor(nowDate.year() - createdDate.year());
+
+  return (
+    <ProfileBadge
+      condition={nowDate.month() === createdDate.month() && nowDate.daysInMonth() === createdDate.daysInMonth() && age > 0}
+      title="Cheers Day!"
+      description={(
+        <span>
+          Today is this user's <C.WINE>Cheers Day</C.WINE>!
+          <br/>
+          They joined <C.HIGHLIGHT>{consts.name}</C.HIGHLIGHT> {age} year{age > 1 ? 's' : ''} ago.
+        </span>
+      )}
+    >
+      <PiWineDuotone
+        size={30}
+        color={colors.wine}
+        className={styles.cheers}
+      />
+    </ProfileBadge>
+  );
+}
 
 function GenderBadge({ gender }:{ gender:UserInfo['gender'] }) {
   const Icon = gender === 'male' ? IoMdMale : gender === 'female' ? IoMdFemale : GiToaster;
@@ -75,6 +103,7 @@ export function Bio({ info }:{ info: UserInfo }) {
     <div className={styles.bio}>
       <BioText content={info.bio} />
       <div className={styles.badgeShelf}>
+        <CheersDayBadge createdAt={info.created_at} />
         <GenderBadge gender={info.gender} />
         <ZodiacBadge anniversary={info.anniversary} />
       </div>

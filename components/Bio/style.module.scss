@@ -32,3 +32,9 @@
   align-items: center;
   justify-content: center;
 }
+
+.cheers {
+  filter: brightness(1.33)
+          drop-shadow($wine 0 0 7.5px)
+          drop-shadow(rgba($wine, 1.0) 0 0 3px);
+}

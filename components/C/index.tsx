@@ -84,6 +84,16 @@ export const C = {
     <span {...props} style={{ color: colors.cold, ...props.style }} />
   ),
 
+  GOLD: (props: SpanProps) : React.JSX.Element => (
+    <span {...props} style={{ color: colors.gold, ...props.style }} />
+  ),
+  WINE: (props: SpanProps) : React.JSX.Element => (
+    <span {...props} style={{ color: colors.wine, ...props.style }} />
+  ),
+  ORANGE: (props: SpanProps) : React.JSX.Element => (
+    <span {...props} style={{ color: colors.orange, ...props.style }} />
+  ),
+
   RED: (props: SpanProps) : React.JSX.Element => (
     <span {...props} style={{ color: colors.red, ...props.style }} />
   ),
