@@ -75,8 +75,10 @@ function GenderBadge({ gender }:{ gender:UserInfo['gender'] }) {
 }
 
 function ZodiacBadge({ anniversary }:{ anniversary:UserInfo['anniversary'] }) {
+  const nowDate = moment();
   const sign = anniversary ? getZodiacString(anniversary.d, anniversary.m) : null;
   const date = anniversary ? `${moment.months(anniversary.m - 1)} ${numberOrder(anniversary.d)}` : null;
+  const bdToday = nowDate.month() + 1 === anniversary?.m && nowDate.date() === anniversary.d;
 
   return (
     <ProfileBadge
@@ -84,15 +86,39 @@ function ZodiacBadge({ anniversary }:{ anniversary:UserInfo['anniversary'] }) {
       title="Anniversary"
       description={(
         <span>
-          This user is {sign && vowelStart(sign) ? 'an' : 'a'} <C.COLD>{sign}</C.COLD> <Zodiac fill={colors.cold} date={anniversary!} size={13} />
+          This user is {sign && vowelStart(sign) ? 'an' : 'a'}
+          {' '}
+          <span className={bdToday ? styles.bdToday : undefined}>
+            <C.COLD>
+              {sign}
+            </C.COLD>
+            {' '}
+            <Zodiac
+              fill={colors.cold}
+              date={anniversary!}
+              size={13}
+            />
+          </span>
           <br/>
           Their anniversary is on <C.SECONDARY><RI>{date}</RI></C.SECONDARY>.
+          {
+            bdToday &&
+            <>
+              <br/>
+              <C.SECONDARY style={{ fontSize: 'smaller' }}>
+                <RI>
+                  And that happens to be today!! Wish them a happy birthday!
+                </RI>
+              </C.SECONDARY>
+            </>
+          }
         </span>
       )}
     >
       <Zodiac
         fill={colors.cold}
         date={anniversary!}
+        className={bdToday ? styles.bdToday : undefined}
       />
     </ProfileBadge>
   );

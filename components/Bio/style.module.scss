@@ -1,4 +1,5 @@
 @import '@/styles/colors.module.scss';
+@import '@/styles/consts.module.scss';
 
 .bio {
   color: $secondary;
@@ -6,7 +7,6 @@
   width: 90%;
   max-width: 600px;
   align-items: center;
-  overflow: hidden;
   gap: 7.5px;
 }
 
@@ -37,4 +37,20 @@
   filter: brightness(1.33)
           drop-shadow($wine 0 0 7.5px)
           drop-shadow(rgba($wine, 1.0) 0 0 3px);
+}
+
+.bdToday {
+  animation: glow 1s $ease-out-quartic infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    filter: brightness(1.33)
+            drop-shadow($cold 0 0 7.5px)
+            drop-shadow(rgba($cold, 1.0) 0 0 3px);
+  }
+
+  50% {
+    filter: brightness(0.66);
+  }
 }
