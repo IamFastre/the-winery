@@ -21,7 +21,7 @@ function CheersDayBadge({ createdAt }:{ createdAt:UserInfo['created_at'] }) {
 
   return (
     <ProfileBadge
-      condition={nowDate.month() === createdDate.month() && nowDate.daysInMonth() === createdDate.daysInMonth() && age > 0}
+      condition={nowDate.month() === createdDate.month() && nowDate.date() === createdDate.date() && age > 0}
       title="Cheers Day!"
       description={(
         <span>
@@ -98,7 +98,7 @@ function ZodiacBadge({ anniversary }:{ anniversary:UserInfo['anniversary'] }) {
   );
 }
 
-export function Bio({ info }:{ info: UserInfo }) {
+export function Bio({ info }:{ info:UserInfo }) {
   return (
     <div className={styles.bio}>
       <BioText content={info.bio} />

@@ -50,7 +50,7 @@ export function ErrorPage(props:ErrorPageProps) {
         </p>
         <div>
           <Link
-            href={`https://github.com/IamFastre/The-Winery/issues`}
+            href={`https://github.com/IamFastre/the-winery/issues`}
             target="_blank"
             title="Report Error"
             type="wrapper"
