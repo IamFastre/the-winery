@@ -33,6 +33,28 @@
   justify-content: center;
 }
 
+.special {
+  align-items: center;
+
+  > svg {
+    path { stroke-width: 42px; }
+
+    &:first-of-type {
+      font-size: 18px;
+      position: absolute;
+      top: 2px;
+      fill: $gold;
+      stroke: $primary;
+    }
+    
+    &:last-of-type {
+      font-size: 30px;
+      fill: $highlight;
+      stroke: $none;
+    }
+  }
+}
+
 .cheers {
   filter: brightness(1.33)
           drop-shadow($wine 0 0 7.5px)

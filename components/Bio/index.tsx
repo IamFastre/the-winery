@@ -2,11 +2,12 @@ import moment from "moment";
 import { IoMdFemale, IoMdMale } from "react-icons/io";
 import { GiToaster } from "react-icons/gi";
 import { PiWineDuotone } from "react-icons/pi";
+import { IoHeart, IoMedical, IoWine } from "react-icons/io5";
 
 import consts from "@/utils/consts";
 import { getZodiacString, numberOrder, vowelStart } from "@/utils";
 import { UserInfo } from "@/utils/api/user/info";
-import { C, RI } from "@/components/C";
+import { BI, C, RI } from "@/components/C";
 import { Zodiac } from "@/components/Zodiac";
 import { ProfileBadge } from "@/components/ProfileBadge";
 
@@ -24,6 +25,27 @@ const Note = ({ children }:{ children:React.ReactNode }) => (
     </C.SECONDARY>
   </>
 );
+
+function SpecialBadge({ info }:{ info:UserInfo }) {
+  return (
+    <ProfileBadge
+      condition={info.meta.badges.includes('special')}
+      title={info.username}
+      description={(
+        <span>
+          This user is a <C.HIGHLIGHT><BI>Super {consts.userlabel} <IoWine color={colors.highlight} size={18} /></BI></C.HIGHLIGHT>!
+          <br/>
+          You gotta give them extra respect.
+        </span>
+      )}
+    >
+      <div className={styles.special}>
+        <IoMedical />
+        <IoHeart />
+      </div>
+    </ProfileBadge>
+  );
+}
 
 function CheersDayBadge({ createdAt }:{ createdAt:UserInfo['created_at'] }) {
   const nowDate = moment();
@@ -183,6 +205,7 @@ export function Bio({ info }:{ info:UserInfo }) {
     <div className={styles.bio}>
       <BioText content={info.bio} />
       <div className={styles.badgeShelf}>
+        <SpecialBadge info={info} />
         <CheersDayBadge createdAt={info.created_at} />
         <GenderBadge gender={info.gender} />
         <ZodiacBadge anniversary={info.anniversary} />
