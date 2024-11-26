@@ -2,7 +2,7 @@ import { result } from '@/utils/api';
 import { createClient } from '@/supabase/server';
 import { Tables } from '@/supabase/types';
 
-export type UserInfo = Tables<'profiles'> & { mail_confirmed: boolean };
+export type UserInfo = Tables<'profiles'> & { mail_confirmed: boolean; meta:Omit<Tables<'users_meta'>, 'id'> };
 export type UserInfoParams = { id:string } | { username:string };
 
 function cureValue(value:string) {
@@ -54,5 +54,22 @@ export async function getUserInfo(what:'id' | 'username' | 'self', value:string 
     user = res.data;
   }
 
-  return result<UserInfo>({ ...user!, mail_confirmed: await mailConfirmed(supabase, user!.id) }, null);
+  const metaRes = await supabase
+    .from('users_meta')
+    .select('*')
+    .eq('id', user?.id ?? '')
+    .single();
+
+  const meta = metaRes.data as Partial<typeof metaRes.data>
+  
+  if (metaRes.error)
+    return result<null>(null, metaRes.error);
+  else
+    delete meta?.id;
+
+  return result<UserInfo>({
+    ...user!,
+    mail_confirmed: await mailConfirmed(supabase, user!.id),
+    meta: meta as UserInfo['meta']
+  }, null);
 }

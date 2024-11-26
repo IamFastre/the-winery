@@ -222,6 +222,29 @@ export type Database = {
           },
         ]
       }
+      users_meta: {
+        Row: {
+          badges: Database["public"]["Enums"]["badge"][]
+          id: string
+        }
+        Insert: {
+          badges?: Database["public"]["Enums"]["badge"][]
+          id?: string
+        }
+        Update: {
+          badges?: Database["public"]["Enums"]["badge"][]
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "users_meta_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -251,12 +274,13 @@ export type Database = {
       }
     }
     Enums: {
+      badge: "special"
       user_gender: "male" | "female" | "toaster"
     }
     CompositeTypes: {
       birth_date: {
-        m: number
         d: number
+        m: number
       }
     }
   }
