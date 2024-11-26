@@ -1,9 +1,10 @@
 @import '@/styles/colors.module.scss';
+@import '@/styles/consts.module.scss';
 
 .menu {
-  min-width: fit-content;
-  width: 200px;
-  max-width: 80%;
+  min-width: 200px;
+  width: fit-content;
+  max-width: 80dvw;
   min-height: fit-content;
   animation: birth 500ms ease-in-out;
 
@@ -20,8 +21,15 @@ div.menuContainer {
   padding: 15px;
   gap: 10px;
   align-items: stretch;
+}
 
-  > h2 {
+.header {
+  min-height: 24px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  > h4 {
     margin: 5px 0;
     word-break: keep-all;
     &::before { content: none; }
@@ -92,7 +100,34 @@ div.option, a.option {
   height: 12px;
 }
 
-.closeButton {
+.smallCloseButton {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+
+  > svg {
+    font-size: 24px;
+    transition: all 500ms $ease-out-quartic;
+    fill: $secondary;
+    stroke: $secondary;
+  }
+
+  &:hover, &:focus-visible {
+    > svg {
+      fill: $quinary;
+      stroke: $quinary;
+    }
+  }
+
+  &:active, &.active {
+    > svg {
+      fill: $tertiary;
+      stroke: $tertiary;
+    }
+  }
+}  
+
+.bigCloseButton {
   align-self: stretch;
   padding: 5px 0;
   font-size: smaller;

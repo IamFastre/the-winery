@@ -1,6 +1,7 @@
 "use client";
 import { Fragment, MouseEventHandler } from "react";
 import Link from "next/link";
+import { IoClose } from "react-icons/io5";
 import { IconType } from "react-icons";
 
 import { focusable } from "@/utils/client";
@@ -31,6 +32,7 @@ export interface MenuModalProps {
   title?: string;
   children?: React.ReactNode;
   close: MouseEventHandler<HTMLDivElement>;
+  closeButton?: 'top' | 'bottom';
   alignTitle?: 'left' | 'center' | 'right';
 }
 
@@ -40,19 +42,37 @@ export interface OptionsModalProps extends Omit<MenuModalProps, 'children'> {
   close: MouseEventHandler<HTMLDivElement>; 
 }
 
-
 export function MenuModal(props:MenuModalProps) {
   return (
     <Section className={styles.menu} containerClassName={styles.menuContainer}>
-      {props.title && <h2 style={{ textAlign: props.alignTitle }}>{props.title}</h2>}
+      {
+        (props.closeButton === 'top' || props.title) &&
+        <>
+          <div className={styles.header}>
+            {
+              props.closeButton === 'top' &&
+              <div className={styles.smallCloseButton} {...focusable(styles.active, props.close)}>
+                <IoClose />
+              </div>
+            }
+            {props.title && <h4 style={{ textAlign: props.alignTitle }}>{props.title}</h4>}
+          </div>
+          <hr/>
+        </>
+      }
       {props.children}
-      <hr/>
-      <Button
-        title="Close"
-        className={styles.closeButton}
-        onClick={props.close}
-        noBrackets
-      />
+      {
+        (props.closeButton === 'bottom' || props.closeButton === undefined) &&
+        <>
+          <hr/>
+          <Button
+            title="Close"
+            className={styles.bigCloseButton}
+            onClick={props.close}
+            noBrackets
+          />
+        </>
+      }
     </Section>
   );
 }
