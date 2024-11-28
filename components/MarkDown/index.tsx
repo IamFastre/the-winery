@@ -5,6 +5,7 @@ import gfm from "remark-gfm";
 import headingId from "remark-heading-id";
 import superSub from "remark-supersub";
 
+import emoticon from "@/libs/remarkEmoticon";
 import userTag from "@/libs/remarkUserTag";
 import cardTag from "@/libs/remarkCardTag";
 import cardRepost from "@/libs/remarkCardRepost";
@@ -16,6 +17,7 @@ const plugins:Options["remarkPlugins"] = [
   [headingId, { defaults: true }],
   [gfm, { singleTilde: false }],
   superSub,
+  emoticon,
   userTag,
   cardTag,
   cardRepost,
