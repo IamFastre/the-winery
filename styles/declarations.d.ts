@@ -16,6 +16,8 @@ declare module '@/styles/colors.module.scss' {
   const gold: string;
   const wine: string;
   const orange: string;
+  const pink: string;
+  const purple: string;
 
   const red: string;
   const green: string;
