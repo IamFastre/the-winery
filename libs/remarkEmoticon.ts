@@ -2,13 +2,16 @@ import { visit } from "unist-util-visit";
 import colors from "@/styles/colors.module.scss";
 import consts from "@/utils/consts";
 
+const rainbowStyle = "color: transparent; background: linear-gradient(to right, red, orange, yellow, green, blue, indigo); -webkit-background-clip: text; background-clip: text; animation: swipe 900ms linear infinite; background-size: 100%;";
+
 function makeEmoticon(value:string, color:string = colors.yellow, ligatures:boolean = true) {
+  const colorStyle = color === 'rainbow' ? rainbowStyle : `color: ${color};`;
   return {
     type: 'emoticon',
     data: {
       hName: 'span',
       hProperties: {
-        style: `color: ${color}; font-weight: bold;${ligatures ? '' : ' font-variant-ligatures: none;'}`
+        style: `${colorStyle} font-weight: bold;${ligatures ? '' : ' font-variant-ligatures: none;'}`
       }
     },
     children: [
@@ -18,12 +21,16 @@ function makeEmoticon(value:string, color:string = colors.yellow, ligatures:bool
 }
 
 interface Options {
+  pattern: boolean;
   ligatures: boolean;
+  caseInsensitive: boolean;
   borders: [boolean, boolean];
 }
 
 const defaultOptions:Options = {
+  pattern: false,
   ligatures: false,
+  caseInsensitive: false,
   borders: [false, false],
 }
 
@@ -33,23 +40,27 @@ const noBorders:Partial<Options> = { borders: [true, true] };
 function visitEmoticon(tree:any, emote:string, color:string = colors.yellow, options:Partial<Options> | null = null) {
   const o:Options = { ...defaultOptions, ...options };
 
-  const escaped = emote.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const escaped = o.pattern ? emote : emote.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const pattern = new RegExp(
-    `${o.borders[0] ? '' : '(?<=\\s|^)'}${escaped}${o.borders[1] ? '' : '(?=\\s|$)'}`
+    `${o.borders[0] ? '' : '(?<=\\s|^)'}${escaped}${o.borders[1] ? '' : '(?=\\s|$)'}`,
+    o.caseInsensitive ? 'ig' : 'g'
   );
 
   visit(tree, ['text'], (node, i, parent) => {
     const value = node.value as string;
     if (pattern.test(value) && parent.type !== 'emoticon') {
-      const splits = value.split(emote);
-      const newNode = makeEmoticon(emote, color, o.ligatures);
+      const splits = value.split(pattern);
+      const matches = [...value.match(pattern)!];
       const texts = splits.map(value => ({ value, type: 'text' }));
       const children = [];
 
       for (let i = 0; i < texts.length; i++) {
         children.push(texts[i]);
-        if (i !== texts.length - 1)
+
+        if (i !== texts.length - 1) {
+          const newNode = makeEmoticon(matches[i], color, o.ligatures);
           children.push(newNode);
+        }
       }
 
       parent.children.splice(i, 1, ...children);
@@ -70,8 +81,12 @@ export default function emoticon() {
     visitEmoticon(tree, 'Kuromi',    colors.purple, noBorders);
     visitEmoticon(tree, 'Shrek',     colors.green,  noBorders);
 
-    visitEmoticon(tree, 'XOXO', colors.red, noBorders);
-    visitEmoticon(tree, 'xoxo', colors.red, noBorders);
+    visitEmoticon(tree, 'xoxo', colors.red, { ...noBorders, caseInsensitive: true });
+
+    visitEmoticon(tree, 'kiss(?:ing)? the homies?(?: good ?night)?', 'rainbow', { ...noBorders, caseInsensitive: true, pattern: true });
+    visitEmoticon(tree, 'rainbow', 'rainbow', { ...noBorders, caseInsensitive: true });
+    visitEmoticon(tree, 'lesbian', 'rainbow', noBorders);
+    visitEmoticon(tree, 'gay', 'rainbow', noBorders);
 
     visitEmoticon(tree, 'OwO', colors.magenta, noBorders);
     visitEmoticon(tree, 'owo', colors.magenta);
@@ -104,16 +119,12 @@ export default function emoticon() {
     visitEmoticon(tree, ':-)', colors.yellow);
     visitEmoticon(tree, '(-:', colors.yellow);
 
-    visitEmoticon(tree, ':P', colors.yellow);
+    visitEmoticon(tree, ':p', colors.yellow, { caseInsensitive: true });
     visitEmoticon(tree, ':b', colors.yellow);
-    visitEmoticon(tree, ':p', colors.yellow);
     visitEmoticon(tree, 'q:', colors.yellow);
 
-    visitEmoticon(tree, ':o', colors.yellow);
-    visitEmoticon(tree, 'o:', colors.yellow);
-
-    visitEmoticon(tree, ':O', colors.yellow);
-    visitEmoticon(tree, 'O:', colors.yellow);
+    visitEmoticon(tree, ':o', colors.yellow, { caseInsensitive: true });
+    visitEmoticon(tree, 'o:', colors.yellow, { caseInsensitive: true });
 
     visitEmoticon(tree, 'xD', colors.yellow);
 
