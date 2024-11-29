@@ -1,4 +1,3 @@
-@use '@/styles/colors.module';
 @use '@/styles/consts.module';
 
 @mixin styling($cards-grid, $back-button-size) {
@@ -47,8 +46,8 @@
     > svg {
       font-size: $back-button-size;
       transition: all 500ms consts.$ease-out-quartic;
-      fill: colors.$red;
-      stroke: colors.$red;
+      fill: var(--red);
+      stroke: var(--red);
 
       &:hover, &:focus-visible {
         transform: scale(1.2);
@@ -66,8 +65,8 @@
     > svg {
       font-size: $back-button-size*3*0.25;
       transition: all 500ms consts.$ease-out-quartic;
-      fill: colors.$accent;
-      stroke: colors.$accent;
+      fill: var(--accent);
+      stroke: var(--accent);
       path { stroke-width: 40px; }
 
       &:hover, &:focus-visible {

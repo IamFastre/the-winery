@@ -1,5 +1,4 @@
 @use 'consts.module';
-@use 'colors.module';
 
 @font-face {
   font-family: Cascadia;
@@ -16,8 +15,8 @@
 }
 
 ::selection {
-  color: colors.$primary;
-  background-color: rgba(colors.$accent, 0.8);
+  color: var(--primary);
+  background-color: rgba(var(--accent), 0.8);
 }
 
 body {
@@ -34,10 +33,10 @@ body {
   left: 0;
 
   overflow: hidden;
-  background-color: colors.$primary;
+  background-color: var(--primary);
 
   font-family: 'Cascadia', 'Menlo', 'Courier Prime', 'Courier New', Courier, monospace;
-  color: colors.$tertiary;
+  color: var(--tertiary);
 }
 
 // BTW, can you tell I'm a React Native dev?
@@ -66,7 +65,7 @@ h1,h2,h3 {
 
   &::before {
     content: "# ";
-    color: colors.$accent;
+    color: var(--accent);
   }
 }
 
@@ -76,7 +75,7 @@ h4,h5,h6 {
 
   &::before {
     content: "§ ";
-    color: colors.$secondary;
+    color: var(--secondary);
   }
 }
 
@@ -86,7 +85,7 @@ p {
 }
 
 a {
-  color: colors.$accent;
+  color: var(--accent);
   font-style: italic;
   text-decoration-style: dotted;
 
@@ -136,13 +135,13 @@ blockquote {
   padding-inline-end: 10px;
   border-radius: 5px;
 
-  background-color: rgba(colors.$quaternary, 0.3);
+  background-color: rgba(var(--quaternary), 0.3);
 
   &::before {
     content: "";
     position: absolute;
     left: 0;
-    background-color: colors.$secondary;
+    background-color: var(--secondary);
     height: 100%;
     width: 5px;
     border-top-left-radius: 5px;
@@ -150,13 +149,13 @@ blockquote {
   }
 
   p {
-    color: colors.$quinary;
+    color: var(--quinary);
   }
 
   >:nth-child(1) {
     &::before {
       content: "“\00a0";
-      color: colors.$secondary;
+      color: var(--secondary);
       font-weight: bold;
     }
   }
@@ -164,14 +163,14 @@ blockquote {
   >:not(:nth-child(1)) {
     &::before {
       content: "\00a0\00a0";
-      color: colors.$secondary;
+      color: var(--secondary);
     }
   }
 
   >:nth-last-child(1) {
     &::after {
       content: "\00a0”";
-      color: colors.$secondary;
+      color: var(--secondary);
       font-weight: bold;
     }
   }
@@ -179,7 +178,7 @@ blockquote {
 
 code {
   display: inline-block;
-  background-color: colors.$quaternary;
+  background-color: var(--quaternary);
   padding: 3px;
   border-radius: 5px;
   font-family: monospace;
@@ -200,7 +199,7 @@ ul, ol {
 
 li {
   &::marker {
-    color: colors.$accent;
+    color: var(--accent);
   }
 }
 
@@ -213,7 +212,7 @@ hr {
   height: 0;
   border-width: 1px;
   border-style: solid;
-  border-color: colors.$secondary;
+  border-color: var(--secondary);
 }
 
 table {
@@ -225,14 +224,14 @@ table {
   width: max-content;
   max-width: 100%;
   overflow: auto;
-  border: 1px solid colors.$secondary;
+  border: 1px solid var(--secondary);
 }
 
 tr {
-  background-color: colors.$quaternary;
+  background-color: var(--quaternary);
 
   &:nth-child(2n) {
-    background-color: colors.$primary;
+    background-color: var(--primary);
   }
 }
 
@@ -241,26 +240,26 @@ th, td {
 }
 
 th {
-  background-color: colors.$primary;
+  background-color: var(--primary);
   font-weight: bold;
-  border-bottom: 1px solid colors.$secondary;
+  border-bottom: 1px solid var(--secondary);
 }
 
 td {
-  border: 1px dashed colors.$secondary;
+  border: 1px dashed var(--secondary);
 }
 
 input, textarea {
-  background-color: rgba(colors.$quaternary, 0.25);
+  background-color: rgba(var(--quaternary), 0.25);
   border: none;
   border-radius: 5px;
-  border-bottom: 2px colors.$accent solid;
+  border-bottom: 2px var(--accent) solid;
   min-height: 30px;
   padding: 0 10px;
 
   &:where(#span) {
     display: inline;
-    background-color: colors.$none;
+    background-color: var(--none);
     border: none;
     min-height: initial;
     font-size: inherit;
@@ -293,16 +292,16 @@ input, textarea {
   }
 }
 
-.user-mention { @include mention(colors.$quinary, colors.$accent); }
-.card-mention { @include mention(colors.$quinary, colors.$highlight, 0.2, 0.35); }
+.user-mention { @include mention(var(--quinary), var(--accent)); }
+.card-mention { @include mention(var(--quinary), var(--highlight), 0.2, 0.35); }
 
 .card-repost {
   display: inline-flex;
   box-sizing: border-box;
   width: 100%;
   padding: 15px;
-  background-color: rgba(colors.$highlight, 0.15);
-  border: 1px solid colors.$highlight;
+  background-color: rgba(var(--highlight), 0.15);
+  border: 1px solid var(--highlight);
   gap: 20px;
   overflow: hidden;
 
@@ -335,7 +334,7 @@ input, textarea {
       position: absolute;
       width: 100%;
       height: 2px;
-      background-color: colors.$highlight;
+      background-color: var(--highlight);
       bottom: -5px;
     }
   }
@@ -369,7 +368,7 @@ input, textarea {
     > a:last-of-type {
       transition: all 500ms consts.$ease-out-quartic;
       > svg {
-        stroke: colors.$accent;
+        stroke: var(--accent);
         width: 25px;
         height: 25px;
       }
@@ -398,7 +397,7 @@ input, textarea {
 
     &:focus-visible:not(#NO-SELECT) {
       outline-width: 1px;
-      outline-color: colors.$accent;
+      outline-color: var(--accent);
       outline-style: dashed;
     }
   }

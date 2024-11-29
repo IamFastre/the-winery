@@ -1,8 +1,7 @@
-@use '@/styles/colors.module';
 @use '@/styles/consts.module';
 
 $all-transition: all 350ms ease-out;
-$placeholder: colors.$quinary;
+$placeholder: var(--quinary);
 
 .container {
   align-items: stretch;
@@ -33,17 +32,17 @@ $placeholder: colors.$quinary;
     filter: drop-shadow(0 0 10px rgba($placeholder, 0.5));
 
     span, .background svg {
-      color: colors.$primary;
-      fill: colors.$primary;
-      stroke: colors.$primary;
+      color: var(--primary);
+      fill: var(--primary);
+      stroke: var(--primary);
     }
   }
 }
 
 .disabled {
-  background-color: rgba(colors.$secondary, 0.1);
-  border-color: colors.$secondary;
-  color: colors.$quinary;
+  background-color: rgba(var(--secondary), 0.1);
+  border-color: var(--secondary);
+  color: var(--quinary);
   cursor: not-allowed;
 }
 
@@ -53,7 +52,7 @@ $placeholder: colors.$quinary;
   padding: 5px;
 
   &:not(.background) {
-    background-color: colors.$primary;
+    background-color: var(--primary);
   }
 
   svg {

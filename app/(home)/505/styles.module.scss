@@ -1,5 +1,4 @@
 @use '@/styles/consts.module';
-@use '@/styles/colors.module';
 
 @mixin styling($width) {
   .sectionContent {
@@ -10,7 +9,7 @@
   .box {
     padding: 15px;
     border-radius: 12px + 12px;
-    background-color: rgba(colors.$red, 0.2);
+    background-color: rgba(var(--red), 0.2);
     gap: 20px;
     width: $width;
   }
@@ -41,23 +40,23 @@
     top: -5px;
     right: -5px;
     transition: all 500ms consts.$ease-out-quartic;
-    outline: 7.5px solid colors.$none;
+    outline: 7.5px solid var(--none);
     padding: 2px;
 
     > svg {
       width: 24px;
       height: 24px;
-      fill: colors.$red;
-      stroke: colors.$red;
+      fill: var(--red);
+      stroke: var(--red);
       transition: all 500ms consts.$ease-out-quartic;
     }
 
     &:hover, &:focus-visible {
-      outline: 1px solid rgba(colors.$red, 0.25);
+      outline: 1px solid rgba(var(--red), 0.25);
 
       > svg {
-        fill: colors.$tertiary;
-        stroke: colors.$tertiary;
+        fill: var(--tertiary);
+        stroke: var(--tertiary);
       }
     }
   }

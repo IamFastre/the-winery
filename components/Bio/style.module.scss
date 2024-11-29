@@ -1,8 +1,7 @@
-@use '@/styles/colors.module';
 @use '@/styles/consts.module';
 
 .bio {
-  color: colors.$secondary;
+  color: var(--secondary);
   padding: 0 25px;
   width: 90%;
   max-width: 600px;
@@ -43,22 +42,22 @@
       font-size: 18px;
       position: absolute;
       top: 2px;
-      fill: colors.$gold;
-      stroke: colors.$primary;
+      fill: var(--gold);
+      stroke: var(--primary);
     }
     
     &:last-of-type {
       font-size: 30px;
-      fill: colors.$highlight;
-      stroke: colors.$none;
+      fill: var(--highlight);
+      stroke: var(--none);
     }
   }
 }
 
 .cheers {
   filter: brightness(1.33)
-          drop-shadow(colors.$wine 0 0 7.5px)
-          drop-shadow(rgba(colors.$wine, 1.0) 0 0 3px);
+          drop-shadow(var(--wine) 0 0 7.5px)
+          drop-shadow(rgba(var(--wine), 1.0) 0 0 3px);
 }
 
 @mixin blink-glow($name, $color) {
@@ -77,7 +76,7 @@
   }
 }
 
-.fDay { @include blink-glow("magenta", colors.$magenta); }
-.mDay { @include blink-glow("cyan", colors.$cyan); }
-.tDay { @include blink-glow("yellow", colors.$yellow); }
-.bdToday { @include blink-glow("cold", colors.$cold); }
+.fDay { @include blink-glow("magenta", var(--magenta)); }
+.mDay { @include blink-glow("cyan", var(--cyan)); }
+.tDay { @include blink-glow("yellow", var(--yellow)); }
+.bdToday { @include blink-glow("cold", var(--cold)); }

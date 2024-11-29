@@ -1,8 +1,7 @@
-@use '@/styles/colors.module';
 @use '@/styles/consts.module';
 
 @mixin styling($img-size) {
-  $shadow: drop-shadow(0 0 5em rgba(colors.$highlight, 0.75));
+  $shadow: drop-shadow(0 0 5em rgba(var(--highlight), 0.75));
 
   $shrink-filter: $shadow blur(3px);
   $shrink-transform: scale(0.8);
@@ -26,7 +25,7 @@
       height: 3px;
       border: none;
       border-radius: 3px;
-      background-color: colors.$quaternary;
+      background-color: var(--quaternary);
     }  
   }
 

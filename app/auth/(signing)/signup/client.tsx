@@ -20,7 +20,7 @@ import { LabelTitle } from "@/components/LabelTitle";
 import { LoadingText } from "@/components/LoadingText";
 import { Section } from "@/components/Section";
 
-import colors from "@/styles/colors.module.scss";
+import colors from "@/styles/colors.js";
 import styles from "../../styles.module.scss";
 
 

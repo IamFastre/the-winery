@@ -1,8 +1,7 @@
-@use '@/styles/colors.module';
 
 @mixin styling($border-width, $margin, $padding) {
   .background {
-    background-color: colors.$primary;
+    background-color: var(--primary);
     border-radius: 0;
   }
   
@@ -13,9 +12,9 @@
     margin: $margin;
     padding: $padding;
     overflow: hidden;
-    border: $border-width solid colors.$secondary;
+    border: $border-width solid var(--secondary);
     &:hover, &:focus-visible {
-      border-color: colors.$accent;
+      border-color: var(--accent);
     }
   }
   
@@ -41,7 +40,7 @@
   .titleBG {
     z-index: 1;
     position: absolute;
-    background-color: colors.$primary;
+    background-color: var(--primary);
     margin-top: calc($margin / 2);
     left: -5px;
     height: calc($border-width * 2);

@@ -1,4 +1,3 @@
-@use '@/styles/colors.module';
 @use '@/styles/consts.module';
 
 .closeButton {
@@ -10,8 +9,8 @@
   > svg {
     font-size: 35px;
     transition: all 500ms consts.$ease-out-quartic;
-    fill: colors.$secondary;
-    stroke: colors.$secondary;
+    fill: var(--secondary);
+    stroke: var(--secondary);
   }
 
   &:hover, &:focus-visible {
@@ -22,8 +21,8 @@
 
   &:active, &.active {
     > svg {
-      fill: colors.$quinary;
-      stroke: colors.$quinary;
+      fill: var(--quinary);
+      stroke: var(--quinary);
     }
   }
 }

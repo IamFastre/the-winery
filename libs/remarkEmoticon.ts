@@ -1,5 +1,5 @@
 import { visit } from "unist-util-visit";
-import colors from "@/styles/colors.module.scss";
+import colors from "@/styles/colors.js";
 import consts from "@/utils/consts";
 
 const rainbowStyle = "color: transparent; background: linear-gradient(to right, red, orange, yellow, green, blue, indigo); -webkit-background-clip: text; background-clip: text; animation: swipe 900ms linear infinite; background-size: 100%;";
