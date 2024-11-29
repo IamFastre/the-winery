@@ -1,8 +1,8 @@
-@import '@/styles/colors.module.scss';
-@import '@/styles/consts.module.scss';
+@use '@/styles/colors.module';
+@use '@/styles/consts.module';
 
 @mixin styling($img-size) {
-  $shadow: drop-shadow(0 0 5em rgba($highlight, 0.75));
+  $shadow: drop-shadow(0 0 5em rgba(colors.$highlight, 0.75));
 
   $shrink-filter: $shadow blur(3px);
   $shrink-transform: scale(0.8);
@@ -26,7 +26,7 @@
       height: 3px;
       border: none;
       border-radius: 3px;
-      background-color: $quaternary;
+      background-color: colors.$quaternary;
     }  
   }
 
@@ -39,7 +39,7 @@
   .icon {
     user-select: none;
     cursor: pointer;
-    transition: all 500ms $ease-out-quartic;
+    transition: all 500ms consts.$ease-out-quartic;
 
     &:hover, &:focus-visible {
       filter: $shadow;

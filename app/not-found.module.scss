@@ -1,4 +1,4 @@
-@import '@/styles/colors.module.scss';
+@use '@/styles/colors.module';
 
 .container {
   flex: 1;
@@ -16,7 +16,7 @@
     gap: 20px;
 
     &:hover, &:focus-visible {
-      border-color: $hot;
+      border-color: colors.$hot;
     }
   }
 
@@ -27,12 +27,12 @@
   svg {
     display: flex;
     margin-bottom: -30px;
-    fill: $quinary;
-    stroke: $quinary;
+    fill: colors.$quinary;
+    stroke: colors.$quinary;
     font-size: 22px;
     &:hover, &:focus-visible {
-      fill: $accent;
-      stroke: $accent;
+      fill: colors.$accent;
+      stroke: colors.$accent;
     }
   }
 }

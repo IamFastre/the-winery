@@ -1,19 +1,19 @@
-@import '@/styles/colors.module.scss';
-@import '@/styles/consts.module.scss';
+@use '@/styles/colors.module';
+@use '@/styles/consts.module';
 
-@mixin isActive($color: $accent) {
+@mixin isActive($color: colors.$accent) {
   > svg {
     fill: $color;
     stroke: $color;
 
     &:hover, &:focus-visible {
-      fill: $none;
+      fill: colors.$none;
       stroke: $color;
     }
 
     &:active, &.active {
-      fill: $none;
-      stroke: $tertiary;
+      fill: colors.$none;
+      stroke: colors.$tertiary;
     }
   }
 }
@@ -32,29 +32,29 @@
 
   > div {
     cursor: pointer;
-    transition: all 500ms $ease-out-quartic;
+    transition: all 500ms consts.$ease-out-quartic;
     height: 24px;
 
     > svg {
       font-size: 24px;
       height: 24px;
-      transition: all 500ms $ease-out-quartic;
-      fill: $none;
-      stroke: $secondary;
+      transition: all 500ms consts.$ease-out-quartic;
+      fill: colors.$none;
+      stroke: colors.$secondary;
       path { stroke-width: 40px; }
     }
 
     &:hover, &:focus-visible {
       > svg {
-        fill: $secondary;
-        stroke: $secondary;  
+        fill: colors.$secondary;
+        stroke: colors.$secondary;  
       }
     }
   
     &:active, &.active {
       > svg {
-        fill: $tertiary;
-        stroke: $tertiary;  
+        fill: colors.$tertiary;
+        stroke: colors.$tertiary;  
       }
     }  
   }
@@ -64,8 +64,8 @@
     > div {
       cursor: not-allowed;
       > svg {
-        fill: $none;
-        stroke: $red;
+        fill: colors.$none;
+        stroke: colors.$red;
       }
     }
   }
@@ -79,24 +79,24 @@ div.superLike {
       font-size: 14px;
       position: absolute;
       top: -2px;
-      stroke: $gold;
+      stroke: colors.$gold;
     }
 
     &:last-of-type {
-      stroke: $highlight;
+      stroke: colors.$highlight;
     }
   }
 
   &:hover, &:focus-visible {
     > svg {
       &:first-of-type {
-        fill: $primary;
-        stroke: $gold;
+        fill: colors.$primary;
+        stroke: colors.$gold;
       }
   
       &:last-of-type {
-        fill: $highlight;
-        stroke: $highlight;
+        fill: colors.$highlight;
+        stroke: colors.$highlight;
       }
     }
   }
@@ -105,13 +105,13 @@ div.superLike {
     scale: 1.5;
     > svg {
       &:first-of-type {
-        fill: $gold;
-        stroke: $primary;
+        fill: colors.$gold;
+        stroke: colors.$primary;
       }
   
       &:last-of-type {
-        fill: $none;
-        stroke: $highlight;
+        fill: colors.$none;
+        stroke: colors.$highlight;
       }
     }
   }
@@ -124,13 +124,13 @@ div.cantSuperLike {
   &:hover, &:focus-visible {
     > svg {
       &:first-of-type {
-        fill: $primary;
-        stroke: $gold;
+        fill: colors.$primary;
+        stroke: colors.$gold;
       }
   
       &:last-of-type {
-        fill: $none;
-        stroke: $highlight;
+        fill: colors.$none;
+        stroke: colors.$highlight;
       }
     }
   }
@@ -141,13 +141,13 @@ div.cantSuperLike {
 
     > svg {
       &:first-of-type {
-        fill: $primary;
-        stroke: $gold;
+        fill: colors.$primary;
+        stroke: colors.$gold;
       }
   
       &:last-of-type {
-        fill: $none;
-        stroke: $highlight;
+        fill: colors.$none;
+        stroke: colors.$highlight;
       }
     }
   }
@@ -166,11 +166,11 @@ div.cantSuperLike {
   }
 
   > span {
-    color: $accent;
+    color: colors.$accent;
   }
 
   &:hover, &:focus-visible {
-    text-decoration-color: $accent;
+    text-decoration-color: colors.$accent;
     text-decoration-line: underline;
     text-decoration-style: dotted;
   }
@@ -180,33 +180,33 @@ div.cantSuperLike {
   }
 }
 
-div.isSaved { @include isActive($cold); }
-div.isLiked { @include isActive($hot); }
+div.isSaved { @include isActive(colors.$cold); }
+div.isLiked { @include isActive(colors.$hot); }
 div.isSuperLiked {
-  filter: drop-shadow(0 0 7.5px $highlight);
+  filter: drop-shadow(0 0 7.5px colors.$highlight);
 
   > svg {
     &:first-of-type {
-      fill: $gold;
-      stroke: $primary;
+      fill: colors.$gold;
+      stroke: colors.$primary;
     }
 
     &:last-of-type {
-      fill: $highlight;
-      stroke: $highlight;
+      fill: colors.$highlight;
+      stroke: colors.$highlight;
     }
   }
 
   &:hover, &:focus-visible {
     > svg {
       &:first-of-type {
-        fill: $primary;
-        stroke: $gold;
+        fill: colors.$primary;
+        stroke: colors.$gold;
       }
   
       &:last-of-type {
-        fill: $none;
-        stroke: $highlight;
+        fill: colors.$none;
+        stroke: colors.$highlight;
       }
     }
   }
@@ -217,13 +217,13 @@ div.isSuperLiked {
 
     > svg {
       &:first-of-type {
-        fill: $gold;
-        stroke: $primary;
+        fill: colors.$gold;
+        stroke: colors.$primary;
       }
   
       &:last-of-type {
-        fill: $none;
-        stroke: $highlight;
+        fill: colors.$none;
+        stroke: colors.$highlight;
       }
     }
   }
@@ -264,22 +264,22 @@ div.isSuperLiked {
 
   > svg {
     font-size: 24px;
-    transition: all 500ms $ease-out-quartic;
-    fill: $secondary;
-    stroke: $secondary;
+    transition: all 500ms consts.$ease-out-quartic;
+    fill: colors.$secondary;
+    stroke: colors.$secondary;
   }
 
   &:hover, &:focus-visible {
     > svg {
-      fill: $quinary;
-      stroke: $quinary;
+      fill: colors.$quinary;
+      stroke: colors.$quinary;
     }
   }
 
   &:active, &.active {
     > svg {
-      fill: $tertiary;
-      stroke: $tertiary;
+      fill: colors.$tertiary;
+      stroke: colors.$tertiary;
     }
   }
 }
@@ -293,7 +293,7 @@ div.isSuperLiked {
 
   > hr {
     margin: 0;
-    border-color: $quaternary;
+    border-color: colors.$quaternary;
     border-style: dashed;
   }
 }
@@ -307,20 +307,20 @@ div.isSuperLiked {
 
   &.super {
     > img {
-      outline: $gold dashed 2px;
+      outline: colors.$gold dashed 2px;
     }
 
     .hasDisplayName {
       > span {
-        color: $highlight;
-        filter: drop-shadow(0 0 7px $highlight)
-                drop-shadow(0 0 8px $highlight);
+        color: colors.$highlight;
+        filter: drop-shadow(0 0 7px colors.$highlight)
+                drop-shadow(0 0 8px colors.$highlight);
 
         &::before {
           display: inline-flex;
           content: "✱";
           margin-right: 2.5px;
-          color: $gold;
+          color: colors.$gold;
         }
       }
     }
@@ -348,13 +348,13 @@ div.isSuperLiked {
 
   > svg {
     font-size: 30px;
-    fill: $secondary;
-    stroke: $secondary;
+    fill: colors.$secondary;
+    stroke: colors.$secondary;
   }
 
   > span {
     font-size: 14px;
-    color: $secondary;
+    color: colors.$secondary;
     font-style: italic;
   }
 }

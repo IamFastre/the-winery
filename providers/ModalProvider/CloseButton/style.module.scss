@@ -1,5 +1,5 @@
-@import '@/styles/colors.module.scss';
-@import '@/styles/consts.module.scss';
+@use '@/styles/colors.module';
+@use '@/styles/consts.module';
 
 .closeButton {
   position: absolute;
@@ -9,9 +9,9 @@
 
   > svg {
     font-size: 35px;
-    transition: all 500ms $ease-out-quartic;
-    fill: $secondary;
-    stroke: $secondary;
+    transition: all 500ms consts.$ease-out-quartic;
+    fill: colors.$secondary;
+    stroke: colors.$secondary;
   }
 
   &:hover, &:focus-visible {
@@ -22,8 +22,8 @@
 
   &:active, &.active {
     > svg {
-      fill: $quinary;
-      stroke: $quinary;
+      fill: colors.$quinary;
+      stroke: colors.$quinary;
     }
   }
 }

@@ -1,5 +1,5 @@
-@import '@/styles/colors.module.scss';
-@import '@/styles/consts.module.scss';
+@use '@/styles/colors.module';
+@use '@/styles/consts.module';
 
 @mixin styling($direction, $icon-size) {
   $size: 0px;
@@ -52,7 +52,7 @@
   }
 
   .sep {
-    background-color: $accent;
+    background-color: colors.$accent;
 
     @if $direction == row {
       width: 90%;
@@ -82,24 +82,24 @@
 
   .icon {
     > svg { 
-      fill: $quinary;
-      stroke: $quinary;
+      fill: colors.$quinary;
+      stroke: colors.$quinary;
       font-size: $icon-size;
-      transition: all 500ms $ease-out-quartic;
+      transition: all 500ms consts.$ease-out-quartic;
     }
 
     &:hover, &:focus-visible {
       > svg {
-        fill: $tertiary;
-        stroke: $tertiary;
+        fill: colors.$tertiary;
+        stroke: colors.$tertiary;
         transform: scale(1.1);
-        filter: drop-shadow(0 0 5px $tertiary);
+        filter: drop-shadow(0 0 5px colors.$tertiary);
       }
     }
 
     &:active, &.active {
       > svg {
-        transition: transform 100ms $ease-out-quartic;
+        transition: transform 100ms consts.$ease-out-quartic;
         transform: scale(0.8);
       }
     }
@@ -107,13 +107,13 @@
     &.current {
       > svg {
         transform: scale(1.1);
-        fill: $accent;
-        stroke: $accent;
+        fill: colors.$accent;
+        stroke: colors.$accent;
       }
 
       &:hover, &:focus-visible {
         > svg {
-          filter: drop-shadow(0 0 5px $accent);
+          filter: drop-shadow(0 0 5px colors.$accent);
         }
       }
     }

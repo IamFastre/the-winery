@@ -1,4 +1,4 @@
-@import '@/styles/colors.module.scss';
+@use '@/styles/colors.module';
 
 .self {
   >:first-child {
@@ -32,7 +32,7 @@
   }
 
   hr {
-    border-color: $accent;
+    border-color: colors.$accent;
     overflow: visible;
     display: flex;
     align-items: center;
@@ -41,9 +41,9 @@
     &::after {
       content: "<#>";
       display: block;
-      color: $secondary;
+      color: colors.$secondary;
       font-size: 16px;
-      background-color: $primary;
+      background-color: colors.$primary;
       padding-left: 2.5px;
       padding-right: 2.5px;
     }
@@ -59,12 +59,12 @@
       position: absolute;
       width: calc(100% - 4px);
       height: calc(100% - 4px);
-      background-color: $primary;
-      border: 2px solid $secondary;
+      background-color: colors.$primary;
+      border: 2px solid colors.$secondary;
       transform: scale(10);
     }
     &:checked::before {
-      background-color: $accent;
+      background-color: colors.$accent;
     }
 
     transform: scale(0.1);

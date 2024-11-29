@@ -1,9 +1,9 @@
-@import '@/styles/colors.module.scss';
-@import '@/styles/consts.module.scss';
+@use '@/styles/colors.module';
+@use '@/styles/consts.module';
 
 $shrink-transform: scale(0.8);
-$shadow: drop-shadow(-5px -5px 10px $highlight)
-         drop-shadow(5px 5px 10px $accent);
+$shadow: drop-shadow(-5px -5px 10px colors.$highlight)
+         drop-shadow(5px 5px 10px colors.$accent);
 $shrink-filter: $shadow blur(3px);
 
 .image {
@@ -13,7 +13,7 @@ $shrink-filter: $shadow blur(3px);
 
   img {
     cursor: pointer;
-    transition: all 500ms $ease-out-quartic;
+    transition: all 500ms consts.$ease-out-quartic;
     
     &:hover, &:focus-visible {
       transform: scale(0.85);

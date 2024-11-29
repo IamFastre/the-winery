@@ -1,4 +1,4 @@
-@import '@/styles/colors.module.scss';
+@use '@/styles/colors.module';
 
 .main {
   a {
@@ -8,7 +8,7 @@
     line-height: 18px;
     
     &:hover, &:focus-visible {
-      text-decoration: $quinary underline dotted;
+      text-decoration: colors.$quinary underline dotted;
     }  
   }
 }

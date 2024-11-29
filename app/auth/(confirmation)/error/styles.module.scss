@@ -1,4 +1,4 @@
-@import '@/styles/colors.module.scss';
+@use '@/styles/colors.module';
 
 .container {
   flex: 1;
@@ -30,12 +30,12 @@
   align-self: center;
   font-size: 12px;
   margin-top: 5px;
-  color: $secondary;
+  color: colors.$secondary;
   font-style: italic;
 
   &::before {
     content: "* ";
     font-style: normal;
-    color: $cold;
+    color: colors.$cold;
   }
 }

@@ -1,5 +1,5 @@
-@import '@/styles/colors.module.scss';
-@import '@/styles/consts.module.scss';
+@use '@/styles/colors.module';
+@use '@/styles/consts.module';
 
 $corner-icon-size: 25px;
 
@@ -31,11 +31,11 @@ $corner-icon-size: 25px;
   top: calc(-1 * $corner-icon-size / 2);
   right: calc(-1 * $corner-icon-size / 2);
   gap: 5px;
-  background: radial-gradient(circle, $primary 50%, $none 85%);
+  background: radial-gradient(circle, colors.$primary 50%, colors.$none 85%);
   
   > a, div {
     cursor: pointer;
-    transition: all 500ms $ease-out-quartic;
+    transition: all 500ms consts.$ease-out-quartic;
 
     > svg { font-size: $corner-icon-size; }
     
@@ -70,7 +70,7 @@ $corner-icon-size: 25px;
     font-size: 12px;
     line-height: 12px;
     font-style: italic;
-    color: $secondary;
+    color: colors.$secondary;
   }
 }
 

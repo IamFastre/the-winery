@@ -1,5 +1,5 @@
-@import '@/styles/colors.module.scss';
-@import '@/styles/consts.module.scss';
+@use '@/styles/colors.module';
+@use '@/styles/consts.module';
 
 .menu {
   min-width: 200px;
@@ -47,15 +47,15 @@ div.option, a.option {
     user-select: none;
     cursor: pointer;
     border-radius: 5px;
-    background-color: rgba($secondary, 0.1);
+    background-color: rgba(colors.$secondary, 0.1);
   }
 
   > svg {
     position: relative;
     font-size: 20px;
-    fill: $primary;
-    stroke: $primary;
-    background-color: $accent;
+    fill: colors.$primary;
+    stroke: colors.$primary;
+    background-color: colors.$accent;
     padding: 5px;
     border-radius: 5px;
 
@@ -78,14 +78,14 @@ div.option, a.option {
   }
 
   &:hover:not(.field), &:focus-visible:not(.field) {
-    background-color: rgba($secondary, 0.15);
+    background-color: rgba(colors.$secondary, 0.15);
     span {
       font-weight: bold;
     }
   }
 
   &:active:not(.field), .active:not(.field) {
-    background-color: rgba($secondary, 0.3);
+    background-color: rgba(colors.$secondary, 0.3);
   }
 }
 
@@ -95,7 +95,7 @@ div.option, a.option {
 }
 
 .optionSubtitle {
-  color: $secondary;
+  color: colors.$secondary;
   font-size: 12px;
   height: 12px;
 }
@@ -107,22 +107,22 @@ div.option, a.option {
 
   > svg {
     font-size: 24px;
-    transition: all 500ms $ease-out-quartic;
-    fill: $secondary;
-    stroke: $secondary;
+    transition: all 500ms consts.$ease-out-quartic;
+    fill: colors.$secondary;
+    stroke: colors.$secondary;
   }
 
   &:hover, &:focus-visible {
     > svg {
-      fill: $quinary;
-      stroke: $quinary;
+      fill: colors.$quinary;
+      stroke: colors.$quinary;
     }
   }
 
   &:active, &.active {
     > svg {
-      fill: $tertiary;
-      stroke: $tertiary;
+      fill: colors.$tertiary;
+      stroke: colors.$tertiary;
     }
   }
 }  

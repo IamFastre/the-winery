@@ -1,5 +1,5 @@
-@import '@/styles/colors.module.scss';
-@import '@/styles/consts.module.scss';
+@use '@/styles/colors.module';
+@use '@/styles/consts.module';
 
 $arrow-size: 28px;
 
@@ -48,12 +48,12 @@ $arrow-size: 28px;
 
   svg {
     font-size: $arrow-size;
-    transition: all 500ms $ease-out-quartic;
-    stroke: $quinary;
-    fill: $quinary;
+    transition: all 500ms consts.$ease-out-quartic;
+    stroke: colors.$quinary;
+    fill: colors.$quinary;
 
     path {
-      transition: all 500ms $ease-out-quartic;
+      transition: all 500ms consts.$ease-out-quartic;
     }
 
     &.disabled {
@@ -61,8 +61,8 @@ $arrow-size: 28px;
     }
 
     &:not(.disabled) {
-      stroke: $accent;
-      fill: $accent;
+      stroke: colors.$accent;
+      fill: colors.$accent;
 
       &:hover, &:focus-visible {
         transform: scale(1.2);
@@ -94,7 +94,7 @@ $arrow-size: 28px;
     margin-bottom: 10px;
 
     &::before {
-      color: $red;
+      color: colors.$red;
       content: "× ";
     }
   }

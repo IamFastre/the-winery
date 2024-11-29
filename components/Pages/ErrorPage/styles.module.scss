@@ -1,5 +1,5 @@
-@import '@/styles/consts.module.scss';
-@import '@/styles/colors.module.scss';
+@use '@/styles/consts.module';
+@use '@/styles/colors.module';
 
 @mixin color($color) {
   border: 2px dashed $color;
@@ -29,7 +29,7 @@
     > svg {
       height: 100px;
       width: 100px;
-      fill: $red;
+      fill: colors.$red;
     }
 
     h1 {
@@ -50,21 +50,21 @@
         align-items: center;
         justify-content: center;
         padding: 4px;
-        transition: all 500ms $ease-out-quartic;
+        transition: all 500ms consts.$ease-out-quartic;
 
         > svg {
           height: 100%;
           width: 100%;
         }
 
-        &:nth-of-type(1) { @include color($red); }
-        &:nth-of-type(2) { @include color($yellow); }
-        &:nth-of-type(3) { @include color($accent); }
+        &:nth-of-type(1) { @include color(colors.$red); }
+        &:nth-of-type(2) { @include color(colors.$yellow); }
+        &:nth-of-type(3) { @include color(colors.$accent); }
       }
     }
   }
 
   &:hover, &:focus-visible {
-    border-color: $red;
+    border-color: colors.$red;
   }
 }

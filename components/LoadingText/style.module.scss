@@ -1,14 +1,14 @@
-@import '@/styles/colors.module.scss';
+@use '@/styles/colors.module';
 
 .loading {
-  color: $secondary;
+  color: colors.$secondary;
   user-select: none;
   font-size: 1rem;
   font-variant-ligatures: none;
 
   > span:nth-child(1) {
     color: transparent;
-    background: linear-gradient(to right, $accent 70%, rgba($accent, 0.33), $accent);
+    background: linear-gradient(to right, colors.$accent 70%, rgba(colors.$accent, 0.33), colors.$accent);
     -webkit-background-clip: text;
     background-clip: text;
     animation: swipe 900ms linear infinite;
@@ -26,11 +26,11 @@
 }
 
 @keyframes blink {
-  0% { color: $secondary; }
-  20% { color: $tertiary; transform: scale(1.5); }
-  30% { color: $tertiary; transform: scale(1.5); }
-  31% { color: $secondary; }
-  100% { color: $secondary; }
+  0% { color: colors.$secondary; }
+  20% { color: colors.$tertiary; transform: scale(1.5); }
+  30% { color: colors.$tertiary; transform: scale(1.5); }
+  31% { color: colors.$secondary; }
+  100% { color: colors.$secondary; }
 }
 
 @keyframes swipe {

@@ -1,4 +1,4 @@
-@import '@/styles/colors.module.scss';
+@use '@/styles/colors.module';
 
 @mixin message($icon-color, $text-color, $icon-size: 50px) {
   flex: 1;
@@ -73,7 +73,7 @@
     gap: 10px;
 
     .sep {
-      background-color: $accent;
+      background-color: colors.$accent;
       width: $sep-width;
       height: 100%;
       margin: 0 10px;
@@ -100,9 +100,9 @@
   }
 
   .loading { flex: 1; align-items: center; justify-content: center; }
-  .hint { @include message($secondary, $secondary); }
-  .error { @include message($red, $secondary); }
-  .noResult { @include message($secondary, $accent, $icon-size: 40px); }
+  .hint { @include message(colors.$secondary, colors.$secondary); }
+  .error { @include message(colors.$red, colors.$secondary); }
+  .noResult { @include message(colors.$secondary, colors.$accent, $icon-size: 40px); }
 }
 
 @media screen and (min-width: 0px)

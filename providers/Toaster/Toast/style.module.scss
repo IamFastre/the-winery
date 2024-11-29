@@ -1,8 +1,8 @@
-@import '@/styles/colors.module.scss';
+@use '@/styles/colors.module';
 
 @mixin icon($color) {
   border-color: $color;
-  background-color: color-mix(in srgb, $primary 88%, $color);
+  background-color: color-mix(in srgb, colors.$primary 88%, $color);
 
   svg {
     fill: $color;
@@ -36,8 +36,8 @@
     $padding: 7.5px;
 
     border-style: solid;
-    border-color: $tertiary;
-    background-color: $quaternary;
+    border-color: colors.$tertiary;
+    background-color: colors.$quaternary;
     border-width: 0;
     border-radius: 5px;
     border-bottom-width: 2px;
@@ -51,7 +51,7 @@
     .body {
       flex: 1;
       flex-direction: row;
-      color: $quinary;
+      color: colors.$quinary;
       margin-left: $padding;
       gap: calc($padding / 2);
       align-items: baseline;
@@ -94,10 +94,10 @@
     }
   }
 
-  .info    { @include icon($highlight); }
-  .success { @include icon($accent); }
-  .warning { @include icon($yellow); }
-  .error   { @include icon($red); }
+  .info    { @include icon(colors.$highlight); }
+  .success { @include icon(colors.$accent); }
+  .warning { @include icon(colors.$yellow); }
+  .error   { @include icon(colors.$red); }
 }
 
 @media screen and (min-width: 0px)

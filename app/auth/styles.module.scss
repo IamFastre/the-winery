@@ -1,5 +1,5 @@
-@import '@/styles/colors.module.scss';
-@import '@/styles/consts.module.scss';
+@use '@/styles/colors.module';
+@use '@/styles/consts.module';
 
 $width: 365px;
 $max-width: 85%;
@@ -14,7 +14,7 @@ $max-width: 85%;
   gap: 10px;
   
   > h3 {
-    color: $tertiary;
+    color: colors.$tertiary;
     align-self: center;
     &::before {
       content: '';
@@ -45,16 +45,16 @@ $max-width: 85%;
 .section {
   min-height: 300px;
   max-height: 90%;
-  transition: all 500ms $ease-out-quartic;
+  transition: all 500ms consts.$ease-out-quartic;
 
   .paragraph {
     padding: 0 10px;
-    color: $secondary;
+    color: colors.$secondary;
     font-size: smaller;
   }
 
-  .success { @include result($accent); }
-  .failure { @include result($red); }
+  .success { @include result(colors.$accent); }
+  .failure { @include result(colors.$red); }
 
   form {
     display: flex;
@@ -78,7 +78,7 @@ $max-width: 85%;
 
         &::placeholder {
           font-style: italic;
-          color: $secondary;
+          color: colors.$secondary;
         }
       }
     }
@@ -113,7 +113,7 @@ $max-width: 85%;
   justify-content: center;
 
   div {
-    transition: all 500ms $ease-out-quartic;
+    transition: all 500ms consts.$ease-out-quartic;
     position: absolute;
     right: 10px;
     margin-bottom: 2px;
@@ -121,8 +121,8 @@ $max-width: 85%;
     svg {
       font-size: 22px;
 
-      &[id="open"] { fill: $accent; }
-      &[id="closed"] { fill: $secondary; }
+      &[id="open"] { fill: colors.$accent; }
+      &[id="closed"] { fill: colors.$secondary; }
     }
     &:hover { transform: scale(1.2); }
     &:active { transform: scale(0.8); }
@@ -134,20 +134,20 @@ $max-width: 85%;
   margin-top: 5px;
   font-size: 10px;
   transform-origin: top;
-  animation: load-animation 1s $ease-out-quartic;
+  animation: load-animation 1s consts.$ease-out-quartic;
 
   > span {
     &.bad{
       &::before {
           content: "× ";
-          color: $red;
+          color: colors.$red;
         }
     }
 
     &.good{
       &::before {
           content: "✓ ";
-          color: $green;
+          color: colors.$green;
         }
     }
 
@@ -156,16 +156,16 @@ $max-width: 85%;
       margin-top: 5px;
       height: 5px;
       width: 100%;
-      background-color: $quaternary;
+      background-color: colors.$quaternary;
       border-radius: 5px;
 
       > div {
-        transition: all 500ms $ease-out-quartic;
+        transition: all 500ms consts.$ease-out-quartic;
         transform-origin: left;
         height: 100%;
         width: 100%;
         flex: 1;
-        background-color: $accent;
+        background-color: colors.$accent;
       }
     }
   }
@@ -189,8 +189,8 @@ $max-width: 85%;
   margin-bottom: 10px;
 
   svg {
-    fill: $red;
-    stroke: $red;
+    fill: colors.$red;
+    stroke: colors.$red;
     margin-inline-end: 5px;
     margin-block-end: -3px;
   }

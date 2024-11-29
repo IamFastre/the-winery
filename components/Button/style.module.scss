@@ -1,8 +1,8 @@
-@import '@/styles/colors.module.scss';
-@import '@/styles/consts.module.scss';
+@use '@/styles/colors.module';
+@use '@/styles/consts.module';
 
 $all-transition: all 350ms ease-out;
-$placeholder: $quinary;
+$placeholder: colors.$quinary;
 
 .container {
   align-items: stretch;
@@ -21,7 +21,7 @@ $placeholder: $quinary;
   border-style: solid;
   cursor: pointer;
   transition: $all-transition,
-              filter 500ms $ease-out-quartic;
+              filter 500ms consts.$ease-out-quartic;
 
   &:hover:not(.disabled),
   &:focus-visible:not(.disabled) {
@@ -33,17 +33,17 @@ $placeholder: $quinary;
     filter: drop-shadow(0 0 10px rgba($placeholder, 0.5));
 
     span, .background svg {
-      color: $primary;
-      fill: $primary;
-      stroke: $primary;
+      color: colors.$primary;
+      fill: colors.$primary;
+      stroke: colors.$primary;
     }
   }
 }
 
 .disabled {
-  background-color: rgba($secondary, 0.1);
-  border-color: $secondary;
-  color: $quinary;
+  background-color: rgba(colors.$secondary, 0.1);
+  border-color: colors.$secondary;
+  color: colors.$quinary;
   cursor: not-allowed;
 }
 
@@ -53,7 +53,7 @@ $placeholder: $quinary;
   padding: 5px;
 
   &:not(.background) {
-    background-color: $primary;
+    background-color: colors.$primary;
   }
 
   svg {

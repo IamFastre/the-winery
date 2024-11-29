@@ -1,5 +1,5 @@
-@import '@/styles/colors.module.scss';
-@import '@/styles/consts.module.scss';
+@use '@/styles/colors.module';
+@use '@/styles/consts.module';
 
 @mixin styling($padding-top, $data-font-size, $cards-grid) {
   .section {
@@ -16,14 +16,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border-color: rgba($secondary, 0.5);
+      border-color: rgba(colors.$secondary, 0.5);
       border-radius: 2px;
 
       &::after {
         content: "<#>";
         display: block;
-        color: $accent;
-        background-color: $primary;
+        color: colors.$accent;
+        background-color: colors.$primary;
         padding-left: 2.5px;
         padding-right: 2.5px;
       }
@@ -91,7 +91,7 @@
     }
 
     &.editing {
-      outline: 2px $accent dashed;
+      outline: 2px colors.$accent dashed;
       cursor: pointer;
     }
 
@@ -99,7 +99,7 @@
       position: absolute;
       align-items: center;
       justify-content: center;  
-      background-color: rgba($tertiary, 0.25);
+      background-color: rgba(colors.$tertiary, 0.25);
       transition: all 250ms ease-in-out;
       animation: fadeIn 500ms ease-in-out;
       border-radius: 7.5%;
@@ -109,20 +109,20 @@
       right: 0;
 
       &:hover, &:focus-visible {
-        background-color: rgba($tertiary, 0.35);
+        background-color: rgba(colors.$tertiary, 0.35);
         .avatarEditIcon {
-          outline: 1px $primary dashed;
+          outline: 1px colors.$primary dashed;
         }
       }
 
       &:active, &.active {
-        background-color: rgba($tertiary, 0.5);
+        background-color: rgba(colors.$tertiary, 0.5);
         .avatarEditIcon {
-          background-color: $primary;
-          outline: 1px $accent dashed;
+          background-color: colors.$primary;
+          outline: 1px colors.$accent dashed;
           svg {
-            fill: $accent;
-            stroke: $accent;
+            fill: colors.$accent;
+            stroke: colors.$accent;
           }
         }
       }
@@ -136,7 +136,7 @@
     .avatarEditIcon {
       position: absolute;
       transition: all 400ms ease-in-out;
-      background-color: $accent;
+      background-color: colors.$accent;
       outline: 1px transparent dashed;
       padding: 7.5px;
       border-radius: 25px;
@@ -144,8 +144,8 @@
       svg {
         transition: all 400ms ease-in-out;
         font-size: 32px;
-        fill: $primary;
-        stroke: $primary;
+        fill: colors.$primary;
+        stroke: colors.$primary;
       }
     }
 
@@ -155,7 +155,7 @@
       right: -10px;
       animation: fadeIn 500ms ease-in-out;
       transition: all 400ms ease-in-out;
-      background-color: $red;
+      background-color: colors.$red;
       outline: 1px transparent dashed;
       padding: 5px;
       border-radius: 25px;
@@ -163,8 +163,8 @@
       svg {
         transition: all 400ms ease-in-out;
         font-size: 20px;
-        fill: $tertiary;
-        stroke: $tertiary;
+        fill: colors.$tertiary;
+        stroke: colors.$tertiary;
       }
     }
 
@@ -194,9 +194,9 @@
       position: absolute;
       left: 100%;
       font-size: 20px;
-      fill: $yellow;
-      stroke: $yellow;
-      filter: drop-shadow(0 0 7.5px $yellow);
+      fill: colors.$yellow;
+      stroke: colors.$yellow;
+      filter: drop-shadow(0 0 7.5px colors.$yellow);
     }
     
     > span:nth-of-type(1) {
@@ -271,14 +271,14 @@
 
     &::before {
       content: "{";
-      color: $accent;
+      color: colors.$accent;
       justify-self: end;
       font-size: 32px;
     }
 
     &::after {
       content: "}";
-      color: $accent;
+      color: colors.$accent;
       justify-self: start;
       font-size: 32px;
     }
@@ -296,7 +296,7 @@
 
     &::after {
       content: ", ";
-      color: $quinary;
+      color: colors.$quinary;
     }
 
     &:nth-last-of-type(1)::after {
@@ -339,12 +339,12 @@
 
     svg {
       font-size: 50px;
-      fill: $secondary;
-      stroke: $secondary;
+      fill: colors.$secondary;
+      stroke: colors.$secondary;
     }
 
     span {
-      color: $secondary;
+      color: colors.$secondary;
       font-style: italic;
     }
   }

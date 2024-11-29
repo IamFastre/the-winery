@@ -1,4 +1,4 @@
-@import '@/styles/colors.module.scss';
+@use '@/styles/colors.module';
 
 @mixin styling($font-size, $bracket-font-size) {
   .container {
@@ -22,14 +22,14 @@
 
     .text {
       font-size: $font-size;
-      color: $accent;
+      color: colors.$accent;
     }
   }
 
   .subtitle {
     .text {
       font-size: 12px;
-      color: $secondary;
+      color: colors.$secondary;
     }
   }
 
