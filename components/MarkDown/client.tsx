@@ -2,11 +2,11 @@
 import { HTMLAttributes, ReactElement, useEffect, useState } from "react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
+import { MdOpenInNew } from "@react-icons/all-files/md/MdOpenInNew";
 
 import { C, LoadingText, MarkDown, UsernameHandle } from "@/components";
 import { api, focusable } from "@/utils/client";
 import { UserInfo } from "@/utils/api/user/info";
-import { MdOpenInNew } from "react-icons/md";
 
 export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
   const [title, setTitle] = useState<string | number | null>(null);

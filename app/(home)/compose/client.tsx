@@ -1,9 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
-import { RiBallPenLine, RiDeleteBin6Line } from "react-icons/ri";
 import { useRouter } from "next/navigation";
-import { IoEyeOutline, IoEye, IoFolderOutline, IoAdd, IoWine, IoFolder } from "react-icons/io5";
 import XRegExp from "xregexp";
+
+import { RiBallPenLine } from "@react-icons/all-files/ri/RiBallPenLine";
+import { RiDeleteBin6Line } from "@react-icons/all-files/ri/RiDeleteBin6Line";
+import { IoEyeOutline } from "@react-icons/all-files/io5/IoEyeOutline";
+import { IoEye } from "@react-icons/all-files/io5/IoEye";
+import { IoFolderOutline } from "@react-icons/all-files/io5/IoFolderOutline";
+import { IoAdd } from "@react-icons/all-files/io5/IoAdd";
+import { IoWine } from "@react-icons/all-files/io5/IoWine";
+import { IoFolder } from "@react-icons/all-files/io5/IoFolder";
 
 import { ErrorAPI } from "@/utils";
 import { SetState } from "@/utils/client";

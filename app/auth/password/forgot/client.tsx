@@ -1,6 +1,8 @@
 "use client";
 import { useRef, useState } from "react";
 
+import { IoCheckmark } from "@react-icons/all-files/io5/IoCheckmark";
+
 import consts from "@/utils/consts";
 import { sendResetPassword } from "@/supabase/actions/user";
 import { AuthError } from "@/supabase/actions/types";
@@ -8,7 +10,6 @@ import { Button, C, GoHomeLogo, LabelTitle, Section } from "@/components";
 import { useGoTo } from "@/hooks";
 
 import styles from "../../styles.module.scss";
-import { IoCheckmark } from "react-icons/io5";
 
 
 const checkEmail = (str:string) : boolean => {

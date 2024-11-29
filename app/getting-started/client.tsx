@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { IoWine, IoWineOutline } from "react-icons/io5";
+import { IoWine } from "@react-icons/all-files/io5/IoWine";
+import { IoWineOutline } from "@react-icons/all-files/io5/IoWineOutline";
 
 import consts from "@/utils/consts";
 import { getLogo } from "@/utils";

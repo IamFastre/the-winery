@@ -1,8 +1,8 @@
 "use client";
 import { Fragment, MouseEventHandler } from "react";
 import Link from "next/link";
-import { IoClose } from "react-icons/io5";
-import { IconType } from "react-icons";
+import { IconType } from "@react-icons/all-files";
+import { IoClose } from "@react-icons/all-files/io5/IoClose";
 
 import { focusable } from "@/utils/client";
 import { Button, Section } from "@/components";

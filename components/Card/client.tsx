@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { IoScan } from "react-icons/io5";
+import { IoScan } from "@react-icons/all-files/io5/IoScan";
 
 import { focusable } from "@/utils/client";
 import { CopyLinkButton } from "@/components/CopyLinkButton";

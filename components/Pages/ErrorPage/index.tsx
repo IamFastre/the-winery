@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
 import Link from "next/link";
-import { GiBrokenBottle } from "react-icons/gi";
-import { IoHomeOutline, IoReloadOutline, IoWarningOutline } from "react-icons/io5";
+import { GiBrokenBottle } from "@react-icons/all-files/gi/GiBrokenBottle";
+import { IoHomeOutline } from "@react-icons/all-files/io5/IoHomeOutline";
+import { IoReloadOutline } from "@react-icons/all-files/io5/IoReloadOutline";
+import { IoWarningOutline } from "@react-icons/all-files/io5/IoWarningOutline";
 
 import { C, L, RI } from "@/components/C";
 import { Section } from "@/components/Section";

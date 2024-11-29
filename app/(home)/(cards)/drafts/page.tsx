@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { IoFolder } from "react-icons/io5";
+import { IoFolder } from "@react-icons/all-files/io5/IoFolder";
 import Link from "next/link";
 
 import consts from "@/utils/consts";

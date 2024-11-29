@@ -15,9 +15,7 @@ const withBundleAnalyzer = NextBundleAnalyzer({
 const nextConfig = {
   distDir: 'dist',
   images: { unoptimized: true },
-  sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
-  },
+  sassOptions: { includePaths: [path.join(__dirname, 'styles')] },
   webpack(config) {
     config.module.rules.push({ test: /\.svg$/, use: ['@svgr/webpack'] });
     return config;

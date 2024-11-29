@@ -1,8 +1,11 @@
 import moment from "moment";
-import { IoMdFemale, IoMdMale } from "react-icons/io";
-import { GiToaster } from "react-icons/gi";
-import { PiWineDuotone } from "react-icons/pi";
-import { IoHeart, IoMedical, IoWine } from "react-icons/io5";
+import { IoMdMale } from "@react-icons/all-files/io/IoMdMale";
+import { IoMdFemale } from "@react-icons/all-files/io/IoMdFemale";
+import { GiToaster } from "@react-icons/all-files/gi/GiToaster";
+import { PiWineDuotone } from "@react-icons/all-files/pi/PiWineDuotone";
+import { IoHeart } from "@react-icons/all-files/io5/IoHeart";
+import { IoMedical } from "@react-icons/all-files/io5/IoMedical";
+import { IoWine } from "@react-icons/all-files/io5/IoWine";
 
 import consts from "@/utils/consts";
 import { getZodiacString, numberOrder, vowelStart } from "@/utils";

@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
-import { IoEye, IoEyeOff } from "react-icons/io5";
+import { IoEye } from "@react-icons/all-files/io5/IoEye";
+import { IoEyeOff } from "@react-icons/all-files/io5/IoEyeOff";
 
 import consts from "@/utils/consts";
 import { multiplyString } from "@/utils";

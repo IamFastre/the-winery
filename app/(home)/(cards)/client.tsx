@@ -1,6 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { IoChevronBack, IoClose } from "react-icons/io5";
+
+import { IoChevronBack } from "@react-icons/all-files/io5/IoChevronBack";
+import { IoClose } from "@react-icons/all-files/io5/IoClose";
 
 import { focusable, routerCanGoBack } from "@/utils/client";
 

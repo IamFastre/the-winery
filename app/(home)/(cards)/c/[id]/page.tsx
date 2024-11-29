@@ -1,5 +1,6 @@
-import { IoCloseCircle } from "react-icons/io5";
 import Image from "next/image";
+
+import { IoCloseCircle } from "@react-icons/all-files/io5/IoCloseCircle";
 
 import { Section } from "@/components/Section";
 import { MarkDown } from "@/components/MarkDown";
@@ -10,9 +11,9 @@ import { Header } from "@/components/Header";
 import { getCardPost } from "@/utils/api/card/post";
 import { getUserInfo } from "@/utils/api/user/info";
 
+import { CardPageShortcuts } from "./shortcuts";
 import { BackButton } from "../../client";
 import styles from "./styles.module.scss";
-import { CardPageShortcuts } from "./shortcuts";
 
 interface CardPageProps {
   params: { id: string }

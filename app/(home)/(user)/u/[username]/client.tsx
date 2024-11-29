@@ -2,8 +2,17 @@
 import { ChangeEventHandler, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { GoPencil, GoTrash } from "react-icons/go";
-import { IoArrowBack, IoArrowForward, IoBookmarkOutline, IoBuildOutline, IoCloseOutline, IoEllipsisHorizontalOutline, IoFolderOutline, IoSaveOutline } from "react-icons/io5";
+
+import { GoPencil } from "@react-icons/all-files/go/GoPencil";
+import { GoTrash } from "@react-icons/all-files/go/GoTrash";
+import { IoArrowBack } from "@react-icons/all-files/io5/IoArrowBack";
+import { IoArrowForward } from "@react-icons/all-files/io5/IoArrowForward";
+import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
+import { IoBuildOutline } from "@react-icons/all-files/io5/IoBuildOutline";
+import { IoCloseOutline } from "@react-icons/all-files/io5/IoCloseOutline";
+import { IoEllipsisHorizontalOutline } from "@react-icons/all-files/io5/IoEllipsisHorizontalOutline";
+import { IoFolderOutline } from "@react-icons/all-files/io5/IoFolderOutline";
+import { IoSaveOutline } from "@react-icons/all-files/io5/IoSaveOutline";
 
 import { humanizeTime } from "@/utils";
 import { cropAvatar, focusable } from "@/utils/client";
