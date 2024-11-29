@@ -1,57 +1,27 @@
-$none: transparent;
+$none: var(--none);
 
-$primary: #0a0a0a;
-$secondary: #666666;
-$tertiary: #eeeeee;
-$quaternary: #1f1f1f;
-$quinary: #b0b0b0;
+$primary: var(--primary);
+$secondary: var(--secondary);
+$tertiary: var(--tertiary);
+$quaternary: var(--quaternary);
+$quinary: var(--quinary);
 
-$accent: #1ed760;
-$highlight: #8400ff;
+$accent: var(--accent);
+$highlight: var(--highlight);
 
-$hot: #d71e1e;
-$cold: #2054ff;
+$hot: var(--hot);
+$cold: var(--cold);
 
-$gold: #ea9a64;
-$wine: #690707;
-$orange: #ff7e0d;
-$pink: #eb4982;
-$purple: #663399;
+$gold: var(--gold);
+$wine: var(--wine);
+$orange: var(--orange);
+$pink: var(--pink);
+$purple: var(--purple);
 
-$red: #d71e1e;
-$green: #00c43b;
-$blue: #3a7aff;
+$red: var(--red);
+$green: var(--green);
+$blue: var(--blue);
 
-$cyan: #27d4ff;
-$yellow: #f8c41b;
-$magenta: #eb16c7;
-
-:export {
-  none: $none;
-
-  primary: $primary;
-  secondary: $secondary;
-  tertiary: $tertiary;
-  quaternary: $quaternary;
-  quinary: $quinary;
-
-  accent: $accent;
-  highlight: $highlight;
-
-  hot: $hot;
-  cold: $cold;
-
-  gold: $gold;
-  wine: $wine;
-  orange: $orange;
-  pink: $pink;
-  purple: $purple;
-
-  red: $red;
-  green: $green;
-  blue: $blue;
-
-  cyan: $cyan;
-  yellow: $yellow;
-  magenta: $magenta;
-}
+$cyan: var(--cyan);
+$yellow: var(--yellow);
+$magenta: var(--magenta);

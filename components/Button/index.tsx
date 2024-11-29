@@ -5,7 +5,7 @@ import CSS from "csstype";
 import { hexOpacity } from "@/utils/funcs";
 import { focusable } from "@/utils/client";
 
-import colors from '@/styles/colors.module.scss';
+import colors from "@/styles/colors.js";
 import styles from "./style.module.scss";
 
 

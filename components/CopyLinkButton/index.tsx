@@ -7,7 +7,7 @@ import { IoShareOutline } from "@icons/io5/IoShareOutline";
 import { focusable } from "@/utils/client";
 import { useToaster } from "@/providers/Toaster";
 
-import colors from '@/styles/colors.module.scss';
+import colors from "@/styles/colors.js";
 
 interface CopyLinkButtonProps {
   id: number;

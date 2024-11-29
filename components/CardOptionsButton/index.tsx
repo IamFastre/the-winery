@@ -12,7 +12,7 @@ import { Modal } from "@/providers/ModalProvider";
 import { useToaster } from "@/providers/Toaster";
 import { OptionsModal } from "@/components/Modals";
 
-import colors from '@/styles/colors.module.scss';
+import colors from "@/styles/colors.js";
 
 interface CardOptionsButtonProps {
   id: number;

@@ -8,7 +8,7 @@ import { IoWarningOutline } from "@icons/io5/IoWarningOutline";
 import { C, L, RI } from "@/components/C";
 import { Section } from "@/components/Section";
 
-import colors from '@/styles/colors.module.scss';
+import colors from "@/styles/colors.js";
 import styles from "./styles.module.scss";
 
 interface ErrorPageProps {

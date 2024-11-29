@@ -2,13 +2,14 @@
 import { HTMLAttributes, ReactElement, useEffect, useState } from "react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
+
 import { MdOpenInNew } from "@icons/md/MdOpenInNew";
 import { C } from "@/components/C";
 import { LoadingText } from "@/components/LoadingText";
 import { UsernameHandle } from "@/components/UsernameHandle";
-
 import { api, focusable } from "@/utils/client";
 import { UserInfo } from "@/utils/api/user/info";
+import { MarkDown } from ".";
 
 export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
   const [title, setTitle] = useState<string | number | null>(null);
@@ -105,9 +106,9 @@ export function CardRepost(props:HTMLAttributes<HTMLSpanElement>) {
   return (
     <div className="card-repost">
       {response?.data?.title && <h1>{response?.data?.title}</h1>}
-      <div>
+      <MarkDown>
         {response?.data?.content}
-      </div>
+      </MarkDown>
       <div>
         <Image
           src={author.avatar}
