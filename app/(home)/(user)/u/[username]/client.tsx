@@ -16,11 +16,14 @@ import { IoSaveOutline } from "@icons/io5/IoSaveOutline";
 
 import { humanizeTime } from "@/utils";
 import { cropAvatar, focusable } from "@/utils/client";
-import { B, Button, C, LabelTitle, OptionsModal } from "@/components";
 import { Modal } from "@/providers/ModalProvider";
 import { editAvatar, editProfile } from "@/supabase/actions/user";
 import { UserInfo } from "@/utils/api/user/info";
 import { useHydration } from "@/hooks";
+import { Button } from "@/components/Button";
+import { C, B } from "@/components/C";
+import { LabelTitle } from "@/components/LabelTitle";
+import { OptionsModal } from "@/components/Modals";
 
 import { ProfileTextStuff } from "./server";
 

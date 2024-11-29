@@ -10,7 +10,7 @@ import { IoCheckmarkCircle } from "@icons/io5/IoCheckmarkCircle";
 import { focusable } from "@/utils/client";
 import { Modal } from "@/providers/ModalProvider";
 import { useToaster } from "@/providers/Toaster";
-import { OptionsModal } from "@/components";
+import { OptionsModal } from "@/components/Modals";
 
 import colors from '@/styles/colors.module.scss';
 

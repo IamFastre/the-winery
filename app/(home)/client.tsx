@@ -12,11 +12,13 @@ import { IoArrowBack } from "@icons/io5/IoArrowBack";
 import { IoArrowForward } from "@icons/io5/IoArrowForward";
 
 import { focusable } from "@/utils/client";
-import { Card, GoHomeLogo, Section } from "@/components";
 import { Modal } from "@/providers/ModalProvider";
 import { useShortcuts } from "@/providers/Shortcuts";
 import { CardFeed } from "@/utils/api/card/feed";
 import { useGoTo } from "@/hooks";
+import { Card } from "@/components/Card";
+import { GoHomeLogo } from "@/components/GoHomeLogo";
+import { Section } from "@/components/Section";
 
 import layoutStyles from "./layout.module.scss";
 import pageStyles from "./page.module.scss";

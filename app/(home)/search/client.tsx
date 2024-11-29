@@ -12,9 +12,12 @@ import Image from "next/image";
 
 import { humanizeTime } from "@/utils";
 import { api } from "@/utils/client";
-import { Button, C, LoadingText, Section } from "@/components";
 import { Tables } from "@/supabase/types";
 import { useHydration } from "@/hooks";
+import { Button } from "@/components/Button";
+import { C } from "@/components/C";
+import { LoadingText } from "@/components/LoadingText";
+import { Section } from "@/components/Section";
 
 import styles from "./styles.module.scss";
 

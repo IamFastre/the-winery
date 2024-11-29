@@ -5,7 +5,8 @@ import { IconType } from "@react-icons/all-files";
 import { IoClose } from "@icons/io5/IoClose";
 
 import { focusable } from "@/utils/client";
-import { Button, Section } from "@/components";
+import { Button } from "@/components/Button";
+import { Section } from "@/components/Section";
 
 import styles from "./style.module.scss";
 

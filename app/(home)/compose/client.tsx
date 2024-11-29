@@ -14,10 +14,14 @@ import { IoFolder } from "@icons/io5/IoFolder";
 
 import { ErrorAPI } from "@/utils";
 import { SetState } from "@/utils/client";
-import { Section, MarkDown, Button, C, LoadingText } from "@/components";
 import { createPost, createDraft, editDraft, deleteDraft } from "@/supabase/actions/post";
 import { Tables } from "@/supabase/types";
 import { useToaster } from "@/providers/Toaster";
+import { Button } from "@/components/Button";
+import { C } from "@/components/C";
+import { LoadingText } from "@/components/LoadingText";
+import { MarkDown } from "@/components/MarkDown";
+import { Section } from "@/components/Section";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./styles.module.scss";

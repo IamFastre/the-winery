@@ -11,9 +11,14 @@ import { useQuery } from "@tanstack/react-query";
 import { humanizeLikes } from "@/utils";
 import { focusable } from "@/utils/client";
 import { api } from "@/utils/client";
-import { Section, LoadingText, UsernameHandle, CopyLinkButton, C, CardOptionsButton } from "@/components";
 import { likePost, savePost } from "@/supabase/actions/post";
 import { Modal } from "@/providers/ModalProvider";
+import { C } from "@/components/C";
+import { CardOptionsButton } from "@/components/CardOptionsButton";
+import { CopyLinkButton } from "@/components/CopyLinkButton";
+import { LoadingText } from "@/components/LoadingText";
+import { Section } from "@/components/Section";
+import { UsernameHandle } from "@/components/UsernameHandle";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "./style.module.scss";

@@ -7,9 +7,10 @@ import { IoWineOutline } from "@icons/io5/IoWineOutline";
 
 import consts from "@/utils/consts";
 import { getLogo } from "@/utils";
-import { B, Button, C, RI } from "@/components";
 import { Database } from "@/supabase/types";
 import { useToaster } from "@/providers/Toaster";
+import { Button } from "@/components/Button";
+import { B, C, RI } from "@/components/C";
 
 import styles from "./styles.module.scss";
 

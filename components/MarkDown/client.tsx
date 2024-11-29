@@ -3,8 +3,10 @@ import { HTMLAttributes, ReactElement, useEffect, useState } from "react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { MdOpenInNew } from "@icons/md/MdOpenInNew";
+import { C } from "@/components/C";
+import { LoadingText } from "@/components/LoadingText";
+import { UsernameHandle } from "@/components/UsernameHandle";
 
-import { C, LoadingText, MarkDown, UsernameHandle } from "@/components";
 import { api, focusable } from "@/utils/client";
 import { UserInfo } from "@/utils/api/user/info";
 
@@ -103,9 +105,9 @@ export function CardRepost(props:HTMLAttributes<HTMLSpanElement>) {
   return (
     <div className="card-repost">
       {response?.data?.title && <h1>{response?.data?.title}</h1>}
-      <MarkDown>
+      <div>
         {response?.data?.content}
-      </MarkDown>
+      </div>
       <div>
         <Image
           src={author.avatar}

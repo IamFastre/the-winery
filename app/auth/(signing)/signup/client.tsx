@@ -12,8 +12,13 @@ import { multiplyString } from "@/utils";
 import { useToaster } from "@/providers/Toaster";
 import { signUp } from "@/supabase/actions/user";
 import { AuthError } from "@/supabase/actions/types";
-import { Button, C, GoHomeLogo, LabelTitle, LoadingText, RI, Section } from "@/components";
 import { useGoTo } from "@/hooks";
+import { Button } from "@/components/Button";
+import { C, RI } from "@/components/C";
+import { GoHomeLogo } from "@/components/GoHomeLogo";
+import { LabelTitle } from "@/components/LabelTitle";
+import { LoadingText } from "@/components/LoadingText";
+import { Section } from "@/components/Section";
 
 import colors from "@/styles/colors.module.scss";
 import styles from "../../styles.module.scss";

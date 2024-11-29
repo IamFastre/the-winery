@@ -7,8 +7,12 @@ import consts from "@/utils/consts";
 import { multiplyString } from "@/utils";
 import { resetPassword } from "@/supabase/actions/user";
 import { AuthError } from "@/supabase/actions/types";
-import { Button, C, GoHomeLogo, LabelTitle, Section } from "@/components";
 import { useGoTo } from "@/hooks";
+import { Button } from "@/components/Button";
+import { C } from "@/components/C";
+import { GoHomeLogo } from "@/components/GoHomeLogo";
+import { LabelTitle } from "@/components/LabelTitle";
+import { Section } from "@/components/Section";
 
 import colors from '@/styles/colors.module.scss';
 import styles from "../../styles.module.scss";

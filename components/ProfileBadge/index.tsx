@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 import { focusable } from "@/utils/client";
-import { MenuModal } from "@/components";
+import { MenuModal } from "@/components/Modals";
 import { Modal } from "@/providers/ModalProvider";
 
 import styles from "./style.module.scss";
