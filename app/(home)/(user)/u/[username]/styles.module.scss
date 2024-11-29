@@ -1,3 +1,4 @@
+@use '@/styles/funcs.module';
 @use '@/styles/consts.module';
 
 @mixin styling($padding-top, $data-font-size, $cards-grid) {
@@ -15,7 +16,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border-color: rgba(var(--secondary), 0.5);
+      border-color: funcs.set-alpha(var(--secondary), 50%);
       border-radius: 2px;
 
       &::after {
@@ -98,7 +99,7 @@
       position: absolute;
       align-items: center;
       justify-content: center;  
-      background-color: rgba(var(--tertiary), 0.25);
+      background-color: funcs.set-alpha(var(--tertiary), 25%);
       transition: all 250ms ease-in-out;
       animation: fadeIn 500ms ease-in-out;
       border-radius: 7.5%;
@@ -108,14 +109,14 @@
       right: 0;
 
       &:hover, &:focus-visible {
-        background-color: rgba(var(--tertiary), 0.35);
+        background-color: funcs.set-alpha(var(--tertiary), 35%);
         .avatarEditIcon {
           outline: 1px var(--primary) dashed;
         }
       }
 
       &:active, &.active {
-        background-color: rgba(var(--tertiary), 0.5);
+        background-color: funcs.set-alpha(var(--tertiary), 50%);
         .avatarEditIcon {
           background-color: var(--primary);
           outline: 1px var(--accent) dashed;

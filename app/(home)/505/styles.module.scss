@@ -1,3 +1,4 @@
+@use '@/styles/funcs.module';
 @use '@/styles/consts.module';
 
 @mixin styling($width) {
@@ -9,7 +10,7 @@
   .box {
     padding: 15px;
     border-radius: 12px + 12px;
-    background-color: rgba(var(--red), 0.2);
+    background-color: funcs.set-alpha(var(--red), 20%);
     gap: 20px;
     width: $width;
   }
@@ -52,7 +53,7 @@
     }
 
     &:hover, &:focus-visible {
-      outline: 1px solid rgba(var(--red), 0.25);
+      outline: 1px solid funcs.set-alpha(var(--red), 25%);
 
       > svg {
         fill: var(--tertiary);

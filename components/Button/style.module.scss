@@ -1,3 +1,4 @@
+@use '@/styles/funcs.module';
 @use '@/styles/consts.module';
 
 $all-transition: all 350ms ease-out;
@@ -8,7 +9,7 @@ $placeholder: var(--quinary);
   justify-content: center;
   flex-direction: row;
   border-color: $placeholder;
-  background-color: rgba($placeholder, 0.1);
+  background-color: funcs.set-alpha($placeholder, 10%);
   overflow: hidden;
 
   &:not(.noMin) {
@@ -24,12 +25,12 @@ $placeholder: var(--quinary);
 
   &:hover:not(.disabled),
   &:focus-visible:not(.disabled) {
-    background-color: rgba($placeholder, 0.2);
+    background-color: funcs.set-alpha($placeholder, 20%);
   }
     
   &:active:not(.disabled), &.active:not(.disabled) {
     background-color: $placeholder;
-    filter: drop-shadow(0 0 10px rgba($placeholder, 0.5));
+    filter: drop-shadow(0 0 10px funcs.set-alpha($placeholder, 50%));
 
     span, .background svg {
       color: var(--primary);
@@ -40,7 +41,7 @@ $placeholder: var(--quinary);
 }
 
 .disabled {
-  background-color: rgba(var(--secondary), 0.1);
+  background-color: funcs.set-alpha(var(--secondary), 10%);
   border-color: var(--secondary);
   color: var(--quinary);
   cursor: not-allowed;

@@ -1,3 +1,4 @@
+@use 'funcs.module';
 @use 'consts.module';
 
 @font-face {
@@ -16,7 +17,7 @@
 
 ::selection {
   color: var(--primary);
-  background-color: rgba(var(--accent), 0.8);
+  background-color: funcs.set-alpha(var(--accent), 80%);
 }
 
 body {
@@ -135,7 +136,7 @@ blockquote {
   padding-inline-end: 10px;
   border-radius: 5px;
 
-  background-color: rgba(var(--quaternary), 0.3);
+  background-color: funcs.set-alpha(var(--quaternary), 30%);
 
   &::before {
     content: "";
@@ -250,7 +251,7 @@ td {
 }
 
 input, textarea {
-  background-color: rgba(var(--quaternary), 0.25);
+  background-color: funcs.set-alpha(var(--quaternary), 25%);
   border: none;
   border-radius: 5px;
   border-bottom: 2px var(--accent) solid;
@@ -276,13 +277,13 @@ input, textarea {
 @mixin mention($tag-color, $link-color, $link-bg-opacity: 0.1, $link-bg-opacity-hover: 0.2) {
   font-weight: bold;
   color: $tag-color;
-  background-color: rgba($link-color, $link-bg-opacity);
+  background-color: funcs.set-alpha($link-color, $link-bg-opacity);
   cursor: pointer;
   border-radius: 4px;
   padding: 2px 4px;
 
   &:hover, &:focus-visible {
-    background-color: rgba($link-color, $link-bg-opacity-hover);
+    background-color: funcs.set-alpha($link-color, $link-bg-opacity-hover);
   } 
 
   a {
@@ -293,14 +294,14 @@ input, textarea {
 }
 
 .user-mention { @include mention(var(--quinary), var(--accent)); }
-.card-mention { @include mention(var(--quinary), var(--highlight), 0.2, 0.35); }
+.card-mention { @include mention(var(--quinary), var(--highlight), 20%, 35%); }
 
 .card-repost {
   display: inline-flex;
   box-sizing: border-box;
   width: 100%;
   padding: 15px;
-  background-color: rgba(var(--highlight), 0.15);
+  background-color: funcs.set-alpha(var(--highlight), 15%);
   border: 1px solid var(--highlight);
   gap: 20px;
   overflow: hidden;

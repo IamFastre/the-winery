@@ -1,7 +1,8 @@
+@use '@/styles/funcs.module';
 @use '@/styles/consts.module';
 
 @mixin styling($img-size) {
-  $shadow: drop-shadow(0 0 5em rgba(var(--highlight), 0.75));
+  $shadow: drop-shadow(0 0 5em funcs.set-alpha(var(--highlight), 75%));
 
   $shrink-filter: $shadow blur(3px);
   $shrink-transform: scale(0.8);

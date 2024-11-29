@@ -1,3 +1,4 @@
+@use '@/styles/funcs.module';
 @use '@/styles/consts.module';
 
 .menu {
@@ -46,7 +47,7 @@ div.option, a.option {
     user-select: none;
     cursor: pointer;
     border-radius: 5px;
-    background-color: rgba(var(--secondary), 0.1);
+    background-color: funcs.set-alpha(var(--secondary), 10%);
   }
 
   > svg {
@@ -77,14 +78,14 @@ div.option, a.option {
   }
 
   &:hover:not(.field), &:focus-visible:not(.field) {
-    background-color: rgba(var(--secondary), 0.15);
+    background-color: funcs.set-alpha(var(--secondary), 15%);
     span {
       font-weight: bold;
     }
   }
 
   &:active:not(.field), .active:not(.field) {
-    background-color: rgba(var(--secondary), 0.3);
+    background-color: funcs.set-alpha(var(--secondary), 30%);
   }
 }
 

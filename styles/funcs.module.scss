@@ -1,0 +1,7 @@
+@function mix($colors...) {
+  @return color-mix(in srgb, $colors);
+}
+
+@function set-alpha($color, $alpha: 100%) {
+  @return mix($color $alpha, transparent);
+}

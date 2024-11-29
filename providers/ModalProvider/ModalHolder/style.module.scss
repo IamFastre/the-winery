@@ -1,3 +1,4 @@
+@use '@/styles/funcs.module';
 @use '@/styles/consts.module';
 
 @mixin styling() {
@@ -11,7 +12,7 @@
     align-items: center;
     justify-content: center;
     transition: all 500ms consts.$ease-out-quartic;
-    background-color: rgba(var(--primary), 0.5);
+    background-color: funcs.set-alpha(var(--primary), 50%);
     backdrop-filter: blur(5px);
     animation: appear 500ms ease-in-out;
   }

@@ -1,8 +1,9 @@
+@use '@/styles/funcs.module';
 @use '@/styles/consts.module';
 
 @mixin color($color) {
   border: 2px dashed $color;
-  background-color: rgba($color, 0.08);
+  background-color: funcs.set-alpha($color, 8%);
 
   > svg {
     stroke: $color;
@@ -10,7 +11,7 @@
   }
 
   &:hover, &:focus-visible {
-    background-color: rgba($color, 0.16);
+    background-color: funcs.set-alpha($color, 16%);
   }
 }
 

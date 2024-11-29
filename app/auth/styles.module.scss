@@ -1,3 +1,4 @@
+@use '@/styles/funcs.module';
 @use '@/styles/consts.module';
 
 $width: 365px;
@@ -8,7 +9,7 @@ $max-width: 85%;
   margin: 10px;
   border-radius: 5px;
   color: $color;
-  background-color: rgba($color, 0.2);
+  background-color: funcs.set-alpha($color, 20%);
   align-items: stretch;
   gap: 10px;
   
