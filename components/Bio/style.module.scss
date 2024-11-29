@@ -62,6 +62,8 @@
 }
 
 @mixin blink-glow($name, $color) {
+  animation: blink-#{$name} 1s consts.$ease-out-quartic infinite;
+
   @keyframes blink-#{$name} {
     0%, 100% {
       filter: brightness(1.33)
@@ -73,11 +75,9 @@
       filter: brightness(0.66);
     }
   }
-
-  animation: blink-#{$name} 1s consts.$ease-out-quartic infinite;
 }
 
-.fDay { @include blink-glow(magenta, colors.$magenta); }
-.mDay { @include blink-glow(cyan, colors.$cyan); }
-.tDay { @include blink-glow(yellow, colors.$yellow); }
-.bdToday { @include blink-glow(cold, colors.$cold); }
+.fDay { @include blink-glow("magenta", colors.$magenta); }
+.mDay { @include blink-glow("cyan", colors.$cyan); }
+.tDay { @include blink-glow("yellow", colors.$yellow); }
+.bdToday { @include blink-glow("cold", colors.$cold); }
