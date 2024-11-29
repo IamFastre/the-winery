@@ -41,7 +41,7 @@
   }
 
   .backButton {
-    margin-left: $back-button-size/2;
+    margin-left: calc($back-button-size / 2);
     cursor: pointer;
     
     > svg {
@@ -61,10 +61,10 @@
   }
 
   .pageIcon {
-    margin-right: $back-button-size/2;
+    margin-right: $back-button-size*0.5;
 
     > svg {
-      font-size: $back-button-size*3/4;
+      font-size: $back-button-size*3*0.25;
       transition: all 500ms $ease-out-quartic;
       fill: $accent;
       stroke: $accent;

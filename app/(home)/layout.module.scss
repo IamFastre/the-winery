@@ -40,7 +40,7 @@
     }
     @else {
       flex-direction: row;
-      padding-left: $size / 15;
+      padding-left: calc($size / 15);
     }
   }
 
@@ -57,13 +57,13 @@
     @if $direction == row {
       width: 90%;
       height: 2px;
-      margin-top: $image-size / 12.5 + 2.5px;
-      margin-bottom: $image-size / 7.5 + 2.5px;
+      margin-top: calc($image-size / 12.5) + 2.5px;
+      margin-bottom: calc($image-size / 7.5) + 2.5px;
     }
     @else {
       width: 2px;
       height: 80%;
-      margin-left: $image-size / 5;
+      margin-left: $image-size * 0.2;
     }
   }
 
@@ -72,7 +72,7 @@
 
     @if $direction == row {
       flex-direction: column;
-      gap: $icon-size / 3 * 2;
+      gap: calc($icon-size / 3) * 2;
     }
     @else {
       flex-direction: row;

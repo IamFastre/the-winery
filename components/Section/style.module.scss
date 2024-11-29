@@ -24,7 +24,7 @@
     top: 0;
     transform: translateY((calc(-52% + $margin)));
     align-self: flex-start;
-    margin-left: $margin + 15px;
+    margin-left: calc($margin + 15px);
     justify-content: center;
     align-content: center;
     z-index: 2;
@@ -42,9 +42,9 @@
     z-index: 1;
     position: absolute;
     background-color: $primary;
-    margin-top: $margin / 2;
+    margin-top: calc($margin / 2);
     left: -5px;
-    height: $border-width * 2;
+    height: calc($border-width * 2);
     width: calc(100% + 10px);
   }
   
@@ -68,7 +68,7 @@
     }
     
     .title {
-      margin-top: -1 * $margin;
+      margin-top: calc(-1 * $margin);
     }
   }
 }

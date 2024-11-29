@@ -53,7 +53,7 @@
       flex-direction: row;
       color: $quinary;
       margin-left: $padding;
-      gap: $padding / 2;
+      gap: calc($padding / 2);
       align-items: baseline;
       justify-content: start;
     }

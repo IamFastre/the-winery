@@ -28,8 +28,8 @@ $corner-icon-size: 25px;
 .cornerButtons {
 
   position: absolute;
-  top: -$corner-icon-size / 2;
-  right: -$corner-icon-size / 2;
+  top: calc(-1 * $corner-icon-size / 2);
+  right: calc(-1 * $corner-icon-size / 2);
   gap: 5px;
   background: radial-gradient(circle, $primary 50%, $none 85%);
   
