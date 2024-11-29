@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { IoCloseCircle } from "@react-icons/all-files/io5/IoCloseCircle";
+import { IoCloseCircle } from "@icons/io5/IoCloseCircle";
 
 import { Section } from "@/components/Section";
 import { MarkDown } from "@/components/MarkDown";

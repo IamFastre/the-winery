@@ -2,7 +2,7 @@
 import { Fragment, MouseEventHandler } from "react";
 import Link from "next/link";
 import { IconType } from "@react-icons/all-files";
-import { IoClose } from "@react-icons/all-files/io5/IoClose";
+import { IoClose } from "@icons/io5/IoClose";
 
 import { focusable } from "@/utils/client";
 import { Button, Section } from "@/components";

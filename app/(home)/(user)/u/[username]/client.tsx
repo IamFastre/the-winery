@@ -3,16 +3,16 @@ import { ChangeEventHandler, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import { GoPencil } from "@react-icons/all-files/go/GoPencil";
-import { GoTrash } from "@react-icons/all-files/go/GoTrash";
-import { IoArrowBack } from "@react-icons/all-files/io5/IoArrowBack";
-import { IoArrowForward } from "@react-icons/all-files/io5/IoArrowForward";
-import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
-import { IoBuildOutline } from "@react-icons/all-files/io5/IoBuildOutline";
-import { IoCloseOutline } from "@react-icons/all-files/io5/IoCloseOutline";
-import { IoEllipsisHorizontalOutline } from "@react-icons/all-files/io5/IoEllipsisHorizontalOutline";
-import { IoFolderOutline } from "@react-icons/all-files/io5/IoFolderOutline";
-import { IoSaveOutline } from "@react-icons/all-files/io5/IoSaveOutline";
+import { GoPencil } from "@icons/go/GoPencil";
+import { GoTrash } from "@icons/go/GoTrash";
+import { IoArrowBack } from "@icons/io5/IoArrowBack";
+import { IoArrowForward } from "@icons/io5/IoArrowForward";
+import { IoBookmarkOutline } from "@icons/io5/IoBookmarkOutline";
+import { IoBuildOutline } from "@icons/io5/IoBuildOutline";
+import { IoCloseOutline } from "@icons/io5/IoCloseOutline";
+import { IoEllipsisHorizontalOutline } from "@icons/io5/IoEllipsisHorizontalOutline";
+import { IoFolderOutline } from "@icons/io5/IoFolderOutline";
+import { IoSaveOutline } from "@icons/io5/IoSaveOutline";
 
 import { humanizeTime } from "@/utils";
 import { cropAvatar, focusable } from "@/utils/client";

@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-import { IoInformationCircle } from "@react-icons/all-files/io5/IoInformationCircle";
-import { IoEllipsisVerticalOutline } from "@react-icons/all-files/io5/IoEllipsisVerticalOutline";
-import { IoEllipsisHorizontalOutline } from "@react-icons/all-files/io5/IoEllipsisHorizontalOutline";
-import { IoCopy } from "@react-icons/all-files/io5/IoCopy";
-import { IoCloseCircle } from "@react-icons/all-files/io5/IoCloseCircle";
-import { IoCheckmarkCircle } from "@react-icons/all-files/io5/IoCheckmarkCircle";
+import { IoInformationCircle } from "@icons/io5/IoInformationCircle";
+import { IoEllipsisVerticalOutline } from "@icons/io5/IoEllipsisVerticalOutline";
+import { IoEllipsisHorizontalOutline } from "@icons/io5/IoEllipsisHorizontalOutline";
+import { IoCopy } from "@icons/io5/IoCopy";
+import { IoCloseCircle } from "@icons/io5/IoCloseCircle";
+import { IoCheckmarkCircle } from "@icons/io5/IoCheckmarkCircle";
 
 import { focusable } from "@/utils/client";
 import { Modal } from "@/providers/ModalProvider";

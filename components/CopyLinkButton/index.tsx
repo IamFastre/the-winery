@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { IoCheckmark } from "@react-icons/all-files/io5/IoCheckmark";
-import { IoClose } from "@react-icons/all-files/io5/IoClose";
-import { IoShareOutline } from "@react-icons/all-files/io5/IoShareOutline";
+import { IoCheckmark } from "@icons/io5/IoCheckmark";
+import { IoClose } from "@icons/io5/IoClose";
+import { IoShareOutline } from "@icons/io5/IoShareOutline";
 
 import { focusable } from "@/utils/client";
 import { useToaster } from "@/providers/Toaster";

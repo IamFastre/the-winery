@@ -1,7 +1,7 @@
-import { RiShiningFill } from '@react-icons/all-files/ri/RiShiningFill';
-import { IoSkullSharp } from '@react-icons/all-files/io5/IoSkullSharp';
-import { IoWarning } from '@react-icons/all-files/io5/IoWarning';
-import { IoCheckmarkCircle } from '@react-icons/all-files/io5/IoCheckmarkCircle';
+import { RiShiningFill } from '@icons/ri/RiShiningFill';
+import { IoSkullSharp } from '@icons/io5/IoSkullSharp';
+import { IoWarning } from '@icons/io5/IoWarning';
+import { IoCheckmarkCircle } from '@icons/io5/IoCheckmarkCircle';
 
 import { ToastWithID } from '../types';
 

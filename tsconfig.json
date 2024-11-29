@@ -22,9 +22,8 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"],
+      "@icons/*": ["./node_modules/@react-icons/all-files/*"]
     }
   },
   "include": [

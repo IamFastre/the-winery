@@ -2,10 +2,10 @@
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
-import { IoSadOutline } from "@react-icons/all-files/io5/IoSadOutline";
-import { IoSearch } from "@react-icons/all-files/io5/IoSearch";
-import { IoSearchCircleOutline } from "@react-icons/all-files/io5/IoSearchCircleOutline";
+import { IoCloseCircleOutline } from "@icons/io5/IoCloseCircleOutline";
+import { IoSadOutline } from "@icons/io5/IoSadOutline";
+import { IoSearch } from "@icons/io5/IoSearch";
+import { IoSearchCircleOutline } from "@icons/io5/IoSearchCircleOutline";
 
 import Link from "next/link";
 import Image from "next/image";

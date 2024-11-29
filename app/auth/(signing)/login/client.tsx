@@ -1,9 +1,9 @@
 "use client";
 import { useRef, useState } from "react";
-import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
-import { IoEye } from "@react-icons/all-files/io5/IoEye";
-import { IoEyeOff } from "@react-icons/all-files/io5/IoEyeOff";
-import { IoWarningOutline } from "@react-icons/all-files/io5/IoWarningOutline";
+import { IoCloseCircleOutline } from "@icons/io5/IoCloseCircleOutline";
+import { IoEye } from "@icons/io5/IoEye";
+import { IoEyeOff } from "@icons/io5/IoEyeOff";
+import { IoWarningOutline } from "@icons/io5/IoWarningOutline";
 
 import consts from "@/utils/consts";
 import { useToaster } from "@/providers/Toaster";

@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { IconType } from "@react-icons/all-files";
 
-import { IoCogOutline } from "@react-icons/all-files/io5/IoCogOutline";
-import { IoInformationCircleOutline } from "@react-icons/all-files/io5/IoInformationCircleOutline";
-import { IoPersonCircleOutline } from "@react-icons/all-files/io5/IoPersonCircleOutline";
-import { IoSearchOutline } from "@react-icons/all-files/io5/IoSearchOutline";
-import { IoWineOutline } from "@react-icons/all-files/io5/IoWineOutline";
-import { IoArrowBack } from "@react-icons/all-files/io5/IoArrowBack";
-import { IoArrowForward } from "@react-icons/all-files/io5/IoArrowForward";
+import { IoCogOutline } from "@icons/io5/IoCogOutline";
+import { IoInformationCircleOutline } from "@icons/io5/IoInformationCircleOutline";
+import { IoPersonCircleOutline } from "@icons/io5/IoPersonCircleOutline";
+import { IoSearchOutline } from "@icons/io5/IoSearchOutline";
+import { IoWineOutline } from "@icons/io5/IoWineOutline";
+import { IoArrowBack } from "@icons/io5/IoArrowBack";
+import { IoArrowForward } from "@icons/io5/IoArrowForward";
 
 import { focusable } from "@/utils/client";
 import { Card, GoHomeLogo, Section } from "@/components";

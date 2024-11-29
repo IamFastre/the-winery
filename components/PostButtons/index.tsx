@@ -1,11 +1,11 @@
 "use client";
 import { Fragment, MouseEventHandler, useEffect, useState } from "react";
-import { IoBookmark } from "@react-icons/all-files/io5/IoBookmark";
-import { IoClose } from "@react-icons/all-files/io5/IoClose";
-import { IoHeart } from "@react-icons/all-files/io5/IoHeart";
-import { IoHeartDislikeOutline } from "@react-icons/all-files/io5/IoHeartDislikeOutline";
-import { IoMedical } from "@react-icons/all-files/io5/IoMedical";
-import { IoWarning } from "@react-icons/all-files/io5/IoWarning";
+import { IoBookmark } from "@icons/io5/IoBookmark";
+import { IoClose } from "@icons/io5/IoClose";
+import { IoHeart } from "@icons/io5/IoHeart";
+import { IoHeartDislikeOutline } from "@icons/io5/IoHeartDislikeOutline";
+import { IoMedical } from "@icons/io5/IoMedical";
+import { IoWarning } from "@icons/io5/IoWarning";
 import { useQuery } from "@tanstack/react-query";
 
 import { humanizeLikes } from "@/utils";

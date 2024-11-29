@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { IoBookmark } from "@react-icons/all-files/io5/IoBookmark";
+import { IoBookmark } from "@icons/io5/IoBookmark";
 
 import consts from "@/utils/consts";
 import { getUserSaves } from "@/utils/api/user/saves";

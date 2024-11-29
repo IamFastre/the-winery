@@ -2,7 +2,7 @@
 import { HTMLAttributes, ReactElement, useEffect, useState } from "react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
-import { MdOpenInNew } from "@react-icons/all-files/md/MdOpenInNew";
+import { MdOpenInNew } from "@icons/md/MdOpenInNew";
 
 import { C, LoadingText, MarkDown, UsernameHandle } from "@/components";
 import { api, focusable } from "@/utils/client";

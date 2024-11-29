@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { IoFolderOpenOutline } from "@react-icons/all-files/io5/IoFolderOpenOutline";
-import { IoHelpCircle } from "@react-icons/all-files/io5/IoHelpCircle";
+import { IoFolderOpenOutline } from "@icons/io5/IoFolderOpenOutline";
+import { IoHelpCircle } from "@icons/io5/IoHelpCircle";
 
 import { UserInfo } from "@/utils/api/user/info";
 import { CardPost } from "@/utils/api/card/post";

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { IoBug } from "@react-icons/all-files/io5/IoBug";
-import { IoClose } from "@react-icons/all-files/io5/IoClose";
+import { IoBug } from "@icons/io5/IoBug";
+import { IoClose } from "@icons/io5/IoClose";
 
 import consts from "@/utils/consts";
 import { B, C } from "@/components/C";

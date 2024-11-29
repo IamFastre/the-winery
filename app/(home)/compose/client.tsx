@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import XRegExp from "xregexp";
 
-import { RiBallPenLine } from "@react-icons/all-files/ri/RiBallPenLine";
-import { RiDeleteBin6Line } from "@react-icons/all-files/ri/RiDeleteBin6Line";
-import { IoEyeOutline } from "@react-icons/all-files/io5/IoEyeOutline";
-import { IoEye } from "@react-icons/all-files/io5/IoEye";
-import { IoFolderOutline } from "@react-icons/all-files/io5/IoFolderOutline";
-import { IoAdd } from "@react-icons/all-files/io5/IoAdd";
-import { IoWine } from "@react-icons/all-files/io5/IoWine";
-import { IoFolder } from "@react-icons/all-files/io5/IoFolder";
+import { RiBallPenLine } from "@icons/ri/RiBallPenLine";
+import { RiDeleteBin6Line } from "@icons/ri/RiDeleteBin6Line";
+import { IoEyeOutline } from "@icons/io5/IoEyeOutline";
+import { IoEye } from "@icons/io5/IoEye";
+import { IoFolderOutline } from "@icons/io5/IoFolderOutline";
+import { IoAdd } from "@icons/io5/IoAdd";
+import { IoWine } from "@icons/io5/IoWine";
+import { IoFolder } from "@icons/io5/IoFolder";
 
 import { ErrorAPI } from "@/utils";
 import { SetState } from "@/utils/client";

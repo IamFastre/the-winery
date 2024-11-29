@@ -1,11 +1,11 @@
 "use client";
 import { useRef, useState } from "react";
 
-import { IoCheckmark } from "@react-icons/all-files/io5/IoCheckmark";
-import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
-import { IoEye } from "@react-icons/all-files/io5/IoEye";
-import { IoEyeOff } from "@react-icons/all-files/io5/IoEyeOff";
-import { IoWarningOutline } from "@react-icons/all-files/io5/IoWarningOutline";
+import { IoCheckmark } from "@icons/io5/IoCheckmark";
+import { IoCloseCircleOutline } from "@icons/io5/IoCloseCircleOutline";
+import { IoEye } from "@icons/io5/IoEye";
+import { IoEyeOff } from "@icons/io5/IoEyeOff";
+import { IoWarningOutline } from "@icons/io5/IoWarningOutline";
 
 import consts from "@/utils/consts";
 import { multiplyString } from "@/utils";

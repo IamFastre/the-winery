@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 
-import { IoCheckmark } from "@react-icons/all-files/io5/IoCheckmark";
+import { IoCheckmark } from "@icons/io5/IoCheckmark";
 
 import consts from "@/utils/consts";
 import { sendResetPassword } from "@/supabase/actions/user";
