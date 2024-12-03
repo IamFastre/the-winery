@@ -32,12 +32,12 @@ export function CardOptionsButton(props:CardOptionsButtonProps) {
 
   const onCopySuccess = () => {
     setCopySuccess(true);
-    toaster.add({ message: "Link copied successfully", type: 'success' });
+    toaster.add({ message: "Card text copied successfully", type: 'success' });
   };
 
   const onCopyError = () => {
     setCopyError(true);
-    toaster.add({ message: "Link couldn't be copied", type: 'error' });
+    toaster.add({ message: "Card text couldn't be copied", type: 'error' });
   };
 
   const onTryCopy = () => {
