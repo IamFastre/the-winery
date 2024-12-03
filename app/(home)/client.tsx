@@ -11,6 +11,7 @@ import { IoWineOutline } from "@icons/io5/IoWineOutline";
 import { IoArrowBack } from "@icons/io5/IoArrowBack";
 import { IoArrowForward } from "@icons/io5/IoArrowForward";
 
+import consts from "@/utils/consts";
 import { focusable } from "@/utils/client";
 import { Modal } from "@/providers/ModalProvider";
 import { useShortcuts } from "@/providers/Shortcuts";
@@ -22,6 +23,7 @@ import { Section } from "@/components/Section";
 
 import layoutStyles from "./layout.module.scss";
 import pageStyles from "./page.module.scss";
+import { C, RI } from "@/components/C";
 
 
 const getCardIndex = (param:string | null, max:number | undefined) => {
@@ -170,6 +172,11 @@ export function Sidebar({ username }:{ username:string; }) {
 
       <Modal state={modalShownState} closeButton>
         Soon...
+        <C.ACCENT style={{ position: 'absolute', bottom: 30, fontSize: 'smaller' }}>
+          <RI>
+            v{consts.version}
+          </RI>
+        </C.ACCENT>
       </Modal>
     </Section>
   );
