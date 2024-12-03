@@ -1,5 +1,5 @@
 import { MouseEventHandler, ReactNode } from "react";
-import { IconType } from "react-icons";
+import { IconType } from "@react-icons/all-files";
 import CSS from "csstype";
 
 import { hexOpacity } from "@/utils/funcs";
