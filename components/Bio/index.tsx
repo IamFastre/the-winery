@@ -77,6 +77,9 @@ function CheersDayBadge({ createdAt }:{ createdAt:UserInfo['created_at'] }) {
 }
 
 function GenderBadge({ gender }:{ gender:UserInfo['gender'] }) {
+  if (gender === null)
+    return null;
+
   const nowDate = moment();
   const Icon = gender === 'male' ? IoMdMale : gender === 'female' ? IoMdFemale : GiToaster;
   const color = gender === 'male' ? colors.cyan : gender === 'female' ? colors.magenta : colors.yellow;
@@ -95,7 +98,6 @@ function GenderBadge({ gender }:{ gender:UserInfo['gender'] }) {
 
   return (
     <ProfileBadge
-      condition={gender !== null}
       title="Gender"
       description={(
         <span>
@@ -164,14 +166,16 @@ function GenderBadge({ gender }:{ gender:UserInfo['gender'] }) {
 }
 
 function ZodiacBadge({ anniversary }:{ anniversary:UserInfo['anniversary'] }) {
+  if (anniversary === null)
+    return null;
+
   const nowDate = moment();
-  const sign = anniversary ? getZodiacString(anniversary.d, anniversary.m) : null;
-  const date = anniversary ? `${moment.months(anniversary.m - 1)} ${numberOrder(anniversary.d)}` : null;
-  const bdToday = nowDate.month() + 1 === anniversary?.m && nowDate.date() === anniversary.d;
+  const sign = getZodiacString(anniversary.d, anniversary.m);
+  const date = `${moment.months(anniversary.m - 1)} ${numberOrder(anniversary.d)}`;
+  const bdToday = nowDate.month() + 1 === anniversary.m && nowDate.date() === anniversary.d;
 
   return (
     <ProfileBadge
-      condition={anniversary !== null}
       title="Anniversary"
       description={(
         <span>
@@ -184,7 +188,7 @@ function ZodiacBadge({ anniversary }:{ anniversary:UserInfo['anniversary'] }) {
             {' '}
             <Zodiac
               fill={colors.cold}
-              date={anniversary!}
+              date={anniversary}
               size={13}
             />
           </span>
@@ -196,7 +200,7 @@ function ZodiacBadge({ anniversary }:{ anniversary:UserInfo['anniversary'] }) {
     >
       <Zodiac
         fill={colors.cold}
-        date={anniversary!}
+        date={anniversary}
         className={bdToday ? styles.bdToday : undefined}
       />
     </ProfileBadge>
