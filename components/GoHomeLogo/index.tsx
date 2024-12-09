@@ -55,9 +55,9 @@ export function GoHomeLogo(props:HomeIconProps) {
       id="home-page-button"
       className={`${styles.image} ${beating || redirecting ? styles.redirecting : ""} ${props.className}`}
       style={props.style}
-      onClick={() => goto(dest, 'assign')}
+      onClick={e => goto(dest, 'push', e.ctrlKey)}
     >
-      <a href={dest} onClick={e => e.preventDefault()}>
+      <a href={dest} onClick={e => e.preventDefault()} type="wrapper">
         <Image
           alt={`${consts.name} logo; a purple heart suit with a golden spiky hexagram on top`}
           src={getLogo(props.logo ?? "brand-outline")}

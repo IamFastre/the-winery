@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { IconType } from "@react-icons/all-files";
 
@@ -132,10 +132,10 @@ export function Sidebar({ username }:{ username:string; }) {
   const modalShownState = useState<boolean>(false);
 
   const Icon = (props:{ icon:IconType; dest?:string; id:string, onClick?:() => void }) => {
-    const handleClick = () => {
+    const handleClick:MouseEventHandler<HTMLElement> = e => {
       if (props.dest) {
         props.onClick?.();
-        goto(props.dest)
+        goto(props.dest, 'push', e.ctrlKey);
       } else if (props.onClick) {
         props.onClick();
       }
