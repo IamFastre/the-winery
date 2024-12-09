@@ -145,9 +145,11 @@ export function Sidebar({ username }:{ username:string; }) {
       <div
         className={`${layoutStyles.icon} ${current.startsWith(props.dest!) ? layoutStyles.current : ""}`}
         id={props.id}
-        {...focusable(layoutStyles.active, handleClick)}
+        {...focusable(layoutStyles.active, current.startsWith(props.dest!) ? undefined : handleClick)}
       >
-        <props.icon />
+        <a href={props.dest} onClick={e => e.preventDefault()} type="wrapper">
+          <props.icon />
+        </a>
       </div>
     );
   };
