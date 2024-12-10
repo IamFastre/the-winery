@@ -8,7 +8,6 @@ import { C } from "@/components/C";
 import { LoadingText } from "@/components/LoadingText";
 import { UsernameHandle } from "@/components/UsernameHandle";
 import { api, focusable } from "@/utils/client";
-import { UserInfo } from "@/utils/api/user/info";
 import { MarkDown } from ".";
 
 export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
@@ -20,7 +19,7 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
 
   const { data:response, isLoading } = useQuery({
     queryFn: async () => await api("/card/post", { id }),
-    queryKey: ["card-tag", id]
+    queryKey: ["/card/post", id]
   });
 
   useEffect(() => {
@@ -67,25 +66,23 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
 
 export function CardRepost(props:HTMLAttributes<HTMLSpanElement>) {
   const id = parseInt(props.id ?? "0");
-  const [author, setAuthor] = useState<UserInfo | null>(null);
 
-  const { data:response, isLoading } = useQuery({
+  const { data:cardRes, isLoading:cardLoading } = useQuery({
     queryFn: async () => await api("/card/post", { id }),
-    queryKey: ["card-tag", id]
+    queryKey: ["/card/post", id]
   });
+  const card = cardRes?.data ?? null;
 
-  useEffect(() => {
-    const start = async () => {
-      if (response?.data?.author_uuid) {
-        const { data:user } = await api('/user/info', { id: response.data.author_uuid! });
-        setAuthor(user);
-      }
-    }
+  const { data:userRes, isLoading:userLoading } = useQuery({
+    queryFn: async () => card?.author_uuid ? await api('/user/info', { id: card.author_uuid }) : null,
+    queryKey: ["user-info", card?.author_uuid],
+    enabled: !!card?.author_uuid
+  });
+  const author = userRes?.data ?? null;
 
-    start();
-  }, [response?.data?.author_uuid])
+  const isLoading = cardLoading && userLoading;
 
-  if (response?.error)
+  if (cardRes?.error)
     return (
       <div className="card-repost">
         <C.SECONDARY>
@@ -94,7 +91,16 @@ export function CardRepost(props:HTMLAttributes<HTMLSpanElement>) {
       </div>
     );
 
-  if (isLoading || author === null)
+  if (userRes?.error)
+    return (
+      <div className="card-repost">
+        <C.SECONDARY>
+          {'> '} <C.RED>Couldn't load info of user <C.SECONDARY>{card!.author_uuid}</C.SECONDARY> ×</C.RED>
+        </C.SECONDARY>
+      </div>
+    );
+
+  if (isLoading || author === null || card === null)
     return (
       <div className="card-repost">
         <span>
@@ -105,9 +111,9 @@ export function CardRepost(props:HTMLAttributes<HTMLSpanElement>) {
 
   return (
     <div className="card-repost">
-      {response?.data?.title && <h1>{response?.data?.title}</h1>}
+      {card.title && <h1>{card.title}</h1>}
       <MarkDown>
-        {response?.data?.content}
+        {card.content}
       </MarkDown>
       <div>
         <Image
