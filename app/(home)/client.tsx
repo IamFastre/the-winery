@@ -105,7 +105,7 @@ export function FeedNavigator({ posts, users }:CardFeed) {
 
       <div className={pageStyles.quiver}>
         <div id="go-back" {...focusable(pageStyles.active, () => increment(-1))}>
-          <IoArrowBack className={index <= 0 ? pageStyles.disabled : undefined} />
+          <IoArrowBack className={`${pageStyles.backArrow} ${index <= 0 ? pageStyles.disabled : undefined}`} />
         </div>
         <input
           id="span"
@@ -120,7 +120,7 @@ export function FeedNavigator({ posts, users }:CardFeed) {
           style={{ width: `${inpt ? (inpt + 1).toFixed().length : (index + 1).toFixed().length}ch` }}
         />
         <div id="go-forward" {...focusable(pageStyles.active, () => increment(+1))}>
-          <IoArrowForward className={index >= posts.length-1 ? pageStyles.disabled : undefined} />
+          <IoArrowForward className={`${pageStyles.forwardArrow} ${index >= posts.length-1 ? pageStyles.disabled : undefined}`} />
         </div>
       </div>
     </>

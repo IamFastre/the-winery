@@ -45,7 +45,7 @@ $arrow-size: 28px;
     }
   }
 
-  svg {
+  > div > svg {
     font-size: $arrow-size;
     transition: all 500ms consts.$ease-out-quartic;
     stroke: var(--quinary);
@@ -73,12 +73,8 @@ $arrow-size: 28px;
 
       &:active, &.active {
         transform: scale(0.8);
-        &:nth-child(1) {
-          transform: translateX(-15px);
-        }
-        &:nth-last-child(1) {
-          transform: translateX(15px);
-        }
+        &.backArrow { transform: translateX(-15px); }
+        &.forwardArrow { transform: translateX(15px); }
       }
     }
   }
