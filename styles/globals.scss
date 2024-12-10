@@ -274,6 +274,27 @@ input, textarea {
   }
 }
 
+/* ========================================================================== */
+
+$rainbow: var(--red), var(--orange), var(--yellow), var(--green), var(--blue), var(--purple);
+
+@keyframes swipe {
+  0% { background-position: 150% 0; }
+  100% { background-position: 0 0; }
+}
+
+.rainbow {
+  color: transparent;
+  background: linear-gradient(to right, $rainbow, $rainbow, $rainbow);
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 300% 100%;
+
+  &:hover {
+    animation: swipe 1.75s linear infinite;
+  }
+}
+
 @mixin mention($tag-color, $link-color, $link-bg-opacity: 0.1, $link-bg-opacity-hover: 0.2) {
   font-weight: bold;
   color: $tag-color;
@@ -379,6 +400,8 @@ input, textarea {
     }
   }
 }
+
+/* ========================================================================== */
 
 @media screen and (min-width: 0px)
               and (max-width: 786px) {

@@ -2,16 +2,17 @@ import { visit } from "unist-util-visit";
 import colors from "@/styles/colors.js";
 import consts from "@/utils/consts";
 
-const rainbowStyle = "color: transparent; background: linear-gradient(to right, red, orange, yellow, green, blue, indigo); -webkit-background-clip: text; background-clip: text; animation: swipe 900ms linear infinite; background-size: 100%;";
 
 function makeEmoticon(value:string, color:string = colors.yellow, ligatures:boolean = true) {
-  const colorStyle = color === 'rainbow' ? rainbowStyle : `color: ${color};`;
+  const styleColor = color === 'rainbow' ? 'transparent' : color;
+
   return {
     type: 'emoticon',
     data: {
       hName: 'span',
       hProperties: {
-        style: `${colorStyle} font-weight: bold;${ligatures ? '' : ' font-variant-ligatures: none;'}`
+        style: `color: ${styleColor}; font-weight: bold;${ligatures ? '' : ' font-variant-ligatures: none;'}`,
+        class: color === 'rainbow' ? color : undefined,
       }
     },
     children: [
@@ -103,6 +104,7 @@ export default function emoticon() {
     visitEmoticon(tree, '0_0', colors.secondary);
 
     visitEmoticon(tree, '•<•', colors.green);
+    visitEmoticon(tree, '•>•', colors.green);
 
     visitEmoticon(tree, '•-•', colors.secondary);
     visitEmoticon(tree, '.-.', colors.secondary, { ligatures: false });
