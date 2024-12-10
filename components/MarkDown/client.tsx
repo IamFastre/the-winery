@@ -74,8 +74,8 @@ export function CardRepost(props:HTMLAttributes<HTMLSpanElement>) {
   const card = cardRes?.data ?? null;
 
   const { data:userRes, isLoading:userLoading } = useQuery({
-    queryFn: async () => card?.author_uuid ? await api('/user/info', { id: card.author_uuid }) : null,
-    queryKey: ["user-info", card?.author_uuid],
+    queryFn: async () => card?.author_uuid ? await api("/user/info", { id: card.author_uuid }) : null,
+    queryKey: ["/user/info", card?.author_uuid],
     enabled: !!card?.author_uuid
   });
   const author = userRes?.data ?? null;

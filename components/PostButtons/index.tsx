@@ -40,7 +40,7 @@ interface LikesModalProps {
 function LikesModal(props:LikesModalProps) {
   const likeList = useQuery({
     queryFn: async () => (await api("/card/like-list", { id: props.postId })).data,
-    queryKey: ['post-like-list', props.postId]
+    queryKey: ["/card/like-list", props.postId]
   });
 
   return (
@@ -119,12 +119,12 @@ export function PostButtons(props:PostButtonsProps) {
 
   const interactions = useQuery({
     queryFn: async () => (await api("/card/interactions", { id: props.postId })).data,
-    queryKey: ['post-interactions', props.postId],
+    queryKey: ["/card/interactions", props.postId],
   });
 
   const status = useQuery({
     queryFn: async () => (await api("/user/super-like-status")).data,
-    queryKey: ['user-super-like-status'],
+    queryKey: ["/user/super-like-status"],
   });
 
   useEffect(() => {
