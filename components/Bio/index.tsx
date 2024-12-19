@@ -8,7 +8,7 @@ import { IoMedical } from "@icons/io5/IoMedical";
 import { IoWine } from "@icons/io5/IoWine";
 
 import consts from "@/utils/consts";
-import { getZodiacString, numberOrder, vowelStart } from "@/utils";
+import { getZodiacString, humanizeLikes, numberOrder, vowelStart } from "@/utils";
 import { UserInfo } from "@/utils/api/user/info";
 import { BI, C, RI } from "@/components/C";
 import { Zodiac } from "@/components/Zodiac";
@@ -28,6 +28,33 @@ const Note = ({ children }:{ children:React.ReactNode }) => (
     </C.SECONDARY>
   </>
 );
+
+function ReputationBadge({ score }:{ score:number }) {
+  const s = humanizeLikes(score);
+  return (
+    <ProfileBadge
+      condition={score !== 0}
+      title="Finesse"
+      description={(
+        <span>
+          This user has <C.SECONDARY>{score.toLocaleString()}</C.SECONDARY>
+          <C.ACCENT title="Winery Points" style={{ marginLeft: 3 }}><sub>WP</sub></C.ACCENT>.
+          {
+            score >= 5000 ? <Note>That's <C.HIGHLIGHT>prolific</C.HIGHLIGHT>!!</Note> :
+            score >= 1000 ? <Note>That's <C.ACCENT>impressive</C.ACCENT>!</Note> :
+            score >= 100  ? <Note>They're getting there.</Note> :
+            null
+          }
+        </span>
+      )}
+      autoWidth
+    >
+      <C.ACCENT style={{ fontFamily: 'Micro5', fontSize: 42 }}>
+        {s}
+      </C.ACCENT>
+    </ProfileBadge>
+  );
+}
 
 function SpecialBadge({ info }:{ info:UserInfo }) {
   return (
@@ -212,6 +239,7 @@ export function Bio({ info }:{ info:UserInfo }) {
     <div className={styles.bio}>
       <BioText content={info.bio} />
       <div className={styles.badgeShelf}>
+        <ReputationBadge score={info.finesse} />
         <SpecialBadge info={info} />
         <CheersDayBadge createdAt={info.created_at} />
         <GenderBadge gender={info.gender} />

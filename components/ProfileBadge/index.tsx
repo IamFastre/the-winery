@@ -12,6 +12,7 @@ interface ProfileBadgeProps {
   condition?: boolean;
   title: string;
   description: React.ReactNode;
+  autoWidth?: boolean;
 }
 
 export function ProfileBadge(props:ProfileBadgeProps) {
@@ -22,7 +23,11 @@ export function ProfileBadge(props:ProfileBadgeProps) {
 
   return (
     <>
-      <div className={styles.badge} {...focusable(styles.active, () => modalShown[1](s => !s))}>
+      <div
+        className={styles.badge}
+        style={{ width: props.autoWidth ? 'auto' : undefined }}
+        {...focusable(styles.active, () => modalShown[1](s => !s))}
+      >
         {props.children}
       </div>
       
