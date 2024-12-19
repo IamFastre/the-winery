@@ -154,13 +154,13 @@ export function humanizeLikes(count: number) : string {
   let result = '';
 
   if (count > 999_999_999_999)
-    result = `${Math.floor(count / 10000)/10}T`;
+    result = `${Math.round(count / 10000)/10}T`;
   else if (count > 999_999_999)
-    result = `${Math.floor(count / 10000)/10}B`;
+    result = `${Math.round(count / 10000)/10}B`;
   else if (count > 999_999)
-    result = `${Math.floor(count / 1000)/10}M`;
+    result = `${Math.round(count / 1000)/10}M`;
   else if (count > 999)
-    result = `${Math.floor(count / 100)/10}K`;
+    result = `${Math.round(count / 100)/10}K`;
   else
     result = `${count}`;
 
