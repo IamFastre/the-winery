@@ -2,7 +2,7 @@ import { result } from '@/utils/api';
 import { createClient } from '@/supabase/server';
 import { Tables } from '@/supabase/types';
 
-export type UserInfo = Tables<'profiles'> & { mail_confirmed: boolean; meta:Omit<Tables<'users_meta'>, 'id'> };
+export type UserInfo = Tables<'profiles'> & { finesse:number; mail_confirmed:boolean; meta:Omit<Tables<'users_meta'>, 'id'> };
 export type UserInfoParams = { id:string } | { username:string };
 
 function cureValue(value:string) {
@@ -33,7 +33,7 @@ export async function getUserInfo(what:'id' | 'username' | 'self', value:string 
   if (what === 'id') {
     const res = await supabase
       .from('profiles')
-      .select('*')
+      .select('*, finesse')
       .eq('id', cureValue(value ?? ''))
       .single();
 
@@ -45,7 +45,7 @@ export async function getUserInfo(what:'id' | 'username' | 'self', value:string 
   if (what === 'username') {
     const res = await supabase
       .from('profiles')
-      .select('*')
+      .select('*, finesse')
       .ilike('username', cureValue(value ?? ''))
       .single();
 

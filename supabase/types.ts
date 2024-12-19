@@ -120,6 +120,7 @@ export type Database = {
           gender: Database["public"]["Enums"]["user_gender"] | null
           id: string
           username: string
+          finesse: number
         }
         Insert: {
           anniversary?:
@@ -250,6 +251,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      finesse: {
+        Args: {
+          "": unknown
+        }
+        Returns: number
+      }
       get_username: {
         Args: Record<PropertyKey, never>
         Returns: string
