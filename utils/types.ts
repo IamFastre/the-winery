@@ -14,6 +14,7 @@ import type { CardInteractions, CardInteractionsParams } from "@/utils/api/card/
 import type { OtherLogo, OtherLogoParams } from "@/utils/api/other/logo";
 
 import type { CardSuperLike, CardSuperLikeParams } from "@/utils/api/mut/card/super-like";
+import type { CardDelete, CardDeleteParams } from "@/utils/api/mut/card/delete";
 
 export type LogoKind = "main" | "brand" | "mono" | "brand-outline" | "mono-outline" | "touch";
 
@@ -49,7 +50,8 @@ export interface Endpoints {
 
   /* ============================= Data Mutation ============================ */
 
-  "/mut/card/super-like": Endpoint<CardSuperLikeParams, CardSuperLike>,
+  "/mut/card/super-like":    Endpoint<CardSuperLikeParams, CardSuperLike>,
+  "/mut/card/delete":        Endpoint<CardDeleteParams, CardDelete>,
 }
 
 export interface ResultSuccess<T> {
