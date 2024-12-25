@@ -11,15 +11,16 @@ import { Section } from "@/components/Section";
 import styles from "./style.module.scss";
 
 export type Option = {
-  title: string;
-  subtitle?: string;
+  title: string | JSX.Element;
+  subtitle?: string | JSX.Element;
   icon?: IconType;
   action?: MouseEventHandler<HTMLDivElement>;
   href?: string;
+  condition?: boolean;
 
   flColor?: string;
   bgColor?: string;
-
+  
   skColor?: string;
   skWidth?: number | string;
 
@@ -82,6 +83,9 @@ export function OptionsModal(props:OptionsModalProps) {
   return (
     <MenuModal title={props.title} close={props.close}>
       {props.options.map((o, i) => {
+        if (o.condition === false)
+          return null;
+
         const icon = o.icon &&
           <o.icon
             className={o.skWidth ? styles.customStrokeWidth : undefined}

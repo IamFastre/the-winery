@@ -15,6 +15,10 @@
 
     &::after { content: none; }
   }
+
+  * {
+    transition: all 500ms consts.$ease-out-quartic;
+  }
 }
 
 div.menuContainer {
