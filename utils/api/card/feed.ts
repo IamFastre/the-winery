@@ -4,16 +4,21 @@ import { createClient } from '@/supabase/server';
 import { Tables } from '@/supabase/types';
 
 export type CardFeed = { posts: Tables<'posts'>[], users: { [id:string]:Tables<'profiles'> } };
-export type CardFeedParams = { id:number };
+export type CardFeedParams = { limit?:number; sort?:'default' /*| 'top'*/ | 'new'; };
 
-export async function getCardFeed(limit:number = 25) {
+export async function getCardFeed(limit:number = 25, sortBy:CardFeedParams['sort'] = 'default') {
   const supabase = createClient();
 
   const res = await supabase
     .from('posts')
     .select('*, score')
     .limit(limit)
-    .order('score', { ascending: false });
+    .order(
+      sortBy === 'new'
+      ? 'timestamp'
+      : 'score',
+      { ascending: false }
+    );
 
   if (res.error)
     return result(null, res.error);
