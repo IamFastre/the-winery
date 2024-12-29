@@ -10,6 +10,7 @@ import { IoSearchOutline } from "@icons/io5/IoSearchOutline";
 import { IoWineOutline } from "@icons/io5/IoWineOutline";
 import { IoArrowBack } from "@icons/io5/IoArrowBack";
 import { IoArrowForward } from "@icons/io5/IoArrowForward";
+import { IoAdd } from "@icons/io5/IoAdd";
 
 import consts from "@/utils/consts";
 import { focusable } from "@/utils/client";
@@ -53,10 +54,12 @@ const setCardIndex = (value:number) => {
 export function FeedNavigator({ posts, users }:CardFeed) {
   const card = getCardIndex(useSearchParams().get('card'), posts.length) - 1;
  
+  const [actionsOpen, setActionsOpen] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(card);
   const [inpt, setInpt] = useState<number>(index);
   const post = posts[index];
   const author = users[post.author_uuid ?? ""];
+
 
 
   const increment = (num:number = 1) => {
@@ -92,6 +95,26 @@ export function FeedNavigator({ posts, users }:CardFeed) {
 
   return (
     <>
+      <div
+        className={`${pageStyles.actions} ${actionsOpen ? pageStyles.open : ''}`}
+      >
+        <div {...focusable(pageStyles.active, () => setActionsOpen(a => !a))}>
+          <IoAdd />
+        </div>
+        <div className={pageStyles.actionsContent}>
+          <h1>Salutations</h1>
+          <p>
+            Welcome to the action panel! Here you can perform various actions regarding your feed run.
+          </p>
+          <p>
+            Don't worry it's too empty now.
+            <br/>
+            Actual features will be added soon!
+          </p>
+          <i><sub>Good fermentin'.</sub></i>
+        </div>
+      </div>
+
       <Card
         username={author.username}
         userAvatar={author.avatar}

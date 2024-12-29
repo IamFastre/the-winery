@@ -1,96 +1,181 @@
 @use '@/styles/consts.module';
+@use '@/styles/funcs.module';
 
 $arrow-size: 28px;
 
-.sectionContent {
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-}
-
-.card {
-  max-width: calc(100% - 26px);
-}
-
-.cardSection {
-  max-height: calc(80vh - 150px);
-  min-width: 200px;
-  max-width: 604px;
-}
-
-.quiver {
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 15px;
-  gap: 10px;
-
-  input {
-    padding: 0 10px;
-    font-size: 28px;
-    height: $arrow-size;
-    line-height: $arrow-size;
-    overflow: hidden;
-    text-align: center;
-    font-size: 22px;
-    user-select: none;
-
-    appearance: textfield;
-    -moz-appearance: textfield;
-
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-    }
+@mixin styling($small) {
+  .sectionContent {
+    align-items: center;
+    justify-content: center;
+    padding: 0;
   }
 
-  > div > svg {
-    font-size: $arrow-size;
+  .actions {
+    z-index: 1;
+    overflow: hidden;
+    position: absolute;
     transition: all 500ms consts.$ease-out-quartic;
-    stroke: var(--quinary);
-    fill: var(--quinary);
+    backdrop-filter: blur(4px);
+    background-color: funcs.set-alpha(var(--accent), 10%);
+    box-sizing: content-box;
+    border: 1px var(--none) solid;
+    border-radius: 4px;
+    max-height: 30px;
+    width: 30px;
 
-    path {
-      transition: all 500ms consts.$ease-out-quartic;
+    @if ($small) {
+      bottom: 15px;
+      right: 15px;
+    } @else {
+      top: 25px;
+      left: 15px;
     }
 
-    &.disabled {
-      transform: scale(0.8);
-    }
+    > div:first-child {
+      z-index: 2;
+      position: absolute;
+      @if ($small) {
+        bottom: 0;
+        right: 0;
+      } @else {
+        top: 0;
+        left: 0;
+      }
+  
+      > svg {
+        transition: all 500ms consts.$ease-out-quartic;
+        font-size: 30px;
+        fill: var(--accent);
+        stroke: var(--accent);
 
-    &:not(.disabled) {
-      stroke: var(--accent);
-      fill: var(--accent);
-
-      &:hover, &:focus-visible {
-        transform: scale(1.2);
-
-        path {
-          stroke-width: 80px;
+        > path {
+          stroke-width: 50px;
         }
       }
+    }
 
-      &:active, &.active {
+    &.open {
+      background-color: funcs.set-alpha(var(--highlight), 15%);
+      border: 1px var(--highlight) dashed;
+      width: calc(100% - 30px);
+      max-height: calc(100% - 80px);
+
+      @if ($small) { bottom: 60px; }
+
+      > div > svg {
+        rotate: 135deg;
+        fill: var(--hot);
+        stroke: var(--hot);
+      }
+
+      .actionsContent {
+        opacity: 1;
+      }
+    }
+
+    .actionsContent {
+      transition: all 500ms consts.$ease-out-quartic;
+      opacity: 0;
+      width: 100%;
+      padding: 10px;
+      @if ($small) { margin-bottom: 20px; }
+      @else { margin-top: 30px; }  
+    }
+  }
+
+  .card {
+    max-width: calc(100% - 26px);
+  }
+
+  .cardSection {
+    max-height: calc(80vh - 150px);
+    min-width: 200px;
+    max-width: 604px;
+  }
+
+  .quiver {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 15px;
+    gap: 10px;
+
+    input {
+      padding: 0 10px;
+      font-size: 28px;
+      height: $arrow-size;
+      line-height: $arrow-size;
+      overflow: hidden;
+      text-align: center;
+      font-size: 22px;
+      user-select: none;
+
+      appearance: textfield;
+      -moz-appearance: textfield;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+    }
+
+    > div > svg {
+      font-size: $arrow-size;
+      transition: all 500ms consts.$ease-out-quartic;
+      stroke: var(--quinary);
+      fill: var(--quinary);
+
+      path {
+        transition: all 500ms consts.$ease-out-quartic;
+      }
+
+      &.disabled {
         transform: scale(0.8);
-        &.backArrow { transform: translateX(-15px); }
-        &.forwardArrow { transform: translateX(15px); }
+      }
+
+      &:not(.disabled) {
+        stroke: var(--accent);
+        fill: var(--accent);
+
+        &:hover, &:focus-visible {
+          transform: scale(1.2);
+
+          path {
+            stroke-width: 80px;
+          }
+        }
+
+        &:active, &.active {
+          transform: scale(0.8);
+          &.backArrow { transform: translateX(-15px); }
+          &.forwardArrow { transform: translateX(15px); }
+        }
+      }
+    }
+  }
+
+  .error {
+    text-align: center;
+
+    > :nth-child(1) {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 10px;
+
+      &::before {
+        color: var(--red);
+        content: "× ";
       }
     }
   }
 }
 
-.error {
-  text-align: center;
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling($small: true);
+}
 
-  > :nth-child(1) {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 10px;
-
-    &::before {
-      color: var(--red);
-      content: "× ";
-    }
-  }
+@media screen and (min-width: 787px) {
+  @include styling($small: false);
 }
