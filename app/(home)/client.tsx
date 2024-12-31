@@ -98,9 +98,6 @@ export function FeedNavigator({ posts, users }:CardFeed) {
       <div
         className={`${pageStyles.actions} ${actionsOpen ? pageStyles.open : ''}`}
       >
-        <div {...focusable(pageStyles.active, () => setActionsOpen(a => !a))}>
-          <IoAdd />
-        </div>
         <div className={pageStyles.actionsContent}>
           <h1>Salutations</h1>
           <p>
@@ -112,6 +109,9 @@ export function FeedNavigator({ posts, users }:CardFeed) {
             Actual features will be added soon!
           </p>
           <i><sub>Good fermentin'.</sub></i>
+        </div>
+        <div {...focusable(pageStyles.active, () => setActionsOpen(a => !a))}>
+          <IoAdd />
         </div>
       </div>
 

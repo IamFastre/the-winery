@@ -11,7 +11,7 @@ $arrow-size: 28px;
   }
 
   .actions {
-    z-index: 1;
+    z-index: 3;
     overflow: hidden;
     position: absolute;
     transition: all 500ms consts.$ease-out-quartic;
@@ -31,9 +31,10 @@ $arrow-size: 28px;
       left: 15px;
     }
 
-    > div:first-child {
-      z-index: 2;
+    > div:last-child {
+      cursor: pointer;
       position: absolute;
+
       @if ($small) {
         bottom: 0;
         right: 0;
