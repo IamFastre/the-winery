@@ -60,7 +60,7 @@ export function ErrorPage(props:ErrorPageProps) {
             <IoWarningOutline />
           </Link>
           <Link
-            href={`?date=${Date.now()}`}
+            href={`?reload=${Math.floor(Math.random() * 1e12)}`}
             title="Reload Page"
             type="wrapper"
           >

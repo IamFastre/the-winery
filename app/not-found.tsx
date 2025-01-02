@@ -22,9 +22,16 @@ export default function NotFoundPage() {
       <ErrorPage
         message={
           url ?
-          <>
-            Page <C.ACCENT><RI>'{url.pathname}'</RI></C.ACCENT> does not exist.
-          </>
+          (
+            url.pathname === '/404' ?
+            <>
+              Well! <RI>This</RI> page is <C.ACCENT><RI>404</RI></C.ACCENT>, funny guy.
+            </>
+            :
+            <>
+              Page <C.ACCENT><RI>'{url.pathname}'</RI></C.ACCENT> does not exist.
+            </>
+          )
           :
           <>
             The page you're trying to request does not exits.
