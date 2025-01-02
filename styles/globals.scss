@@ -114,21 +114,8 @@ a {
   }
 
   &:where([type="wrapper"]) {
-    display: flex;
-    unicode-bidi: isolate;
-    box-sizing: border-box;
-    flex-direction: column;
-    position: relative;
-
-    color: inherit;
-    font-style: inherit;
-    text-decoration: inherit;
-    text-decoration-style: inherit;
-
-    &:hover, &:focus-visible {
-      font-weight: inherit;
-      text-decoration-style: inherit;
-    }
+    all: unset;
+    cursor: pointer;
   }
 }
 
@@ -302,7 +289,7 @@ $rainbow: var(--red), var(--orange), var(--yellow), var(--green), var(--blue), v
   }
 }
 
-@mixin mention($tag-color, $link-color, $link-bg-opacity: 0.1, $link-bg-opacity-hover: 0.2) {
+@mixin mention($tag-color, $link-color, $link-bg-opacity: 10%, $link-bg-opacity-hover: 20%) {
   font-weight: bold;
   color: $tag-color;
   background-color: funcs.set-alpha($link-color, $link-bg-opacity);
