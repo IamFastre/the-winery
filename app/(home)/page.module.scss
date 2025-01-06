@@ -15,11 +15,11 @@ $arrow-size: 28px;
     overflow: hidden;
     position: absolute;
     transition: all 500ms consts.$ease-out-quartic;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(5px);
     background-color: funcs.set-alpha(var(--accent), 10%);
     box-sizing: content-box;
     border: 1px var(--none) solid;
-    border-radius: 4px;
+    border-radius: 5px;
     max-height: 30px;
     width: 30px;
 
@@ -75,10 +75,13 @@ $arrow-size: 28px;
     }
 
     .actionsContent {
+      align-items: center;
       transition: all 500ms consts.$ease-out-quartic;
       opacity: 0;
       width: 100%;
       padding: 10px;
+      gap: 5px;
+
       @if ($small) { margin-bottom: 20px; }
       @else { margin-top: 30px; }  
     }
