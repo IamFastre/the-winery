@@ -59,7 +59,7 @@ $o-height: 40px;
   }
 
   .options {
-    // margin: 0 6px;
+    margin: 0 4px;
     height: 0;
     max-height: calc($o-height * 4);
     overflow-y: scroll;
@@ -81,7 +81,8 @@ $o-height: 40px;
   }
 
   .option {
-    height: $o-height;
+    min-height: $o-height;
+    max-height: $o-height;
     transition: all 500ms consts.$ease-out-quartic;
     padding: 10px;
     flex-direction: row;
