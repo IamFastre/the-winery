@@ -21,10 +21,13 @@ import { useGoTo } from "@/hooks";
 import { Card } from "@/components/Card";
 import { GoHomeLogo } from "@/components/GoHomeLogo";
 import { Section } from "@/components/Section";
+import { DropdownButton } from "@/components/DropdownButton";
 
 import layoutStyles from "./layout.module.scss";
 import pageStyles from "./page.module.scss";
 import { C, RI } from "@/components/C";
+import { Button } from "@/components/Button";
+import colors from "@/styles/colors";
 
 
 const getCardIndex = (param:string | null, max:number | undefined) => {
@@ -51,10 +54,71 @@ const setCardIndex = (value:number) => {
   return params.toString();
 };
 
+const sortByOptions = [
+  "Default",
+  "Newest",
+  "Random",
+];
+
+function ActionsButton() {
+  const [actionsOpen, setActionsOpen] = useState<boolean>(false);
+
+  const [sortBy, setSortBy] = useState<number>(0);
+  const [onlyFollowing, setOnlyFollowing] = useState<boolean>(false);
+  const [focusMode, setFocusMode] = useState<boolean>(false);
+
+  const onSelectSort = (o:string, i:number) => {
+    setSortBy(i);
+    console.log(o);
+  }
+
+  return (
+    <div
+      className={`${pageStyles.actions} ${actionsOpen ? pageStyles.open : ''}`}
+    >
+      <div className={pageStyles.actionsContent}>
+        <span className={pageStyles.actionsTitle}>
+          Actions
+        </span>
+        <div className={pageStyles.actionsArray}>
+          <DropdownButton
+            title="Sort by"
+            subtitle={sortByOptions[sortBy]}
+            onSelect={onSelectSort}
+            selectedIndices={[sortBy]}
+            options={sortByOptions}
+          />
+          <div className={pageStyles.actionsSmall}>
+            <Button
+              title="Only Following"
+              color={onlyFollowing ? colors.green : colors.red}
+              onClick={() => setOnlyFollowing(f => !f)}
+            />
+            <Button
+              title="Focus Mode"
+              color={focusMode ? colors.green : colors.red}
+              onClick={() => setFocusMode(f => !f)}
+            />
+          </div>
+        </div>
+        <C.SECONDARY>
+          <i>
+            <span style={{ fontSize: 'smaller' }}>
+              Only a mock! Not functional now.
+            </span>
+          </i>
+        </C.SECONDARY>
+      </div>
+      <div {...focusable(pageStyles.active, () => setActionsOpen(a => !a))}>
+        <IoAdd />
+      </div>
+    </div>
+  );
+}
+
 export function FeedNavigator({ posts, users }:CardFeed) {
   const card = getCardIndex(useSearchParams().get('card'), posts.length) - 1;
  
-  const [actionsOpen, setActionsOpen] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(card);
   const [inpt, setInpt] = useState<number>(index);
   const post = posts[index];
@@ -95,26 +159,6 @@ export function FeedNavigator({ posts, users }:CardFeed) {
 
   return (
     <>
-      <div
-        className={`${pageStyles.actions} ${actionsOpen ? pageStyles.open : ''}`}
-      >
-        <div className={pageStyles.actionsContent}>
-          <h1>Salutations</h1>
-          <p>
-            Welcome to the action panel! Here you can perform various actions regarding your feed run.
-          </p>
-          <p>
-            Don't worry it's too empty now.
-            <br/>
-            Actual features will be added soon!
-          </p>
-          <i><sub>Good fermentin'.</sub></i>
-        </div>
-        <div {...focusable(pageStyles.active, () => setActionsOpen(a => !a))}>
-          <IoAdd />
-        </div>
-      </div>
-
       <Card
         username={author.username}
         userAvatar={author.avatar}
@@ -146,6 +190,8 @@ export function FeedNavigator({ posts, users }:CardFeed) {
           <IoArrowForward className={`${pageStyles.forwardArrow} ${index >= posts.length-1 ? pageStyles.disabled : undefined}`} />
         </div>
       </div>
+
+      <ActionsButton />
     </>
   );
 }

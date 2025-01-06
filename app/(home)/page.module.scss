@@ -82,8 +82,45 @@ $arrow-size: 28px;
       padding: 10px;
       gap: 5px;
 
-      @if ($small) { margin-bottom: 20px; }
-      @else { margin-top: 30px; }  
+      @if ($small) {
+        flex-direction: column-reverse;
+        margin-bottom: 20px;
+      }
+      @else {
+        flex-direction: column;
+        margin-top: 30px;
+      }
+
+      .actionsTitle {
+        font-size: larger;
+        @if ($small) { margin-top: 10px; }
+        @else { margin-bottom: 10px; }
+      }
+
+      .actionsArray {
+        flex-direction: row;
+        gap: 10px;
+        overflow-x: scroll;
+        max-width: 100%;
+
+        > div {
+          width: 150px;
+        }
+        
+        .actionsSmall {
+          gap: 10px;
+          @if ($small) { flex-direction: column-reverse; }
+          @else { flex-direction: column; }
+
+          > div {
+            height: 50px;
+
+            > div > span {
+              font-size: smaller;
+            }
+          }
+        }
+      }
     }
   }
 
