@@ -1,0 +1,108 @@
+@use '@/styles/funcs.module';
+@use '@/styles/consts.module';
+
+$o-height: 40px;
+
+@mixin styling($small) {
+  .container {
+    user-select: none;
+    width: 175px;
+
+    @if ($small) { flex-direction: column-reverse; }
+    @else { flex-direction: column; }
+  }
+
+  .head {
+    height: calc($o-height + 10px);
+    padding: 10px;
+    border: 1px solid var(--accent);
+    background-color: funcs.set-alpha(var(--accent), 10%);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    transition: all 500ms consts.$ease-out-quartic;
+
+    &.open {
+      background-color: funcs.set-alpha(var(--accent), 20%);
+    }
+  }
+
+  .subtitle {
+    font-size: 12px;
+    color: var(--secondary);
+  }
+
+  .icon {
+    transition: all 500ms consts.$ease-out-quartic;
+
+    @if ($small) { transform: scaleY(-1); }
+    @else { transform: scaleY(1); }
+
+    path {
+      transition: all 500ms consts.$ease-out-quartic;
+      fill: var(--accent);
+      stroke: transparent;
+      stroke-width: 0;
+    }
+
+    &.open {
+      @if ($small) { rotate: -90deg; }
+      @else { rotate: 90deg; }
+
+      path {
+        fill: transparent;
+        stroke: var(--accent);
+        stroke-width: 50px;
+      }
+    }
+  }
+
+  .options {
+    // margin: 0 6px;
+    height: 0;
+    max-height: calc($o-height * 4);
+    overflow-y: scroll;
+    transition: all 500ms consts.$ease-out-quartic;
+    background-color: funcs.set-alpha(var(--accent), 10%);
+
+    @if ($small) {
+      flex-direction: column-reverse;
+      border-radius: 5px 5px 0 0;
+    }
+    @else {
+      flex-direction: column;
+      border-radius: 0 0 5px 5px;
+    }
+
+    &.open {
+      height: auto;
+    }
+  }
+
+  .option {
+    height: $o-height;
+    transition: all 500ms consts.$ease-out-quartic;
+    padding: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &.selected {
+      background-color: funcs.set-alpha(var(--accent), 10%);
+
+      &::after {
+        content: "•";
+        color: var(--accent);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling($small: true);
+}
+
+@media screen and (min-width: 787px) {
+  @include styling($small: false);
+}
