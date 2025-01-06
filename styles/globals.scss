@@ -27,6 +27,10 @@
   background-color: funcs.set-alpha(var(--accent), 80%);
 }
 
+:root {
+  interpolate-size: allow-keywords;
+}
+
 body {
   margin: 0;
   padding: 10px;
