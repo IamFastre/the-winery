@@ -13,14 +13,15 @@ $o-height: 40px;
   }
 
   .head {
+    cursor: pointer;
     height: calc($o-height + 10px);
     padding: 10px;
-    border: 1px solid var(--accent);
-    background-color: funcs.set-alpha(var(--accent), 10%);
+    gap: 10px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    border: 1px solid var(--accent);
+    background-color: funcs.set-alpha(var(--accent), 10%);
     transition: all 500ms consts.$ease-out-quartic;
 
     &.open {
@@ -87,6 +88,7 @@ $o-height: 40px;
     padding: 10px;
     flex-direction: row;
     justify-content: space-between;
+    cursor: pointer;
 
     &.selected {
       background-color: funcs.set-alpha(var(--accent), 10%);

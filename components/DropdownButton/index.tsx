@@ -5,7 +5,7 @@ import styles from "./style.module.scss";
 import { IoCaretDown } from '@react-icons/all-files/io5/IoCaretDown';
 
 interface DropdownButtonProps {
-  title: string;
+  title: string | JSX.Element;
   subtitle?: string;
   options: string[];
   selectedIndices: number[];

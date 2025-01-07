@@ -3,7 +3,7 @@
 .loading {
   color: var(--secondary);
   user-select: none;
-  font-size: 1rem;
+  font-size: inherit;
   font-variant-ligatures: none;
 
   > span:nth-child(1) {
