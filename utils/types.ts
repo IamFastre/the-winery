@@ -15,6 +15,7 @@ import type { OtherLogo, OtherLogoParams } from "@/utils/api/other/logo";
 
 import type { CardSuperLike, CardSuperLikeParams } from "@/utils/api/mut/card/super-like";
 import type { CardDelete, CardDeleteParams } from "@/utils/api/mut/card/delete";
+import { options } from "./consts";
 
 export type LogoKind = "main" | "brand" | "mono" | "brand-outline" | "mono-outline" | "touch";
 
@@ -69,7 +70,9 @@ export type ResultAPI<T extends keyof Endpoints> = Result<Endpoints[T]['Return']
 
 /* ========================================================================== */
 
+export type AppOptions = typeof options;
+
 export type StorageEntry = {
-  "feed:sort-by": 0 | 1 | 2;
+  "feed:sort-by": AppOptions['feed']['sort-by'][number];
   "feed:only-following": boolean;
 };
