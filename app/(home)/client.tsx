@@ -1,7 +1,7 @@
 "use client";
 import { MouseEventHandler, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { IconType } from "@react-icons/all-files";
+import { useQuery } from "@tanstack/react-query";
 
 import { IoCogOutline } from "@icons/io5/IoCogOutline";
 import { IoInformationCircleOutline } from "@icons/io5/IoInformationCircleOutline";
@@ -12,47 +12,23 @@ import { IoArrowBack } from "@icons/io5/IoArrowBack";
 import { IoArrowForward } from "@icons/io5/IoArrowForward";
 import { IoAdd } from "@icons/io5/IoAdd";
 
-import consts from "@/utils/consts";
-import { focusable } from "@/utils/client";
+import consts, { options } from "@/utils/consts";
+import { Storage } from "@/utils";
+import { api, focusable } from "@/utils/client";
 import { Modal } from "@/providers/ModalProvider";
 import { useShortcuts } from "@/providers/Shortcuts";
-import { CardFeed } from "@/utils/api/card/feed";
 import { useGoTo } from "@/hooks";
 import { Card } from "@/components/Card";
 import { GoHomeLogo } from "@/components/GoHomeLogo";
 import { Section } from "@/components/Section";
 import { DropdownButton } from "@/components/DropdownButton";
+import { C, RI } from "@/components/C";
+import { LoadingText } from "@/components/LoadingText";
+import { ErrorPage } from "@/components/Pages";
 
 import layoutStyles from "./layout.module.scss";
 import pageStyles from "./page.module.scss";
-import { C, RI } from "@/components/C";
-import { Button } from "@/components/Button";
-import colors from "@/styles/colors";
 
-
-const getCardIndex = (param:string | null, max:number | undefined) => {
-  if (!param)
-    return 1;
-
-  if (!max)
-    max = 1;
-
-  const result = Number.parseInt(param);
-
-  if (Number.isNaN(result) || result < 1)
-    return 1;
-
-  if (result > max)
-    return max;
-
-  return result;
-}
-
-const setCardIndex = (value:number) => {
-  const params = new URLSearchParams();
-  params.set('card', value.toFixed(0));
-  return params.toString();
-};
 
 const sortByOptions = [
   "Default",
@@ -60,17 +36,29 @@ const sortByOptions = [
   "Random",
 ];
 
-function ActionsButton() {
+function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching:boolean; }) {
   const [actionsOpen, setActionsOpen] = useState<boolean>(false);
 
-  const [sortBy, setSortBy] = useState<number>(0);
-  const [onlyFollowing, setOnlyFollowing] = useState<boolean>(false);
-  const [focusMode, setFocusMode] = useState<boolean>(false);
+  // const onlyFollowing = Storage.get("feed:only-following") ?? false;
+  // const focusMode = Storage.get("feed:focus-mode") ?? false;
+
+  const sortBy = Storage.get("feed:sort-by") ?? "default";
+  const sortI = options['feed']['sort-by'].indexOf(sortBy);
 
   const onSelectSort = (o:string, i:number) => {
-    setSortBy(i);
-    console.log(o);
-  }
+    Storage.set("feed:sort-by", options['feed']['sort-by'][i]);
+    refetch();
+  };
+
+  // const onClickFollowing = () => {
+  //   Storage.set("feed:only-following", !onlyFollowing);
+  //   refetch();
+  // };
+  
+  // const onClickFocus = () => {
+  //   Storage.set("feed:focus-mode", !focusMode);
+  //   refetch();
+  // };
 
   return (
     <div
@@ -82,32 +70,25 @@ function ActionsButton() {
         </span>
         <div className={pageStyles.actionsArray}>
           <DropdownButton
-            title="Sort by"
-            subtitle={sortByOptions[sortBy]}
+            title={refetching ? <LoadingText /> : "Sort by"}
+            subtitle={sortByOptions[sortI]}
             onSelect={onSelectSort}
-            selectedIndices={[sortBy]}
+            selectedIndices={[sortI]}
             options={sortByOptions}
           />
-          <div className={pageStyles.actionsSmall}>
+          {/* <div className={pageStyles.actionsSmall}>
             <Button
               title="Only Following"
               color={onlyFollowing ? colors.green : colors.red}
-              onClick={() => setOnlyFollowing(f => !f)}
+              onClick={onClickFollowing}
             />
             <Button
               title="Focus Mode"
               color={focusMode ? colors.green : colors.red}
-              onClick={() => setFocusMode(f => !f)}
+              onClick={onClickFocus}
             />
-          </div>
+          </div> */}
         </div>
-        <C.SECONDARY>
-          <i>
-            <span style={{ fontSize: 'smaller' }}>
-              Only a mock! Not functional now.
-            </span>
-          </i>
-        </C.SECONDARY>
       </div>
       <div {...focusable(pageStyles.active, () => setActionsOpen(a => !a))}>
         <IoAdd />
@@ -116,15 +97,20 @@ function ActionsButton() {
   );
 }
 
-export function FeedNavigator({ posts, users }:CardFeed) {
-  const card = getCardIndex(useSearchParams().get('card'), posts.length) - 1;
- 
-  const [index, setIndex] = useState<number>(card);
+export function FeedNavigator() {
+  const query = useQuery({
+    queryFn: async () => await api("/card/feed", { sort: Storage.get('feed:sort-by') ?? undefined }),
+    queryKey: ["/card/feed"]
+  });
+
+  const [index, setIndex] = useState<number>(0);
   const [inpt, setInpt] = useState<number>(index);
-  const post = posts[index];
-  const author = users[post.author_uuid ?? ""];
 
+  const posts = query.data?.data?.posts;
+  const users = query.data?.data?.users;
 
+  const post = posts?.[index];
+  const author = users?.[post?.author_uuid ?? ""];
 
   const increment = (num:number = 1) => {
     if (posts)
@@ -138,7 +124,6 @@ export function FeedNavigator({ posts, users }:CardFeed) {
   };
 
   useEffect(() => {
-    window.history.pushState(null, '', `?${setCardIndex(index + 1)}`);
     setInpt(index);
   }, [index]);
 
@@ -156,6 +141,22 @@ export function FeedNavigator({ posts, users }:CardFeed) {
     { key: 's', alt: true, ctrl: true, clickableId: 'super-like-post' },
     { key: 'l', alt: true, ctrl: true, clickableId: 'like-list' },
   ]);
+
+  if (query.data?.error) {
+    return (
+      <ErrorPage
+        message={query.data.error.message}
+        code={query.data.error.code}
+        noCard
+      />
+    );
+  }
+
+  if (query.isLoading || !author || !post) {
+    return (
+      <LoadingText />
+    );
+  }
 
   return (
     <>
@@ -187,11 +188,14 @@ export function FeedNavigator({ posts, users }:CardFeed) {
           style={{ width: `${inpt ? (inpt + 1).toFixed().length : (index + 1).toFixed().length}ch` }}
         />
         <div id="go-forward" {...focusable(pageStyles.active, () => increment(+1))}>
-          <IoArrowForward className={`${pageStyles.forwardArrow} ${index >= posts.length-1 ? pageStyles.disabled : undefined}`} />
+          <IoArrowForward className={`${pageStyles.forwardArrow} ${index >= posts.length - 1 ? pageStyles.disabled : undefined}`} />
         </div>
       </div>
 
-      <ActionsButton />
+      <ActionsButton
+        refetch={() => query.refetch()}
+        refetching={query.isRefetching}
+      />
     </>
   );
 }
