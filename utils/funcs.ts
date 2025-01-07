@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { StaticImageData } from 'next/image';
 
-import { LogoKind } from './types';
+import { LogoKind, StorageEntry } from './types';
 
 import NDC   from "@/public/static/images/logo/NaipeDeCopas.png";
 import NDCB  from "@/public/static/images/logo/NaipeDeCopasBrand.png";
@@ -165,4 +165,28 @@ export function humanizeLikes(count: number) : string {
     result = `${count}`;
 
   return result;
+}
+
+export class Storage {
+  static set<T extends keyof StorageEntry>(key:T, value:StorageEntry[T]) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  static get<T extends keyof StorageEntry>(key:T) : StorageEntry[T] | null {
+    const value = localStorage.getItem(key);
+
+    if (value === null)
+      return null;
+
+    return JSON.parse(value) as StorageEntry[T];
+  }
+
+  static remove(key:keyof StorageEntry) : boolean {
+    if (localStorage.getItem(key) !== null) {
+      localStorage.removeItem(key);
+      return true;
+    }
+
+    return false;
+  }
 }

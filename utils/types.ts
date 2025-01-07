@@ -66,3 +66,10 @@ export interface ResultFailure {
 
 export type Result<T> = T extends null ? ResultFailure : ResultSuccess<T>;
 export type ResultAPI<T extends keyof Endpoints> = Result<Endpoints[T]['Return'] | null>;
+
+/* ========================================================================== */
+
+export type StorageEntry = {
+  "feed:sort-by": 0 | 1 | 2;
+  "feed:only-following": boolean;
+};
