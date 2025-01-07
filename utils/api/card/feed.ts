@@ -1,10 +1,11 @@
+import _ from 'lodash';
 import { result } from '@/utils/api';
 import { getUserInfo } from '@/utils/api/user/info';
 import { createClient } from '@/supabase/server';
 import { Tables } from '@/supabase/types';
 
 export type CardFeed = { posts: Tables<'posts'>[], users: { [id:string]:Tables<'profiles'> } };
-export type CardFeedParams = { limit?:number; sort?:'default' /*| 'top'*/ | 'new'; };
+export type CardFeedParams = { limit?:number; sort?:'default' | 'new' | 'random'; };
 
 export async function getCardFeed(limit:number = 25, sortBy:CardFeedParams['sort'] = 'default') {
   const supabase = createClient();
@@ -23,7 +24,10 @@ export async function getCardFeed(limit:number = 25, sortBy:CardFeedParams['sort
   if (res.error)
     return result(null, res.error);
 
-  const users:CardFeed['users'] = {};
+  if (sortBy === 'random')
+    res.data = _.shuffle(res.data);
+
+  const users:CardFeed['users'] = { };
 
   for (const author of res.data.map(p => p.author_uuid) ?? []) {
     if (author && !users[author]) {
