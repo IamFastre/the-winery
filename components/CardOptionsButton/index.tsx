@@ -15,7 +15,7 @@ import { useToaster } from "@/providers/Toaster";
 import { OptionsModal } from "@/components/Modals";
 import { LoadingText } from "@/components/LoadingText";
 
-import colors from "@/styles/colors.js";
+import colors from "@/styles/colors";
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/supabase/client";
 

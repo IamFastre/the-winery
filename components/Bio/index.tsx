@@ -15,7 +15,7 @@ import { Zodiac } from "@/components/Zodiac";
 import { ProfileBadge } from "@/components/ProfileBadge";
 
 import { BioText } from "./client";
-import colors from "@/styles/colors.js";
+import colors from "@/styles/colors";
 import styles from "./style.module.scss";
 
 const Note = ({ children }:{ children:React.ReactNode }) => (

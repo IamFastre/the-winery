@@ -20,7 +20,7 @@ import { LoadingText } from "@/components/LoadingText";
 import { Section } from "@/components/Section";
 import { UsernameHandle } from "@/components/UsernameHandle";
 
-import colors from "@/styles/colors.js";
+import colors from "@/styles/colors";
 import styles from "./style.module.scss";
 import Image from "next/image";
 

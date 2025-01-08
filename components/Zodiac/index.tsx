@@ -1,7 +1,7 @@
 import { getZodiac } from "@/utils";
 import { UserInfo } from "@/utils/api/user/info";
 
-import colors from "@/styles/colors.js";
+import colors from "@/styles/colors";
 import styles from "./style.module.scss";
 
 interface ZodiacProps extends React.SVGProps<SVGSVGElement> {

@@ -27,7 +27,7 @@ import { OptionsModal } from "@/components/Modals";
 
 import { ProfileTextStuff } from "./server";
 
-import colors from "@/styles/colors.js";
+import colors from "@/styles/colors";
 import styles from "./styles.module.scss";
 
 const GENDERS = [null, 'male', 'female', 'toaster'] as UserInfo['gender'][];

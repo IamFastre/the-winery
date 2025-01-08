@@ -5,7 +5,7 @@ import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
 import { C } from "@/components/C";
 
-import colors from "@/styles/colors.js";
+import colors from "@/styles/colors";
 import styles from "./styles.module.scss";
 
 export const metadata:Metadata = {

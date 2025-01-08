@@ -2,10 +2,9 @@ import { MouseEventHandler, ReactNode } from "react";
 import { IconType } from "@react-icons/all-files";
 import CSS from "csstype";
 
-import { hexOpacity } from "@/utils/funcs";
 import { focusable } from "@/utils/client";
 
-import colors from "@/styles/colors.js";
+import colors from "@/styles/colors";
 import styles from "./style.module.scss";
 
 
@@ -33,38 +32,16 @@ export function Button(props:Readonly<ButtonProps>) {
   return (
     <div
       className={`${styles.container} ${props.disabled ? styles.disabled : ""} ${props.noMinimum ? styles.noMin : ""} ${props.className}`}
+      style={{ '--button-color': color } as Record<string, string>}
       {...focusable(styles.active, !props.disabled ? props.onClick : undefined)}
     >
-      {/* This is just cursed */}
-      <style jsx> {`
-        .${styles.container} {
-          border-color: ${color} !important;
-          background-color: ${hexOpacity(color, 0.1)} !important;
-
-          &:hover:not(.${styles.disabled}),
-          &:focus-visible:not(.${styles.disabled}) {
-            background-color: ${hexOpacity(color, 0.2)} !important;
-          }
-
-          &:active:not(.${styles.disabled}),
-          &.${styles.active}:not(.${styles.disabled}) {
-            background-color: ${color} !important;
-            filter: drop-shadow(0 0 10px ${hexOpacity(color, 0.5)}) !important;
-          }
-        }
-
-        .${styles.icon} {
-          svg {
-            fill: ${props.disabled ? colors.secondary : props.icon?.color ?? colors.tertiary};
-            stroke: ${props.disabled ? colors.secondary : props.icon?.color ?? colors.tertiary};
-          }
-        }
-      `}</style>
-
       {
         props.icon ?
         <div className={`${styles.icon} ${props.iconBackground ? styles.background : ""}`}>
-          <props.icon.element size={props.icon.size ?? 30} />
+          <props.icon.element
+            size={props.icon.size ?? 30}
+            color={props.disabled ? colors.secondary : props.icon?.color ?? colors.tertiary}
+          />
         </div>
         : null
       }

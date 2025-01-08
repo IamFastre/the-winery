@@ -14,7 +14,7 @@ import { GoHomeLogo } from "@/components/GoHomeLogo";
 import { LabelTitle } from "@/components/LabelTitle";
 import { Section } from "@/components/Section";
 
-import colors from "@/styles/colors.js";
+import colors from "@/styles/colors";
 import styles from "../../styles.module.scss";
 import { useToaster } from "@/providers/Toaster";
 

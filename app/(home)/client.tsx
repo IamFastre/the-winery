@@ -100,7 +100,8 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
 export function FeedNavigator() {
   const query = useQuery({
     queryFn: async () => await api("/card/feed", { sort: Storage.get('feed:sort-by') ?? undefined }),
-    queryKey: ["/card/feed"]
+    queryKey: ["/card/feed"],
+    refetchOnWindowFocus: false,
   });
 
   const [index, setIndex] = useState<number>(0);

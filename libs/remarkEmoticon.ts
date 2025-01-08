@@ -1,5 +1,5 @@
 import { visit } from "unist-util-visit";
-import colors from "@/styles/colors.js";
+import colors from "@/styles/colors";
 import consts from "@/utils/consts";
 
 

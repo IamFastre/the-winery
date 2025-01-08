@@ -23,7 +23,7 @@ import { LoadingText } from "@/components/LoadingText";
 import { MarkDown } from "@/components/MarkDown";
 import { Section } from "@/components/Section";
 
-import colors from "@/styles/colors.js";
+import colors from "@/styles/colors";
 import styles from "./styles.module.scss";
 
 interface EditorProps {

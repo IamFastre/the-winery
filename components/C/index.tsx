@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from "react";
-import colors from "@/styles/colors.js";
+import colors from "@/styles/colors";
 
 
 export type SpanProps      = HTMLAttributes<HTMLSpanElement>;
