@@ -122,6 +122,11 @@ a {
   &:where([type="wrapper"]) {
     all: unset;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: relative;
+    overflow: visible;
   }
 }
 
