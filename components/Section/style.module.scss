@@ -1,19 +1,21 @@
 @use '@/styles/colors.module' as c;
+@use '@/styles/values.module' as v;
 
 @mixin styling($border-width, $margin, $padding) {
   .background {
     background-color: c.$primary;
-    border-radius: 0;
+    border-radius: v.$border-radius-1;
   }
   
   .container {
-    &.flex {
-      flex: 1;
-    }
     margin: $margin;
     padding: $padding;
     overflow: hidden;
     border: $border-width solid c.$secondary;
+    border-radius: v.$border-radius-1;
+
+    &.flex { flex: 1; }
+
     &:hover, &:focus-visible {
       border-color: c.$accent;
     }

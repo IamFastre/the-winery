@@ -1,6 +1,7 @@
 @use '@/styles/funcs.module';
 @use '@/styles/consts.module';
 @use '@/styles/colors.module' as c;
+@use '@/styles/values.module' as v;
 
 $all-transition: all 350ms ease-out;
 
@@ -9,6 +10,7 @@ $all-transition: all 350ms ease-out;
   justify-content: center;
   flex-direction: row;
   border-color: var(--button-color);
+  border-radius: v.$border-radius-1;
   background-color: funcs.set-alpha(var(--button-color), 10%);
   overflow: hidden;
 

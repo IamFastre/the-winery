@@ -1,6 +1,7 @@
 @use 'funcs.module';
 @use 'consts.module';
 @use 'colors.module' as c;
+@use 'values.module' as v;
 
 @font-face {
   font-family: Cascadia;
@@ -323,6 +324,7 @@ $rainbow: c.$red, c.$orange, c.$yellow, c.$green, c.$blue, c.$purple;
   padding: 15px;
   background-color: funcs.set-alpha(c.$highlight, 15%);
   border: 1px solid c.$highlight;
+  border-radius: v.$border-radius-1;
   gap: 20px;
   overflow: hidden;
 
@@ -371,7 +373,7 @@ $rainbow: c.$red, c.$orange, c.$yellow, c.$green, c.$blue, c.$purple;
     > img {
       width: 32px;
       height: 32px;
-      border-radius: 10%;
+      border-radius: v.$border-radius-2;
     }
 
     > div:first-of-type {

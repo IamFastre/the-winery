@@ -1,6 +1,7 @@
 @use '@/styles/funcs.module';
 @use '@/styles/consts.module';
 @use '@/styles/colors.module' as c;
+@use '@/styles/values.module' as v;
 
 @mixin styling($padding-top, $data-font-size, $cards-grid) {
   .section {
@@ -84,11 +85,12 @@
   }
 
   .avatar {
-    border-radius: 10%;
+    $radius: v.$border-radius-2;
+    border-radius: $radius;
 
     img {
       overflow: hidden;
-      border-radius: 10%;
+      border-radius: $radius;
     }
 
     &.editing {
@@ -103,7 +105,7 @@
       background-color: funcs.set-alpha(c.$tertiary, 25%);
       transition: all 250ms ease-in-out;
       animation: fadeIn 500ms ease-in-out;
-      border-radius: 10%;
+      border-radius: $radius;
       top: 0;
       bottom: 0;
       left: 0;

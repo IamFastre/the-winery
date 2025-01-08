@@ -1,5 +1,6 @@
 @use '@/styles/consts.module';
 @use '@/styles/colors.module' as c;
+@use '@/styles/values.module' as v;
 
 $corner-icon-size: 25px;
 
@@ -56,7 +57,7 @@ $corner-icon-size: 25px;
   gap: 10px;
 
   > img {
-   border-radius: 10%;
+   border-radius: v.$border-radius-2;
   }
 }
 
