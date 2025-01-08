@@ -98,8 +98,8 @@ export default async function CardPage({ params }:CardPageProps) {
             <Image
               src={author.avatar}
               alt={`${author.username}'s avatar`}
-              width={50}
-              height={50}
+              width={40}
+              height={40}
             />
             <div className={styles.authorText}>
               <UsernameHandle username={author.username} id="user-post" />
