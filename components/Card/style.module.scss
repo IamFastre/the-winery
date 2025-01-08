@@ -1,4 +1,5 @@
 @use '@/styles/consts.module';
+@use '@/styles/colors.module' as c;
 
 $corner-icon-size: 25px;
 
@@ -30,7 +31,7 @@ $corner-icon-size: 25px;
   top: calc(-1 * $corner-icon-size / 2);
   right: calc(-1 * $corner-icon-size / 2);
   gap: 5px;
-  background: radial-gradient(circle, var(--primary) 50%, var(--none) 85%);
+  background: radial-gradient(circle, c.$primary 50%, c.$none 85%);
   
   > a, div {
     cursor: pointer;
@@ -69,7 +70,7 @@ $corner-icon-size: 25px;
     font-size: 12px;
     line-height: 12px;
     font-style: italic;
-    color: var(--secondary);
+    color: c.$secondary;
   }
 }
 

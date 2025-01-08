@@ -1,3 +1,4 @@
+@use '@/styles/colors.module' as c;
 
 @mixin styling($action-height, $posting-as-size, $action-font-size) {
   .sectionContent {
@@ -20,11 +21,11 @@
   .title {
     span {
       font-size: 22px;
-      color: var(--quinary);
+      color: c.$quinary;
     }
 
     hr {
-      border-color: var(--accent);
+      border-color: c.$accent;
       margin-top: 5px;
     }
   }
@@ -55,7 +56,7 @@
     > textarea, > div {
       flex: 1;
       resize: none;
-      caret-color: var(--accent);
+      caret-color: c.$accent;
     }
   }
 
@@ -104,7 +105,7 @@
   }
   
   .error {
-    color: var(--secondary);
+    color: c.$secondary;
     font-size: 14px;
     animation: showUp 1s ease-in-out;
 
@@ -113,13 +114,13 @@
 
       &::before {
         content: "..";
-        color: var(--none);
+        color: c.$none;
       }
     }
 
     &::before {
       content: "× ";
-      color: var(--red);
+      color: c.$red;
     }
   }
 

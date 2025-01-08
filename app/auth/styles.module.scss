@@ -1,5 +1,6 @@
 @use '@/styles/funcs.module';
 @use '@/styles/consts.module';
+@use '@/styles/colors.module' as c;
 
 $width: 365px;
 $max-width: 85%;
@@ -14,7 +15,7 @@ $max-width: 85%;
   gap: 10px;
   
   > h3 {
-    color: var(--tertiary);
+    color: c.$tertiary;
     align-self: center;
     &::before {
       content: '';
@@ -49,12 +50,12 @@ $max-width: 85%;
 
   .paragraph {
     padding: 0 10px;
-    color: var(--secondary);
+    color: c.$secondary;
     font-size: smaller;
   }
 
-  .success { @include result(var(--accent)); }
-  .failure { @include result(var(--red)); }
+  .success { @include result(c.$accent); }
+  .failure { @include result(c.$red); }
 
   form {
     display: flex;
@@ -78,7 +79,7 @@ $max-width: 85%;
 
         &::placeholder {
           font-style: italic;
-          color: var(--secondary);
+          color: c.$secondary;
         }
       }
     }
@@ -121,8 +122,8 @@ $max-width: 85%;
     svg {
       font-size: 22px;
 
-      &[id="open"] { fill: var(--accent); }
-      &[id="closed"] { fill: var(--secondary); }
+      &[id="open"] { fill: c.$accent; }
+      &[id="closed"] { fill: c.$secondary; }
     }
     &:hover { transform: scale(1.2); }
     &:active { transform: scale(0.8); }
@@ -140,14 +141,14 @@ $max-width: 85%;
     &.bad{
       &::before {
           content: "× ";
-          color: var(--red);
+          color: c.$red;
         }
     }
 
     &.good{
       &::before {
           content: "✓ ";
-          color: var(--green);
+          color: c.$green;
         }
     }
 
@@ -156,7 +157,7 @@ $max-width: 85%;
       margin-top: 5px;
       height: 5px;
       width: 100%;
-      background-color: var(--quaternary);
+      background-color: c.$quaternary;
       border-radius: 5px;
 
       > div {
@@ -165,7 +166,7 @@ $max-width: 85%;
         height: 100%;
         width: 100%;
         flex: 1;
-        background-color: var(--accent);
+        background-color: c.$accent;
       }
     }
   }
@@ -189,8 +190,8 @@ $max-width: 85%;
   margin-bottom: 10px;
 
   svg {
-    fill: var(--red);
-    stroke: var(--red);
+    fill: c.$red;
+    stroke: c.$red;
     margin-inline-end: 5px;
     margin-block-end: -3px;
   }

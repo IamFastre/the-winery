@@ -1,15 +1,15 @@
 @use '@/styles/funcs.module';
 @use '@/styles/consts.module';
+@use '@/styles/colors.module' as c;
 
 $all-transition: all 350ms ease-out;
-$placeholder: var(--quinary);
 
 .container {
   align-items: stretch;
   justify-content: center;
   flex-direction: row;
-  border-color: $placeholder;
-  background-color: funcs.set-alpha($placeholder, 10%);
+  border-color: var(--button-color);
+  background-color: funcs.set-alpha(var(--button-color), 10%);
   overflow: hidden;
 
   &:not(.noMin) {
@@ -23,27 +23,28 @@ $placeholder: var(--quinary);
   transition: $all-transition,
               filter 500ms consts.$ease-out-quartic;
 
-  &:hover:not(.disabled),
-  &:focus-visible:not(.disabled) {
-    background-color: funcs.set-alpha($placeholder, 20%);
-  }
-    
-  &:active:not(.disabled), &.active:not(.disabled) {
-    background-color: $placeholder;
-    filter: drop-shadow(0 0 10px funcs.set-alpha($placeholder, 50%));
+  &:not(.disabled) {
+    &:hover, &:focus-visible {
+      background-color: funcs.set-alpha(var(--button-color), 20%);
+    }
+      
+    &:active, &.active {
+      background-color: var(--button-color);
+      filter: drop-shadow(0 0 10px funcs.set-alpha(var(--button-color), 50%));
 
-    span, .background svg {
-      color: var(--primary);
-      fill: var(--primary);
-      stroke: var(--primary);
+      span, .background svg {
+        color: c.$primary;
+        fill: c.$primary;
+        stroke: c.$primary;
+      }
     }
   }
 }
 
 .disabled {
-  background-color: funcs.set-alpha(var(--secondary), 10%);
-  border-color: var(--secondary);
-  color: var(--quinary);
+  background-color: funcs.set-alpha(c.$secondary, 10%);
+  border-color: c.$secondary;
+  color: c.$quinary;
   cursor: not-allowed;
 }
 
@@ -53,7 +54,7 @@ $placeholder: var(--quinary);
   padding: 5px;
 
   &:not(.background) {
-    background-color: var(--primary);
+    background-color: c.$primary;
   }
 
   svg {

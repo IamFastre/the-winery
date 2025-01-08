@@ -1,5 +1,6 @@
 @use '@/styles/funcs.module';
 @use '@/styles/consts.module';
+@use '@/styles/colors.module' as c;
 
 @mixin styling() {
   .modalHolder {
@@ -12,7 +13,7 @@
     align-items: center;
     justify-content: center;
     transition: all 500ms consts.$ease-out-quartic;
-    background-color: funcs.set-alpha(var(--primary), 50%);
+    background-color: funcs.set-alpha(c.$primary, 50%);
     backdrop-filter: blur(5px);
     animation: appear 500ms ease-in-out;
   }

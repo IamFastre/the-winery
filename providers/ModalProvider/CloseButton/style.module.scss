@@ -1,4 +1,5 @@
 @use '@/styles/consts.module';
+@use '@/styles/colors.module' as c;
 
 .closeButton {
   position: absolute;
@@ -9,8 +10,8 @@
   > svg {
     font-size: 35px;
     transition: all 500ms consts.$ease-out-quartic;
-    fill: var(--secondary);
-    stroke: var(--secondary);
+    fill: c.$secondary;
+    stroke: c.$secondary;
   }
 
   &:hover, &:focus-visible {
@@ -21,8 +22,8 @@
 
   &:active, &.active {
     > svg {
-      fill: var(--quinary);
-      stroke: var(--quinary);
+      fill: c.$quinary;
+      stroke: c.$quinary;
     }
   }
 }

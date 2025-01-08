@@ -1,5 +1,6 @@
 @use '@/styles/consts.module';
 @use '@/styles/funcs.module';
+@use '@/styles/colors.module' as c;
 
 $arrow-size: 28px;
 
@@ -16,9 +17,9 @@ $arrow-size: 28px;
     position: absolute;
     transition: all 500ms consts.$ease-out-quartic;
     backdrop-filter: blur(5px);
-    background-color: funcs.set-alpha(var(--accent), 10%);
+    background-color: funcs.set-alpha(c.$accent, 10%);
     box-sizing: content-box;
-    border: 1px var(--none) solid;
+    border: 1px c.$none solid;
     border-radius: 5px;
     max-height: 30px;
     width: 30px;
@@ -46,8 +47,8 @@ $arrow-size: 28px;
       > svg {
         transition: all 500ms consts.$ease-out-quartic;
         font-size: 30px;
-        fill: var(--accent);
-        stroke: var(--accent);
+        fill: c.$accent;
+        stroke: c.$accent;
 
         > path {
           stroke-width: 50px;
@@ -56,8 +57,8 @@ $arrow-size: 28px;
     }
 
     &.open {
-      background-color: funcs.set-alpha(var(--highlight), 15%);
-      border: 1px var(--highlight) dashed;
+      background-color: funcs.set-alpha(c.$highlight, 15%);
+      border: 1px c.$highlight dashed;
       width: calc(100% - 30px);
       max-height: calc(100% - 80px);
 
@@ -65,8 +66,8 @@ $arrow-size: 28px;
 
       > div > svg {
         rotate: 135deg;
-        fill: var(--hot);
-        stroke: var(--hot);
+        fill: c.$hot;
+        stroke: c.$hot;
       }
 
       .actionsContent {
@@ -164,8 +165,8 @@ $arrow-size: 28px;
     > div > svg {
       font-size: $arrow-size;
       transition: all 500ms consts.$ease-out-quartic;
-      stroke: var(--quinary);
-      fill: var(--quinary);
+      stroke: c.$quinary;
+      fill: c.$quinary;
 
       path {
         transition: all 500ms consts.$ease-out-quartic;
@@ -176,8 +177,8 @@ $arrow-size: 28px;
       }
 
       &:not(.disabled) {
-        stroke: var(--accent);
-        fill: var(--accent);
+        stroke: c.$accent;
+        fill: c.$accent;
 
         &:hover, &:focus-visible {
           transform: scale(1.2);
@@ -205,7 +206,7 @@ $arrow-size: 28px;
       margin-bottom: 10px;
 
       &::before {
-        color: var(--red);
+        color: c.$red;
         content: "× ";
       }
     }

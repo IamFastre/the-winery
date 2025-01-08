@@ -1,5 +1,6 @@
 @use '@/styles/funcs.module';
 @use '@/styles/consts.module';
+@use '@/styles/colors.module' as c;
 
 $o-height: 40px;
 
@@ -20,18 +21,18 @@ $o-height: 40px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid var(--accent);
-    background-color: funcs.set-alpha(var(--accent), 10%);
+    border: 1px solid c.$accent;
+    background-color: funcs.set-alpha(c.$accent, 10%);
     transition: all 500ms consts.$ease-out-quartic;
 
     &.open {
-      background-color: funcs.set-alpha(var(--accent), 20%);
+      background-color: funcs.set-alpha(c.$accent, 20%);
     }
   }
 
   .subtitle {
     font-size: 12px;
-    color: var(--secondary);
+    color: c.$secondary;
   }
 
   .icon {
@@ -42,7 +43,7 @@ $o-height: 40px;
 
     path {
       transition: all 500ms consts.$ease-out-quartic;
-      fill: var(--accent);
+      fill: c.$accent;
       stroke: transparent;
       stroke-width: 0;
     }
@@ -53,7 +54,7 @@ $o-height: 40px;
 
       path {
         fill: transparent;
-        stroke: var(--accent);
+        stroke: c.$accent;
         stroke-width: 50px;
       }
     }
@@ -65,7 +66,7 @@ $o-height: 40px;
     max-height: calc($o-height * 4);
     overflow-y: scroll;
     transition: all 500ms consts.$ease-out-quartic;
-    background-color: funcs.set-alpha(var(--accent), 10%);
+    background-color: funcs.set-alpha(c.$accent, 10%);
 
     @if ($small) {
       flex-direction: column-reverse;
@@ -91,11 +92,11 @@ $o-height: 40px;
     cursor: pointer;
 
     &.selected {
-      background-color: funcs.set-alpha(var(--accent), 10%);
+      background-color: funcs.set-alpha(c.$accent, 10%);
 
       &::after {
         content: "•";
-        color: var(--accent);
+        color: c.$accent;
       }
     }
   }

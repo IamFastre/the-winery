@@ -1,8 +1,9 @@
 @use '@/styles/consts.module';
+@use '@/styles/colors.module' as c;
 
 $shrink-transform: scale(0.8);
-$shadow: drop-shadow(-5px -5px 10px var(--highlight))
-         drop-shadow(5px 5px 10px var(--accent));
+$shadow: drop-shadow(-5px -5px 10px c.$highlight)
+         drop-shadow(5px 5px 10px c.$accent);
 $shrink-filter: $shadow blur(3px);
 
 .image {

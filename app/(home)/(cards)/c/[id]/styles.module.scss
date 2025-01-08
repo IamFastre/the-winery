@@ -1,3 +1,4 @@
+@use '@/styles/colors.module' as c;
 
 @mixin styling() {
   .sectionContent {
@@ -34,7 +35,7 @@
     
     > hr {
       margin: 10px 0 0 0;
-      border-color: var(--highlight);
+      border-color: c.$highlight;
     }
   }
   .footer {
@@ -54,7 +55,7 @@
       font-size: 16px;
     }
     > span {
-      color: var(--secondary);
+      color: c.$secondary;
       font-size: 12px;
     }
   }
@@ -80,18 +81,18 @@
 
     > svg {
       font-size: 50px;
-      fill: var(--red);
-      stroke: var(--red);
+      fill: c.$red;
+      stroke: c.$red;
     }
 
     > span {
       text-align: center;
       font-size: larger;
-      color: var(--red);
+      color: c.$red;
 
       > span {
         font-size: smaller;
-        color: var(--secondary);
+        color: c.$secondary;
       }
     }
   }

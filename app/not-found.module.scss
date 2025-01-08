@@ -1,3 +1,4 @@
+@use '@/styles/colors.module' as c;
 
 .container {
   flex: 1;
@@ -15,7 +16,7 @@
     gap: 20px;
 
     &:hover, &:focus-visible {
-      border-color: var(--hot);
+      border-color: c.$hot;
     }
   }
 
@@ -26,12 +27,12 @@
   svg {
     display: flex;
     margin-bottom: -30px;
-    fill: var(--quinary);
-    stroke: var(--quinary);
+    fill: c.$quinary;
+    stroke: c.$quinary;
     font-size: 22px;
     &:hover, &:focus-visible {
-      fill: var(--accent);
-      stroke: var(--accent);
+      fill: c.$accent;
+      stroke: c.$accent;
     }
   }
 }

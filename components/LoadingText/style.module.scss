@@ -1,14 +1,15 @@
 @use '@/styles/funcs.module';
+@use '@/styles/colors.module' as c;
 
 .loading {
-  color: var(--secondary);
+  color: c.$secondary;
   user-select: none;
   font-size: inherit;
   font-variant-ligatures: none;
 
   > span:nth-child(1) {
-    color: var(--none);
-    background: linear-gradient(to right, var(--accent) 70%, funcs.set-alpha(var(--accent), 25%), var(--accent));
+    color: c.$none;
+    background: linear-gradient(to right, c.$accent 70%, funcs.set-alpha(c.$accent, 25%), c.$accent);
     -webkit-background-clip: text;
     background-clip: text;
     animation: swipe 900ms linear infinite;
@@ -26,11 +27,11 @@
 }
 
 @keyframes blink {
-  0% { color: var(--secondary); }
-  20% { color: var(--tertiary); transform: scale(1.5); }
-  30% { color: var(--tertiary); transform: scale(1.5); }
-  31% { color: var(--secondary); }
-  100% { color: var(--secondary); }
+  0% { color: c.$secondary; }
+  20% { color: c.$tertiary; transform: scale(1.5); }
+  30% { color: c.$tertiary; transform: scale(1.5); }
+  31% { color: c.$secondary; }
+  100% { color: c.$secondary; }
 }
 
 @keyframes swipe {

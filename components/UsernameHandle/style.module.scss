@@ -1,3 +1,4 @@
+@use '@/styles/colors.module' as c;
 
 .main {
   a {
@@ -7,7 +8,7 @@
     line-height: 18px;
     
     &:hover, &:focus-visible {
-      text-decoration: var(--quinary) underline dotted;
+      text-decoration: c.$quinary underline dotted;
     }  
   }
 }
