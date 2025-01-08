@@ -6,7 +6,7 @@ import { QueryProvider } from "@/providers/Query";
 import { Toaster } from "@/providers/Toaster";
 import { ModalProvider } from "@/providers/ModalProvider";
 
-import colors from "@/styles/colors.js";
+import { DARK as theme } from "@/styles/themes";
 import "@/styles/globals.scss";
 
 export const metadata:Metadata = {
@@ -22,8 +22,8 @@ export const viewport:Viewport = {
 }
 
 const style = { } as Record<string, string>;
-Object.keys(colors).forEach(c => {
-  style[`--${c}`] = (colors as Record<string, string>)[c];
+Object.keys(theme.palette).forEach(c => {
+  style[`--color-${c}`] = (theme.palette as Record<string, string>)[c];
 });
 
 export default function RootLayout({ children }: Readonly<{ children:React.ReactNode }>) {
