@@ -117,3 +117,17 @@ export const SCARLATTA:Theme = {
     'border-radius-2': '50%',
   }
 }
+
+export function MakeTheme(theme:Theme) {  
+  const style = { } as Record<string, string>;
+
+  Object.keys(theme.palette).forEach(c => {
+    style[`--color-${c}`] = (theme.palette as Record<string, string>)[c];
+  });
+
+  Object.keys(theme.styling).forEach(v => {
+    style[`--value-${v}`] = (theme.styling as Record<string, string>)[v];
+  });
+
+  return style;
+}
