@@ -30,8 +30,15 @@ export const DARK:Theme = {
     cyan: "#27d4ff",
     yellow: "#f8c41b",
     magenta: "#eb16c7",
+  },
+
+  styling: {
+    'border-radius-1': '0px',
+    'border-radius-2': '10%',
   }
 }
+
+/* ========================================================================== */
 
 export const LIGHT:Theme = {
   name: 'light',
@@ -63,8 +70,15 @@ export const LIGHT:Theme = {
     cyan: "#27d4ff",
     yellow: "#f8c41b",
     magenta: "#eb16c7",
+  },
+
+  styling: {
+    'border-radius-1': '0px',
+    'border-radius-2': '10%',
   }
 }
+
+/* ========================================================================== */
 
 export const SCARLATTA:Theme = {
   name: 'scarlatta',
@@ -96,5 +110,10 @@ export const SCARLATTA:Theme = {
     cyan: "#27d4ff",
     yellow: "#f8c41b",
     magenta: "#eb16c7",
+  },
+
+  styling: {
+    'border-radius-1': '15px',
+    'border-radius-2': '50%',
   }
 }

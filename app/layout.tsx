@@ -6,7 +6,7 @@ import { QueryProvider } from "@/providers/Query";
 import { Toaster } from "@/providers/Toaster";
 import { ModalProvider } from "@/providers/ModalProvider";
 
-import { DARK as theme } from "@/styles/themes";
+import { SCARLATTA as theme } from "@/styles/themes";
 import "@/styles/globals.scss";
 
 export const metadata:Metadata = {
@@ -22,8 +22,13 @@ export const viewport:Viewport = {
 }
 
 const style = { } as Record<string, string>;
+
 Object.keys(theme.palette).forEach(c => {
   style[`--color-${c}`] = (theme.palette as Record<string, string>)[c];
+});
+
+Object.keys(theme.styling).forEach(v => {
+  style[`--value-${v}`] = (theme.styling as Record<string, string>)[v];
 });
 
 export default function RootLayout({ children }: Readonly<{ children:React.ReactNode }>) {

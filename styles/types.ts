@@ -33,4 +33,9 @@ export interface Theme {
     yellow: Color;
     magenta: Color;
   }
+
+  styling: {
+    'border-radius-1': `${number}${'px' | '%'}`;
+    'border-radius-2': `${number}${'px' | '%'}`;
+  }
 }
