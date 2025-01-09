@@ -41,7 +41,7 @@
     justify-content: center;
 
     &::after {
-      content: "<#>";
+      content: v.$line-ribbon;
       display: block;
       color: c.$secondary;
       font-size: 16px;

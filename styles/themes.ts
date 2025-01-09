@@ -33,8 +33,12 @@ export const DARK:Theme = {
   },
 
   styling: {
+    'font-stack': "'Cascadia', 'Menlo', 'Courier Prime', 'Courier New', Courier, monospace",
     'border-radius-1': '0px',
     'border-radius-2': '10%',
+    'bracket-l': '"{"',
+    'bracket-r': '"}"',
+    'line-ribbon': '"<#>"',
   }
 }
 
@@ -73,8 +77,12 @@ export const LIGHT:Theme = {
   },
 
   styling: {
+    'font-stack': "'Cascadia', 'Menlo', 'Courier Prime', 'Courier New', Courier, monospace",
     'border-radius-1': '0px',
     'border-radius-2': '10%',
+    'bracket-l': '"{"',
+    'bracket-r': '"}"',
+    'line-ribbon': '"<#>"',
   }
 }
 
@@ -113,13 +121,19 @@ export const SCARLATTA:Theme = {
   },
 
   styling: {
+    'font-stack': "'Ubuntu', 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif",
     'border-radius-1': '15px',
     'border-radius-2': '50%',
+    'bracket-l': '"ʚ"',
+    'bracket-r': '"ɞ"',
+    'line-ribbon': '".•˚ʚ♡ɞ˚•."',
   }
 }
 
 export function MakeTheme(theme:Theme) {  
   const style = { } as Record<string, string>;
+
+  style['--theme-name'] = theme.name;
 
   Object.keys(theme.palette).forEach(c => {
     style[`--color-${c}`] = (theme.palette as Record<string, string>)[c];

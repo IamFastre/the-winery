@@ -22,7 +22,7 @@
       border-radius: 2px;
 
       &::after {
-        content: "<#>";
+        content: v.$line-ribbon;
         display: block;
         color: c.$accent;
         background-color: c.$primary;
@@ -273,14 +273,14 @@
     padding: 0 15px;
 
     &::before {
-      content: "{";
+      content: v.$bracket-l;
       color: c.$accent;
       justify-self: end;
       font-size: 32px;
     }
 
     &::after {
-      content: "}";
+      content: v.$bracket-r;
       color: c.$accent;
       justify-self: start;
       font-size: 32px;

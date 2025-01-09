@@ -18,6 +18,62 @@
 }
 
 @font-face {
+  font-family: Ubuntu;
+  src: url('/static/fonts/Ubuntu/Light.ttf');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Ubuntu;
+  src: url('/static/fonts/Ubuntu/Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Ubuntu;
+  src: url('/static/fonts/Ubuntu/Medium.ttf');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Ubuntu;
+  src: url('/static/fonts/Ubuntu/Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Ubuntu;
+  src: url('/static/fonts/Ubuntu/Light-Italic.ttf');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Ubuntu;
+  src: url('/static/fonts/Ubuntu/Regular-Italic.ttf');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Ubuntu;
+  src: url('/static/fonts/Ubuntu/Medium-Italic.ttf');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Ubuntu;
+  src: url('/static/fonts/Ubuntu/Bold-Italic.ttf');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
   font-family: Micro5;
   src: url('/static/fonts/Micro5.ttf');
   font-weight: 100 200 300 400 500 600 800 900;
@@ -49,7 +105,7 @@ body {
   overflow: hidden;
   background-color: c.$primary;
 
-  font-family: 'Cascadia', 'Menlo', 'Courier Prime', 'Courier New', Courier, monospace;
+  font-family: v.$font-stack;
   color: c.$tertiary;
 }
 

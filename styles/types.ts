@@ -32,10 +32,14 @@ export interface Theme {
     cyan: Color;
     yellow: Color;
     magenta: Color;
-  }
+  };
 
   styling: {
+    'font-stack': string;
     'border-radius-1': `${number}${'px' | '%'}`;
     'border-radius-2': `${number}${'px' | '%'}`;
-  }
+    'bracket-l': `"${string}"`;
+    'bracket-r': `"${string}"`;
+    'line-ribbon': `"${string}"`;
+  };
 }

@@ -1,6 +1,7 @@
 @use '@/styles/funcs.module';
 @use '@/styles/consts.module';
 @use '@/styles/colors.module' as c;
+@use '@/styles/values.module' as v;
 
 $o-height: 40px;
 
@@ -22,11 +23,20 @@ $o-height: 40px;
     align-items: center;
     justify-content: space-between;
     border: 1px solid c.$accent;
+    border-radius: v.$border-radius-1;
     background-color: funcs.set-alpha(c.$accent, 10%);
     transition: all 500ms consts.$ease-out-quartic;
 
     &.open {
       background-color: funcs.set-alpha(c.$accent, 20%);
+      @if ($small) {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+      @else {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     }
   }
 
