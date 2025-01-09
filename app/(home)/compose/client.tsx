@@ -67,7 +67,7 @@ const Editor = (props:EditorProps) => {
             value={props.title}
             onChange={e => props.setTitle(e.target.value)}
             onBlur={() => props.setTitle(t => t.trim())}
-            style={{ width: (props.title ? props.title.length : 12) * 11.72 }}
+            style={{ width: `${(props.title ? props.title.length : 12)}ch` }}
             autoComplete="off"
             />
           }

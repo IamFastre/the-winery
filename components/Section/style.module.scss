@@ -33,13 +33,13 @@
     font-weight: lighter;
     font-size: 20px;
     user-select: none;
+
+    &.centered {
+      align-self: center;
+      margin-left: 0;
+    }
   }
-  
-  .title.centered {
-    align-self: center;
-    margin-left: 0;
-  }
-  
+
   .titleBG {
     z-index: 1;
     position: absolute;
