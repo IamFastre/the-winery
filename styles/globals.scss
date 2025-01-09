@@ -477,6 +477,7 @@ $rainbow: c.$red, c.$orange, c.$yellow, c.$green, c.$blue, c.$purple;
 * {
   font-family: inherit;
   color: inherit;
+  transition: all 150ms consts.$ease-out-quartic;
 
   &:focus {
     outline: none;

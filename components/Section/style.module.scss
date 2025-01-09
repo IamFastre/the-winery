@@ -1,3 +1,4 @@
+@use '@/styles/consts.module';
 @use '@/styles/colors.module' as c;
 @use '@/styles/values.module' as v;
 
@@ -5,6 +6,7 @@
   .background {
     background-color: c.$primary;
     border-radius: v.$border-radius-1;
+    transition: all 500ms consts.$ease-out-quartic;
   }
   
   .container {
@@ -13,6 +15,7 @@
     overflow: hidden;
     border: $border-width solid c.$secondary;
     border-radius: v.$border-radius-1;
+    transition: all 500ms consts.$ease-out-quartic;
 
     &.flex { flex: 1; }
 
