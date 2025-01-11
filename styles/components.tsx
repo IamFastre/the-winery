@@ -1,12 +1,6 @@
 import { MakeTheme } from "./themes";
 import { Theme } from "./types";
 
-export function ThemeUpdater() {
-  return (
-    <script src="/static/scripts/theme-updater.js" />
-  );
-}
-
 export function ThemeStyle({ theme }:{ theme:Theme }) {
   const s = MakeTheme(theme);
   return (

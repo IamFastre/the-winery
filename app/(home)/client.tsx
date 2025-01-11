@@ -13,7 +13,7 @@ import { IoArrowForward } from "@icons/io5/IoArrowForward";
 import { IoAdd } from "@icons/io5/IoAdd";
 
 import consts, { options } from "@/utils/consts";
-import { Storage } from "@/utils";
+import { LocalStorage } from "@/utils";
 import { api, focusable } from "@/utils/client";
 import { Modal } from "@/providers/ModalProvider";
 import { useShortcuts } from "@/providers/Shortcuts";
@@ -42,11 +42,11 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
   // const onlyFollowing = Storage.get("feed:only-following") ?? false;
   // const focusMode = Storage.get("feed:focus-mode") ?? false;
 
-  const sortBy = Storage.get("feed:sort-by") ?? "default";
+  const sortBy = LocalStorage.get("feed:sort-by") ?? "default";
   const sortI = options['feed']['sort-by'].indexOf(sortBy);
 
   const onSelectSort = (o:string, i:number) => {
-    Storage.set("feed:sort-by", options['feed']['sort-by'][i]);
+    LocalStorage.set("feed:sort-by", options['feed']['sort-by'][i]);
     refetch();
   };
 
@@ -99,7 +99,7 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
 
 export function FeedNavigator() {
   const query = useQuery({
-    queryFn: async () => await api("/card/feed", { sort: Storage.get('feed:sort-by') ?? undefined }),
+    queryFn: async () => await api("/card/feed", { sort: LocalStorage.get('feed:sort-by') ?? undefined }),
     queryKey: ["/card/feed"],
     refetchOnWindowFocus: false,
   });

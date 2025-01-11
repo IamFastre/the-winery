@@ -1,8 +1,5 @@
-/**
- * Retrieves a list of available themes from the document's stylesheets.
- *
- * @returns {HTMLElement[]} - An array of elements that define available themes.
- */
+import { LocalStorage } from "./local-storage.js";
+
 function GetAvailableThemes() {
   const r = [];
   for (let i = 0; i < document.styleSheets.length; i++) {
@@ -16,14 +13,9 @@ function GetAvailableThemes() {
   return r;
 }
 
-/**
- * Sets the theme of the document.
- *
- * @param {string} [t] - The name of the theme to set. If not provided, the theme is retrieved from localStorage.
- */
-function UpdateTheme(t = undefined) {
+export function UpdateTheme(t = undefined) {
   const all_themes = GetAvailableThemes();
-  const theme = t ?? localStorage.getItem("settings:theme");
+  const theme = t ?? LocalStorage.get("settings:theme");
   document.children[0].setAttribute(
     "data-theme",
     all_themes.includes(theme) ? theme : all_themes[0]

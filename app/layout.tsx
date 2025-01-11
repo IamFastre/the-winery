@@ -7,7 +7,7 @@ import { Toaster } from "@/providers/Toaster";
 import { ModalProvider } from "@/providers/ModalProvider";
 
 import { DARK, LIGHT, SCARLATTA } from "@/styles/themes";
-import { ThemeStyle, ThemeUpdater } from "@/styles/components";
+import { ThemeStyle } from "@/styles/components";
 import "@/styles/globals.scss";
 
 export const metadata:Metadata = {
@@ -26,10 +26,14 @@ export default async function RootLayout({ children }: Readonly<{ children:React
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* ============================= THEMES ============================= */}
         <ThemeStyle theme={DARK} />
         <ThemeStyle theme={LIGHT} />
         <ThemeStyle theme={SCARLATTA} />
-        <ThemeUpdater />
+        {/* ============================= SCRIPTS ============================ */}
+        <script src="/static/scripts/local-storage.js" type="module" />
+        <script src="/static/scripts/theme-updater.js" type="module" />
+        {/* ============================= OTHERS ============================= */}
         <meta name="google-site-verification" content="c2u4sSYzf3Z23dbDg1eiq_nJzXDm7aLScvANNt59pvI" />
       </head>
       <body>
