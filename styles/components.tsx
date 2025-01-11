@@ -1,5 +1,5 @@
 import { MakeTheme } from "./themes";
-import { Theme } from "./types";
+import { Theme } from "./themes/types";
 
 export function ThemeStyle({ theme }:{ theme:Theme }) {
   const s = MakeTheme(theme);

@@ -16,7 +16,7 @@ import type { OtherLogo, OtherLogoParams } from "@/utils/api/other/logo";
 import type { CardSuperLike, CardSuperLikeParams } from "@/utils/api/mut/card/super-like";
 import type { CardDelete, CardDeleteParams } from "@/utils/api/mut/card/delete";
 
-import type { Theme } from "@/styles/types";
+import type { Theme } from "@/styles/themes/types";
 
 import type { options } from "./consts";
 

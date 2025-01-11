@@ -1,4 +1,4 @@
-import type { Theme } from "./types";
+import type { Theme } from "./themes/types";
 
 const c = <S extends string>(s:S) => `var(--color-${s})` as const
 

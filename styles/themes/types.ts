@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 export type Color = Exclude<CSSProperties['color'], undefined>;
 
@@ -41,5 +41,9 @@ export interface Theme {
     'bracket-l': `"${string}"`;
     'bracket-r': `"${string}"`;
     'line-ribbon': `"${string}"`;
+  };
+
+  components?: {
+    Wallpaper: () => ReactNode;
   };
 }
