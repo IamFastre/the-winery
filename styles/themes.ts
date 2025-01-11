@@ -49,10 +49,10 @@ export const LIGHT:Theme = {
   palette: {
     none: "transparent",
 
-    primary: "#eeeeee",
-    secondary: "#959595",
+    primary: "#dedede",
+    secondary: "#808080",
     tertiary: "#0c0c0c",
-    quaternary: "#1f1f1f",
+    quaternary: "#ffffff",
     quinary: "#575757",
 
     accent: "#00c90f",
