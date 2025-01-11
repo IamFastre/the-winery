@@ -1,5 +1,3 @@
-import { LocalStorage } from "./local-storage.js";
-
 function GetAvailableThemes() {
   const r = [];
   for (let i = 0; i < document.styleSheets.length; i++) {
@@ -13,7 +11,7 @@ function GetAvailableThemes() {
   return r;
 }
 
-export function UpdateTheme(t = undefined) {
+function UpdateTheme(t = undefined) {
   const all_themes = GetAvailableThemes();
   const theme = t ?? LocalStorage.get("settings:theme");
   document.children[0].setAttribute(

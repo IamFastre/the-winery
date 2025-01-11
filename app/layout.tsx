@@ -31,8 +31,8 @@ export default async function RootLayout({ children }: Readonly<{ children:React
         <ThemeStyle theme={LIGHT} />
         <ThemeStyle theme={SCARLATTA} />
         {/* ============================= SCRIPTS ============================ */}
-        <script src="/static/scripts/local-storage.js" type="module" />
-        <script src="/static/scripts/theme-updater.js" type="module" />
+        <script src="/static/scripts/local-storage.js" />
+        <script src="/static/scripts/theme-updater.js" />
         {/* ============================= OTHERS ============================= */}
         <meta name="google-site-verification" content="c2u4sSYzf3Z23dbDg1eiq_nJzXDm7aLScvANNt59pvI" />
       </head>

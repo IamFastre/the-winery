@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-export class LocalStorage {
+class LocalStorage {
   static set(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
   }
