@@ -15,7 +15,10 @@ import type { OtherLogo, OtherLogoParams } from "@/utils/api/other/logo";
 
 import type { CardSuperLike, CardSuperLikeParams } from "@/utils/api/mut/card/super-like";
 import type { CardDelete, CardDeleteParams } from "@/utils/api/mut/card/delete";
-import { options } from "./consts";
+
+import type { Theme } from "@/styles/types";
+
+import type { options } from "./consts";
 
 export type LogoKind = "main" | "brand" | "mono" | "brand-outline" | "mono-outline" | "touch";
 
@@ -75,4 +78,5 @@ export type AppOptions = typeof options;
 export type StorageEntry = {
   "feed:sort-by": AppOptions['feed']['sort-by'][number];
   "feed:only-following": boolean;
+  "settings:theme": Theme['name'];
 };
