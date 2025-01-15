@@ -11,8 +11,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { humanizeTime } from "@/utils";
+import { UserInfo } from "@/utils/api/user/info";
 import { api } from "@/utils/client";
-import { Tables } from "@/supabase/types";
 import { useHydration } from "@/hooks";
 import { Button } from "@/components/Button";
 import { C } from "@/components/C";
@@ -28,7 +28,7 @@ const setQuery = (value:string) => {
   return params.toString();
 };
 
-const Result = ({ user }:{ user:Tables<'profiles'>; }) => {
+const Result = ({ user }:{ user:UserInfo; }) => {
   const hydrated = useHydration();
   return (
     <Link href={`/u/${user.username}`} type="wrapper">
@@ -71,7 +71,7 @@ export function Searcher() {
   const initialQ = useSearchParams().get('q') ?? "";
   const [q, setQ] = useState<string>(initialQ);
   const [search, setSearch] = useState<string>(q);
-  const [results, setResults] = useState<Tables<'profiles'>[] | null>(null);
+  const [results, setResults] = useState<UserInfo[] | null>(null);
   const [error, setError] = useState<boolean>(false);
 
   const onSubmit = async () => {

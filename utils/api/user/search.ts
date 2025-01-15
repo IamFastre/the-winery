@@ -1,8 +1,9 @@
 import { result } from '@/utils/api';
 import { createClient } from '@/supabase/server';
-import { Tables } from '@/supabase/types';
 
-export type UserSearch = Tables<'profiles'>[];
+import { getUserInfo, UserInfo } from "@/utils/api/user/info";
+
+export type UserSearch = UserInfo[];
 export type UserSearchParams = { q:string };
 
 const escape = (s:string) => "\\" + s;
@@ -25,9 +26,23 @@ export async function getUserSearch(query:string) {
   const d = cureDisplayName(query);
 
   const res = await supabase
-  .from('profiles')
-  .select('*')
-  .or(`username.ilike.%${u}%, display_name.ilike.%${d}%`);
+    .from('profiles')
+    .select('id')
+    .or(`username.ilike.%${u}%, display_name.ilike.%${d}%`);
 
-  return result<UserSearch | null>(res.data, res.error);
+  if (res.error)
+    return result<null>(null, res.error);
+
+
+  const r:UserInfo[] = []
+  for (let i = 0; i < res.data.length; i++) {
+    const u = res.data[i];
+    const user = await getUserInfo("id", u.id);
+
+    if (user.error)
+      return result<null>(null, user.error);
+    r.push(user.data);
+  }
+
+  return result<UserSearch | null>(r, res.error);
 }
