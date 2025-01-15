@@ -1,8 +1,8 @@
 "use client";
+import { useLayoutEffect, useState } from "react";
 
 import { Flowery } from "@/styles/themes";
 import { Theme } from "@/styles/themes/types";
-import { useLayoutEffect, useState } from "react";
 
 type Wallpaper = Exclude<Theme['other'], undefined>['wallpaper'];
 
