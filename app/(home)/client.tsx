@@ -11,6 +11,8 @@ import { IoWineOutline } from "@icons/io5/IoWineOutline";
 import { IoArrowBack } from "@icons/io5/IoArrowBack";
 import { IoArrowForward } from "@icons/io5/IoArrowForward";
 import { IoAdd } from "@icons/io5/IoAdd";
+import { IoList } from "@icons/io5/IoList";
+import { IoColorPalette } from "@icons/io5/IoColorPalette";
 
 import consts, { options } from "@/utils/consts";
 import { LocalStorage } from "@/utils";
@@ -85,6 +87,7 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
           <DropdownButton
             title={refetching ? <LoadingText /> : "Sort by"}
             subtitle={sortByOptions[sortI]}
+            icon={IoList}
             onSelect={onSelectSort}
             selectedIndices={[sortI]}
             options={sortByOptions}
@@ -92,6 +95,7 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
           <DropdownButton
             title="Theme"
             subtitle={themeOptions[themeI]}
+            icon={IoColorPalette}
             onSelect={onSelectTheme}
             selectedIndices={[themeI]}
             options={themeOptions}

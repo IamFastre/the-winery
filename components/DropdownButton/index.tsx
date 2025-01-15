@@ -1,18 +1,20 @@
 "use client";
 import { useState } from 'react';
+import { IconType } from "@react-icons/all-files";
+import { IoCaretDown } from "@icons/io5/IoCaretDown";
 
 import styles from "./style.module.scss";
-import { IoCaretDown } from '@react-icons/all-files/io5/IoCaretDown';
 
 interface DropdownButtonProps {
   title: string | JSX.Element;
   subtitle?: string;
+  icon?: IconType;
   options: string[];
   selectedIndices: number[];
   onSelect: (option:string, index:number) => void;
 }
 
-export function DropdownButton({ title, subtitle, options, selectedIndices, onSelect }:DropdownButtonProps) {
+export function DropdownButton({ title, subtitle, icon, options, selectedIndices, onSelect }:DropdownButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -24,21 +26,26 @@ export function DropdownButton({ title, subtitle, options, selectedIndices, onSe
     setIsOpen(false);
   };
 
+  const Icon = icon;
+
   return (
     <div className={styles.container}>
       <div
         className={`${styles.head} ${isOpen ? styles.open : ""}`}
         onClick={handleToggle}
       >
-        <div>
-          <span>{title}</span>
-          { subtitle &&
-            <span className={styles.subtitle}>
-              {subtitle}
-            </span>
-          }
+        <div className={styles.headContent}>
+          { Icon && <Icon /> }
+          <div>
+            <span>{title}</span>
+            { subtitle &&
+              <span className={styles.subtitle}>
+                {subtitle}
+              </span>
+            }
+          </div>
         </div>
-        <IoCaretDown className={`${styles.icon} ${isOpen ? styles.open : ""}`} />
+        <IoCaretDown className={`${styles.caret} ${isOpen ? styles.open : ""}`} />
       </div>
 
       <div className={`${styles.options} ${isOpen ? styles.open : ""}`}>
