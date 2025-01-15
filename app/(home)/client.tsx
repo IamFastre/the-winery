@@ -46,7 +46,12 @@ const themeOptions = [
 
 function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching:boolean; }) {
   const [actionsOpen, setActionsOpen] = useState<boolean>(false);
-  const [themeI, setThemeI] = useState<number>(0);
+  const [themeI, setThemeI] = useState<number>(
+    themeOptions.map(s => s.toLowerCase())
+    .indexOf(
+      document.children[0].getAttribute("data-theme") ?? 'dark'
+    )
+  );
 
   // const onlyFollowing = Storage.get("feed:only-following") ?? false;
   // const focusMode = Storage.get("feed:focus-mode") ?? false;
