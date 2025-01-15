@@ -36,8 +36,15 @@ const sortByOptions = [
   "Random",
 ];
 
+const themeOptions = [
+  "Dark",
+  "Light",
+  "Scarlatta",
+];
+
 function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching:boolean; }) {
   const [actionsOpen, setActionsOpen] = useState<boolean>(false);
+  const [themeI, setThemeI] = useState<number>(0);
 
   // const onlyFollowing = Storage.get("feed:only-following") ?? false;
   // const focusMode = Storage.get("feed:focus-mode") ?? false;
@@ -48,6 +55,12 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
   const onSelectSort = (o:string, i:number) => {
     LocalStorage.set("feed:sort-by", options['feed']['sort-by'][i]);
     refetch();
+  };
+
+  // this shit is temporary until we do the settings
+  const onSelectTheme = (o:string, i:number) => {
+    document.children[0].setAttribute("data-theme", o.toLowerCase());
+    setThemeI(i);
   };
 
   // const onClickFollowing = () => {
@@ -75,6 +88,13 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
             onSelect={onSelectSort}
             selectedIndices={[sortI]}
             options={sortByOptions}
+          />
+          <DropdownButton
+            title="Theme"
+            subtitle={themeOptions[themeI]}
+            onSelect={onSelectTheme}
+            selectedIndices={[themeI]}
+            options={themeOptions}
           />
           {/* <div className={pageStyles.actionsSmall}>
             <Button
