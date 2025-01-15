@@ -18,6 +18,7 @@ import { Button } from "@/components/Button";
 import { C } from "@/components/C";
 import { LoadingText } from "@/components/LoadingText";
 import { Section } from "@/components/Section";
+import { Bio } from "@/components/Bio";
 
 import styles from "./styles.module.scss";
 
@@ -60,6 +61,7 @@ const Result = ({ user }:{ user:UserInfo; }) => {
               {humanizeTime(user.created_at, !hydrated, true)}
             </C.SECONDARY>
           </span>
+          <Bio info={user} noText />
         </div>
       </Section>
     </Link>

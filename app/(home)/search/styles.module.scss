@@ -89,6 +89,9 @@
   }
 
   .text {
+    justify-content: center;
+    align-items: start;
+
     > span:nth-child(1) {
       font-size: 18px;
       font-weight: bold;
@@ -96,6 +99,18 @@
 
     > span:nth-child(2) {
       font-size: 12px;
+    }
+
+    > div {
+      transform: scale(0.75);
+      transform-origin: left bottom;
+      padding: 0;
+      width: auto;
+
+      > div {
+        height:auto;
+        max-height: 30px;
+      }
     }
   }
 
