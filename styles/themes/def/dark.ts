@@ -34,10 +34,19 @@ export const DARK:Theme = {
 
   styling: {
     "font-stack": "'Cascadia', 'Menlo', 'Courier Prime', 'Courier New', Courier, monospace",
+
     "border-radius-1": "0px",
     "border-radius-2": "10%",
-    "bracket-l": "'{'",
-    "bracket-r": "'}'",
+
     "line-ribbon": "'<#>'",
+
+    "bracket-1-l": "'{'",
+    "bracket-1-r": "'}'",
+
+    "bracket-2-l": "'['",
+    "bracket-2-r": "']'",
+
+    "bracket-3-l": "'•-{'",
+    "bracket-3-r": "'}-•'",
   }
 }

@@ -34,11 +34,20 @@ export const SCARLATTA:Theme = {
 
   styling: {
     "font-stack": "'Ubuntu', 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif",
+
     "border-radius-1": "15px",
     "border-radius-2": "50%",
-    "bracket-l": "'ʚ'",
-    "bracket-r": "'ɞ'",
+
     "line-ribbon": "'.•˚ʚ♡ɞ˚•.'",
+
+    "bracket-1-l": "'ʚ'",
+    "bracket-1-r": "'ɞ'",
+
+    "bracket-2-l": "'•'",
+    "bracket-2-r": "'•'",
+
+    "bracket-3-l": "''",
+    "bracket-3-r": "''",
   },
 
   other: {

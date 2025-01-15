@@ -273,14 +273,14 @@
     padding: 0 15px;
 
     &::before {
-      content: v.$bracket-l;
+      content: v.$bracket-1-l;
       color: c.$accent;
       justify-self: end;
       font-size: 32px;
     }
 
     &::after {
-      content: v.$bracket-r;
+      content: v.$bracket-1-r;
       color: c.$accent;
       justify-self: start;
       font-size: 32px;

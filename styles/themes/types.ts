@@ -36,11 +36,20 @@ export interface Theme {
 
   styling: {
     'font-stack': string;
+    
     'border-radius-1': `${number}${'px' | '%'}`;
     'border-radius-2': `${number}${'px' | '%'}`;
-    'bracket-l': `"${string}"` | `'${string}'`;
-    'bracket-r': `"${string}"` | `'${string}'`;
+
     'line-ribbon': `"${string}"` | `'${string}'`;
+
+    'bracket-1-l': `"${string}"` | `'${string}'`;
+    'bracket-1-r': `"${string}"` | `'${string}'`;
+
+    'bracket-2-l': `"${string}"` | `'${string}'`;
+    'bracket-2-r': `"${string}"` | `'${string}'`;
+
+    'bracket-3-l': `"${string}"` | `'${string}'`;
+    'bracket-3-r': `"${string}"` | `'${string}'`;
   };
 
   other?: {
