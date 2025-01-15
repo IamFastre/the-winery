@@ -1,0 +1,78 @@
+@use '@/styles/colors.module' as c;
+
+@mixin styling($small) {
+  .flowery {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.8;
+
+    > svg {
+      position: absolute;
+    }
+
+    > svg:nth-child(1) {
+      $size: if($small, 175px, 250px);
+      top: calc(-1 * $size / 3);
+      left: calc(-1 * $size / 4);
+      width: $size;
+      height: $size;
+    }
+
+    > svg:nth-child(2) {
+      $size: if($small, 150px, 250px);
+      bottom: calc(-1 * $size / 4);
+      right: calc(-1 * $size / 4);
+      width: $size;
+      height: $size;
+      rotate: -45deg;
+    }
+
+    > svg:nth-child(3) {
+      $size: if($small, 60px, 100px);
+      bottom: if($small, calc(25% - $size / 2), 200px);
+      right: calc(25% - $size / 2);
+      width: $size;
+      height: $size;
+      opacity: 0.65;
+    }
+
+    > svg:nth-child(4) {
+      $size: if($small, 100px, 200px);
+      bottom: 15%;
+      left: 10%;
+      width: $size;
+      height: $size;
+      rotate: 30deg;
+      opacity: 0.5;
+    }
+
+    > svg:nth-child(5) {
+      $size: if($small, 150px, 200px);
+      top: 5%;
+      right: 7%;
+      width: $size;
+      height: $size;
+      transform: scaleX(-1);
+    }
+
+    > svg:nth-child(6) {
+      $size: if($small, 40px, 50px);
+      bottom: 40px;
+      left: calc(50% - $size / 2);
+      width: $size;
+      height: $size;
+    }
+  }
+}
+
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling($small: true);
+}
+
+@media screen and (min-width: 787px) {
+  @include styling($small: false);
+}
