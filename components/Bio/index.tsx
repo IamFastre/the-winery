@@ -234,17 +234,22 @@ function ZodiacBadge({ anniversary }:{ anniversary:UserInfo['anniversary'] }) {
   );
 }
 
-export function Bio({ info }:{ info:UserInfo }) {
+export function Bio({ info, noText, noBadges }:{ info:UserInfo; noText?:boolean; noBadges?:boolean; }) {
   return (
     <div className={styles.bio}>
-      <BioText content={info.bio} />
-      <div className={styles.badgeShelf}>
-        <ReputationBadge score={info.finesse} />
-        <SpecialBadge info={info} />
-        <CheersDayBadge createdAt={info.created_at} />
-        <GenderBadge gender={info.gender} />
-        <ZodiacBadge anniversary={info.anniversary} />
-      </div>
+      { (!noText) &&
+        <BioText content={info.bio} />
+      }
+
+      { (!noBadges) &&
+        <div className={styles.badgeShelf}>
+          <ReputationBadge score={info.finesse} />
+          <SpecialBadge info={info} />
+          <CheersDayBadge createdAt={info.created_at} />
+          <GenderBadge gender={info.gender} />
+          <ZodiacBadge anniversary={info.anniversary} />
+        </div>
+      }
     </div>
   );
 }
