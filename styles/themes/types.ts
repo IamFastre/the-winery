@@ -44,6 +44,6 @@ export interface Theme {
   };
 
   other?: {
-    background: 'flowery';
+    wallpaper: 'flowery';
   };
 }

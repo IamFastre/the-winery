@@ -42,6 +42,6 @@ export const SCARLATTA:Theme = {
   },
 
   other: {
-    background: "flowery",
+    wallpaper: "flowery",
   },
 }
