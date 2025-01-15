@@ -1,10 +1,12 @@
+import { DEFAULT } from ".";
 import { Theme } from "../types";
 
 export const SCARLATTA:Theme = {
+  ...DEFAULT,
   name: "scarlatta",
-  palette: {
-    none: "transparent",
 
+  palette: {
+    ...DEFAULT.palette,
     primary: "#341411",
     secondary: "#bd3478",
     tertiary: "#eed0d0",
@@ -16,20 +18,6 @@ export const SCARLATTA:Theme = {
 
     hot: "#ff0076",
     cold: "#2B6788",
-   
-    gold: "#ea9a64",
-    wine: "#690707",
-    orange: "#ff7e0d",
-    pink: "#eb4982",
-    purple: "#663399",
-
-    red: "#d71e1e",
-    green: "#00c43b",
-    blue: "#3a7aff",
-
-    cyan: "#27d4ff",
-    yellow: "#f8c41b",
-    magenta: "#eb16c7",
   },
 
   styling: {
