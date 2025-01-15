@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties } from "react";
 
 export type Color = Exclude<CSSProperties['color'], undefined>;
 
@@ -38,12 +38,12 @@ export interface Theme {
     'font-stack': string;
     'border-radius-1': `${number}${'px' | '%'}`;
     'border-radius-2': `${number}${'px' | '%'}`;
-    'bracket-l': `"${string}"`;
-    'bracket-r': `"${string}"`;
-    'line-ribbon': `"${string}"`;
+    'bracket-l': `"${string}"` | `'${string}'`;
+    'bracket-r': `"${string}"` | `'${string}'`;
+    'line-ribbon': `"${string}"` | `'${string}'`;
   };
 
-  components?: {
-    Wallpaper: () => ReactNode;
+  other?: {
+    background: 'flowery';
   };
 }

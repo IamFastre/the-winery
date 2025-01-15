@@ -1,7 +1,7 @@
 import { Theme } from "../types";
 
 export const DARK:Theme = {
-  name: 'dark',
+  name: "dark",
   palette: {
     none: "transparent",
 
@@ -33,11 +33,11 @@ export const DARK:Theme = {
   },
 
   styling: {
-    'font-stack': "'Cascadia', 'Menlo', 'Courier Prime', 'Courier New', Courier, monospace",
-    'border-radius-1': '0px',
-    'border-radius-2': '10%',
-    'bracket-l': '"{"',
-    'bracket-r': '"}"',
-    'line-ribbon': '"<#>"',
+    "font-stack": "'Cascadia', 'Menlo', 'Courier Prime', 'Courier New', Courier, monospace",
+    "border-radius-1": "0px",
+    "border-radius-2": "10%",
+    "bracket-l": "'{'",
+    "bracket-r": "'}'",
+    "line-ribbon": "'<#>'",
   }
 }

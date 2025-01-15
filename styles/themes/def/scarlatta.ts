@@ -1,8 +1,7 @@
 import { Theme } from "../types";
-import { Scarlatta as Wallpaper } from "./wallpapers";
 
 export const SCARLATTA:Theme = {
-  name: 'scarlatta',
+  name: "scarlatta",
   palette: {
     none: "transparent",
 
@@ -34,15 +33,15 @@ export const SCARLATTA:Theme = {
   },
 
   styling: {
-    'font-stack': "'Ubuntu', 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif",
-    'border-radius-1': '15px',
-    'border-radius-2': '50%',
-    'bracket-l': '"ʚ"',
-    'bracket-r': '"ɞ"',
-    'line-ribbon': '".•˚ʚ♡ɞ˚•."',
+    "font-stack": "'Ubuntu', 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif",
+    "border-radius-1": "15px",
+    "border-radius-2": "50%",
+    "bracket-l": "'ʚ'",
+    "bracket-r": "'ɞ'",
+    "line-ribbon": "'.•˚ʚ♡ɞ˚•.'",
   },
 
-  components: {
-    Wallpaper,
+  other: {
+    background: "flowery",
   },
 }
