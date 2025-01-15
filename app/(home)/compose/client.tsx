@@ -5,7 +5,7 @@ import XRegExp from "xregexp";
 
 import { RiBallPenLine } from "@icons/ri/RiBallPenLine";
 import { RiDeleteBin6Line } from "@icons/ri/RiDeleteBin6Line";
-import { IoEyeOutline } from "@icons/io5/IoEyeOutline";
+import { IoSaveOutline } from "@icons/io5/IoSaveOutline";
 import { IoEye } from "@icons/io5/IoEye";
 import { IoFolderOutline } from "@icons/io5/IoFolderOutline";
 import { IoAdd } from "@icons/io5/IoAdd";
@@ -99,7 +99,7 @@ const Editor = (props:EditorProps) => {
         className={styles.showPrev}
         onClick={() => props.setShow(!props.show)}
         color={colors.highlight}
-        icon={{ element: props.show ? IoEyeOutline : IoEye }}
+        icon={{ element: props.show ? RiBallPenLine : IoEye }}
       />
     </div>
   );
@@ -154,6 +154,15 @@ const Error = (props:{ error:ErrorAPI; isOK:boolean; }) => (
   </span>
 );
 
+const Title = ({ onEdit, onPreview, previewing }:{ onEdit:string; onPreview:string; previewing:boolean }) => (
+  <div className={styles.title}>
+    <div>
+      {previewing ? onPreview : onEdit}
+    </div>
+    <hr style={{ borderStyle: previewing ? 'dashed' : 'solid' }} />
+  </div>
+);
+
 export function PostEditor({ user }:{ user:Tables<'profiles'> }) {
   const router = useRouter();
   const toaster = useToaster();
@@ -191,38 +200,45 @@ export function PostEditor({ user }:{ user:Tables<'profiles'> }) {
   };
 
   return (
-    <div className={styles.post}>
-      <Editor
-        toaster={toaster}
-        title={title}
-        content={content}
-        show={showPrev}
-        setTitle={setTitle}
-        setContent={setContent}
-        setShow={setShowPrev}
-        resetError={() => setError(null)}
+    <>
+      <Title
+        onEdit="Create Post"
+        onPreview="Post Preview"
+        previewing={showPrev}
       />
-      <div className={styles.footer}>
-        <AsUser username={user.username} />
-        <div className={styles.actions}>
-          {uploading && <LoadingText className={styles.loading} compact />}
-          <Button
-            noMinimum
-            icon={{ element: IoFolderOutline }}
-            onClick={onDraft}
-            disabled={!(isEnough && user.username) || uploading}
-          />
-          <Button
-            noMinimum
-            title="Post"
-            icon={{ element: IoAdd }}
-            onClick={onPost}
-            disabled={!(isEnough && user.username) || uploading}
-          />
+      <div className={styles.post}>
+        <Editor
+          toaster={toaster}
+          title={title}
+          content={content}
+          show={showPrev}
+          setTitle={setTitle}
+          setContent={setContent}
+          setShow={setShowPrev}
+          resetError={() => setError(null)}
+        />
+        <div className={styles.footer}>
+          <AsUser username={user.username} />
+          <div className={styles.actions}>
+            {uploading && <LoadingText className={styles.loading} compact />}
+            <Button
+              noMinimum
+              icon={{ element: IoFolderOutline }}
+              onClick={onDraft}
+              disabled={!(isEnough && user.username) || uploading}
+            />
+            <Button
+              noMinimum
+              title="Post"
+              icon={{ element: IoAdd }}
+              onClick={onPost}
+              disabled={!(isEnough && user.username) || uploading}
+            />
+          </div>
         </div>
+        { error ? <Error error={error} isOK={isEnough} /> : null }
       </div>
-      { error ? <Error error={error} isOK={isEnough} /> : null }
-    </div>
+    </>
   );
 }
 
@@ -280,45 +296,52 @@ export function DraftEditor({ user, draft }:{ user:Tables<'profiles'>; draft:Tab
   };
 
   return (
-    <div className={styles.post}>
-      <Editor
-        toaster={toaster}
-        title={title}
-        content={content}
-        show={showPrev}
-        setTitle={setTitle}
-        setContent={setContent}
-        setShow={setShowPrev}
-        resetError={() => setError(null)}
+    <>
+      <Title
+        onEdit="Edit Draft"
+        onPreview="Draft Preview"
+        previewing={showPrev}
       />
-      <div className={styles.footer}>
-        <AsUser username={user.username} />
-        <div className={styles.actions}>
-          {uploading && <LoadingText className={styles.loading} compact />}
-          <Button
-            noMinimum
-            icon={{ element: RiDeleteBin6Line }}
-            onClick={onDelete}
-            color={colors.red}
-            disabled={!user.username || uploading}
-            iconBackground
-          />
-          <Button
-            noMinimum
-            icon={{ element: RiBallPenLine }}
-            onClick={onEdit}
-            disabled={!(isEnough && user.username) || uploading}
-          />
-          <Button
-            noMinimum
-            title="Post"
-            icon={{ element: IoAdd }}
-            onClick={onPost}
-            disabled={!(isEnough && user.username) || uploading}
-          />
+      <div className={styles.post}>
+        <Editor
+          toaster={toaster}
+          title={title}
+          content={content}
+          show={showPrev}
+          setTitle={setTitle}
+          setContent={setContent}
+          setShow={setShowPrev}
+          resetError={() => setError(null)}
+        />
+        <div className={styles.footer}>
+          <AsUser username={user.username} />
+          <div className={styles.actions}>
+            {uploading && <LoadingText className={styles.loading} compact />}
+            <Button
+              noMinimum
+              icon={{ element: RiDeleteBin6Line }}
+              onClick={onDelete}
+              color={colors.red}
+              disabled={!user.username || uploading}
+              iconBackground
+            />
+            <Button
+              noMinimum
+              icon={{ element: IoSaveOutline }}
+              onClick={onEdit}
+              disabled={!(isEnough && user.username) || uploading}
+            />
+            <Button
+              noMinimum
+              title="Post"
+              icon={{ element: IoAdd }}
+              onClick={onPost}
+              disabled={!(isEnough && user.username) || uploading}
+            />
+          </div>
         </div>
+        { error ? <Error error={error} isOK={isEnough} /> : null }
       </div>
-      { error ? <Error error={error} isOK={isEnough} /> : null }
-    </div>
+    </>
   );
 }

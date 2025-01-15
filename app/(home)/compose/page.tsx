@@ -38,12 +38,6 @@ export default async function ComposePage({ searchParams }:{ searchParams: { dra
   return (
     <Section title="Compose" style={{ flex: 1 }}  containerClassName={styles.sectionContent}>
       <div className={styles.content}>
-        <div className={styles.title}>
-          <span>
-            {draft ? "Edit Draft" : "Create Post"}
-          </span>
-          <hr />
-        </div>
         {
           draft ?
           <DraftEditor user={user} draft={draft} />
