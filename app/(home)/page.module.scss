@@ -1,6 +1,7 @@
 @use '@/styles/consts.module';
 @use '@/styles/funcs.module';
 @use '@/styles/colors.module' as c;
+@use '@/styles/values.module' as v;
 
 $arrow-size: 28px;
 
@@ -20,7 +21,7 @@ $arrow-size: 28px;
     background-color: funcs.set-alpha(c.$accent, 10%);
     box-sizing: content-box;
     border: 1px c.$none solid;
-    border-radius: 5px;
+    border-radius: v.$border-radius-3;
     max-height: 30px;
     width: 30px;
 
@@ -61,6 +62,7 @@ $arrow-size: 28px;
       border: 1px c.$highlight dashed;
       width: calc(100% - 30px);
       max-height: calc(100% - 80px);
+      border-radius: min(v.$border-radius-1, v.$border-radius-2, v.$border-radius-3);
 
       @if ($small) { bottom: 60px; }
 

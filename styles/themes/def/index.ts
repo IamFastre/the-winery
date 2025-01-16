@@ -38,6 +38,7 @@ export const DEFAULT:Theme = {
 
     "border-radius-1": "0px",
     "border-radius-2": "10%",
+    "border-radius-3": "5px",
 
     "line-ribbon": "'<#>'",
 

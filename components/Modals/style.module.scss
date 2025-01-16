@@ -1,6 +1,7 @@
 @use '@/styles/funcs.module';
 @use '@/styles/consts.module';
 @use '@/styles/colors.module' as c;
+@use '@/styles/values.module' as v;
 
 .menu {
   min-width: 200px;
@@ -51,7 +52,7 @@ div.option, a.option {
   &:not(.field) {
     user-select: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: v.$border-radius-3;
     background-color: funcs.set-alpha(c.$secondary, 10%);
   }
 
@@ -61,8 +62,9 @@ div.option, a.option {
     fill: c.$primary;
     stroke: c.$primary;
     background-color: c.$accent;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 6px;
+    border-radius: v.$border-radius-3;
+    overflow: visible;
 
     path {
       stroke-width: 40px;

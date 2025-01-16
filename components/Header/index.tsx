@@ -25,12 +25,10 @@ export function Header(props:Readonly<HeaderProps>) {
           {props.left}
         </div>
         <div className={styles.middle}>
-          <div className={styles.title}>
-            { props.noBrackets || <span>{"•-{"}</span> }
-            <span className={styles.text} style={{ color: props.titleColor }}>
+          <div className={`${styles.title} ${props.noBrackets ? '' : styles.brackets}`}>
+            <span style={{ color: props.titleColor }}>
               {props.title}
             </span>
-            { props.noBrackets || <span>{"}-•"}</span> }
           </div>
           <div className={styles.subtitle}>
             {

@@ -25,6 +25,7 @@ export const SCARLATTA:Theme = {
 
     "border-radius-1": "15px",
     "border-radius-2": "50%",
+    "border-radius-3": "50px",
 
     "line-ribbon": "'.•˚ʚ♡ɞ˚•.'",
 

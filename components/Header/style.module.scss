@@ -1,4 +1,5 @@
 @use '@/styles/colors.module' as c;
+@use '@/styles/values.module' as v;
 
 @mixin styling($font-size, $bracket-font-size) {
   .container {
@@ -17,12 +18,18 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    gap: 10px;
-    font-size: $bracket-font-size;
+    gap: 1ch;
+    font-size: $font-size;
+    color: c.$accent;
 
-    .text {
-      font-size: $font-size;
-      color: c.$accent;
+    &::before, &::after {
+      color: c.$quinary;
+      font-size: $bracket-font-size;
+    }
+
+    &.brackets {
+      &::before { content: v.$bracket-3-l; }
+      &::after  { content: v.$bracket-3-r; }
     }
   }
 
