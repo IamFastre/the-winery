@@ -25,6 +25,7 @@ import { Section } from "@/components/Section";
 
 import colors from "@/styles/colors";
 import styles from "./styles.module.scss";
+import { HydratedTime } from "@/components/HydratedTime";
 
 interface EditorProps {
   toaster: ReturnType<typeof useToaster>;
@@ -105,7 +106,7 @@ const Editor = (props:EditorProps) => {
   );
 };
 
-const AsUser = ({ username }:{ username:string; }) => (
+const AsUser = ({ username, date }:{ username:string; date?:string }) => (
   <div className={styles.asUser}>
     <span>
       <C.SECONDARY>
@@ -118,6 +119,17 @@ const AsUser = ({ username }:{ username:string; }) => (
         {username}
       </C.ACCENT>
     </span>
+    { date &&
+      <span>
+        <C.SECONDARY>
+          Created at
+        </C.SECONDARY>
+        <C.QUINARY>
+          {' '}
+          <HydratedTime timestamp={date} />
+        </C.QUINARY>
+      </span>
+    }
   </div>
 );
 
@@ -314,7 +326,7 @@ export function DraftEditor({ user, draft }:{ user:Tables<'profiles'>; draft:Tab
           resetError={() => setError(null)}
         />
         <div className={styles.footer}>
-          <AsUser username={user.username} />
+          <AsUser username={user.username} date={draft.timestamp} />
           <div className={styles.actions}>
             {uploading && <LoadingText className={styles.loading} compact />}
             <Button
