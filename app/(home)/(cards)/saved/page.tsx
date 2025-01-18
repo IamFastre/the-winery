@@ -7,6 +7,7 @@ import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
 import { Card } from "@/components/Card";
 import { ErrorPage } from "@/components/Pages";
+import { CardList } from "@/components/CardList";
 
 import { PageIcon } from "../server";
 import { BackButton } from "../client";
@@ -39,23 +40,7 @@ export default async function SavesPage() {
         left={<BackButton />}
         right={<PageIcon icon={IoBookmark} />}
       />
-      <div className={styles.cardsHolder}>
-        <div className={styles.cards}>
-          {saves.map(post => (
-            <div key={post.id}>
-              <Card
-                username={users[post.author_uuid!].username}
-                userAvatar={users[post.author_uuid!].avatar}
-                title={post.title}
-                content={post.content}
-                timestamp={post.timestamp}
-                postId={post.id}
-                centered
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+      <CardList cards={saves} users={users} type="posts" />
     </Section>
   );
 }

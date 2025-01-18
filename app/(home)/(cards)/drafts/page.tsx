@@ -12,6 +12,7 @@ import { ErrorPage } from "@/components/Pages";
 import { PageIcon } from "../server";
 import { BackButton } from "../client";
 import styles from "../styles.module.scss";
+import { CardList } from "@/components/CardList";
 
 export const metadata:Metadata = {
   title: `Drafts • ${consts.name}`,
@@ -40,20 +41,7 @@ export default async function DraftsPage() {
         left={<BackButton />}
         right={<PageIcon icon={IoFolder} />}
       />
-      <div className={styles.cardsHolder}>
-        <div className={styles.cards}>
-          {drafts.map(draft => (
-            <Link href={`/compose?draft=${draft.id}`} type="wrapper" key={draft.id}>
-              <Card
-                title={draft.title}
-                content={draft.content}
-                timestamp={draft.timestamp}
-                centered
-              />
-            </Link>
-          ))}
-        </div>
-      </div>
+      <CardList cards={drafts} type="drafts" />
     </Section>
   );
 }
