@@ -155,23 +155,25 @@ p {
 }
 
 a {
-  color: c.$accent;
-  font-style: italic;
-  text-decoration-style: dotted;
+  &:not([type="wrapper"]) {
+    color: c.$accent;
+    font-style: italic;
+    text-decoration-style: dotted;
 
-  &:hover, &:focus-visible {
-    font-weight: bolder;
-    text-decoration-style: solid;
-  }
-
-  &[aria-describedby="footnote-label"] {
-    font-style: normal;
-
-    &::before {
-      content: "[";
+    &:hover, &:focus-visible {
+      font-weight: bolder;
+      text-decoration-style: solid;
     }
-    &::after {
-      content: "]";
+
+    &[aria-describedby="footnote-label"] {
+      font-style: normal;
+
+      &::before {
+        content: "[";
+      }
+      &::after {
+        content: "]";
+      }
     }
   }
 
