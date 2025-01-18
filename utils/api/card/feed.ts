@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import { result } from '@/utils/api';
-import { getUserInfo } from '@/utils/api/user/info';
+import { getUserInfo, UserInfo } from '@/utils/api/user/info';
 import { createClient } from '@/supabase/server';
 import { Tables } from '@/supabase/types';
 
-export type CardFeed = { posts: Tables<'posts'>[], users: { [id:string]:Tables<'profiles'> } };
+export type CardFeed = { posts: Tables<'posts'>[], users: { [id:string]:UserInfo } };
 export type CardFeedParams = { limit?:number; sort?:'default' | 'new' | 'random'; };
 
 export async function getCardFeed(limit:number = 25, sortBy:CardFeedParams['sort'] = 'default') {
