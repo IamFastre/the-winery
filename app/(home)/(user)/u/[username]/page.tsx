@@ -7,8 +7,9 @@ import { getUserInfo } from "@/utils/api/user/info";
 import { addLogoBadge } from "@/utils/server";
 import { Section } from "@/components/Section";
 import { ErrorPage } from "@/components/Pages";
+import { CardList } from "@/components/CardList";
 
-import { CardList, ProfileInfo } from "./server";
+import { ProfileInfo } from "./server";
 import { DataBox, ProfileEditor } from "./client";
 import styles from "./styles.module.scss";
 
@@ -87,7 +88,7 @@ export default async function UserPage({ params }:UserPageProps) {
         <DataBox cards={posts.data.length} joined={user.data.created_at} />
       </div>
       <hr/>
-      <CardList posts={posts.data} />
+      <CardList cards={posts.data} type="posts" />
     </Section>
   );
 }

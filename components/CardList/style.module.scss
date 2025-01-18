@@ -1,0 +1,60 @@
+@use '@/styles/colors.module' as c;
+
+@mixin styling($padding-top, $data-font-size, $cards-grid) {
+  .cardArea {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+  }
+
+  .cardsHolder {
+    align-items: center;
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+
+  .cards {
+    display: block;
+    width: 100%;
+    column-count: $cards-grid;
+    column-gap: 30px;
+    column-span: none;
+    padding: 15px min(4%, 45px);
+
+    > * {
+      margin-bottom: 30px;
+      max-width: calc(100vw - 75px);
+      break-inside: avoid;
+    }
+  }
+
+  .noCards {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    user-select: none;
+
+    svg {
+      font-size: 50px;
+      fill: c.$secondary;
+      stroke: c.$secondary;
+    }
+
+    span {
+      color: c.$secondary;
+      font-style: italic;
+    }
+  }
+}
+
+@media screen and (min-width: 0px)
+  and (max-width: 786px) {
+@include styling($padding-top: 30px, $data-font-size: 14px, $cards-grid: 1);
+}
+
+@media screen and (min-width: 787px) {
+@include styling($padding-top: 50px, $data-font-size: 18px, $cards-grid: 2);
+}

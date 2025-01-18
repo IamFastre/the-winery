@@ -1,11 +1,8 @@
 import Image from "next/image";
 
-import { IoFolderOpenOutline } from "@icons/io5/IoFolderOpenOutline";
 import { IoHelpCircle } from "@icons/io5/IoHelpCircle";
 
 import { UserInfo } from "@/utils/api/user/info";
-import { CardPost } from "@/utils/api/card/post";
-import { Card } from "@/components/Card";
 import { C } from "@/components/C";
 import { Bio } from "@/components/Bio";
 
@@ -44,37 +41,6 @@ export function ProfileTextStuff({ profile }:{ profile:UserInfo }) {
         {profile.mail_confirmed || <IoHelpCircle title="Email not confirmed." />}
       </div>
       <Bio info={profile} />
-    </div>
-  );
-}
-
-export function CardList({ posts }:{ posts:CardPost[] }) {
-  return (
-    <div className={styles.cardArea}>
-      <div className={styles.cardsHolder}>
-        {
-          posts.length ?
-          <div className={styles.cards}>
-            { posts.map(post => (
-              <Card
-                title={post.title}
-                content={post.content}
-                timestamp={post.timestamp}
-                postId={post.id}
-                key={post.id}
-                centered
-              />
-              )) }
-          </div>
-        :
-        <div className={styles.noCards}>
-          <IoFolderOpenOutline />
-          <span>
-            No posts yet
-          </span>
-        </div>
-        }
-      </div>
     </div>
   );
 }
