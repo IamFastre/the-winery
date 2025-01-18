@@ -50,29 +50,31 @@ export function ProfileTextStuff({ profile }:{ profile:UserInfo }) {
 
 export function CardList({ posts }:{ posts:CardPost[] }) {
   return (
-    <div className={styles.cardsHolder}>
-      {
-        posts.length ?
-        <div className={styles.cards}>
-          { posts.map(post => (
-            <Card
-              title={post.title}
-              content={post.content}
-              timestamp={post.timestamp}
-              postId={post.id}
-              key={post.id}
-              centered
-            />
-            )) }
+    <div className={styles.cardArea}>
+      <div className={styles.cardsHolder}>
+        {
+          posts.length ?
+          <div className={styles.cards}>
+            { posts.map(post => (
+              <Card
+                title={post.title}
+                content={post.content}
+                timestamp={post.timestamp}
+                postId={post.id}
+                key={post.id}
+                centered
+              />
+              )) }
+          </div>
+        :
+        <div className={styles.noCards}>
+          <IoFolderOpenOutline />
+          <span>
+            No posts yet
+          </span>
         </div>
-      :
-      <div className={styles.noCards}>
-        <IoFolderOpenOutline />
-        <span>
-          No posts yet
-        </span>
+        }
       </div>
-      }
     </div>
   );
 }

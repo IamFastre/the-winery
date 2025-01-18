@@ -307,29 +307,32 @@
     }
   }
 
-  .cardsHolder {
-    flex: 1;
+  .cardArea {
+    width: 100%;
+    height: 100%;
     align-items: center;
   }
 
-  .cards {
-    display: grid;
-    grid-template-columns: $cards-grid;
-    justify-items: stretch;
-    align-content: start;
-    align-items: stretch;
+  .cardsHolder {
+    align-items: center;
+    overflow-y: scroll;
     position: absolute;
     top: 0;
     bottom: 0;
-    overflow-y: scroll;
-    padding: 15px;
-    gap: 30px;
+  }
+
+  .cards {
+    display: block;
+    width: 100%;
+    column-count: $cards-grid;
+    column-gap: 30px;
+    column-span: none;
+    padding: 15px min(4%, 45px);
 
     > div {
+      margin-bottom: 30px;
       max-width: calc(100vw - 75px);
-      > div:nth-child(1) {
-        flex: 1;
-      }
+      break-inside: avoid;
     }
   }
 
@@ -355,9 +358,9 @@
 
 @media screen and (min-width: 0px)
               and (max-width: 786px) {
-  @include styling($padding-top: 30px, $data-font-size: 14px, $cards-grid: 1fr);
+  @include styling($padding-top: 30px, $data-font-size: 14px, $cards-grid: 1);
 }
 
 @media screen and (min-width: 787px) {
-  @include styling($padding-top: 50px, $data-font-size: 18px, $cards-grid: 1fr 1fr);
+  @include styling($padding-top: 50px, $data-font-size: 18px, $cards-grid: 2);
 }
