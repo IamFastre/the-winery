@@ -96,7 +96,7 @@ export async function addLogoBadge(input:string) {
     if (avatar === "unknown")
       throw new TypeError(`Input not recognized as data or http url: '${input}'`);
 
-    const logo = await getOtherLogo('brand-outline');
+    const logo = await getOtherLogo('basic');
     const icon = await sharp(logo.data)
       .resize({ width: BADGE_DIM, height: BADGE_DIM })
       .toBuffer();

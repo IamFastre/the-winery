@@ -20,7 +20,7 @@ import type { Theme } from "@/styles/themes/types";
 
 import type { options } from "./consts";
 
-export type LogoKind = "main" | "brand" | "mono" | "brand-outline" | "mono-outline" | "touch";
+export type LogoKind = "main" | "basic" | "mono" | "touch" | "old";
 
 export interface ErrorAPI {
   code:number | string;

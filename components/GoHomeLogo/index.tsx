@@ -60,7 +60,7 @@ export function GoHomeLogo(props:HomeIconProps) {
       <a href={dest} onClick={e => e.preventDefault()} type="wrapper">
         <Image
           alt={`${consts.name} logo; a purple heart suit with a golden spiky hexagram on top`}
-          src={getLogo(props.logo ?? "brand-outline")}
+          src={getLogo(props.logo ?? "basic")}
           priority
         />
       </a>

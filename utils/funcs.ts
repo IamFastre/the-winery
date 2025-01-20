@@ -3,12 +3,11 @@ import { StaticImageData } from 'next/image';
 
 import { LogoKind, StorageEntry } from './types';
 
-import NDC   from "@/public/static/images/logo/NaipeDeCopas.png";
-import NDCB  from "@/public/static/images/logo/NaipeDeCopasBrand.png";
-import NDCM  from "@/public/static/images/logo/NaipeDeCopasMono.png";
-import NDCBO from "@/public/static/images/logo/NaipeDeCopasBrandO.png";
-import NDCMO from "@/public/static/images/logo/NaipeDeCopasMonoO.png";
-import NDCTI from "@/public/static/images/logo/NaipeDeCopasTouch.png";
+import CVMain   from "@/public/static/images/logo/CorvinumMain.png";
+import CVBasic  from "@/public/static/images/logo/CorvinumBasic.png";
+import CVMono  from "@/public/static/images/logo/CorvinumMono.png";
+import CVTouch from "@/public/static/images/logo/CorvinumTouch.png";
+import CVOld from "@/public/static/images/logo/CorvinumOld.png";
 
 import ZodiacAquarius    from "@/public/static/images/zodiacs/Aquarius.svg";
 import ZodiacPisces      from "@/public/static/images/zodiacs/Pisces.svg";
@@ -57,17 +56,15 @@ export function hexOpacity(str:string, opacity:number) : string {
 }
 
 export function getLogo(kind:LogoKind) : StaticImageData {
-  return kind === "brand"
-       ? NDCB
+  return kind === "basic"
+       ? CVBasic
        : kind === "mono"
-       ? NDCM
-       : kind === "brand-outline"
-       ? NDCBO
-       : kind === "mono-outline"
-       ? NDCMO
+       ? CVMono
        : kind === "touch"
-       ? NDCTI
-       : NDC;
+       ? CVTouch
+       : kind === "old"
+       ? CVOld
+       : CVMain;
 }
 
 export function getZodiac(day:number, month:number) : React.FC<React.SVGProps<SVGSVGElement>> | null {
