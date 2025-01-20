@@ -38,17 +38,10 @@ const sortByOptions = [
   "Random",
 ];
 
-const themeOptions = [
-  "Dark",
-  "Light",
-  "Scarlatta",
-];
-
 function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching:boolean; }) {
   const [actionsOpen, setActionsOpen] = useState<boolean>(false);
   const [themeI, setThemeI] = useState<number>(
-    themeOptions.map(s => s.toLowerCase())
-    .indexOf(
+    options['settings']['theme'].indexOf(
       document.children[0].getAttribute("data-theme") ?? 'dark'
     )
   );
@@ -99,11 +92,11 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
           />
           <DropdownButton
             title="Theme"
-            subtitle={themeOptions[themeI]}
+            subtitle={options['settings']['theme'][themeI]}
             icon={IoColorPalette}
             onSelect={onSelectTheme}
             selectedIndices={[themeI]}
-            options={themeOptions}
+            options={options['settings']['theme']}
           />
           {/* <div className={pageStyles.actionsSmall}>
             <Button
