@@ -1,0 +1,88 @@
+@use '@/styles/colors.module' as c;
+@use '@/styles/values.module' as v;
+
+@mixin styling($small) {
+  .sectionContent {
+    align-items: center;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow-y: scroll;
+  }
+
+  .content {
+    width: if($small, 100%, 80%);
+    padding: if($small, 30px, 50px);
+  }
+
+  .settings {
+    $m: 15px;
+
+    >:not(:last-child):after {
+      content: "";
+      width: 100%;
+      height: 2px;
+      background-color: c.$quaternary;
+      margin: $m 0;
+    }
+  }
+
+  .header {
+    font-size: 30px;
+    align-self: center;
+    border-bottom: 2px solid c.$accent;
+    padding: 7.5px;
+    margin-bottom: 15px;
+
+    > svg {
+      color: c.$secondary;
+      margin-left: 10px;
+    }
+  }
+
+  .setting {
+    flex: 1;
+    align-items: stretch;
+    gap: 7.5px;
+
+    .title {
+      font-size: if($small, 20px, 22px);
+      font-weight: bold;
+
+      > span::before {
+        content: v.$arrow-1-r;
+        margin-right: 1ch;
+        color: c.$accent;
+      }
+    }
+
+    .description {
+      margin-bottom: 5px;
+      font-size: smaller;
+      font-style: italic;
+      color: c.$secondary;
+    }
+  }
+
+  .footer {
+    opacity: 0.5;
+    user-select: none;
+    margin: 20px 0;
+
+    .version {
+      user-select: text;
+    }
+  }
+}
+
+@media screen and (min-width: 0px)
+              and (max-width: 786px) {
+  @include styling($small: true);
+}
+
+@media screen and (min-width: 787px) {
+  @include styling($small: false);
+}
