@@ -50,5 +50,8 @@ export const DEFAULT:Theme = {
 
     "bracket-3-l": "'•-{'",
     "bracket-3-r": "'}-•'",
+
+    "arrow-1-l": "'<'",
+    "arrow-1-r": "'>'",
   }
 }

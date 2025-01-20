@@ -51,6 +51,9 @@ export interface Theme {
 
     'bracket-3-l': `"${string}"` | `'${string}'`;
     'bracket-3-r': `"${string}"` | `'${string}'`;
+
+    'arrow-1-l': `"${string}"` | `'${string}'`;
+    'arrow-1-r': `"${string}"` | `'${string}'`;
   };
 
   other?: {
