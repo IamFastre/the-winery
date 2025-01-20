@@ -1,12 +1,10 @@
 import { Metadata } from "next";
 import { IoFolder } from "@icons/io5/IoFolder";
-import Link from "next/link";
 
 import consts from "@/utils/consts";
 import { getUserDrafts } from "@/utils/api/user/drafts";
 import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
-import { Card } from "@/components/Card";
 import { ErrorPage } from "@/components/Pages";
 
 import { PageIcon } from "../server";

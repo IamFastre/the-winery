@@ -5,7 +5,6 @@ import consts from "@/utils/consts";
 import { getUserSaves } from "@/utils/api/user/saves";
 import { Section } from "@/components/Section";
 import { Header } from "@/components/Header";
-import { Card } from "@/components/Card";
 import { ErrorPage } from "@/components/Pages";
 import { CardList } from "@/components/CardList";
 
