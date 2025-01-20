@@ -6,15 +6,13 @@
 $o-height: 40px;
 
 @mixin styling($small) {
-  .container {
-    user-select: none;
-    width: 175px;
+  user-select: none;
+  width: 175px;
 
-    &.noWith { width: unset; }
+  &.noWith { width: unset; }
 
-    @if ($small) { flex-direction: column-reverse; }
-    @else { flex-direction: column; }
-  }
+  @if ($small) { flex-direction: column-reverse; }
+  @else { flex-direction: column; }
 
   .head {
     cursor: pointer;
@@ -134,9 +132,12 @@ $o-height: 40px;
 
 @media screen and (min-width: 0px)
               and (max-width: 786px) {
-  @include styling($small: true);
+  .container:not(.bottom, .top) { @include styling($small: true); }
 }
 
 @media screen and (min-width: 787px) {
-  @include styling($small: false);
+  .container:not(.bottom, .top) { @include styling($small: false); }
 }
+
+.top    { @include styling($small: true); }
+.bottom { @include styling($small: false); }

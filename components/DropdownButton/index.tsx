@@ -12,11 +12,12 @@ interface DropdownButtonProps {
   options: string[];
   selectedIndices: number[];
   onSelect: (option:string, index:number) => void;
+  style?: "auto" | "top" | "bottom";
   floating?: boolean;
   noWith?: boolean;
 }
 
-export function DropdownButton({ title, subtitle, icon, options, selectedIndices, onSelect, floating, noWith }:DropdownButtonProps) {
+export function DropdownButton({ title, subtitle, icon, options, selectedIndices, onSelect, style, floating, noWith }:DropdownButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -29,9 +30,10 @@ export function DropdownButton({ title, subtitle, icon, options, selectedIndices
   };
 
   const Icon = icon;
+  const cls = style === 'top' ? styles.top : style === 'bottom' ? styles.bottom : '';
 
   return (
-    <div className={`${styles.container} ${noWith ? styles.noWith : ""}`}>
+    <div className={`${styles.container} ${noWith ? styles.noWith : ""} ${cls}`}>
       <div
         className={`${styles.head} ${isOpen ? styles.open : ""}`}
         onClick={handleToggle}
