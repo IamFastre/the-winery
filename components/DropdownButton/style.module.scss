@@ -10,6 +10,8 @@ $o-height: 40px;
     user-select: none;
     width: 175px;
 
+    &.noWith { width: unset; }
+
     @if ($small) { flex-direction: column-reverse; }
     @else { flex-direction: column; }
   }
@@ -83,7 +85,8 @@ $o-height: 40px;
   }
 
   .options {
-    margin: 0 4px;
+    $m: 4px;
+    margin: 0 $m;
     height: 0;
     max-height: calc($o-height * 4);
     overflow-y: scroll;
@@ -99,8 +102,13 @@ $o-height: 40px;
       border-radius: 0 0 5px 5px;
     }
 
-    &.open {
-      height: auto;
+    &.open { height: auto; }
+
+    &.floating {
+      z-index: 1;
+      position: absolute;
+      width: calc(100% - $m * 2);
+      top: calc($o-height + 10px);
     }
   }
 

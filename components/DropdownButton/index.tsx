@@ -12,9 +12,11 @@ interface DropdownButtonProps {
   options: string[];
   selectedIndices: number[];
   onSelect: (option:string, index:number) => void;
+  floating?: boolean;
+  noWith?: boolean;
 }
 
-export function DropdownButton({ title, subtitle, icon, options, selectedIndices, onSelect }:DropdownButtonProps) {
+export function DropdownButton({ title, subtitle, icon, options, selectedIndices, onSelect, floating, noWith }:DropdownButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -29,7 +31,7 @@ export function DropdownButton({ title, subtitle, icon, options, selectedIndices
   const Icon = icon;
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${noWith ? styles.noWith : ""}`}>
       <div
         className={`${styles.head} ${isOpen ? styles.open : ""}`}
         onClick={handleToggle}
@@ -47,8 +49,7 @@ export function DropdownButton({ title, subtitle, icon, options, selectedIndices
         </div>
         <IoCaretDown className={`${styles.caret} ${isOpen ? styles.open : ""}`} />
       </div>
-
-      <div className={`${styles.options} ${isOpen ? styles.open : ""}`}>
+      <div className={`${styles.options} ${floating ? styles.floating : ""} ${isOpen ? styles.open : ""}`}>
         {
           options.map((option, i) => (
             <div
