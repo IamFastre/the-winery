@@ -14,17 +14,15 @@ import { IoAdd } from "@icons/io5/IoAdd";
 import { IoList } from "@icons/io5/IoList";
 import { IoColorPalette } from "@icons/io5/IoColorPalette";
 
-import consts, { options } from "@/utils/consts";
+import { options } from "@/utils/consts";
 import { LocalStorage } from "@/utils";
 import { api, focusable } from "@/utils/client";
-import { Modal } from "@/providers/ModalProvider";
 import { useShortcuts } from "@/providers/Shortcuts";
 import { useGoTo } from "@/hooks";
 import { Card } from "@/components/Card";
 import { GoHomeLogo } from "@/components/GoHomeLogo";
 import { Section } from "@/components/Section";
 import { DropdownButton } from "@/components/DropdownButton";
-import { C, RI } from "@/components/C";
 import { LoadingText } from "@/components/LoadingText";
 import { ErrorPage } from "@/components/Pages";
 
@@ -225,7 +223,6 @@ export function FeedNavigator() {
 
 export function Sidebar({ username }:{ username:string; }) {
   const [redirecting, goto, current] = useGoTo();
-  const modalShownState = useState<boolean>(false);
 
   const Icon = (props:{ icon:IconType; dest?:string; id:string, onClick?:() => void }) => {
     const handleClick:MouseEventHandler<HTMLElement> = e => {
@@ -263,19 +260,10 @@ export function Sidebar({ username }:{ username:string; }) {
           <Icon icon={IoSearchOutline} id="search-page-button" dest={'/search'} />
           <Icon icon={IoPersonCircleOutline} id="user-page-button" dest={`/u/${username}`} />
           <Icon icon={IoWineOutline} id="compose-page-button" dest={'/compose'}/>
-          <Icon icon={IoCogOutline} id="settings-page-button" onClick={() => modalShownState[1](s => !s)} />
+          <Icon icon={IoCogOutline} id="settings-page-button" dest={'/settings'} />
           <Icon icon={IoInformationCircleOutline} id="info-page-button" dest={'/getting-started'} />
         </div>
       </div>
-
-      <Modal state={modalShownState} closeButton>
-        Soon...
-        <C.ACCENT style={{ position: 'absolute', bottom: 30, fontSize: 'smaller' }}>
-          <RI>
-            v{consts.version}
-          </RI>
-        </C.ACCENT>
-      </Modal>
     </Section>
   );
 }
