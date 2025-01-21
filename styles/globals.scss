@@ -155,7 +155,7 @@ p {
 }
 
 a {
-  &:not([type="wrapper"]) {
+  &:where(:not([type="wrapper"])) {
     color: c.$accent;
     font-style: italic;
     text-decoration-style: dotted;
