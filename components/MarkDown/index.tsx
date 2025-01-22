@@ -9,21 +9,24 @@ import tags from "@/libs/remarkTags";
 import emoticon from "@/libs/remarkEmoticon";
 import cardRepost from "@/libs/remarkCardRepost";
 
-import { CardRepost, CardTag } from "./client";
+import { CardRepost, CardTag, TagProps, UserTag } from "./client";
 import styles from "./style.module.scss";
 
-const plugins:Options["remarkPlugins"] = [
+const plugins:Exclude<Options["remarkPlugins"], null | undefined> = [
   [headingId, { defaults: true }],
   [gfm, { singleTilde: false }],
-  tags,
   superSub,
+  tags,
   emoticon,
   cardRepost,
 ];
 
 function HandleSpan(props:HTMLAttributes<HTMLSpanElement>) {
   if (props.className?.includes("card-tag"))
-    return <CardTag {...props} />;
+    return <CardTag {...props as TagProps} />;
+
+  if (props.className?.includes("user-tag"))
+    return <UserTag {...props as TagProps} />;
 
   if (props.className?.includes("card-repost"))
     return <CardRepost {...props} />;
@@ -32,5 +35,12 @@ function HandleSpan(props:HTMLAttributes<HTMLSpanElement>) {
 }
 
 export function MarkDown(props:Options) {
-  return <RMD {...props} className={styles.self} remarkPlugins={plugins} components={{ 'span': HandleSpan }} />;
+  return (
+    <RMD
+      {...props}
+      className={styles.self + ' ' + props.className}
+      remarkPlugins={plugins.concat(props.remarkPlugins ?? [])}
+      components={{ 'span': HandleSpan, ...props.components }}
+    />
+  );
 }

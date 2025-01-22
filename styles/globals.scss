@@ -374,6 +374,21 @@ $rainbow: c.$red, c.$orange, c.$yellow, c.$green, c.$blue, c.$purple;
     color: $link-color;
     font-style: inherit;
     text-decoration: inherit; 
+    
+    &.error {
+      text-decoration: underline;
+      text-decoration-color: c.$red;
+      text-decoration-style: wavy;
+    }
+
+    img {
+      width: 16px;
+      height: 16px;
+      border-radius: v.$border-radius-2;
+      vertical-align: middle;
+      margin-left: 0.5ch;
+      margin-bottom: 2px;
+    }
   }
 }
 

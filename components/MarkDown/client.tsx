@@ -1,5 +1,5 @@
 "use client";
-import { HTMLAttributes, ReactElement, useEffect, useState } from "react";
+import { HTMLAttributes, useEffect, useState } from "react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 
@@ -10,11 +10,41 @@ import { UsernameHandle } from "@/components/UsernameHandle";
 import { api, focusable } from "@/utils/client";
 import { MarkDown } from ".";
 
-export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
+export type TagProps = HTMLAttributes<HTMLSpanElement> & { 'data-tag': string };
+
+export function UserTag(props:TagProps) {
+  const username = props['data-tag'];
+
+  const { data:response, isLoading } = useQuery({
+    queryFn: async () => await api("/user/info", { username }),
+    queryKey: ["/card/post", username]
+  });
+
+  const name  = response?.data?.display_name ?? null;
+  const user  = response?.data ?? null;
+  const error = response?.error;
+
+  return (
+    <span
+      className={props.className}
+      title={error ? "Not Found" : isLoading ? "Loading..." : name!}
+    >
+      u:
+      <a href={`/u/${username}`} className={error ? "error" : undefined}>
+        {username}
+        {isLoading && <LoadingText compact />}
+        {error && <C.RED>?</C.RED>}
+        {user && <Image src={user.avatar} alt={`${user.username}'s profile picture`} width={256} height={256} /> }
+      </a>
+    </span>
+  );
+}
+
+export function CardTag(props:TagProps) {
   const [title, setTitle] = useState<string | number | null>(null);
   const [author, setAuthor] = useState<string | null>(null);
 
-  const id = parseInt((props.children as ReactElement[])[1].props.children);
+  const id = parseInt(props['data-tag']);
   const isTwelve = id === 12;
 
   const { data:response, isLoading } = useQuery({
@@ -55,7 +85,7 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
 
   return (
     <span
-      className="card-tag"
+      className={props.className}
       title={author ? `by ${author}` : isTwelve ? "ID 12 loads forever, a little easter egg" : title === null ? "Post not found" : undefined}
     >
       c:

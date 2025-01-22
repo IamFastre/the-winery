@@ -5,7 +5,7 @@ function makeTag(tag:string, prefix:string, type:string) {
 
   return {
     type,
-    data: { hName: 'span', hProperties: { class: type } },
+    data: { hName: 'span', hProperties: { class: type, 'data-tag': t } },
     children: [
       { value: `${prefix}:`, type: 'text' },
       {
