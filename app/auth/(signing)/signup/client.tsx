@@ -28,7 +28,7 @@ const checkUsername = (str:string) : boolean => {
   if (!str)
     return true;
 
-  return /^(?![0-9\-])[a-z0-9_-]+(?![\-])$/i
+  return /^(?![0-9\-])[a-z0-9_-]+[^-]$/i
          .test(str);
 };
 

@@ -55,7 +55,7 @@ export function CardTag(props:HTMLAttributes<HTMLSpanElement>) {
 
   return (
     <span
-      className="card-mention"
+      className="card-tag"
       title={author ? `by ${author}` : isTwelve ? "ID 12 loads forever, a little easter egg" : title === null ? "Post not found" : undefined}
     >
       c:

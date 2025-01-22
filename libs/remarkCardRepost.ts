@@ -41,15 +41,5 @@ export default function cardRepost() {
 
       parent.children.splice(i, 1, ...children);
     });
-
-    visit(tree, ['link'], (node, i, parent) => {
-      if (URL.canParse(node.url)) {
-        const url = new URL(node.url);
-        if (url.origin === location.origin && /^\/c\/\d+$/i.test(url.pathname)) {
-          const newNode = makeCardRepost(url.pathname.replace('/c/', ''));
-          parent.children.splice(i, 1, newNode);
-        }
-      }
-    });
   };
 }

@@ -377,8 +377,8 @@ $rainbow: c.$red, c.$orange, c.$yellow, c.$green, c.$blue, c.$purple;
   }
 }
 
-.user-mention { @include mention(c.$quinary, c.$accent); }
-.card-mention { @include mention(c.$quinary, c.$highlight, 20%, 35%); }
+.user-tag { @include mention(c.$quinary, c.$accent); }
+.card-tag { @include mention(c.$quinary, c.$highlight, 20%, 35%); }
 
 .card-repost {
   display: inline-flex;
