@@ -5,12 +5,16 @@ export default function colorBlock() {
   return (tree:any) => {
     visit(tree, ['inlineCode'], (node, i, parent) => {
       const value = node.value as string;
+      const rules = [
+        `background-color: ${value};`,
+        `font-weight: bold;`,
+      ];
 
       if (/^#(?:[0-9a-fA-F]{3}){1,2}$/.test(value) || /^rgb|RGB\((\d{1,3}), *(\d{1,3}), *(\d{1,3})\)$/.test(value))
         parent.children.splice(i, 1, {
           type: 'inlineCode',
           value,
-          data: { hProperties: { style: `background-color: ${value};` } }
+          data: { hProperties: { style: rules.join(' ') } }
         });
     });
   };

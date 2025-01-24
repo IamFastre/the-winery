@@ -240,11 +240,27 @@ blockquote {
   }
 }
 
+pre {
+  > code {
+    display: block;
+    padding: 7px 15px;
+    border: 1px c.$secondary solid;
+    border-radius: 12px;
+    background-color: c.$quaternary;
+    margin: 0;
+
+    &:hover, &:focus-visible {
+      border-style: dashed;
+    }
+  }
+}
+
 code {
   display: inline-block;
   background-color: c.$quaternary;
-  padding: 3px;
-  border-radius: 5px;
+  padding: 2px 5px;
+  margin: 1px 0;
+  border-radius: v.$border-radius-3;
   font-family: monospace;
 }
 
