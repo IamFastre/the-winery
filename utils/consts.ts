@@ -1,7 +1,7 @@
-import { version } from '@/package.json';
+import project from '@/package.json';
 
 const consts = {
-  version,
+  version: project.version,
   name: "The Winery",
   shortname: "Winery",
   userlabel: "Winer",
