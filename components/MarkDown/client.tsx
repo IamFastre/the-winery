@@ -1,5 +1,5 @@
 "use client";
-import { HTMLAttributes, useEffect, useState } from "react";
+import { HTMLAttributes } from "react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 
@@ -41,55 +41,49 @@ export function UserTag(props:TagProps) {
 }
 
 export function CardTag(props:TagProps) {
-  const [title, setTitle] = useState<string | number | null>(null);
-  const [author, setAuthor] = useState<string | null>(null);
-
   const id = parseInt(props['data-tag']);
   const isTwelve = id === 12;
 
-  const { data:response, isLoading } = useQuery({
+  const { data:postQ, isLoading:isPostLoading } = useQuery({
     queryFn: async () => await api("/card/post", { id }),
     queryKey: ["/card/post", id]
   });
 
-  useEffect(() => {
-    const resTitle = response?.data?.title;
+  const card = postQ?.data ?? null;
 
-    if (resTitle === undefined)
-      setTitle(null);
-    else if (resTitle === null)
-      setTitle(id);
-    else
-      setTitle(resTitle);
-  }, [id, response]);
+  const { data:userQ, isLoading:isUserLoading } = useQuery({
+    queryFn: async () => card?.author_uuid ? await api("/user/info", { id: card.author_uuid }) : null,
+    queryKey: ["/user/info", card?.author_uuid],
+    enabled: !!card?.author_uuid
+  });
 
-  useEffect(() => {
-    const start = async () => {
-      if (response?.data?.author_uuid) {
-        const { data:user } = await api('/user/info', { id: response.data.author_uuid! });
-        setAuthor(user?.display_name ? `${user.display_name} (${user.username})` : user?.username ?? null);
-      }
-    }
-
-    start();
-  }, [response?.data?.author_uuid])
-
-  const text:string | number | JSX.Element
-    = isLoading || isTwelve
-    ? <LoadingText compact />
-    : title === null
-    ? <C.RED>{id} ×</C.RED>
-    : typeof(title) === 'number'
-    ? `{${title}}`
-    : title;
+  const author = userQ?.data ?? null;
+  const isLoading = isPostLoading || isUserLoading || isTwelve;
+  const error = Boolean(postQ?.error || userQ?.error) && !isTwelve;
 
   return (
     <span
       className={props.className}
-      title={author ? `by ${author}` : isTwelve ? "ID 12 loads forever, a little easter egg" : title === null ? "Post not found" : undefined}
+      title={isPostLoading ? "Loading Post..." : isUserLoading ? "Loading User..." : `by ${author?.display_name ?? author?.username}`}
     >
       c:
-      <a href={`/c/${id}`}>{text}</a>
+      <a href={`/c/${id}`} className={error ? "error" : undefined}>
+        {card?.title ?? (isLoading ? id : `{${id}}`)}
+        {isLoading && <LoadingText compact />}
+        {error && <C.RED>?</C.RED>}
+        { author &&
+          <span style={{ marginLeft: '5px', fontSize: '12px', fontStyle: 'italic', opacity: 0.75 }}>
+            (
+            <C.QUINARY>
+              u:
+            </C.QUINARY>
+            <C.ACCENT>
+              {author.username}
+            </C.ACCENT>
+            )
+          </span>
+        }
+      </a>
     </span>
   );
 }
@@ -101,6 +95,7 @@ export function CardRepost(props:HTMLAttributes<HTMLSpanElement>) {
     queryFn: async () => await api("/card/post", { id }),
     queryKey: ["/card/post", id]
   });
+
   const card = cardRes?.data ?? null;
 
   const { data:userRes, isLoading:userLoading } = useQuery({
@@ -108,9 +103,9 @@ export function CardRepost(props:HTMLAttributes<HTMLSpanElement>) {
     queryKey: ["/user/info", card?.author_uuid],
     enabled: !!card?.author_uuid
   });
-  const author = userRes?.data ?? null;
 
-  const isLoading = cardLoading && userLoading;
+  const author = userRes?.data ?? null;
+  const isLoading = cardLoading || userLoading;
 
   if (cardRes?.error)
     return (
