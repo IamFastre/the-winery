@@ -23,6 +23,11 @@ import ZodiacSagittarius from "@/public/static/images/zodiacs/Sagittarius.svg";
 import ZodiacCapricorn   from "@/public/static/images/zodiacs/Capricorn.svg";
 
 
+function padZero(str:string, len:number = 2) : string {
+  const zeros = new Array(len).join('0');
+  return (zeros + str).slice(-len);
+}
+
 export function multiplyString(str:string, num:number) : string {
   let res = "";
 
@@ -34,6 +39,44 @@ export function multiplyString(str:string, num:number) : string {
 
 export function vowelStart(str:string) : boolean {
   return /^[aeiou]/i.test(str);
+}
+
+export function rgbToHex(rgb:string) : string {
+  const result = rgb.match(/\d+/g);
+
+  if (!result || result.length !== 3)
+    throw new Error('Invalid RGB color.');
+
+  const [r, g, b] = result.map(Number);
+
+  return `#${padZero(r.toString(16))}${padZero(g.toString(16))}${padZero(b.toString(16))}`;
+}
+export function hexInvert(hex:string, blackOrWhite:boolean = false) : string {
+  if (hex.indexOf('#') === 0)
+    hex = hex.slice(1);
+
+  if (hex.length === 3)
+    hex = hex[0] + hex[0]
+        + hex[1] + hex[1]
+        + hex[2] + hex[2];
+
+  if (hex.length !== 6)
+    throw new Error('Invalid HEX color.');
+
+  let r:string | number = parseInt(hex.slice(0, 2), 16),
+      g:string | number = parseInt(hex.slice(2, 4), 16),
+      b:string | number = parseInt(hex.slice(4, 6), 16);
+
+  if (blackOrWhite)
+    return (r * 0.299 + g * 0.587 + b * 0.114) > 186
+      ? '#000000'
+      : '#ffffff';
+
+  r = (255 - r).toString(16);
+  g = (255 - g).toString(16);
+  b = (255 - b).toString(16);
+
+  return `#${padZero(r)}${padZero(g)}${padZero(b)}`;
 }
 
 export function hexOpacity(str:string, opacity:number) : string {
