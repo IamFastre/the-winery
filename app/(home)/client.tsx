@@ -14,11 +14,12 @@ import { IoAdd } from "@icons/io5/IoAdd";
 import { IoList } from "@icons/io5/IoList";
 import { IoColorPalette } from "@icons/io5/IoColorPalette";
 
-import { options } from "@/utils/consts";
+import consts, { options } from "@/utils/consts";
 import { LocalStorage } from "@/utils";
 import { api, focusable } from "@/utils/client";
 import { useShortcuts } from "@/providers/Shortcuts";
 import { useGoTo } from "@/hooks";
+import { C } from "@/components/C";
 import { Card } from "@/components/Card";
 import { GoHomeLogo } from "@/components/GoHomeLogo";
 import { Section } from "@/components/Section";
@@ -109,6 +110,13 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
             />
           </div> */}
         </div>
+        <C.SECONDARY>
+          <i>
+            <sub>
+              v{consts.version}
+            </sub>
+          </i>
+        </C.SECONDARY>
       </div>
       <div {...focusable(pageStyles.active, () => setActionsOpen(a => !a))}>
         <IoAdd />
