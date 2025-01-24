@@ -8,6 +8,7 @@ import superSub from "remark-supersub";
 import tags from "@/libs/remarkTags";
 import emoticon from "@/libs/remarkEmoticon";
 import cardRepost from "@/libs/remarkCardRepost";
+import colorBlock from "@/libs/remarkColorBlock";
 
 import { CardRepost, CardTag, TagProps, UserTag } from "./client";
 import styles from "./style.module.scss";
@@ -19,6 +20,7 @@ const plugins:Exclude<Options["remarkPlugins"], null | undefined> = [
   tags,
   emoticon,
   cardRepost,
+  colorBlock,
 ];
 
 function HandleSpan(props:HTMLAttributes<HTMLSpanElement>) {
