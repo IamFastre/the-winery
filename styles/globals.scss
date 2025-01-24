@@ -398,8 +398,8 @@ $rainbow: c.$red, c.$orange, c.$yellow, c.$green, c.$blue, c.$purple;
     }
 
     img {
-      width: 16px;
-      height: 16px;
+      width: 16px !important;
+      height: 16px !important;
       border-radius: v.$border-radius-2;
       vertical-align: middle;
       margin-left: 0.5ch;
