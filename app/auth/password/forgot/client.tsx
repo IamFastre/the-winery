@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
+import Link from "next/link";
 
 import { IoCheckmark } from "@icons/io5/IoCheckmark";
 
@@ -128,9 +129,9 @@ export function ForgotCard() {
               className={styles.button}
             />
 
-            <a href="/auth/login">
+            <Link href="/auth/login">
               Suddenly remembered?
-            </a>
+            </Link>
           </form>
           {
             error ?

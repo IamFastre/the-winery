@@ -1,5 +1,6 @@
 "use client";
 import { HTMLAttributes } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 
@@ -30,12 +31,12 @@ export function UserTag(props:TagProps) {
       title={error ? "Not Found" : isLoading ? "Loading..." : name!}
     >
       u:
-      <a href={`/u/${username}`} className={error ? "error" : undefined}>
+      <Link href={`/u/${username}`} className={error ? "error" : undefined}>
         {username}
         {isLoading && <LoadingText compact />}
         {error && <C.RED>?</C.RED>}
         {user && <Image src={user.avatar} alt={`${user.username}'s profile picture`} width={256} height={256} /> }
-      </a>
+      </Link>
     </span>
   );
 }
@@ -67,7 +68,7 @@ export function CardTag(props:TagProps) {
       title={isPostLoading ? "Loading Post..." : isUserLoading ? "Loading User..." : `by ${author?.display_name ?? author?.username}`}
     >
       c:
-      <a href={`/c/${id}`} className={error ? "error" : undefined}>
+      <Link href={`/c/${id}`} className={error ? "error" : undefined}>
         {card?.title ?? (isLoading ? id : `{${id}}`)}
         {isLoading && <LoadingText compact />}
         {error && <C.RED>?</C.RED>}
@@ -83,7 +84,7 @@ export function CardTag(props:TagProps) {
             )
           </span>
         }
-      </a>
+      </Link>
     </span>
   );
 }
@@ -153,9 +154,9 @@ export function CardRepost(props:HTMLAttributes<HTMLSpanElement>) {
           </span>
           <UsernameHandle username={author.username} />
         </div>
-        <a href={`/c/${id}`} {...focusable('active')}>
+        <Link href={`/c/${id}`} {...focusable('active')}>
           <MdOpenInNew />
-        </a>
+        </Link>
       </div>
     </div>
   );

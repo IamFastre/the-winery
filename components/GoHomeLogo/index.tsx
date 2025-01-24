@@ -1,5 +1,6 @@
 "use client";
 import { CSSProperties, useEffect, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 
 import consts from "@/utils/consts";
@@ -57,13 +58,13 @@ export function GoHomeLogo(props:HomeIconProps) {
       style={props.style}
       onClick={e => goto(dest, 'push', e.ctrlKey)}
     >
-      <a href={dest} onClick={e => e.preventDefault()} type="wrapper">
+      <Link href={dest} onClick={e => e.preventDefault()} type="wrapper">
         <Image
           alt={`${consts.name} logo; a purple heart suit with a golden spiky hexagram on top`}
           src={getLogo(props.logo ?? "basic")}
           priority
         />
-      </a>
+      </Link>
     </div>
   );
 }

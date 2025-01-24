@@ -1,5 +1,6 @@
 "use client";
 import { MouseEventHandler, useEffect, useState } from "react";
+import Link from "next/link";
 import { IconType } from "@react-icons/all-files";
 import { useQuery } from "@tanstack/react-query";
 
@@ -248,9 +249,9 @@ export function Sidebar({ username }:{ username:string; }) {
         id={props.id}
         {...focusable(layoutStyles.active, current.startsWith(props.dest!) ? undefined : handleClick)}
       >
-        <a href={props.dest} onClick={e => e.preventDefault()} type="wrapper">
+        <Link href={props.dest!} onClick={e => e.preventDefault()} type="wrapper">
           <props.icon />
-        </a>
+        </Link>
       </div>
     );
   };

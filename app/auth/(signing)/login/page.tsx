@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 
 import consts from "@/utils/consts";
 import { Section } from "@/components/Section";
@@ -18,7 +19,7 @@ export default function LoginPage() {
         <LoginCard />
         <Section isCard>
           <span className={styles.footer}>
-            Don't have an account? <a href="/auth/signup">sign up</a> now!
+            Don't have an account? <Link href="/auth/signup">sign up</Link> now!
           </span>
         </Section>
       </div>

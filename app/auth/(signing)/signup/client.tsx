@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
+import Link from "next/link";
 
 import { IoCheckmark } from "@icons/io5/IoCheckmark";
 import { IoCloseCircleOutline } from "@icons/io5/IoCloseCircleOutline";
@@ -186,7 +187,7 @@ export function SignupCard() {
             Now all you have to do is check your inbox!
           </p>
           <p style={{ fontSize: 'smaller' }}>
-            If you're not signed in automatically just go to the <a href="/auth/login"><C.TERTIARY>login page</C.TERTIARY></a>.
+            If you're not signed in automatically just go to the <Link href="/auth/login"><C.TERTIARY>login page</C.TERTIARY></Link>.
           </p>
           <Button
             icon={{ element: IoCheckmark, size: 20 }}

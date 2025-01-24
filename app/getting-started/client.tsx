@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { IoWine } from "@icons/io5/IoWine";
 import { IoWineOutline } from "@icons/io5/IoWineOutline";
 
@@ -86,8 +87,8 @@ export function Content({ profile }: { profile:Database['public']['Tables']['pro
             </p>
           :
             <p>
-              To get started and ferment your own pieces, you can <a href="/auth/login">log in</a> to your account.
-              Oh you don't have one? <span title="I mean, of course...">expected</span>; you can also <a href="/auth/signup">create a new account</a>!
+              To get started and ferment your own pieces, you can <Link href="/auth/login">log in</Link> to your account.
+              Oh you don't have one? <span title="I mean, of course...">expected</span>; you can also <Link href="/auth/signup">create a new account</Link>!
               How fabulous!
             </p>
         }

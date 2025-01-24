@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
+import Link from "next/link";
 import { IoCloseCircleOutline } from "@icons/io5/IoCloseCircleOutline";
 import { IoEye } from "@icons/io5/IoEye";
 import { IoEyeOff } from "@icons/io5/IoEyeOff";
@@ -161,9 +162,9 @@ export function LoginCard() {
           className={styles.button}
         />
 
-        <a href="/auth/password/forgot">
+        <Link href="/auth/password/forgot">
           Forgot password?
-        </a>
+        </Link>
       </form>
       {
         error &&
