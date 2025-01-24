@@ -30,6 +30,7 @@ import { ErrorPage } from "@/components/Pages";
 
 import layoutStyles from "./layout.module.scss";
 import pageStyles from "./page.module.scss";
+import { Button } from "@/components/Button";
 
 
 const sortByOptions = [
@@ -98,26 +99,21 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
             selectedIndices={[themeI]}
             options={options['settings']['theme']}
           />
-          {/* <div className={pageStyles.actionsSmall}>
+          <div className={pageStyles.actionsSmall}>
             <Button
               title="Only Following"
-              color={onlyFollowing ? colors.green : colors.red}
-              onClick={onClickFollowing}
             />
             <Button
               title="Focus Mode"
-              color={focusMode ? colors.green : colors.red}
-              onClick={onClickFocus}
             />
-          </div> */}
+          </div>
         </div>
-        <C.SECONDARY>
-          <i>
-            <sub>
-              v{consts.version}
-            </sub>
-          </i>
-        </C.SECONDARY>
+        <C.QUINARY style={{ opacity: 0.5, fontSize: 'smaller', fontStyle: 'italic' }}>
+          <C.HIGHLIGHT>
+            v
+          </C.HIGHLIGHT>
+          {consts.version}
+        </C.QUINARY>
       </div>
       <div {...focusable(pageStyles.active, () => setActionsOpen(a => !a))}>
         <IoAdd />

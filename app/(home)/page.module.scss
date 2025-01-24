@@ -101,13 +101,18 @@ $arrow-size: 28px;
       }
 
       .actionsArray {
+        $g: 10px;
         flex-direction: row;
-        gap: 10px;
+        gap: $g;
+        width: min(600px, 100%);
         overflow-x: scroll;
-        max-width: 100%;
+        scroll-snap-type: x mandatory;
+        scroll-padding: 0px;
+        scroll-padding-left: 0px;
 
         > div {
-          width: 50vw;
+          min-width: calc(50% - $g / 2);
+          scroll-snap-align: start;
         }
         
         .actionsSmall {
