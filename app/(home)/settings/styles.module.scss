@@ -14,8 +14,9 @@
   }
 
   .content {
-    width: if($small, 100%, 80%);
     padding: if($small, 30px, 50px);
+    width: if($small, 100%, 80%);
+    max-width: 850px;
   }
 
   .settings {
@@ -31,11 +32,11 @@
   }
 
   .header {
-    font-size: 30px;
+    font-size: if($small, 26px, 30px);
     align-self: center;
     border-bottom: 2px solid c.$accent;
     padding: 7.5px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 
     > svg {
       color: c.$secondary;

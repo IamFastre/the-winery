@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { LocalStorage } from "@/utils";
 
 type NavigationType = 'assign' | 'push' | 'replace';
 
@@ -9,7 +10,10 @@ export function useGoTo() : [boolean, (path:string, type?:NavigationType, newTab
   const [redirecting, setRedirecting] = useState(false);
 
   const goto = (path:string, type:NavigationType = 'push', newTab:boolean = false) => {
-    setRedirecting(true);
+    const isDelayed = LocalStorage.get("settings:goto-delay") ?? true;
+
+    if (isDelayed)
+      setRedirecting(true);
 
     setTimeout(() => {
       if (type === 'assign') {
@@ -24,8 +28,10 @@ export function useGoTo() : [boolean, (path:string, type?:NavigationType, newTab
       } else {
         throw "wtf is that";
       }
-      setRedirecting(false);
-    }, 960);
+
+      if (isDelayed)
+        setRedirecting(false);
+    }, isDelayed ? 960 : 0);
   };
 
   return [redirecting, goto, current];

@@ -78,5 +78,7 @@ export type AppOptions = typeof options;
 export type StorageEntry = {
   "feed:sort-by": AppOptions['feed']['sort-by'][number];
   "feed:only-following": boolean;
+
   "settings:theme": Theme['name'];
+  "settings:goto-delay": boolean;
 };
