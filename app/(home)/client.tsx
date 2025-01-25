@@ -16,7 +16,7 @@ import { IoList } from "@icons/io5/IoList";
 import { IoColorPalette } from "@icons/io5/IoColorPalette";
 
 import consts, { options } from "@/utils/consts";
-import { LocalStorage } from "@/utils";
+import { capitalize, LocalStorage, StorageEntry } from "@/utils";
 import { api, focusable } from "@/utils/client";
 import { useShortcuts } from "@/providers/Shortcuts";
 import { useGoTo } from "@/hooks";
@@ -30,20 +30,13 @@ import { ErrorPage } from "@/components/Pages";
 
 import layoutStyles from "./layout.module.scss";
 import pageStyles from "./page.module.scss";
-import { Button } from "@/components/Button";
 
-
-const sortByOptions = [
-  "Default",
-  "Newest",
-  "Random",
-];
 
 function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching:boolean; }) {
   const [actionsOpen, setActionsOpen] = useState<boolean>(false);
   const [themeI, setThemeI] = useState<number>(
     options['settings']['theme'].indexOf(
-      document.children[0].getAttribute("data-theme") ?? 'dark'
+      document.children[0].getAttribute("data-theme") as StorageEntry['settings:theme'] ?? 'dark'
     )
   );
 
@@ -85,28 +78,28 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
         <div className={pageStyles.actionsArray}>
           <DropdownButton
             title={refetching ? <LoadingText /> : "Sort by"}
-            subtitle={sortByOptions[sortI]}
+            subtitle={capitalize(options['feed']['sort-by'][sortI])}
             icon={IoList}
             onSelect={onSelectSort}
             selectedIndices={[sortI]}
-            options={sortByOptions}
+            options={options['feed']['sort-by'].map(capitalize)}
           />
           <DropdownButton
             title="Theme"
-            subtitle={options['settings']['theme'][themeI]}
+            subtitle={capitalize(options['settings']['theme'][themeI])}
             icon={IoColorPalette}
             onSelect={onSelectTheme}
             selectedIndices={[themeI]}
-            options={options['settings']['theme']}
+            options={options['settings']['theme'].map(capitalize)}
           />
-          <div className={pageStyles.actionsSmall}>
+          {/* <div className={pageStyles.actionsSmall}>
             <Button
               title="Only Following"
             />
             <Button
               title="Focus Mode"
             />
-          </div>
+          </div> */}
         </div>
         <C.QUINARY style={{ opacity: 0.5, fontSize: 'smaller', fontStyle: 'italic' }}>
           <C.HIGHLIGHT>

@@ -23,11 +23,6 @@ import ZodiacSagittarius from "@/public/static/images/zodiacs/Sagittarius.svg";
 import ZodiacCapricorn   from "@/public/static/images/zodiacs/Capricorn.svg";
 
 
-function padZero(str:string, len:number = 2) : string {
-  const zeros = new Array(len).join('0');
-  return (zeros + str).slice(-len);
-}
-
 export function multiplyString(str:string, num:number) : string {
   let res = "";
 
@@ -39,6 +34,15 @@ export function multiplyString(str:string, num:number) : string {
 
 export function vowelStart(str:string) : boolean {
   return /^[aeiou]/i.test(str);
+}
+
+export function capitalize(str:string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export function padZero(str:string, len:number = 2) : string {
+  const zeros = new Array(len).join('0');
+  return (zeros + str).slice(-len);
 }
 
 export function rgbToHex(rgb:string) : string {

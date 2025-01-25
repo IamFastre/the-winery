@@ -1,13 +1,14 @@
 "use client";
 import { useState } from "react";
+import { IconType } from "@react-icons/all-files";
 import { IoColorPalette } from "@icons/io5/IoColorPalette";
 import { IoBrushOutline } from "@icons/io5/IoBrushOutline";
 
 import { options } from "@/utils/consts";
+import { capitalize, StorageEntry } from "@/utils";
 import { DropdownButton } from "@/components/DropdownButton";
 
 import styles from "./styles.module.scss";
-import { IconType } from "@react-icons/all-files";
 
 const Header = ({ title, Icon }:{ title:string; Icon?:IconType }) => (
   <span id={title.toLowerCase().replaceAll(/\W+/g, "-")} className={styles.header}>
@@ -37,7 +38,7 @@ const Setting = ({ title, description, children }:{ title:string; description?:s
 export function ThemeSetting() {
   const [themeI, setThemeI] = useState<number>(
     options['settings']['theme'].indexOf(
-      document.children[0].getAttribute("data-theme") ?? 'dark'
+      document.children[0].getAttribute("data-theme") as StorageEntry['settings:theme'] ?? 'dark'
     )
   );
 
@@ -52,11 +53,11 @@ export function ThemeSetting() {
       description="decides the color palette and styling for your client."
     >
       <DropdownButton
-        title={options['settings']['theme'][themeI]}
+        title={capitalize(options['settings']['theme'][themeI])}
         icon={IoColorPalette}
         onSelect={onSelectTheme}
         selectedIndices={[themeI]}
-        options={options['settings']['theme']}
+        options={options['settings']['theme'].map(capitalize)}
         style="bottom"
         noWith
       />

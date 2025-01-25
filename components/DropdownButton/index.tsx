@@ -9,7 +9,7 @@ interface DropdownButtonProps {
   title: string | JSX.Element;
   subtitle?: string;
   icon?: IconType;
-  options: string[];
+  options: Readonly<string[]>;
   selectedIndices: number[];
   onSelect: (option:string, index:number) => void;
   style?: "auto" | "top" | "bottom";

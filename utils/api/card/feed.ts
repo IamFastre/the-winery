@@ -5,7 +5,7 @@ import { createClient } from '@/supabase/server';
 import { Tables } from '@/supabase/types';
 
 export type CardFeed = { posts: Tables<'posts'>[], users: { [id:string]:UserInfo } };
-export type CardFeedParams = { limit?:number; sort?:'default' | 'new' | 'random'; };
+export type CardFeedParams = { limit?:number; sort?:'default' | 'latest' | 'random'; };
 
 export async function getCardFeed(limit:number = 25, sortBy:CardFeedParams['sort'] = 'default') {
   const supabase = createClient();
@@ -15,7 +15,7 @@ export async function getCardFeed(limit:number = 25, sortBy:CardFeedParams['sort
     .select('*, score')
     .limit(limit)
     .order(
-      sortBy === 'new'
+      sortBy === 'latest'
       ? 'timestamp'
       : 'score',
       { ascending: false }

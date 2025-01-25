@@ -10,15 +10,11 @@ const consts = {
 
 export const options = {
   feed: {
-    "sort-by": ['default', 'new', 'random'] as const
+    "sort-by": ['default', 'latest', 'random']
   },
   settings: {
-    "theme": [
-      "dark",
-      "light",
-      "scarlatta",
-    ]
+    "theme": ['dark', 'light', 'scarlatta'],
   }
-};
+} as const;
 
 export default consts;
