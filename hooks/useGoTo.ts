@@ -10,7 +10,7 @@ export function useGoTo() : [boolean, (path:string, type?:NavigationType, newTab
   const [redirecting, setRedirecting] = useState(false);
 
   const goto = (path:string, type:NavigationType = 'push', newTab:boolean = false) => {
-    const isDelayed = LocalStorage.get("settings:goto-delay") ?? true;
+    const isDelayed = LocalStorage.get("settings:goto-delay");
 
     if (isDelayed)
       setRedirecting(true);

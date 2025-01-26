@@ -40,10 +40,10 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
     )
   );
 
-  // const onlyFollowing = Storage.get("feed:only-following") ?? false;
-  // const focusMode = Storage.get("feed:focus-mode") ?? false;
+  // const onlyFollowing = LocalStorage.get("feed:only-following");
+  // const focusMode = LocalStorage.get("feed:focus-mode");
 
-  const sortBy = LocalStorage.get("feed:sort-by") ?? "default";
+  const sortBy = LocalStorage.get("feed:sort-by");
   const sortI = options['feed']['sort-by'].indexOf(sortBy);
 
   const onSelectSort = (o:string, i:number) => {
@@ -117,7 +117,7 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
 
 export function FeedNavigator() {
   const query = useQuery({
-    queryFn: async () => await api("/card/feed", { sort: LocalStorage.get('feed:sort-by') ?? undefined }),
+    queryFn: async () => await api("/card/feed", { sort: LocalStorage.get('feed:sort-by') }),
     queryKey: ["/card/feed"],
     refetchOnWindowFocus: false,
   });

@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { StaticImageData } from 'next/image';
 
+import { storage_defaults } from './consts';
 import { LogoKind, StorageEntry } from './types';
 
 import CVMain   from "@/public/static/images/logo/CorvinumMain.png";
@@ -216,15 +217,11 @@ export class LocalStorage {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  static get<T extends keyof StorageEntry>(key:T) : StorageEntry[T] | null {
-    const value = localStorage.getItem(key);
+  static get<T extends keyof StorageEntry>(key:T) : StorageEntry[T] {
+    const value = localStorage.getItem(key) ?? storage_defaults[key];
 
-    if (value === null)
-      return null;
-
-    try { return JSON.parse(value) as StorageEntry[T]; }
-    catch { return null;
-     }
+    try { return JSON.parse(value as string); }
+    catch { return storage_defaults[key]; }
   }
 
   static remove(key:keyof StorageEntry) : boolean {

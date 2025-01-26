@@ -70,7 +70,7 @@ function ThemeSetting() {
 }
 
 function GotoSetting() {
-  const [on, setOn] = useState<boolean>(LocalStorage.get('settings:goto-delay') ?? true);
+  const [on, setOn] = useState<boolean>(LocalStorage.get('settings:goto-delay'));
 
   const onClick = () => {
     setOn(o => {
