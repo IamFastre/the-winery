@@ -1,12 +1,16 @@
 @use '@/styles/colors.module' as c;
 
 @mixin styling($small) {
-  .flowery {
+  .wallpaper {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    overflow: hidden;
+  }
+
+  .flowery {
     opacity: 0.8;
 
     > svg {

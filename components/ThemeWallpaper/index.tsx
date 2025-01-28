@@ -1,7 +1,7 @@
 "use client";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Flowery } from "@/styles/themes";
+import Wallpapers from "@/styles/themes/wallpapers";
 import { Theme } from "@/styles/themes/types";
 
 type Wallpaper = Exclude<Theme['other'], undefined>['wallpaper'];
@@ -9,7 +9,7 @@ type Wallpaper = Exclude<Theme['other'], undefined>['wallpaper'];
 export function ThemeWallpaper() {
   const [theme, setTheme] = useState<Wallpaper | null>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const html = document.children[0];
     const style = window.getComputedStyle(html);
 
@@ -30,9 +30,9 @@ export function ThemeWallpaper() {
     return () => observer.disconnect();
   }, []);
 
+  const W = theme ? Wallpapers[theme] : null;
+
   return (
-    theme === 'flowery'
-    ? <Flowery />
-    : null
+    W && <W />
   );
 }

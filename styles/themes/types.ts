@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import Wallpapers from "./wallpapers";
 
 export type Color = Exclude<CSSProperties['color'], undefined>;
 
@@ -57,6 +58,6 @@ export interface Theme {
   };
 
   other?: {
-    wallpaper: 'flowery';
+    wallpaper: keyof typeof Wallpapers;
   };
 }

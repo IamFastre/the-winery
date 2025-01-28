@@ -1,7 +1,5 @@
 import { Theme } from "./types";
 
-export * from "./wallpapers";
-
 export * from "./def/dark";
 export * from "./def/light";
 export * from "./def/scarlatta";

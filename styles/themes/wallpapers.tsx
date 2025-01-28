@@ -7,9 +7,9 @@ import { LuMoonStar } from "@icons/lu/LuMoonStar";
 
 import style from "./wallpapers.module.scss";
 
-export function Flowery() {
+export function flowery() {
   return (
-    <div className={style.flowery}>
+    <div className={`${style.wallpaper} ${style.flowery}`}>
       <IoFlowerOutline />
       <IoRose />
       <IoLeafOutline />
@@ -19,3 +19,9 @@ export function Flowery() {
     </div>
   );
 }
+
+const Wallpapers = {
+  flowery,
+};
+
+export default Wallpapers;
