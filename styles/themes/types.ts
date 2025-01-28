@@ -1,10 +1,12 @@
 import type { CSSProperties } from "react";
 import Wallpapers from "./wallpapers";
+import { options } from "@/utils/consts";
 
 export type Color = Exclude<CSSProperties['color'], undefined>;
 
 export interface Theme {
-  name: 'dark' | 'light' | 'scarlatta';
+  name: typeof options['settings']['theme'][number];
+
   palette: {
     none: Color;
 

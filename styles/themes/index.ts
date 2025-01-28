@@ -3,6 +3,7 @@ import { Theme } from "./types";
 export * from "./def/dark";
 export * from "./def/light";
 export * from "./def/scarlatta";
+export * from "./def/tundra";
 
 export function MakeTheme(theme:Theme) {  
   const style = { } as Record<string, string>;

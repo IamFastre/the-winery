@@ -14,7 +14,7 @@ export const options = {
     "sort-by": ['default', 'latest', 'random'],
   },
   settings: {
-    "theme": ['dark', 'light', 'scarlatta'],
+    "theme": ['dark', 'light', 'scarlatta', 'tundra'],
   }
 } as const;
 

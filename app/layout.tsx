@@ -6,7 +6,7 @@ import { QueryProvider } from "@/providers/Query";
 import { Toaster } from "@/providers/Toaster";
 import { ModalProvider } from "@/providers/ModalProvider";
 
-import { DARK, LIGHT, SCARLATTA } from "@/styles/themes";
+import { DARK, LIGHT, SCARLATTA, TUNDRA } from "@/styles/themes";
 import { ThemeStyle } from "@/styles/components";
 import "@/styles/globals.scss";
 
@@ -30,6 +30,7 @@ export default async function RootLayout({ children }: Readonly<{ children:React
         <ThemeStyle theme={DARK} />
         <ThemeStyle theme={LIGHT} />
         <ThemeStyle theme={SCARLATTA} />
+        <ThemeStyle theme={TUNDRA} />
         {/* ============================= SCRIPTS ============================ */}
         <script src="/static/scripts/local-storage.js" />
         <script src="/static/scripts/theme-updater.js" />

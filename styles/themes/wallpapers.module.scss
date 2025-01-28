@@ -70,6 +70,18 @@
       height: $size;
     }
   }
+
+  .foresta {
+    opacity: 0.8;
+    > svg {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+
+      &.wide { display: if($small, none, block); }
+      &.long { display: if($small, block, none); }
+    }
+  }
 }
 
 @media screen and (min-width: 0px)
