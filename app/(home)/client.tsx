@@ -101,12 +101,12 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
             />
           </div> */}
         </div>
-        <C.QUINARY style={{ opacity: 0.5, fontSize: 'smaller', fontStyle: 'italic' }}>
+        <C.SECONDARY style={{ opacity: 0.5, fontSize: 'smaller', fontStyle: 'italic' }}>
           <C.HIGHLIGHT>
             v
           </C.HIGHLIGHT>
           {consts.version}
-        </C.QUINARY>
+        </C.SECONDARY>
       </div>
       <div {...focusable(pageStyles.active, () => setActionsOpen(a => !a))}>
         <IoAdd />

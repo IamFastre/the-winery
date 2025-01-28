@@ -48,7 +48,7 @@ export function CopyLinkButton({ id, activeClassName }:CopyLinkButtonProps) {
       id="share-post"
       {...focusable(activeClassName, onShare)}
     >
-      { error ? <IoClose color={colors.red} /> : showSuccess ? <IoCheckmark color={colors.green} /> : <IoShareOutline color={colors.quinary} /> }
+      { error ? <IoClose color={colors.red} /> : showSuccess ? <IoCheckmark color={colors.green} /> : <IoShareOutline /> }
     </div>
   );
 }

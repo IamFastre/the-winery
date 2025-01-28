@@ -109,7 +109,7 @@ export function CardOptionsButton(props:CardOptionsButtonProps) {
           showOptionsState[1]((s) => !s)
         )}
       >
-        <Icon color={colors.quinary} />
+        <Icon />
       </div>
 
       <Modal state={showOptionsState}>

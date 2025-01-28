@@ -1,4 +1,5 @@
 @use '@/styles/consts.module';
+@use '@/styles/funcs.module';
 @use '@/styles/colors.module' as c;
 @use '@/styles/values.module' as v;
 
@@ -27,7 +28,6 @@ $corner-icon-size: 25px;
 }
 
 .cornerButtons {
-
   position: absolute;
   top: calc(-1 * $corner-icon-size / 2);
   right: calc(-1 * $corner-icon-size / 2);
@@ -38,7 +38,10 @@ $corner-icon-size: 25px;
     cursor: pointer;
     transition: all 500ms consts.$ease-out-quartic;
 
-    > svg { font-size: $corner-icon-size; }
+    > svg {
+      color: funcs.set-alpha(c.$tertiary, 60%);
+      font-size: $corner-icon-size;
+    }
     
     &:hover, &:focus-visible {
       transform: scale(1.2);

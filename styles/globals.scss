@@ -220,7 +220,7 @@ blockquote {
   }
 
   p {
-    color: c.$quinary;
+    color: funcs.set-alpha(c.$tertiary, 65%);
   }
 
   >:nth-child(1) {
