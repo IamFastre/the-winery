@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 
 import consts from "@/utils/consts";
+import { AppProvider } from "@/providers/AppContext";
 import { Shortcuts } from "@/providers/Shortcuts";
 import { QueryProvider } from "@/providers/Query";
 import { Toaster } from "@/providers/Toaster";
@@ -39,15 +40,17 @@ export default async function RootLayout({ children }: Readonly<{ children:React
       </head>
       <body>
         <div id="NO-SELECT" tabIndex={0} />
-        <Shortcuts>
-          <QueryProvider>
-            <Toaster>
-              <ModalProvider>
-                {children}
-              </ModalProvider>
-            </Toaster>
-          </QueryProvider>
-        </Shortcuts>
+        <AppProvider>
+          <Shortcuts>
+            <QueryProvider>
+              <Toaster>
+                <ModalProvider>
+                  {children}
+                </ModalProvider>
+              </Toaster>
+            </QueryProvider>
+          </Shortcuts>
+        </AppProvider>
       </body>
     </html>
   );
