@@ -8,7 +8,11 @@ export function ThemeStyle({ theme }:{ theme:Theme }) {
       suppressHydrationWarning
       data-theme-definition={theme.name}
       dangerouslySetInnerHTML={{
-        __html: `[data-theme=${theme.name}] { ${Object.keys(s).map(v => `${v}: ${s[v]};`).join(' ')} }`
+        __html: `[data-theme=${theme.name}] { ${Object.keys(s).map(v =>
+          v.startsWith(".")
+          ? `${v} { ${s[v]} }`
+          : `${v}: ${s[v]};`).join(' ')
+        } }`
       }}
     />
   );

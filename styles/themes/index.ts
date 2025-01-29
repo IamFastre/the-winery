@@ -23,5 +23,10 @@ export function MakeTheme(theme:Theme) {
       style[`--other-${v}`] = (theme.other as Record<string, string>)[v];
     });
 
+  if (theme.custom)
+    Object.keys(theme.custom).forEach(v => {
+      style[`.${v}`] = (theme.custom as Record<string, string>)[v];
+    });
+
   return style;
 }
