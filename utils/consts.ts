@@ -14,7 +14,12 @@ export const options = {
     "sort-by": ['default', 'latest', 'random'],
   },
   settings: {
-    "theme": ['dark', 'light', 'scarlatta', 'tundra'],
+    "theme": ['tuii', 'scarlatta', 'tundra'],
+    "theme-variants": {
+      'tuii': ['dark', 'light'],
+      'scarlatta': ['none'], //['wine', 'rose'],
+      'tundra': ['none'], //['lux', 'nox'],
+    },
   }
 } as const;
 
@@ -22,7 +27,8 @@ export const storage_defaults:StorageEntry = {
   "feed:only-following": false,
   "feed:sort-by": 'default',
 
-  "settings:theme": 'dark',
+  "settings:theme": 'tuii',
+  "settings:theme-variant": 'dark',
   "settings:goto-delay": true,
 } as const;
 

@@ -2,10 +2,12 @@ import type { CSSProperties } from "react";
 import Wallpapers from "./wallpapers";
 import { options } from "@/utils/consts";
 
+export type ThemeName = typeof options['settings']['theme'][number];
 export type Color = Exclude<CSSProperties['color'], undefined>;
 
-export interface Theme {
-  name: typeof options['settings']['theme'][number];
+export interface Theme<T extends ThemeName = ThemeName> {
+  name: T;
+  variant?: typeof options['settings']['theme-variants'][T][number];
 
   palette: {
     none: Color;

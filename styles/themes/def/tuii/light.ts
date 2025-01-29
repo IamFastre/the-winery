@@ -1,9 +1,10 @@
-import { DEFAULT } from ".";
-import { Theme } from "../types";
+import { DEFAULT } from "..";
+import { Theme } from "../../types";
 
-export const LIGHT:Theme = {
+export const LIGHT:Theme<'tuii'> = {
   ...DEFAULT,
-  name: "light",
+  name: "tuii",
+  variant: "light",
 
   palette: {
     ...DEFAULT.palette,

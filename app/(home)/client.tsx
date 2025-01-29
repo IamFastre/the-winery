@@ -16,7 +16,7 @@ import { IoList } from "@icons/io5/IoList";
 import { IoColorPalette } from "@icons/io5/IoColorPalette";
 
 import consts, { options } from "@/utils/consts";
-import { capitalize, LocalStorage, StorageEntry } from "@/utils";
+import { capitalize, LocalStorage } from "@/utils";
 import { api, focusable } from "@/utils/client";
 import { useShortcuts } from "@/providers/Shortcuts";
 import { useGoTo } from "@/hooks";
@@ -27,16 +27,34 @@ import { Section } from "@/components/Section";
 import { DropdownButton } from "@/components/DropdownButton";
 import { LoadingText } from "@/components/LoadingText";
 import { ErrorPage } from "@/components/Pages";
+import { Theme } from "@/styles/themes/types";
 
 import layoutStyles from "./layout.module.scss";
 import pageStyles from "./page.module.scss";
 
+const themes:string[] = []
 
+function themeify(name:string, variant:string | null) {
+  return [undefined, null, "null", "none"].includes(variant) ? name : `${name}:${variant}`;
+}
+
+Object.keys(options['settings']['theme-variants']).map((t) => {
+  options['settings']['theme-variants'][t as Theme['name']].forEach(e => {
+    themes.push(
+      themeify(t, e)
+    );
+  });
+})
+
+console.log(themes);
 function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching:boolean; }) {
   const [actionsOpen, setActionsOpen] = useState<boolean>(false);
   const [themeI, setThemeI] = useState<number>(
-    options['settings']['theme'].indexOf(
-      document.children[0].getAttribute("data-theme") as StorageEntry['settings:theme'] ?? 'dark'
+    themes.indexOf(
+      themeify(
+        document.children[0].getAttribute("data-theme")!,
+        document.children[0].getAttribute("data-theme-variant")
+      )
     )
   );
 
@@ -53,7 +71,9 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
 
   // this shit is temporary until we do the settings
   const onSelectTheme = (o:string, i:number) => {
-    document.children[0].setAttribute("data-theme", o.toLowerCase());
+    const [name, variant] = o.split(":");
+    document.children[0].setAttribute("data-theme", name.toLowerCase());
+    document.children[0].setAttribute("data-theme-variant", variant?.toLowerCase() ?? "none");
     setThemeI(i);
   };
 
@@ -86,11 +106,11 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
           />
           <DropdownButton
             title="Theme"
-            subtitle={capitalize(options['settings']['theme'][themeI])}
+            subtitle={capitalize(themes[themeI])}
             icon={IoColorPalette}
             onSelect={onSelectTheme}
             selectedIndices={[themeI]}
-            options={options['settings']['theme'].map(capitalize)}
+            options={themes.map(capitalize)}
           />
           {/* <div className={pageStyles.actionsSmall}>
             <Button

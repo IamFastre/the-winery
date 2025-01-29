@@ -80,5 +80,6 @@ export type StorageEntry = {
   "feed:only-following": boolean;
 
   "settings:theme": Theme['name'];
+  "settings:theme-variant": Theme['variant'];
   "settings:goto-delay": boolean;
 };
