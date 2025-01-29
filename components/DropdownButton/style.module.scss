@@ -86,7 +86,7 @@ $o-height: 40px;
     $m: 4px;
     margin: 0 $m;
     height: 0;
-    max-height: calc($o-height * 4);
+    max-height: calc($o-height * 3);
     overflow-y: scroll;
     transition: all 500ms consts.$ease-out-quartic;
     background-color: funcs.set-alpha(c.$accent, 10%);

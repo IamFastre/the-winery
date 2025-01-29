@@ -81,40 +81,35 @@
   }
 
   .icon {
-    > a > svg { 
-      fill: c.$quinary;
-      stroke: c.$quinary;
+    color: c.$quinary;
+    > svg { 
       font-size: $icon-size;
       transition: all 500ms consts.$ease-out-quartic;
     }
 
     &:hover, &:focus-visible {
-      > a > svg {
-        fill: c.$tertiary;
-        stroke: c.$tertiary;
+      color: c.$tertiary;
+      > svg {
         transform: scale(1.1);
         filter: drop-shadow(0 0 5px c.$tertiary);
       }
     }
 
     &:active, &.active {
-      > a > svg {
+      > svg {
         transition: transform 100ms consts.$ease-out-quartic;
         transform: scale(0.8);
       }
     }
 
     &.current {
-      > a > svg {
+      color: c.$accent;
+      > svg {
         transform: scale(1.1);
-        fill: c.$accent;
-        stroke: c.$accent;
       }
 
       &:hover, &:focus-visible {
-        > a > svg {
-          filter: drop-shadow(0 0 5px c.$accent);
-        }
+        filter: drop-shadow(0 0 5px c.$accent);
       }
     }
   }

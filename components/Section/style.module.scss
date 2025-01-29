@@ -29,7 +29,7 @@
     top: 0;
     transform: translateY((calc(-52% + $margin)));
     align-self: flex-start;
-    margin-left: calc($margin + 15px);
+    margin-left: calc($margin + 15px + v.$border-radius-1 / 2);
     justify-content: center;
     align-content: center;
     z-index: 2;

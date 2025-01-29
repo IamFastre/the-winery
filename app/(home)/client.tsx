@@ -224,6 +224,7 @@ export function Sidebar({ username }:{ username:string; }) {
 
   const Icon = (props:{ icon:IconType; dest?:string; id:string, onClick?:() => void }) => {
     const handleClick:MouseEventHandler<HTMLElement> = e => {
+      e.preventDefault();
       if (props.dest) {
         props.onClick?.();
         goto(props.dest, 'push', e.ctrlKey);
@@ -233,20 +234,20 @@ export function Sidebar({ username }:{ username:string; }) {
     };
 
     return (
-      <div
-        className={`${layoutStyles.icon} ${current.startsWith(props.dest!) ? layoutStyles.current : ""}`}
+      <Link
+        className={`navbar-icon ${layoutStyles.icon} ${current.startsWith(props.dest!) ? layoutStyles.current+" current" : ""}`}
         id={props.id}
+        href={props.dest!}
+        type="wrapper"
         {...focusable(layoutStyles.active, current.startsWith(props.dest!) ? undefined : handleClick)}
       >
-        <Link href={props.dest!} onClick={e => e.preventDefault()} type="wrapper">
-          <props.icon />
-        </Link>
-      </div>
+        <props.icon />
+      </Link>
     );
   };
 
   return (
-    <Section style={{ flex: 1 }} containerStyle={{ borderStyle: redirecting ? 'dashed' : 'solid' }}>
+    <Section style={{ flex: 1 }} containerClassName="navbar" containerStyle={{ borderStyle: redirecting ? 'dashed' : 'solid' }}>
       <div className={layoutStyles.nav}>
         <GoHomeLogo
           redirecting={redirecting}
