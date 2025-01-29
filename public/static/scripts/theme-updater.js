@@ -21,7 +21,7 @@ const observer = new MutationObserver(mutationsList => {
       const name = html.getAttribute(HTML_THEME_ATTR_NAME);
       const varr = html.getAttribute(HTML_THEME_ATTR_VAR);
       const theme = themeify(name, varr);
-      console.log(theme);
+
       if (allThemes.includes(theme)) {
         SetTheme(theme);
       } else {

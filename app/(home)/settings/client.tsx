@@ -8,6 +8,7 @@ import { IoHeartHalf } from "@icons/io5/IoHeartHalf";
 
 import { themes } from "@/utils/consts";
 import { capitalize, LocalStorage, themeify } from "@/utils";
+import { useAppContext } from "@/providers/AppContext";
 import { DropdownButton } from "@/components/DropdownButton";
 
 import styles from "./styles.module.scss";
@@ -40,21 +41,15 @@ const Setting = ({ title, description, children }:{ title:string; description?:s
 };
 
 function ThemeSetting() {
-  const [themeI, setThemeI] = useState<number>(
-    themes.indexOf(
-      themeify(
-        document.children[0].getAttribute("data-theme")!,
-        document.children[0].getAttribute("data-theme-variant")
-      )
-    )
-  );
+  const { theme } = useAppContext();
+  const t = themeify(theme.name!, theme.variant);
 
-  const onSelectTheme = (o:string, i:number) => {
+  const onSelectTheme = (o:string) => {
     const [name, variant] = o.split(":");
     document.children[0].setAttribute("data-theme", name.toLowerCase());
     document.children[0].setAttribute("data-theme-variant", variant?.toLowerCase() ?? "none");
-    setThemeI(i);
   };
+
 
   return (
     <Setting
@@ -62,10 +57,10 @@ function ThemeSetting() {
       description="decides the color palette and styling for your client."
     >
       <DropdownButton
-        title={capitalize(themes[themeI])}
+        title={capitalize(t)}
         icon={IoColorPalette}
         onSelect={onSelectTheme}
-        selectedIndices={[themeI]}
+        selectedIndices={[themes.indexOf(t)]}
         options={themes.map(capitalize)}
         style="bottom"
         noWith

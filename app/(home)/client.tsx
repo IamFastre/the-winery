@@ -19,6 +19,7 @@ import consts, { options, themes } from "@/utils/consts";
 import { capitalize, LocalStorage, themeify } from "@/utils";
 import { api, focusable } from "@/utils/client";
 import { useShortcuts } from "@/providers/Shortcuts";
+import { useAppContext } from "@/providers/AppContext";
 import { useGoTo } from "@/hooks";
 import { C } from "@/components/C";
 import { Card } from "@/components/Card";
@@ -32,15 +33,10 @@ import layoutStyles from "./layout.module.scss";
 import pageStyles from "./page.module.scss";
 
 function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching:boolean; }) {
+  const { theme } = useAppContext();
+  const t = themeify(theme.name!, theme.variant);
+  
   const [actionsOpen, setActionsOpen] = useState<boolean>(false);
-  const [themeI, setThemeI] = useState<number>(
-    themes.indexOf(
-      themeify(
-        document.children[0].getAttribute("data-theme")!,
-        document.children[0].getAttribute("data-theme-variant")
-      )
-    )
-  );
 
   // const onlyFollowing = LocalStorage.get("feed:only-following");
   // const focusMode = LocalStorage.get("feed:focus-mode");
@@ -54,11 +50,10 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
   };
 
   // this shit is temporary until we do the settings
-  const onSelectTheme = (o:string, i:number) => {
+  const onSelectTheme = (o:string) => {
     const [name, variant] = o.split(":");
     document.children[0].setAttribute("data-theme", name.toLowerCase());
     document.children[0].setAttribute("data-theme-variant", variant?.toLowerCase() ?? "none");
-    setThemeI(i);
   };
 
   // const onClickFollowing = () => {
@@ -90,10 +85,10 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
           />
           <DropdownButton
             title="Theme"
-            subtitle={capitalize(themes[themeI])}
+            subtitle={capitalize(t)}
             icon={IoColorPalette}
             onSelect={onSelectTheme}
-            selectedIndices={[themeI]}
+            selectedIndices={[themes.indexOf(t)]}
             options={themes.map(capitalize)}
           />
           {/* <div className={pageStyles.actionsSmall}>

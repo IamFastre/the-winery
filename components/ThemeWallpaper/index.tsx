@@ -7,8 +7,8 @@ import { Theme } from "@/styles/themes/types";
 export type Wallpaper = Exclude<Theme['other'], undefined>['wallpaper'];
 
 export function ThemeWallpaper() {
-  const { wallpaper:wp } = useAppContext();
-  const W = wp ? Wallpapers[wp] : null;
+  const { theme } = useAppContext();
+  const W = theme.wallpaper ? Wallpapers[theme.wallpaper] : null;
 
   return (
     W && <W />
