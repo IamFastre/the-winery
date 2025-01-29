@@ -9,7 +9,7 @@ import { IoHeartHalf } from "@icons/io5/IoHeartHalf";
 import { themes } from "@/utils/consts";
 import { capitalize, LocalStorage, themeify } from "@/utils";
 import { useAppContext } from "@/providers/AppContext";
-import { DropdownButton } from "@/components/DropdownButton";
+import { DropdownButton, Option } from "@/components/DropdownButton";
 
 import styles from "./styles.module.scss";
 import { Button } from "@/components/Button";
@@ -43,13 +43,12 @@ const Setting = ({ title, description, children }:{ title:string; description?:s
 function ThemeSetting() {
   const { theme } = useAppContext();
   const t = themeify(theme.name!, theme.variant);
+  const [title, subtitle] = t.split(":");
 
-  const onSelectTheme = (o:string) => {
-    const [name, variant] = o.split(":");
-    document.children[0].setAttribute("data-theme", name.toLowerCase());
-    document.children[0].setAttribute("data-theme-variant", variant?.toLowerCase() ?? "none");
+  const onSelectTheme = (o:Option) => {
+    document.children[0].setAttribute("data-theme", o.title.toLowerCase());
+    document.children[0].setAttribute("data-theme-variant", o.subtitle?.toLowerCase() ?? "none");
   };
-
 
   return (
     <Setting
@@ -57,11 +56,18 @@ function ThemeSetting() {
       description="decides the color palette and styling for your client."
     >
       <DropdownButton
-        title={capitalize(t)}
+        title={capitalize(title)}
+        subtitle={subtitle}
         icon={IoColorPalette}
         onSelect={onSelectTheme}
         selectedIndices={[themes.indexOf(t)]}
-        options={themes.map(capitalize)}
+        options={themes.map(capitalize).map(o => {
+          const [name, variant] = o.split(":");
+          return {
+            title: name,
+            subtitle: variant
+          }
+        })}
         style="bottom"
         noWith
       />

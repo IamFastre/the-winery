@@ -3,15 +3,22 @@ import { useState } from 'react';
 import { IconType } from "@react-icons/all-files";
 import { IoCaretDown } from "@icons/io5/IoCaretDown";
 
+import { C } from '@/components/C';
+
 import styles from "./style.module.scss";
+
+export type Option = {
+  title: string;
+  subtitle?: string;
+}
 
 interface DropdownButtonProps {
   title: string | JSX.Element;
   subtitle?: string;
   icon?: IconType;
-  options: Readonly<string[]>;
+  options: Readonly<Option[]>;
   selectedIndices: number[];
-  onSelect: (option:string, index:number) => void;
+  onSelect: (option:Option, index:number) => void;
   style?: "auto" | "top" | "bottom";
   floating?: boolean;
   noWith?: boolean;
@@ -24,7 +31,7 @@ export function DropdownButton({ title, subtitle, icon, options, selectedIndices
     setIsOpen(!isOpen);
   };
 
-  const handleSelect = (option:string, index:number) => {
+  const handleSelect = (option:Option, index:number) => {
     onSelect(option, index);
     setIsOpen(false);
   };
@@ -59,7 +66,14 @@ export function DropdownButton({ title, subtitle, icon, options, selectedIndices
               onClick={() => handleSelect(option, i)}
               key={i}
             >
-              {option}
+              <span>
+                {option.title}
+                { option.subtitle &&
+                  <C.SECONDARY style={{ marginLeft: '0.5ch', fontSize: 'smaller' }}>
+                    {option.subtitle}
+                  </C.SECONDARY>
+                }
+              </span>
             </div>
           ))
         }

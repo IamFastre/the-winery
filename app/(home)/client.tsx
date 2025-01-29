@@ -25,7 +25,7 @@ import { C } from "@/components/C";
 import { Card } from "@/components/Card";
 import { GoHomeLogo } from "@/components/GoHomeLogo";
 import { Section } from "@/components/Section";
-import { DropdownButton } from "@/components/DropdownButton";
+import { DropdownButton, Option } from "@/components/DropdownButton";
 import { LoadingText } from "@/components/LoadingText";
 import { ErrorPage } from "@/components/Pages";
 
@@ -44,16 +44,15 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
   const sortBy = LocalStorage.get("feed:sort-by");
   const sortI = options['feed']['sort-by'].indexOf(sortBy);
 
-  const onSelectSort = (o:string, i:number) => {
+  const onSelectSort = (o:Option, i:number) => {
     LocalStorage.set("feed:sort-by", options['feed']['sort-by'][i]);
     refetch();
   };
 
   // this shit is temporary until we do the settings
-  const onSelectTheme = (o:string) => {
-    const [name, variant] = o.split(":");
-    document.children[0].setAttribute("data-theme", name.toLowerCase());
-    document.children[0].setAttribute("data-theme-variant", variant?.toLowerCase() ?? "none");
+  const onSelectTheme = (o:Option) => {
+    document.children[0].setAttribute("data-theme", o.title.toLowerCase());
+    document.children[0].setAttribute("data-theme-variant", o.subtitle?.toLowerCase() ?? "none");
   };
 
   // const onClickFollowing = () => {
@@ -81,7 +80,7 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
             icon={IoList}
             onSelect={onSelectSort}
             selectedIndices={[sortI]}
-            options={options['feed']['sort-by'].map(capitalize)}
+            options={options['feed']['sort-by'].map(capitalize).map(o => ({ title: o }))}
           />
           <DropdownButton
             title="Theme"
@@ -89,7 +88,13 @@ function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching
             icon={IoColorPalette}
             onSelect={onSelectTheme}
             selectedIndices={[themes.indexOf(t)]}
-            options={themes.map(capitalize)}
+            options={themes.map(capitalize).map(o => {
+              const [name, variant] = o.split(":");
+              return {
+                title: name,
+                subtitle: variant
+              }
+            })}
           />
           {/* <div className={pageStyles.actionsSmall}>
             <Button
