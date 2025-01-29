@@ -62,4 +62,9 @@ export interface Theme {
   other?: {
     wallpaper: keyof typeof Wallpapers;
   };
+
+  custom?: {
+    'navbar': string;
+    'navbar-icon': string;
+  };
 }

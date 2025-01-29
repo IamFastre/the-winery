@@ -1,6 +1,8 @@
 import { IoFlowerOutline } from "@icons/io5/IoFlowerOutline";
 import { IoRose } from "@icons/io5/IoRose";
 import { IoLeafOutline } from "@icons/io5/IoLeafOutline";
+import { IoEllipse } from "@icons/io5/IoEllipse";
+import { IoMoon } from "@icons/io5/IoMoon";
 import { PiFlowerLotusDuotone } from "@icons/pi/PiFlowerLotusDuotone";
 import { PiFlowerDuotone } from "@icons/pi/PiFlowerDuotone";
 import { LuMoonStar } from "@icons/lu/LuMoonStar";
@@ -26,17 +28,16 @@ export function flowery() {
 export function foresta() {
   return (
     <div className={`${style.wallpaper} ${style.foresta}`}>
+      {true ? <IoEllipse /> : <IoMoon /> }
       <ForestaWide
         className={style.wide}
         viewBox="0 0 800 450"
         height width="100%"
-        preserveAspectRatio="xMidYMax slice"
       />
       <ForestaLong
         className={style.long}
         viewBox="0 0 450 800"
         height width="100%"
-        preserveAspectRatio="xMidYMax slice"
       />
     </div>
   );

@@ -74,7 +74,18 @@
   .foresta {
     opacity: 0.8;
 
-    > svg {
+    > svg:first-child {
+      $s: 50%;
+      opacity: 0.5;
+      position: absolute;
+      color: c.$highlight;
+      width: $s;
+      height: $s;
+      bottom: if($small, 15%, calc(50px + 20%));
+      right: 10%;
+    }
+
+    > svg:not(:first-child) {
       position: absolute;
       width: 100%;
       bottom: 0;

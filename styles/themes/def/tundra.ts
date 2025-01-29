@@ -1,3 +1,4 @@
+import colors from "@/styles/colors";
 import { DEFAULT } from ".";
 import { Theme } from "../types";
 
@@ -13,7 +14,7 @@ export const TUNDRA:Theme = {
     secondary: "#44754e",
     tertiary: "#001500",
     quaternary: "#f0fff0",
-    quinary: "#90af90",
+    quinary: "#5eac5e",
 
     accent: "#21880f",
     highlight: "#fb6900",
@@ -22,7 +23,7 @@ export const TUNDRA:Theme = {
   styling: {
     "font-stack": "'Format1452'",
 
-    "border-radius-1": "20px",
+    "border-radius-1": "25px",
     "border-radius-2": "10px",
     "border-radius-3": "10px",
 
@@ -43,5 +44,18 @@ export const TUNDRA:Theme = {
 
   other: {
     wallpaper: 'foresta',
+  },
+
+  custom: {
+    'navbar': `
+      background-color: ${colors.secondary};
+      &:hover { border-color: ${colors.secondary}; }
+    `,
+
+    'navbar-icon': `
+      color: ${colors.primary};
+      &:hover { color: ${colors.quaternary}; }
+      &.current { color: ${colors.highlight}; }
+    `
   }
 }
