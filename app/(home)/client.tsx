@@ -15,8 +15,8 @@ import { IoAdd } from "@icons/io5/IoAdd";
 import { IoList } from "@icons/io5/IoList";
 import { IoColorPalette } from "@icons/io5/IoColorPalette";
 
-import consts, { options } from "@/utils/consts";
-import { capitalize, LocalStorage } from "@/utils";
+import consts, { options, themes } from "@/utils/consts";
+import { capitalize, LocalStorage, themeify } from "@/utils";
 import { api, focusable } from "@/utils/client";
 import { useShortcuts } from "@/providers/Shortcuts";
 import { useGoTo } from "@/hooks";
@@ -27,26 +27,10 @@ import { Section } from "@/components/Section";
 import { DropdownButton } from "@/components/DropdownButton";
 import { LoadingText } from "@/components/LoadingText";
 import { ErrorPage } from "@/components/Pages";
-import { Theme } from "@/styles/themes/types";
 
 import layoutStyles from "./layout.module.scss";
 import pageStyles from "./page.module.scss";
 
-const themes:string[] = []
-
-function themeify(name:string, variant:string | null) {
-  return [undefined, null, "null", "none"].includes(variant) ? name : `${name}:${variant}`;
-}
-
-Object.keys(options['settings']['theme-variants']).map((t) => {
-  options['settings']['theme-variants'][t as Theme['name']].forEach(e => {
-    themes.push(
-      themeify(t, e)
-    );
-  });
-})
-
-console.log(themes);
 function ActionsButton({ refetch, refetching }:{ refetch: () => void; refetching:boolean; }) {
   const [actionsOpen, setActionsOpen] = useState<boolean>(false);
   const [themeI, setThemeI] = useState<number>(

@@ -212,6 +212,10 @@ export function humanizeLikes(count: number) : string {
   return result;
 }
 
+export function themeify(name:string, variant:string | null) {
+  return [undefined, null, "null", "none"].includes(variant) ? name : `${name}:${variant}`;
+}
+
 export class LocalStorage {
   static set<T extends keyof StorageEntry>(key:T, value:StorageEntry[T]) {
     localStorage.setItem(key, JSON.stringify(value));

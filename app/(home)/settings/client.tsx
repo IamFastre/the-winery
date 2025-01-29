@@ -6,8 +6,8 @@ import { IoBrushOutline } from "@icons/io5/IoBrushOutline";
 import { IoMapOutline } from "@icons/io5/IoMapOutline";
 import { IoHeartHalf } from "@icons/io5/IoHeartHalf";
 
-import { options } from "@/utils/consts";
-import { capitalize, LocalStorage, StorageEntry } from "@/utils";
+import { themes } from "@/utils/consts";
+import { capitalize, LocalStorage, themeify } from "@/utils";
 import { DropdownButton } from "@/components/DropdownButton";
 
 import styles from "./styles.module.scss";
@@ -41,13 +41,18 @@ const Setting = ({ title, description, children }:{ title:string; description?:s
 
 function ThemeSetting() {
   const [themeI, setThemeI] = useState<number>(
-    options['settings']['theme'].indexOf(
-      document.children[0].getAttribute("data-theme") as StorageEntry['settings:theme'] ?? 'dark'
+    themes.indexOf(
+      themeify(
+        document.children[0].getAttribute("data-theme")!,
+        document.children[0].getAttribute("data-theme-variant")
+      )
     )
   );
 
   const onSelectTheme = (o:string, i:number) => {
-    document.children[0].setAttribute("data-theme", o.toLowerCase());
+    const [name, variant] = o.split(":");
+    document.children[0].setAttribute("data-theme", name.toLowerCase());
+    document.children[0].setAttribute("data-theme-variant", variant?.toLowerCase() ?? "none");
     setThemeI(i);
   };
 
@@ -57,11 +62,11 @@ function ThemeSetting() {
       description="decides the color palette and styling for your client."
     >
       <DropdownButton
-        title={capitalize(options['settings']['theme'][themeI])}
+        title={capitalize(themes[themeI])}
         icon={IoColorPalette}
         onSelect={onSelectTheme}
         selectedIndices={[themeI]}
-        options={options['settings']['theme'].map(capitalize)}
+        options={themes.map(capitalize)}
         style="bottom"
         noWith
       />

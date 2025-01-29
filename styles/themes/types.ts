@@ -7,7 +7,7 @@ export type Color = Exclude<CSSProperties['color'], undefined>;
 
 export interface Theme<T extends ThemeName = ThemeName> {
   name: T;
-  variant?: typeof options['settings']['theme-variants'][T][number];
+  variant?: typeof options['settings']['theme-variant'][T][number];
 
   palette: {
     none: Color;

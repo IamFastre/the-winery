@@ -15,13 +15,21 @@ export const options = {
   },
   settings: {
     "theme": ['tuii', 'scarlatta', 'tundra'],
-    "theme-variants": {
+    "theme-variant": {
       'tuii': ['dark', 'light'],
       'scarlatta': ['none'], //['wine', 'rose'],
       'tundra': ['none'], //['lux', 'nox'],
     },
   }
 } as const;
+
+export const themes:string[] = []
+
+Object.keys(options['settings']['theme-variant']).map((n) => {
+  options['settings']['theme-variant'][n as keyof typeof options['settings']['theme-variant']].forEach(v => {
+    themes.push(v === 'none' ? n : `${n}:${v}`);
+  });
+})
 
 export const storage_defaults:StorageEntry = {
   "feed:only-following": false,
