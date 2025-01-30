@@ -5,7 +5,7 @@ import { IoClose } from "@icons/io5/IoClose";
 
 import consts from "@/utils/consts";
 import { B, C } from "@/components/C";
-import { Section } from "@/components/Section";
+import { PageSection } from "@/components/Section";
 
 import styles from "./styles.module.scss";
 
@@ -16,10 +16,7 @@ export const metadata:Metadata = {
 
 export default function E505() {
   return (
-    <Section
-      style={{ flex: 1 }}
-      containerClassName={styles.sectionContent}
-    >
+    <PageSection containerClassName={styles.sectionContent}>
       <div className={styles.box}>
         <div className={styles.text}>
           <Link className={styles.closeButton} href="/" type="wrapper">
@@ -49,6 +46,6 @@ export default function E505() {
           `}}
         />
       </div>
-    </Section>
+    </PageSection>
   );
 }

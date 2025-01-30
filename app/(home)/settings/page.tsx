@@ -1,8 +1,7 @@
-import { Section } from "@/components/Section";
+import { PageSection } from "@/components/Section";
 
 import consts from "@/utils/consts";
 import { C } from "@/components/C";
-import { ThemeWallpaper } from "@/components/ThemeWallpaper";
 
 import { Settings } from "./client";
 import styles from "./styles.module.scss";
@@ -10,8 +9,7 @@ import styles from "./styles.module.scss";
 
 export default async function SettingsPage() {
   return (
-    <Section title="Settings" style={{ flex: 1 }} containerClassName={styles.sectionContent}>
-      <ThemeWallpaper />
+    <PageSection title="Settings" containerClassName={styles.sectionContent}>
       <div className={styles.content}>
         <Settings />
       </div>
@@ -43,6 +41,6 @@ export default async function SettingsPage() {
           </sup>
         </span>
       </div>
-    </Section>
+    </PageSection>
   );
 }

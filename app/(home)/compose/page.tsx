@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import consts from "@/utils/consts";
 import { getUserInfo } from "@/utils/api/user/info";
 import { getCardDraft } from "@/utils/api/card/draft";
-import { Section } from "@/components/Section";
+import { PageSection } from "@/components/Section";
 import { ErrorPage } from "@/components/Pages";
 import { Tables } from "@/supabase/types";
 
@@ -36,7 +36,7 @@ export default async function ComposePage({ searchParams }:{ searchParams: { dra
   }
 
   return (
-    <Section title="Compose" style={{ flex: 1 }}  containerClassName={styles.sectionContent}>
+    <PageSection title="Compose" containerClassName={styles.sectionContent}>
       <div className={styles.content}>
         {
           draft ?
@@ -45,6 +45,6 @@ export default async function ComposePage({ searchParams }:{ searchParams: { dra
           <PostEditor user={user} />
         }
       </div>
-    </Section>
+    </PageSection>
   );
 }

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { IoCloseCircle } from "@icons/io5/IoCloseCircle";
 
-import { Section } from "@/components/Section";
+import { PageSection } from "@/components/Section";
 import { MarkDown } from "@/components/MarkDown";
 import { UsernameHandle } from "@/components/UsernameHandle";
 import { HydratedTime } from "@/components/HydratedTime";
@@ -26,7 +26,7 @@ export default async function CardPage({ params }:CardPageProps) {
 
   if (Number.isNaN(id)) {
     return (
-      <Section style={{ flex: 1 }}>
+      <PageSection>
         <div className={styles.error}>
           <IoCloseCircle />
           <span>
@@ -37,11 +37,11 @@ export default async function CardPage({ params }:CardPageProps) {
             </span>
           </span>
         </div>
-      </Section>
+      </PageSection>
     );
   } else if (postError) {
     return (
-      <Section style={{ flex: 1 }}>
+      <PageSection>
         <div className={styles.error}>
           <IoCloseCircle />
           <span>
@@ -52,11 +52,11 @@ export default async function CardPage({ params }:CardPageProps) {
             </span>
           </span>
         </div>
-      </Section>
+      </PageSection>
     );
   } else if (userError) {
     return (
-      <Section style={{ flex: 1 }}>
+      <PageSection>
         <div className={styles.error}>
           <IoCloseCircle />
           <span>
@@ -67,7 +67,7 @@ export default async function CardPage({ params }:CardPageProps) {
             </span>
           </span>
         </div>
-      </Section>
+      </PageSection>
     );
   }
 
@@ -78,10 +78,7 @@ export default async function CardPage({ params }:CardPageProps) {
         left={<BackButton />}
         noBrackets
       />
-      <Section
-        containerClassName={styles.sectionContent}
-        style={{ flex: 1 }}
-      >
+      <PageSection containerClassName={styles.sectionContent}>
         <div className={styles.cardContent}>
           {
             post.title &&
@@ -114,7 +111,7 @@ export default async function CardPage({ params }:CardPageProps) {
             </div>
           </div>
         </div>
-      </Section>
+      </PageSection>
       <CardPageShortcuts />
     </div>
   );

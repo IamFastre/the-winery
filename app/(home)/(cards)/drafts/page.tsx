@@ -3,7 +3,7 @@ import { IoFolder } from "@icons/io5/IoFolder";
 
 import consts from "@/utils/consts";
 import { getUserDrafts } from "@/utils/api/user/drafts";
-import { Section } from "@/components/Section";
+import { PageSection } from "@/components/Section";
 import { Header } from "@/components/Header";
 import { ErrorPage } from "@/components/Pages";
 
@@ -32,7 +32,7 @@ export default async function DraftsPage() {
   const { drafts, count } = data;
 
   return (
-    <Section className={styles.section} containerClassName={styles.sectionContainer}>
+    <PageSection className={styles.section} containerClassName={styles.sectionContainer}>
       <Header
         title="Drafts"
         subtitle={`${count} ${(count ?? drafts.length) > 1 ? "cards" : "card"}`}
@@ -40,6 +40,6 @@ export default async function DraftsPage() {
         right={<PageIcon icon={IoFolder} />}
       />
       <CardList cards={drafts} type="drafts" />
-    </Section>
+    </PageSection>
   );
 }

@@ -3,7 +3,7 @@ import { IoBookmark } from "@icons/io5/IoBookmark";
 
 import consts from "@/utils/consts";
 import { getUserSaves } from "@/utils/api/user/saves";
-import { Section } from "@/components/Section";
+import { PageSection } from "@/components/Section";
 import { Header } from "@/components/Header";
 import { ErrorPage } from "@/components/Pages";
 import { CardList } from "@/components/CardList";
@@ -32,7 +32,7 @@ export default async function SavesPage() {
   const { saves, users, count } = data;
 
   return (
-    <Section className={styles.section} containerClassName={styles.sectionContainer}>
+    <PageSection className={styles.section} containerClassName={styles.sectionContainer}>
       <Header
         title="Saved"
         subtitle={`${count} ${count > 1 ? "cards" : "card"}`}
@@ -40,6 +40,6 @@ export default async function SavesPage() {
         right={<PageIcon icon={IoBookmark} />}
       />
       <CardList cards={saves} users={users} type="posts" />
-    </Section>
+    </PageSection>
   );
 }

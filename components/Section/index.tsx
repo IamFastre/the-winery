@@ -1,4 +1,5 @@
 import { CSSProperties, HTMLAttributes } from "react";
+import { ThemeWallpaper } from "@/components/ThemeWallpaper";
 
 import styles from "./style.module.scss";
 
@@ -22,7 +23,7 @@ export interface SectionProps {
   centered?: boolean;
 }
 
-export function Section(props:SectionProps) : React.JSX.Element {
+export function Section(props:SectionProps) {
   return (
     <div
       className={`${styles.background} ${props.className} ${props.isCard ? styles.card : ""}`}
@@ -47,5 +48,17 @@ export function Section(props:SectionProps) : React.JSX.Element {
         {props.children}
       </div>
     </div>
+  );
+}
+
+export function PageSection(props:SectionProps) {
+  return (
+    <Section
+    style={{ flex: 1 }}
+      {...props}
+    >
+      <ThemeWallpaper />
+      {props.children}
+    </Section>
   );
 }

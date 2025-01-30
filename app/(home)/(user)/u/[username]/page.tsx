@@ -5,7 +5,7 @@ import consts from "@/utils/consts";
 import { getUserPosts } from "@/utils/api/user/posts";
 import { getUserInfo } from "@/utils/api/user/info";
 import { addLogoBadge } from "@/utils/server";
-import { Section } from "@/components/Section";
+import { PageSection } from "@/components/Section";
 import { ErrorPage } from "@/components/Pages";
 import { CardList } from "@/components/CardList";
 
@@ -75,7 +75,7 @@ export default async function UserPage({ params }:UserPageProps) {
     );
 
   return (
-    <Section className={styles.section} containerClassName={styles.sectionContainer}>
+    <PageSection className={styles.section} containerClassName={styles.sectionContainer}>
       <Image
         src={user.data.avatar}
         alt=''
@@ -89,6 +89,6 @@ export default async function UserPage({ params }:UserPageProps) {
       </div>
       <hr/>
       <CardList cards={posts.data} type="posts" />
-    </Section>
+    </PageSection>
   );
 }

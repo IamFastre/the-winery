@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import consts from "@/utils/consts";
 import { getUserInfo } from "@/utils/api/user/info";
 import { Header } from "@/components/Header";
-import { Section } from "@/components/Section";
+import { PageSection } from "@/components/Section";
 
 import { Content } from "./client";
 import styles from "./styles.module.scss";
@@ -31,9 +31,9 @@ export default async function GettingStartedPage() {
         right={<Nail />}
         margin="20px"
       />
-      <Section style={{ flex: 1 }} containerClassName={styles.sectionContainer} centered>
+      <PageSection  containerClassName={styles.sectionContainer} centered>
         <Content profile={profile} />
-      </Section>
+      </PageSection>
     </div>
   );
 }

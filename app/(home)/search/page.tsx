@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 import consts from "@/utils/consts";
-import { Section } from "@/components/Section";
+import { PageSection } from "@/components/Section";
 
 import { Searcher } from "./client";
 import styles from "./styles.module.scss";
@@ -13,8 +13,8 @@ export const metadata:Metadata = {
 
 export default async function SearchPage() {
   return (
-    <Section title="Search" style={{ flex: 1 }} containerClassName={styles.sectionContent}>
+    <PageSection title="Search" containerClassName={styles.sectionContent}>
       <Searcher />
-    </Section>
+    </PageSection>
   );
 }
