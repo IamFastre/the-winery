@@ -18,5 +18,7 @@ export const SCARLATTA_ROSE:Theme<'scarlatta'> = {
 
     hot: "#ff0076",
     cold: "#2B6788",
+
+    gold: "#e36917",
   },
 }

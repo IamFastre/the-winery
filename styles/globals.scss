@@ -94,6 +94,8 @@
 
 :root {
   interpolate-size: allow-keywords;
+  font-synthesis: style small-caps;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -343,6 +345,11 @@ input, textarea {
   border-bottom: 2px c.$accent solid;
   min-height: 30px;
   padding: 0 10px;
+
+  &::placeholder {
+    color: c.$tertiary;
+    opacity: 0.4;
+  }
 
   &:where(#span) {
     display: inline;
