@@ -2,6 +2,7 @@ import { Theme } from "../types";
 
 export const DEFAULT:Theme = {
   name: "default" as Theme['name'],
+  variant: "none",
 
   palette: {
     none: "transparent",

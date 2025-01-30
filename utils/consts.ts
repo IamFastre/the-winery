@@ -17,7 +17,7 @@ export const options = {
     "theme": ['tuii', 'scarlatta', 'tundra'],
     "theme-variant": {
       'tuii': ['dark', 'light'],
-      'scarlatta': ['none'], //['wine', 'rose'],
+      'scarlatta': ['wine', 'rose'],
       'tundra': ['none'], //['lux', 'nox'],
     },
   }

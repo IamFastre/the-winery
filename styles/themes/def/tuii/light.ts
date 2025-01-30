@@ -1,13 +1,12 @@
-import { DEFAULT } from "..";
 import { Theme } from "../../types";
+import { TUII_DARK } from "./dark";
 
-export const LIGHT:Theme<'tuii'> = {
-  ...DEFAULT,
-  name: "tuii",
+export const TUII_LIGHT:Theme<'tuii'> = {
+  ...TUII_DARK,
   variant: "light",
 
   palette: {
-    ...DEFAULT.palette,
+    ...TUII_DARK.palette,
     primary: "#dedede",
     secondary: "#808080",
     tertiary: "#0c0c0c",

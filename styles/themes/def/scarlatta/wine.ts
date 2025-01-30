@@ -1,9 +1,10 @@
-import { DEFAULT } from ".";
-import { Theme } from "../types";
+import { DEFAULT } from "..";
+import { Theme } from "../../types";
 
-export const SCARLATTA:Theme = {
+export const SCARLATTA_WINE:Theme<'scarlatta'> = {
   ...DEFAULT,
   name: "scarlatta",
+  variant: "wine",
 
   palette: {
     ...DEFAULT.palette,

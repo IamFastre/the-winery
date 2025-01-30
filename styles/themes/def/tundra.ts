@@ -2,9 +2,10 @@ import colors from "@/styles/colors";
 import { DEFAULT } from ".";
 import { Theme } from "../types";
 
-export const TUNDRA:Theme = {
+export const TUNDRA:Theme<'tundra'> = {
   ...DEFAULT,
   name: "tundra",
+  variant: "none",
 
   palette: {
     ...DEFAULT.palette,

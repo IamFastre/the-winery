@@ -7,7 +7,7 @@ import { QueryProvider } from "@/providers/Query";
 import { Toaster } from "@/providers/Toaster";
 import { ModalProvider } from "@/providers/ModalProvider";
 
-import { DARK, LIGHT, SCARLATTA, TUNDRA } from "@/styles/themes";
+import { TUII_DARK, TUII_LIGHT, SCARLATTA_WINE, SCARLATTA_ROSE, TUNDRA } from "@/styles/themes";
 import { ThemeStyle } from "@/styles/components";
 import "@/styles/globals.scss";
 
@@ -28,9 +28,10 @@ export default async function RootLayout({ children }: Readonly<{ children:React
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* ============================= THEMES ============================= */}
-        <ThemeStyle theme={DARK} />
-        <ThemeStyle theme={LIGHT} />
-        <ThemeStyle theme={SCARLATTA} />
+        <ThemeStyle theme={TUII_DARK} />
+        <ThemeStyle theme={TUII_LIGHT} />
+        <ThemeStyle theme={SCARLATTA_WINE} />
+        <ThemeStyle theme={SCARLATTA_ROSE} />
         <ThemeStyle theme={TUNDRA} />
         {/* ============================= SCRIPTS ============================ */}
         <script src="/static/scripts/local-storage.js" />

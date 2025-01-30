@@ -2,7 +2,8 @@ import { Theme } from "./types";
 
 export * from "./def/tuii/dark";
 export * from "./def/tuii/light";
-export * from "./def/scarlatta";
+export * from "./def/scarlatta/wine";
+export * from "./def/scarlatta/rose";
 export * from "./def/tundra";
 
 export function MakeTheme(theme:Theme) {  
