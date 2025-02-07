@@ -85,7 +85,7 @@ export function ForgotCard() {
           <div className={styles.paragraph}>
             <p>
               <span title="First is virginity">
-                Second worse thing to lose is your password.
+                Second worse thing to unintentionally lose is your password.
               </span>
               {' '}
               That's why we're here to recover it for you!
