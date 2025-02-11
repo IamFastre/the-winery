@@ -44,7 +44,7 @@ export const TUNDRA:Theme<'tundra'> = {
   },
 
   other: {
-    wallpaper: 'foresta',
+    'home-wallpaper': 'foresta',
   },
 
   custom: {

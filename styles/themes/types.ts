@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
-import Wallpapers from "./wallpapers";
+
 import { options } from "@/utils/consts";
+import { HomeWallpapers } from "./wallpapers";
 
 export type ThemeName = typeof options['settings']['theme'][number];
 export type Color = Exclude<CSSProperties['color'], undefined>;
@@ -62,7 +63,7 @@ export interface Theme<T extends ThemeName = ThemeName> {
   };
 
   other?: {
-    wallpaper: keyof typeof Wallpapers;
+    'home-wallpaper': keyof typeof HomeWallpapers;
   };
 
   custom?: {

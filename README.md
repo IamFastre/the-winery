@@ -106,10 +106,14 @@ Here's a little tour of the vineyard:
 
 <sub>*It's important to note while the schemas are not public, you can get an idea of how do structure your **Supabase** project in the `supabase/types.ts` file*</sub>
 
+---
+
 <div align="center">
     <h3>Socials</h3>
-    <a href="https://the-winery.vercel.app/u/TheWinery">The Winery</a> |
-    <a href="https://www.instagram.com/TheWinery.app">Instagram</a> |
-    <a href="https://twitter.com/TheWinery_app">Twitter</a> |
-    <a href="https://www.reddit.com/r/TheWinery">Reddit</a>
+    <strong>
+        <a href="https://the-winery.vercel.app/u/TheWinery">The Winery</a> |
+        <a href="https://www.instagram.com/TheWinery.app">Instagram</a> |
+        <a href="https://twitter.com/TheWinery_app">Twitter</a> |
+        <a href="https://www.reddit.com/r/TheWinery">Reddit</a>
+    </strong>
 </div>

@@ -76,11 +76,12 @@ export default function emoticon() {
   return (tree:any) => {
     visitEmoticon(tree, consts.name,      colors.highlight, noBorders);
     visitEmoticon(tree, consts.shortname, colors.highlight, noBorders);
-    
-    visitEmoticon(tree, 'John Cena', colors.none,   noBorders);
-    visitEmoticon(tree, 'Kirby',     colors.pink,   noBorders);
-    visitEmoticon(tree, 'Kuromi',    colors.purple, noBorders);
-    visitEmoticon(tree, 'Shrek',     colors.green,  noBorders);
+
+    visitEmoticon(tree, 'John Cena',   colors.none,   noBorders);
+    visitEmoticon(tree, 'Kirby',       colors.pink,   noBorders);
+    visitEmoticon(tree, 'Kuromi',      colors.purple, noBorders);
+    visitEmoticon(tree, 'Cinnamoroll', colors.cyan,   noBorders);
+    visitEmoticon(tree, 'Shrek',       colors.green,  noBorders);
 
     visitEmoticon(tree, 'xoxo', colors.red, { ...noBorders, caseInsensitive: true });
 

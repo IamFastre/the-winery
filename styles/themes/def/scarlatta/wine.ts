@@ -44,6 +44,6 @@ export const SCARLATTA_WINE:Theme<'scarlatta'> = {
   },
 
   other: {
-    wallpaper: "flowery",
+    'home-wallpaper': "flowery",
   },
 }

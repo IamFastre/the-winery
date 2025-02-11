@@ -1,5 +1,5 @@
 import { CSSProperties, HTMLAttributes } from "react";
-import { ThemeWallpaper } from "@/components/ThemeWallpaper";
+import { HomeWallpaper } from "@/components/ThemeWallpapers";
 
 import styles from "./style.module.scss";
 
@@ -57,7 +57,7 @@ export function PageSection(props:SectionProps) {
     style={{ flex: 1 }}
       {...props}
     >
-      <ThemeWallpaper />
+      <HomeWallpaper />
       {props.children}
     </Section>
   );

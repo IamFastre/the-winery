@@ -5,13 +5,13 @@ import { Theme } from "@/styles/themes/types";
 
 
 type ThemeVariant = Exclude<Theme['variant'], undefined>;
-type Wallpaper = Exclude<Theme['other'], undefined>['wallpaper'];
+type HomeWallpaper = Exclude<Theme['other'], undefined>['home-wallpaper'];
 
 const DefaultAppValue = {
   theme: {
     name: null as Theme['name'] | null,
     variant: null as ThemeVariant | null,
-    wallpaper: null as Wallpaper | null,
+    homeWallpaper: null as HomeWallpaper | null,
   }
 };
 
@@ -24,7 +24,7 @@ export function useAppContext() {
 export function AppProvider({ children }:{ children:ReactNode }) {
   const [name, setName] = useState<Theme['name'] | null>(null);
   const [variant, setVariant] = useState<ThemeVariant | null>(null);
-  const [wallpaper, setWallpaper] = useState<Wallpaper | null>(null);
+  const [homeWallpaper, setHomeWallpaper] = useState<HomeWallpaper | null>(null);
 
   useEffect(() => {
     const html = document.children[0];
@@ -33,7 +33,7 @@ export function AppProvider({ children }:{ children:ReactNode }) {
     const callback = () => {
       setName(style.getPropertyValue("--theme-name") as Theme['name']);
       setVariant(style.getPropertyValue("--theme-variant") as ThemeVariant);
-      setWallpaper(style.getPropertyValue("--other-wallpaper") as Wallpaper);
+      setHomeWallpaper(style.getPropertyValue("--other-wallpaper") as HomeWallpaper);
     };
 
     const observer = new MutationObserver(mutationsList => {
@@ -50,11 +50,11 @@ export function AppProvider({ children }:{ children:ReactNode }) {
   }, []);
 
 
-  const value = {
+  const value:typeof DefaultAppValue = {
     theme: {
       name,
       variant,
-      wallpaper
+      homeWallpaper
     }
   }
 

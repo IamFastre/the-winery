@@ -43,9 +43,7 @@ export function foresta() {
   );
 }
 
-const Wallpapers = {
+export const HomeWallpapers = {
   flowery,
   foresta,
 };
-
-export default Wallpapers;

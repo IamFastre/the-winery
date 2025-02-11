@@ -12,6 +12,7 @@ import { Button } from "@/components/Button";
 import { C } from "@/components/C";
 import { GoHomeLogo } from "@/components/GoHomeLogo";
 import { LabelTitle } from "@/components/LabelTitle";
+import { LoadingText } from "@/components/LoadingText";
 import { Section } from "@/components/Section";
 
 import colors from "@/styles/colors";
@@ -61,6 +62,8 @@ export function ResetCard() {
   const toaster = useToaster();
   const [redirecting, goto] = useGoTo();
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const [password, setPassword] = useState<string>('');
   const [confPass, setConfPass] = useState<string>('');
 
@@ -79,16 +82,19 @@ export function ResetCard() {
 
   const onSubmit = async () => {
     if (isOK) {
+      setLoading(true);
       const { data, error } = await resetPassword(password);
-
+      
       if (error)
         setError(error);
-
+      
       else if (data) {
         setError(null);
         toaster.add({ message: "Password reset successfully", type: "success" })
         goto(`/`);
       }
+
+      setLoading(true);
     }
   };
 
@@ -174,7 +180,7 @@ export function ResetCard() {
         </label>
 
         <Button
-          title="Reset Password"
+          title={loading ? <LoadingText text="Resetting Password"/> : "Reset Password"}
           onClick={onSubmit}
           disabled={!isOK}
           className={styles.button}
