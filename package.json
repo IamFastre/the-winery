@@ -14,6 +14,7 @@
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.45.4",
     "@tanstack/react-query": "^5.53.1",
+    "@vercel/analytics": "^1.5.0",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "next": "^14.2.18",

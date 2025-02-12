@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/react";
 
 import consts from "@/utils/consts";
 import { AppProvider } from "@/providers/AppContext";
@@ -55,6 +56,7 @@ export default async function RootLayout({ children }: Readonly<{ children:React
             </QueryProvider>
           </Shortcuts>
         </AppProvider>
+        <Analytics />
       </body>
     </html>
   );
