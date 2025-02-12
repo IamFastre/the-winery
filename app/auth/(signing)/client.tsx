@@ -23,7 +23,7 @@ const Provider = (props:{ name:string; onClick?:MouseEventHandler<HTMLElement>; 
       {...focusable(styles.active, props.disabled ? undefined : props.onClick)}
     >
       <Image
-        src={`/static/images/auth/${name}.svg`}
+        src={`/static/images/auth/${capitalize(name)}.svg`}
         alt={`${capitalize(name)} Logo`}
         width={25}
         height={25}
@@ -54,10 +54,11 @@ export function ProvidersTray({ goto, setLoading, setError }:ProvidersTrayProps)
       <hr />
       <div className={styles.providersTray}>
         <Provider name="google" onClick={onSubmitGoogle} />
-        <Provider name="apple" disabled />
-        <Provider name="github" disabled />
+
+        <Provider name="apple"   disabled />
+        <Provider name="github"  disabled />
         <Provider name="discord" disabled />
-        <Provider name="twitch" disabled />
+        <Provider name="twitch"  disabled />
       </div>
     </>
   );
