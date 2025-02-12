@@ -74,6 +74,16 @@ $h: 50px;
     }
   }
 
+  .tray {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 15px;
+
+    > div {
+      flex: 1;
+    }
+  }
+
   .footer {
     opacity: 0.5;
     user-select: none;

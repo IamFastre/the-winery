@@ -7,7 +7,7 @@ import { IoMapOutline } from "@icons/io5/IoMapOutline";
 import { IoHeartHalf } from "@icons/io5/IoHeartHalf";
 
 import { themes } from "@/utils/consts";
-import { capitalize, LocalStorage, themeify } from "@/utils";
+import { capitalize, LocalStorage, StorageEntry, themeify } from "@/utils";
 import { useAppContext } from "@/providers/AppContext";
 import { DropdownButton, Option } from "@/components/DropdownButton";
 import { Button } from "@/components/Button";
@@ -102,18 +102,34 @@ function GotoSetting() {
 }
 
 function SignOutButton() {
-  const onClick = async () => {
+  const onReset = () => {
+    const len = localStorage.length;
+
+    for (let i = 0; i < len; i++)
+      LocalStorage.remove(localStorage.key(0) as keyof StorageEntry);
+
+    location.reload();
+  }
+
+  const onLogOut = async () => {
     await signOut();
     location.reload();
   };
 
   return (
     <div className={styles.setting}>
-      <Button
-        title="Log Out"
-        color={colors.hot}
-        onClick={onClick}
-      />
+      <div className={styles.tray}>
+        <Button
+          title="Rest Settings"
+          color={colors.highlight}
+          onClick={onReset}
+        />
+        <Button
+          title="Log Out"
+          color={colors.hot}
+          onClick={onLogOut}
+        />
+      </div>
     </div>
   );
 }
