@@ -50,12 +50,15 @@ export function ProvidersTray({ goto, setLoading, setError }:ProvidersTrayProps)
   };
 
   return (
-    <div className={styles.providersTray}>
-      <Provider name="google" onClick={onSubmitGoogle} />
-      <Provider name="apple" disabled />
-      <Provider name="github" disabled />
-      <Provider name="discord" disabled />
-      <Provider name="twitch" disabled />
-  </div>
+    <>
+      <hr />
+      <div className={styles.providersTray}>
+        <Provider name="google" onClick={onSubmitGoogle} />
+        <Provider name="apple" disabled />
+        <Provider name="github" disabled />
+        <Provider name="discord" disabled />
+        <Provider name="twitch" disabled />
+      </div>
+    </>
   );
 }

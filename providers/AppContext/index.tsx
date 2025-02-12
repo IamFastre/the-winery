@@ -33,7 +33,7 @@ export function AppProvider({ children }:{ children:ReactNode }) {
     const callback = () => {
       setName(style.getPropertyValue("--theme-name") as Theme['name']);
       setVariant(style.getPropertyValue("--theme-variant") as ThemeVariant);
-      setHomeWallpaper(style.getPropertyValue("--other-wallpaper") as HomeWallpaper);
+      setHomeWallpaper(style.getPropertyValue("--other-home-wallpaper") as HomeWallpaper);
     };
 
     const observer = new MutationObserver(mutationsList => {
