@@ -134,6 +134,18 @@ export async function signIn(email:string, password:string) {
   };
 }
 
+export async function signGoogle() {
+  const url = await getCurrentURL();
+  const supabase = createClient();
+
+  return await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${url}/auth/callback`,
+    },
+  });
+}
+
 export async function resetPassword(password:string) {
   const supabase = createClient();
   const { data, error } = await supabase.auth.updateUser({ password });
