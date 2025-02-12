@@ -10,10 +10,11 @@ import { themes } from "@/utils/consts";
 import { capitalize, LocalStorage, themeify } from "@/utils";
 import { useAppContext } from "@/providers/AppContext";
 import { DropdownButton, Option } from "@/components/DropdownButton";
-
-import styles from "./styles.module.scss";
 import { Button } from "@/components/Button";
+import { signOut } from "@/supabase/actions/user";
+
 import colors from "@/styles/colors";
+import styles from "./styles.module.scss";
 
 const Header = ({ title, Icon }:{ title:string; Icon?:IconType }) => (
   <span id={title.toLowerCase().replaceAll(/\W+/g, "-")} className={styles.header}>
@@ -100,6 +101,23 @@ function GotoSetting() {
   );
 }
 
+function SignOutButton() {
+  const onClick = async () => {
+    await signOut();
+    location.reload();
+  };
+
+  return (
+    <div className={styles.setting}>
+      <Button
+        title="Log Out"
+        color={colors.hot}
+        onClick={onClick}
+      />
+    </div>
+  );
+}
+
 export function Settings() {
   return (
     <div className={styles.settings}>
@@ -107,6 +125,7 @@ export function Settings() {
       <GotoSetting />
       <Header title="Appearance" Icon={IoBrushOutline} />
       <ThemeSetting />
+      <SignOutButton />
     </div>
   );
 }

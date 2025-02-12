@@ -1,6 +1,8 @@
 @use '@/styles/colors.module' as c;
 @use '@/styles/values.module' as v;
 
+$h: 50px;
+
 @mixin styling($small) {
   .sectionContent {
     align-items: center;
@@ -65,6 +67,10 @@
       font-size: smaller;
       font-style: italic;
       color: c.$secondary;
+    }
+
+    > div:last-of-type {
+      min-height: $h;
     }
   }
 

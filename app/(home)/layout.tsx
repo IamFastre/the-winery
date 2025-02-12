@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/providers/Toaster";
 import { getUserInfo } from "@/utils/api/user/info";
 
@@ -12,7 +13,7 @@ export default async function HomeLayout({ children }: Readonly<{ children:React
     <div className={styles.body}>
       {/* TODO: Resizable bar + icon title */}
       <div className={styles.bar}>
-        <Sidebar username={self!.username} />
+        <Sidebar username={self?.username ?? ''} />
       </div>
       <div className={styles.page}>
         <Toaster>

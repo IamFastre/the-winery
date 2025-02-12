@@ -13,6 +13,7 @@ export default async function SettingsPage() {
       <div className={styles.content}>
         <Settings />
       </div>
+
       <div className={styles.footer}>
         <span>
           <C.ACCENT>

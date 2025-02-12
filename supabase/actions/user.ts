@@ -163,3 +163,8 @@ export async function sendResetPassword(email:string) {
 
   return { data: null, error: "Bad email" };
 }
+
+export async function signOut() {
+  const supabase = createClient();
+  return supabase.auth.signOut();
+}

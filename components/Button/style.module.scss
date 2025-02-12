@@ -54,6 +54,7 @@ $all-transition: all 350ms ease-out;
   align-items: center;
   justify-content: center;
   padding: 5px;
+  aspect-ratio: 1;
 
   &:not(.background) {
     background-color: c.$primary;
