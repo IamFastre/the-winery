@@ -21,6 +21,7 @@ import { LabelTitle } from "@/components/LabelTitle";
 import { LoadingText } from "@/components/LoadingText";
 import { Section } from "@/components/Section";
 
+import { ProvidersTray } from "../client";
 import colors from "@/styles/colors";
 import styles from "../../styles.module.scss";
 
@@ -145,6 +146,7 @@ export function SignupCard() {
         setSuccess(true);
         setShowPass(false);
       }
+
       setLoading(false);
     }
   };
@@ -316,6 +318,12 @@ export function SignupCard() {
             onClick={onSubmit}
             disabled={!isOK || loading}
             className={styles.button}
+          />
+
+          <ProvidersTray
+            goto={goto}
+            setLoading={setLoading}
+            setError={setError}
           />
         </form>
       }

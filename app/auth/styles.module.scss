@@ -1,9 +1,37 @@
 @use '@/styles/funcs.module';
 @use '@/styles/consts.module';
 @use '@/styles/colors.module' as c;
+@use '@/styles/values.module' as v;
 
 $width: 365px;
 $max-width: 85%;
+
+@mixin provider($color: c.$accent) {
+  padding: 5px;
+  border: 2px dashed $color;
+  border-radius: v.$border-radius-1;
+  background-color: funcs.set-alpha($color, 10%);
+  cursor: pointer;
+  transition: all 350ms ease-out,
+              filter 500ms consts.$ease-out-quartic;
+
+  &.disabled {
+  border: 2px dashed c.$secondary;
+  background-color: funcs.set-alpha(c.$secondary, 10%);
+  filter: saturate(0);
+  }
+
+  &:not(.disabled) {
+    &:hover, &:focus-visible {
+      background-color: funcs.set-alpha($color, 20%);
+    }
+      
+    &:active, &.active {
+      background-color: $color;
+      filter: drop-shadow(0 0 10px funcs.set-alpha($color, 50%));
+    }
+  }
+}
 
 @mixin result($color) {
   padding: 10px;
@@ -52,6 +80,19 @@ $max-width: 85%;
     padding: 0 10px;
     color: c.$secondary;
     font-size: smaller;
+  }
+
+  .providersTray {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .google  { @include provider(#0b57d0); }
+    .github  { @include provider(#0d1117); }
+    .apple   { @include provider(#ffffff); }
+    .discord { @include provider(#5865f2); }
+    .twitch  { @include provider(#9244ff); }
   }
 
   .success { @include result(c.$accent); }

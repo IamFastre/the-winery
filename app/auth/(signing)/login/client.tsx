@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import Link from "next/link";
+
 import { IoCloseCircleOutline } from "@icons/io5/IoCloseCircleOutline";
 import { IoEye } from "@icons/io5/IoEye";
 import { IoEyeOff } from "@icons/io5/IoEyeOff";
@@ -18,6 +19,7 @@ import { LabelTitle } from "@/components/LabelTitle";
 import { LoadingText } from "@/components/LoadingText";
 import { Section } from "@/components/Section";
 
+import { ProvidersTray } from "../client";
 import colors from "@/styles/colors";
 import styles from "../../styles.module.scss";
 
@@ -73,6 +75,7 @@ export function LoginCard() {
         setError(null);
         goto('/', 'replace');
       }
+
       setLoading(false);
     }
   };
@@ -160,6 +163,12 @@ export function LoginCard() {
           onClick={onSubmit}
           disabled={!isOK || loading}
           className={styles.button}
+        />
+
+        <ProvidersTray
+          goto={goto}
+          setLoading={setLoading}
+          setError={setError}
         />
 
         <Link href="/auth/password/forgot">
