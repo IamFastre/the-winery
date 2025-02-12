@@ -14,15 +14,13 @@ export const metadata:Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <LoginCard />
-        <Section isCard>
-          <span className={styles.footer}>
-            Don't have an account? <Link href="/auth/signup">sign up</Link> now!
-          </span>
-        </Section>
-      </div>
-    </div>
+    <>
+      <LoginCard />
+      <Section isCard>
+        <span className={styles.footer}>
+          Don't have an account? <Link href="/auth/signup">sign up</Link> now!
+        </span>
+      </Section>
+    </>
   );
 }
