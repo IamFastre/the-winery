@@ -195,8 +195,9 @@ export function PostEditor({ user }:{ user:Tables<'profiles'> }) {
     if (!postError) {
       toaster.add({ message: "Post added", icon: IoWine });
       router.push(`/u/${user.username}`);
-      setUploading(false);
     }
+
+    setUploading(false);
   };
 
   const onDraft = async () => {
@@ -207,8 +208,9 @@ export function PostEditor({ user }:{ user:Tables<'profiles'> }) {
     if (!draftError) {
       toaster.add({ message: "Draft added", icon: IoFolder });
       router.push('/drafts');
-      setUploading(false);
     }
+
+    setUploading(false);
   };
 
   return (
@@ -278,9 +280,10 @@ export function DraftEditor({ user, draft }:{ user:Tables<'profiles'>; draft:Tab
       if (!draftError) { 
         toaster.add({ message: "Post added", icon: IoWine });
         router.push(`/u/${user.username}`);
-        setUploading(false);
       }
     }
+
+    setUploading(false);
   };
 
   const onEdit = async () => {
@@ -291,8 +294,9 @@ export function DraftEditor({ user, draft }:{ user:Tables<'profiles'>; draft:Tab
     if (!error) {
       toaster.add({ message: "Changes saved", icon: IoFolder });
       router.push('/drafts');
-      setUploading(false);
     }
+
+    setUploading(false);
   };
 
   const onDelete = async () => {
@@ -303,8 +307,9 @@ export function DraftEditor({ user, draft }:{ user:Tables<'profiles'>; draft:Tab
     if (!error) {
       toaster.add({ message: "Draft deleted", icon: RiDeleteBin6Line, type: "error" });
       router.push('/drafts');
-      setUploading(false);
     }
+
+    setUploading(false);
   };
 
   return (

@@ -404,7 +404,7 @@ $rainbow: c.$red, c.$orange, c.$yellow, c.$green, c.$blue, c.$purple;
     color: $link-color;
     font-style: inherit;
     text-decoration: inherit; 
-    
+
     &.error {
       text-decoration: underline;
       text-decoration-color: c.$red;
