@@ -526,6 +526,13 @@ $rainbow: c.$red, c.$orange, c.$yellow, c.$green, c.$blue, c.$purple;
   color: inherit;
   transition: all 150ms consts.$ease-out-quartic;
 
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   &:focus {
     outline: none;
 

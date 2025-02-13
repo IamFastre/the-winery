@@ -106,6 +106,12 @@ Here's a little tour of the vineyard:
 
 <sup>*It's important to note while the schemas are not public, you can get an idea of how do structure your **Supabase** project in the `supabase/types.ts` file*</sup>
 
+## Other
+
+### Credits
+
+Please check [credits.txt](./credits.txt).
+
 ---
 
 <div align="center">
