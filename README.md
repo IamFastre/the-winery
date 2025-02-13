@@ -87,14 +87,14 @@ Ready to get your hands dirty? Here's how to spin up **a Winery** on your local 
 
 Here's a little tour of the vineyard:
 
-- **`app`:** This is where **Next.js** works its magic. Each directory here corresponds to a different page on the site.
-- **`components`:** All our **React** components live here.
-- **`hooks`:** Here lives all the custom **React** hooks used throughout the app.
-- **`lib`**: Helper digestible internal libraries.
-- **`providers`**: Just some **React** context setups.
-- **`styles`:** CSS files for styling the components and pages.
-- **`styles`:** Where everything **Supabase**-related lives.
-- **`utils`:** Helper functions, where most functionality lives.
+- **`@/app`:** This is where **Next.js** works its magic. Each directory here corresponds to a different page on the site.
+- **`@/components`:** All our **React** components live here.
+- **`@/hooks`:** Here lives all the custom **React** hooks used throughout the app.
+- **`@/lib`**: Helper digestible internal libraries.
+- **`@/providers`**: Just some **React** context setups.
+- **`@/styles`:** CSS files for styling the components and pages.
+- **`@/supabase`:** Where everything **Supabase**-related lives.
+- **`@/utils`:** Helper functions, where most functionality lives.
 
 ## Supabase Configuration
 
@@ -104,7 +104,7 @@ Here's a little tour of the vineyard:
 1. **Database Setup:** You may need to create tables in your **Supabase** database.
 1. **API Keys:** Grab your project URL and anon key from the **Supabase** project settings and add them to your `.env` file as mentioned in the installation steps.
 
-<sub>*It's important to note while the schemas are not public, you can get an idea of how do structure your **Supabase** project in the `supabase/types.ts` file*</sub>
+<sup>*It's important to note while the schemas are not public, you can get an idea of how do structure your **Supabase** project in the `supabase/types.ts` file*</sup>
 
 ---
 
