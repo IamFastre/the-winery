@@ -23,14 +23,21 @@ Close enough for us, and hopefully for you too! This is a social platform, a dig
 
 Here, you get to craft and share what we affectionately call "cards" (because "posts" is just *so* last season). These cards can be filled with whatever your heart desires: prose, poetry, pictures of your cat, existential dread, philosophical rants – the sky's the limit, dear. And because sharing is caring (and because it's a social platform), you get to share your cards with other like-minded *Winers*, or draft it, we truly don't mind it.
 
-## Getting Started&hairsp;<sub>Fermenting Your First Piece</sub>
+After all, you know the saying:
+
+> “Wine is bottled poetry.” \
+> – Some Scottish Guy
+
+## Getting Started
+<!-- Fermenting Your First Piece -->
 
 Eager to start fermenting your own pieces? Wonderful! Here's how to dive into the vat of creativity:
 
 1. **Log In or Create an Account:** If you're already one of our esteemed *Winers*, log in! If not, don't worry, you can create a new account. It's quick, easy, and painless (mostly... hopefully).
 1. **Compose Your Oeuvres d'Art:** Once you're in, the world is your oyster... or rather, your winery. Go ahead and start fermenting those cards!
 
-## Features&hairsp;<sub>The Grapes of Our Labor</sub>
+## Features
+<!-- The Grapes of Our Labor -->
 
 - **User Authentication:** Log in or sign up securely. We've got this.
 - **Card Creation:** With the power of Markdown, create new cards with any content you like. Seriously, anything.
@@ -42,7 +49,8 @@ Eager to start fermenting your own pieces? Wonderful! Here's how to dive into th
 - **Regret, Maybe**: Users can delete their cards. Careful as we might be losing a gem.
 - **Discovery:** See other users' cards and get inspired.
 
-## Technologies Used&hairsp;<sub>The *Secret* Sauce</sub>
+## Technologies Used
+<!-- The *Secret* Sauce -->
 
 We've concocted this fine vintage using:
 
@@ -52,7 +60,8 @@ We've concocted this fine vintage using:
 - **TypeScript:** For type safety and developer experience; who can endure plain JS.
 - **Sass:** For CSS preprocessing and organization; who can endure plain CSS.
 
-## Installation&hairsp;<sub>Setting Up Your Own Vineyard</sub>
+## Installation
+<!-- Setting Up Your Own Vineyard -->
 
 Ready to get your hands dirty? Here's how to spin up **a Winery** on your local machine:
 
@@ -83,7 +92,8 @@ Ready to get your hands dirty? Here's how to spin up **a Winery** on your local 
     ```
     After that, your server should be ready at http://localhost:3000. Remember, that's not **The Winery**, that's **a Winery** – your own.
 
-## Project Structure&hairsp;<sub>The Lay of the Land</sub>
+## Project Structure
+<!-- The Lay of the Land -->
 
 Here's a little tour of the vineyard:
 
