@@ -3,11 +3,13 @@ import { StorageEntry } from './types';
 
 const consts = {
   version: project.version,
-  name: "The Winery",
-  shortname: "Winery",
-  userlabel: "Winer",
-  organization: "neRIA",
+  name: process.env.NEXT_PUBLIC_PROJECT_NAME!,
+  shortname: process.env.NEXT_PUBLIC_PROJECT_SHORT_NAME ?? process.env.NEXT_PUBLIC_PROJECT_NAME!,
+  userlabel: process.env.NEXT_PUBLIC_PROJECT_USER_LABEL ?? 'user',
+  organization: process.env.NEXT_PUBLIC_PROJECT_ORGANIZATION!,
 } as const;
+
+console.log({ consts });
 
 export const options = {
   feed: {
