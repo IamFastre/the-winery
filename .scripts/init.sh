@@ -29,29 +29,35 @@ ignoreErrors() {
     set +e
 }
 
+println() {
+    if [ "$2" == "!" ]; then
+        printf '%b' "$1"
+    elif [ "$1" != "!" ]; then
+        printf '•> %b' "$1"
+    fi
+    printf '\n'
+}
+
 C() {
     printf '%b' "$1"
 }
 
 end() {
-    printf '\n'
+    println !
     if [ -z "$1" ] || [ "$1" -eq 0 ]; then
         C $GREEN
-        printf '•> Success!'
+        println 'Success!'
     else
         C $RED
-        printf '•> Error.'
+        println 'Error.'
         C $GRAY
-        printf '\n'
         if [ -n "$2" ]; then
-            printf '   %s' "$2"
-            printf '\n'
+            println "   $2" !
         fi
-        printf '   CODE: %s' "$1"
+        println "   CODE: $1" !
     fi
 
     C $RESET
-    printf '\n\n'
     exit $1
 }
 
@@ -64,6 +70,6 @@ printf ' }-•'
 C $GRAY
 printf '\n\n'
 
-printf '•> Starting...'
-printf '\n\n'
+println 'Starting...'
+println !
 source .env.local
