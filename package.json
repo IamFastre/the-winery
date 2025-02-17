@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "release": ".scripts/release.sh",
-    "db:get-types": ".scripts/db-get-types.sh"
+    "db-types": ".scripts/db-types.sh"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^15.0.3",

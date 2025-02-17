@@ -44,17 +44,18 @@ try
 catch || end $EXIT_CODE 'Provided version is invalid'
 
 git add .
-git commit -m "$m" > /dev/null
+git commit -m "$m" > /dev/null 2>&1
 
 println 'Commit made'
 
 if [ $do_push == true ]; then
     try
     (
+        println 'Pushing...'
         git push > /dev/null 2>&1
         println 'Commit pushed'
     )
-    catch  || end $EXIT_CODE 'Could not push commit'
+    catch || end $EXIT_CODE 'Could not push commit'
 fi
 
 end

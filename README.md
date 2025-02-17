@@ -46,7 +46,7 @@ Eager to start fermenting your own pieces? Wonderful! Here's how to dive into th
 - **Card Liking:** Users can like cards to show appreciation and push the word further.
 - **Card Super Liking:** Users can super like cards, for extra appreciation and extra pushing; only got one per day; use it wisely.
 - **Discovery:** See other users' cards and get inspired.
-- **Regret, Maybe**: Users can delete their cards. Careful as we might be losing a gem.
+- **Regret, Maybe:** Users can delete their cards. Careful as we might be losing a gem.
 - **Discovery:** See other users' cards and get inspired.
 
 ## Technologies Used
@@ -93,7 +93,7 @@ Ready to get your hands dirty? Here's how to spin up **a Winery** on your local 
     After that, your server should be ready at http://localhost:3000. Remember, that's not **The Winery**, that's **a Winery** – your own.
 
 ## Project Structure
-<!-- The Lay of the Land -->
+<!-- The Lay of The Land -->
 
 Here's a little tour of the vineyard:
 
