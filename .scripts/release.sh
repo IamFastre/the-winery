@@ -51,7 +51,7 @@ println 'Commit made'
 if [ $do_push == true ]; then
     try
     (
-        git push > /dev/null
+        git push > /dev/null 2>&1
         println 'Commit pushed'
     )
     catch  || end $EXIT_CODE 'Could not push commit'
