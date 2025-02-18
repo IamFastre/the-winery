@@ -7,9 +7,11 @@
         />
     </div>
     <div>
-        <strong><sup><samp>
-            •-{ The Winery }-•
-        </samp></sup></strong>
+        <a href="https://the-winery.vercel.app/">
+            <strong><sup><samp>
+                •-{ The Winery }-•
+            </samp></sup></strong>
+        </a>
     </div>
 </div>
 
@@ -129,19 +131,30 @@ Other folders may include:
 
 <sup>*It's important to note while the schemas are not public, you can get an idea of how do structure your **Supabase** project in the `supabase/types.ts` file*</sup>
 
-## Other
+## Others
 
 <div align="center">
-    <h3>Credits</h3>
+    <h3>🌟 | Credits</h3>
     <span>
         Please check the
-        <a href="./credits.txt">credits.txt</a>
+        <strong><a href="./credits.txt">credits.txt</a></strong>
         file for a list of assets' credits.
     </span>
 </div>
 
 <div align="center">
-    <h3>Socials</h3>
+    <h3>📜 | License</h3>
+    <span>
+        This project is licensed under the
+        <br />
+        <strong><a href="./LICENSE.md">AGPLv3 license</a></strong> (<em>GNU Affero General Public License</em>).
+        <br />
+        Bite me if I ever use <strong>MIT</strong> for an app.
+    </span>
+</div>
+
+<div align="center">
+    <h3>🌐 | Socials</h3>
     <strong>
         <a href="https://the-winery.vercel.app/u/TheWinery">The Winery</a> |
         <a href="https://www.instagram.com/TheWinery.app">Instagram</a> |

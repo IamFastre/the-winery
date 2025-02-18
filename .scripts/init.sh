@@ -1,4 +1,5 @@
 #!/bin/bash
+source .env.local
 
 GREEN='\u001b[38;2;30;215;96m'
 PURPLE='\u001b[38;2;132;0;255m'
@@ -31,15 +32,15 @@ ignoreErrors() {
 
 println() {
     if [ "$2" == "!" ]; then
-        printf '%b' "$1"
+        printf "$1"
     elif [ "$1" != "!" ]; then
-        printf '•> %b' "$1"
+        printf "•> $1"
     fi
     printf '\n'
 }
 
 C() {
-    printf '%b' "$1"
+    printf "$1"
 }
 
 end() {
@@ -64,7 +65,7 @@ end() {
 C $GREEN
 printf '•-{ '
 C $PURPLE
-printf 'The Winery'
+printf "$NEXT_PUBLIC_PROJECT_NAME"
 C $GREEN
 printf ' }-•'
 C $GRAY
@@ -72,4 +73,3 @@ printf '\n\n'
 
 println 'Starting...'
 println !
-source .env.local
