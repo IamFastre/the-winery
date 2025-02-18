@@ -1,6 +1,6 @@
 {
   "name": "winery-defastre",
-  "version": "0.13.2-re.5",
+  "version": "0.13.2-re.6",
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
