@@ -80,11 +80,20 @@ Ready to get your hands dirty? Here's how to spin up **a Winery** on your local 
     - Rename or duplicate a `.env.template` to be `.env.local` in the root directory.
     - Configure the `.env` file to your own values.
     ```env
-    ANALYZE_BUNDLE=<BOOLEAN; whether to turn on '@next/bundle-analyzer' or not>
-    NEXT_PUBLIC_SUPABASE_URL=<YOUR_SUPABASE_URL>
-    NEXT_PUBLIC_SUPABASE_ANON_KEY=<YOUR_SUPABASE_ANON_KEY>
-    SUPABASE_SECRET_KEY=<YOUR_SUPABASE_SECRET_KEY>
+    NEXT_PUBLIC_PROJECT_NAME=<APP_NAME>
+    NEXT_PUBLIC_PROJECT_SHORT_NAME=<APP_NAME_SHORTHAND?>
+    NEXT_PUBLIC_PROJECT_ORGANIZATION=<ORGANIZATION_NAME>
+    NEXT_PUBLIC_PROJECT_USER_LABEL=<USER_LABEL?>
+
+    NEXT_PUBLIC_SUPABASE_ID=<SUPABASE_PROJECT_ID>
+    NEXT_PUBLIC_SUPABASE_URL=<SUPABASE_URL>
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=<SUPABASE_ANON_KEY>
+
+    SUPABASE_SECRET_KEY=<SUPABASE_SECRET_KEY>
+
+    ANALYZE_BUNDLE=<ENABLES_BUNDLE_ANALYSIS?>
     ```
+    *Note that these are vital to the app except for optional ones detonated by the `?`.*
 
 1. **Start the Development Server:**
     ```bash
@@ -106,6 +115,10 @@ Here's a little tour of the vineyard:
 - **`@/supabase`:** Where everything **Supabase**-related lives.
 - **`@/utils`:** Helper functions, where most functionality lives.
 
+Other folders may include:
+- **`.scripts`:** Some bash scripts for automation and ease of developing.
+- **`public`:** A directory containing root level files for HTTP server.
+
 ## Supabase Configuration
 
 **Supabase** is crucial for this project. Here's how to get it working:
@@ -118,11 +131,14 @@ Here's a little tour of the vineyard:
 
 ## Other
 
-### Credits
-
-Please check [credits.txt](./credits.txt).
-
----
+<div align="center">
+    <h3>Credits</h3>
+    <span>
+        Please check the
+        <a href="./credits.txt">credits.txt</a>
+        file for a list of assets' credits.
+    </span>
+</div>
 
 <div align="center">
     <h3>Socials</h3>

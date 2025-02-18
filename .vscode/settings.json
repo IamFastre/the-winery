@@ -1,6 +1,3 @@
 {
-    "typescript.tsdk": "node_modules\\typescript\\lib",
-    "github-actions.workflows.pinned.workflows": [
-        ".github/workflows/nextjs.yml"
-    ]
+    "typescript.tsdk": "node_modules\\typescript\\lib"
 }

@@ -9,8 +9,6 @@ const consts = {
   organization: process.env.NEXT_PUBLIC_PROJECT_ORGANIZATION!,
 } as const;
 
-console.log({ consts });
-
 export const options = {
   feed: {
     "sort-by": ['default', 'latest', 'random'],
