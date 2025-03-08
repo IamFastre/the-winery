@@ -46,7 +46,7 @@
       fill: c.$gold;
       stroke: c.$primary;
     }
-    
+
     &:last-of-type {
       font-size: 30px;
       fill: c.$highlight;
@@ -68,7 +68,7 @@
     0%, 100% {
       filter: brightness(1.33)
               drop-shadow($color 0 0 7.5px)
-              drop-shadow(color 0 0 3px);
+              drop-shadow($color 0 0 3px);
     }
 
     50% {
