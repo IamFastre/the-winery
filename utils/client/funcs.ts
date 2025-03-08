@@ -21,16 +21,9 @@ export async function api<T extends keyof Endpoints>(path:T, args?:Endpoints[T][
   
   const json = await response.json() as Endpoints[T]['Return'] | ErrorAPI;
 
-  if (response.status === 200)
-    return {
-      data: json,
-      error: null,
-    } as ResultAPI<T>;
-  else
-    return {
-      data: null,
-      error: json,
-    } as ResultAPI<T>;
+  return (response.ok)
+    ? { data: json, error: null } as ResultAPI<T>
+    : { data: null, error: json } as ResultAPI<T>;
 }
 
 export function cropAvatar(base64Image:string, onDone:(dataUrl:string) => void, sharpen:boolean = false) {

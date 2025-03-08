@@ -1,5 +1,4 @@
-import { Section } from "@/components/Section";
-import { HomeWallpaper } from "@/components/ThemeWallpapers";
+import { PageSection } from "@/components/Section";
 
 import { FeedNavigator } from "./client";
 import styles from "./page.module.scss";
@@ -7,9 +6,8 @@ import styles from "./page.module.scss";
 
 export default async function HomePage() {
   return (
-    <Section title="Home" style={{ flex: 1 }} containerClassName={styles.sectionContent}>
-      <HomeWallpaper />
+    <PageSection title="Home" containerClassName={styles.sectionContent}>
       <FeedNavigator />
-    </Section>
+    </PageSection>
   );
 }

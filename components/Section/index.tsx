@@ -54,7 +54,7 @@ export function Section(props:SectionProps) {
 export function PageSection(props:SectionProps) {
   return (
     <Section
-    style={{ flex: 1 }}
+      style={{ flex: 1 }}
       {...props}
     >
       <HomeWallpaper />

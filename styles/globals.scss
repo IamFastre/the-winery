@@ -127,7 +127,7 @@ div {
   overflow: visible;
 }
 
-svg {  
+svg {
   vertical-align: middle;
 }
 
@@ -218,7 +218,7 @@ blockquote {
     height: 100%;
     width: 5px;
     border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;  
+    border-bottom-left-radius: 5px;
   }
 
   p {
@@ -398,12 +398,12 @@ $rainbow: c.$red, c.$orange, c.$yellow, c.$green, c.$blue, c.$purple;
 
   &:hover, &:focus-visible {
     background-color: funcs.set-alpha($link-color, $link-bg-opacity-hover);
-  } 
+  }
 
   a {
     color: $link-color;
     font-style: inherit;
-    text-decoration: inherit; 
+    text-decoration: inherit;
 
     &.error {
       text-decoration: underline;
