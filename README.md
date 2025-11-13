@@ -1,13 +1,13 @@
 <div align="center">
     <div>
         <img
-            src="https://the-winery.vercel.app/api/other/logo?variant=main"
+            src="https://winery.neria.studio/api/other/logo?variant=main"
             alt="The Winery Logo"
             width="300"
         />
     </div>
     <div>
-        <a href="https://the-winery.vercel.app/">
+        <a href="https://winery.neria.studio">
             <strong><sup><samp>
                 •-{ The Winery }-•
             </samp></sup></strong>
