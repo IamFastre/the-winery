@@ -15,7 +15,7 @@ export async function getCardInteractions(id:string | number) {
   const likedRes = await supabase
     .from('likes')
     .select('*')
-    .eq('post', id)
+    .eq('post', parseInt(id.toString()))
     .eq('user_uuid', user.id)
     .maybeSingle();
 
@@ -26,18 +26,18 @@ export async function getCardInteractions(id:string | number) {
   const superLikedRes = await supabase
     .from('super_likes')
     .select('*')
-    .eq('post', id)
+    .eq('post', parseInt(id.toString()))
     .eq('user_uuid', user.id)
     .maybeSingle();
 
   if (superLikedRes.error)
     return result(null, superLikedRes.error);
-  
+
   // IS POST SAVED
   const savedRes = await supabase
     .from('saves')
     .select('*')
-    .eq('post', id)
+    .eq('post', parseInt(id.toString()))
     .eq('user_uuid', user.id)
     .maybeSingle();
 
@@ -48,7 +48,7 @@ export async function getCardInteractions(id:string | number) {
   const likesRes = await supabase
     .from('likes')
     .select('*', { count: 'exact', head: true })
-    .eq('post', id);
+    .eq('post', parseInt(id.toString()));
 
   if (likesRes.error)
     return result(null, likesRes.error);
@@ -57,7 +57,7 @@ export async function getCardInteractions(id:string | number) {
   const superLikesRes = await supabase
     .from('super_likes')
     .select('*', { count: 'exact', head: true })
-    .eq('post', id);
+    .eq('post', parseInt(id.toString()));
 
   if (superLikesRes.error)
     return result(null, superLikesRes.error);

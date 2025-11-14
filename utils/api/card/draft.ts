@@ -11,7 +11,7 @@ export async function getCardDraft(id:string | number) {
   const res = await supabase
     .from('drafts')
     .select('*')
-    .eq('id', id)
+    .eq('id', parseInt(id.toString()))
     .single();
 
   return result<CardDraft | null>(res.data, res.error);

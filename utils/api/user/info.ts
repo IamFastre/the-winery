@@ -27,7 +27,7 @@ export async function getUserInfo(what:'id' | 'username' | 'self', value:string 
 
     return getUserInfo('id', user.id);
   }
-  
+
   let user:Tables<'profiles'> | null = null;
 
   if (what === 'id') {
@@ -61,13 +61,13 @@ export async function getUserInfo(what:'id' | 'username' | 'self', value:string 
     .single();
 
   const meta = metaRes.data as Partial<typeof metaRes.data>
-  
+
   if (metaRes.error)
     return result<null>(null, metaRes.error);
   else
     delete meta?.id;
 
-  return result<UserInfo>({
+  return result({
     ...user!,
     mail_confirmed: await mailConfirmed(supabase, user!.id),
     meta: meta as UserInfo['meta']

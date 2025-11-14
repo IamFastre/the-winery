@@ -16,7 +16,7 @@ export async function getCardLikeList(id:string | number) {
   const likesRes = await supabase
     .from('likes')
     .select('*')
-    .eq('post', id)
+    .eq('post', parseInt(id.toString()))
     .order('timestamp', { ascending: false });
 
   if (likesRes.error)
@@ -26,7 +26,7 @@ export async function getCardLikeList(id:string | number) {
   const countRes = await supabase
     .from('likes')
     .select('*', { count: 'exact', head: true })
-    .eq('post', id);
+    .eq('post', parseInt(id.toString()));
 
   if (countRes.error)
     return result(null, countRes.error);
@@ -49,7 +49,7 @@ export async function getCardLikeList(id:string | number) {
   const superLikesRes = await supabase
     .from('super_likes')
     .select('*')
-    .eq('post', id)
+    .eq('post', parseInt(id.toString()))
     .order('timestamp', { ascending: false });
 
   if (superLikesRes.error)
@@ -59,7 +59,7 @@ export async function getCardLikeList(id:string | number) {
   const superCountRes = await supabase
     .from('super_likes')
     .select('*', { count: 'exact', head: true })
-    .eq('post', id);
+    .eq('post', parseInt(id.toString()));
 
   if (superCountRes.error)
     return result(null, superCountRes.error);

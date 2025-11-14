@@ -11,7 +11,7 @@ export async function getCardPost(id:string | number) {
   const res = await supabase
     .from('posts')
     .select('*, score')
-    .eq('id', id)
+    .eq('id', parseInt(id.toString()))
     .single();
 
   return result<CardPost | null>(res.data, res.error);

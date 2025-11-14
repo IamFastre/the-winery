@@ -10,7 +10,7 @@ export async function getUserPosts(what:'author_uuid' | 'author', value:string) 
 
   const res = await supabase
     .from('posts')
-    .select('*')
+    .select('*, score')
     .eq(what, value)
     .order('timestamp', { ascending: false });
 

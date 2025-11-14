@@ -10,7 +10,7 @@ export async function postCardDelete(id:string | number) {
   const res = await supabase
     .from('posts')
     .delete()
-    .eq('id', id)
+    .eq('id', parseInt(id.toString()))
     .single();
 
   if (res.error)

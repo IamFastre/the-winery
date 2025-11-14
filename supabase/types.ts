@@ -125,7 +125,7 @@ export type Database = {
           gender: Database["public"]["Enums"]["user_gender"] | null
           id: string
           username: string
-          finesse: number | null
+          finesse: number
         }
         Insert: {
           anniversary?:
@@ -279,8 +279,8 @@ export type Database = {
     }
     CompositeTypes: {
       birth_date: {
-        d: number | null
-        m: number | null
+        d: number
+        m: number
       }
     }
   }
